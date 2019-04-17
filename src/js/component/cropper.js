@@ -83,9 +83,9 @@ class Cropper extends Component {
             obj.evented = false;
         });
 
-        this._cropzone = new Cropzone({
-            left: -10,
-            top: -10,
+        this._cropzone = new Cropzone(canvas, {
+            left: 0,
+            top: 0,
             width: 1,
             height: 1,
             strokeWidth: 0, // {@link https://github.com/kangax/fabric.js/issues/2860}
@@ -97,7 +97,6 @@ class Cropper extends Component {
             lockScalingFlip: true,
             lockRotation: true
         }, this.graphics.cropSelectionStyle);
-        this._cropzone._render(canvas.getContext('2d'));
 
         canvas.discardActiveObject();
         canvas.add(this._cropzone);

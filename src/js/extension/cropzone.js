@@ -26,16 +26,18 @@ const CORNER_TYPE_BOTTOM_RIGHT = 'br';
 const Cropzone = fabric.util.createClass(fabric.Rect, /** @lends Cropzone.prototype */{
     /**
      * Constructor
+     * @param {Object} canvas canvas
      * @param {Object} options Options object
      * @param {Object} extendsOptions object for extends "options" 
      * @override
      */
-    initialize(options, extendsOptions) {
+    initialize(canvas, options, extendsOptions) {
         options = snippet.extend(options, extendsOptions);
         options.type = 'cropzone';
 
         this.callSuper('initialize', options);
 
+        this.canvas = canvas;
         this.options = options;
 
         this.on({
@@ -117,6 +119,10 @@ const Cropzone = fabric.util.createClass(fabric.Rect, /** @lends Cropzone.protot
     _fillOuterRect(ctx, fillStyle) {
         const {x, y} = this._getCoordinates(ctx);
 
+        console.log('-------------');
+        console.log(x);
+        console.log(y);
+
         ctx.save();
         ctx.fillStyle = fillStyle;
         ctx.beginPath();
@@ -197,24 +203,25 @@ const Cropzone = fabric.util.createClass(fabric.Rect, /** @lends Cropzone.protot
      * @returns {cropzoneCoordinates} - {@link cropzoneCoordinates}
      * @private
      */
-    _getCoordinates(ctx) {
+    _getCoordinates() {
         const {width, height, left, top} = this;
         const halfWidth = width / 2;
         const halfHeight = height / 2;
-        const canvasEl = ctx.canvas; // canvas element, not fabric object
+        const canvasHeight = this.canvas.getHeight(); // canvas element, not fabric object
+        const canvasWidth = this.canvas.getWidth(); // canvas element, not fabric object
 
         return {
             x: snippet.map([
                 -(halfWidth + left), // x0
                 -(halfWidth), // x1
                 halfWidth, // x2
-                halfWidth + (canvasEl.width - left - width) // x3
+                halfWidth + (canvasWidth - left - width) // x3
             ], Math.ceil),
             y: snippet.map([
                 -(halfHeight + top), // y0
                 -(halfHeight), // y1
                 halfHeight, // y2
-                halfHeight + (canvasEl.height - top - height) // y3
+                halfHeight + (canvasHeight - top - height) // y3
             ], Math.ceil)
         };
     },
