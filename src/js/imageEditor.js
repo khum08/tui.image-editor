@@ -314,7 +314,7 @@ class ImageEditor {
         const {ctrlKey, keyCode, metaKey} = e;
         const activeObject = this._graphics.getActiveObject();
         const activeObjectGroup = this._graphics.getActiveObjects();
-        const existRemoveObject = activeObject || activeObjectGroup.length;
+        const existRemoveObject = activeObject || (activeObjectGroup && activeObjectGroup.size());
         const isModifierKey = (ctrlKey || metaKey);
 
         if (isModifierKey && (keyCode === keyCodes.Z || keyCode === keyCodes.Y)) {
