@@ -339,9 +339,9 @@ class ImageEditor {
         const activeObject = this._graphics.getActiveObject();
         const activeObjectGroup = this._graphics.getActiveObjects();
 
-        if (activeObjectGroup.length) {
+        if (activeObjectGroup && activeObjectGroup.size()) {
             this.discardSelection();
-            this._removeObjectStream(activeObjectGroup);
+            this._removeObjectStream(activeObjectGroup.getObjects());
         } else if (activeObject) {
             const activeObjectId = this._graphics.getObjectId(activeObject);
             this.removeObject(activeObjectId);

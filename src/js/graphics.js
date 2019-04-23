@@ -302,7 +302,7 @@ class Graphics {
      * @returns {Object} active object or group instance
      */
     getActiveObject() {
-        return this._canvas.getActiveObject();
+        return this._canvas._activeObject || this._canvas.getActiveGroup();
     }
 
     /**
@@ -310,7 +310,7 @@ class Graphics {
      * @returns {Object} active group object instance
      */
     getActiveObjects() {
-        return this._canvas.getActiveObjects();
+        return this._canvas.getActiveGroup();
     }
 
     /**
@@ -1012,6 +1012,7 @@ class Graphics {
      */
     discardSelection() {
         this._canvas.discardActiveObject();
+        this._canvas.discardActiveGroup();
         this._canvas.renderAll();
     }
 

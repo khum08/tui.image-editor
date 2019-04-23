@@ -40,22 +40,15 @@ const Cropzone = fabric.util.createClass(fabric.Rect, /** @lends Cropzone.protot
         this.canvas = canvas;
         this.options = options;
 
-        this.canvas.on({
-            'object:moving': this._onMoving.bind(this),
-            'object:scaling': this._onScaling.bind(this)
+        this.on({
+            'moving': this._onMoving.bind(this),
+            'scaling': this._onScaling.bind(this)
         });
     },
 
-    /**
-     * Render Crop-zone
-     * @param {CanvasRenderingContext2D} tempCtx - Context
-     * @private
-     * @override
-     */
-    _render(tempCtx) {
+    _renderCropzone() {
         const cropzoneDashLineWidth = 7;
         const cropzoneDashLineOffset = 7;
-        this.callSuper('_render', tempCtx);
 
         // Calc original scale
         const originalFlipX = this.flipX ? -1 : 1;
@@ -90,6 +83,19 @@ const Cropzone = fabric.util.createClass(fabric.Rect, /** @lends Cropzone.protot
 
         // Reset scale
         ctx.scale(1 / originalScaleX, 1 / originalScaleY);
+    },
+
+    /**
+     * Render Crop-zone
+     * @private
+     * @override
+     */
+    _render() {
+        const ctx = this.canvas.getContext();
+
+        this.callSuper('_render', ctx);
+
+        this._renderCropzone();
     },
 
     /**
