@@ -1,5 +1,5 @@
 {
-  "name": "tui-image-editor",
+  "name": "@alm/tui-image-editor",
   "author": "NHNEnt FE Development Lab <dl_javascript@nhnent.com>",
   "version": "3.5.2",
   "license": "MIT",
@@ -65,6 +65,7 @@
     "test:types": "tsc --project test/types",
     "bundle": "webpack && webpack -p && npm run bundle:svg && node tsBannerGenerator.js",
     "bundle:svg": "node makesvg.js",
+    "bundle:alm": "webpack && webpack -p --alm",
     "serve": "webpack-dev-server --inline --hot -d",
     "cpy-dist2doc": "mkdir -p doc/dist && cp -f -r dist doc",
     "doc": "jsdoc -c jsdoc.conf.json && npm run cpy-dist2doc",
@@ -72,8 +73,6 @@
     "postinstall": "npm install --no-save --no-optional fabric@^1.6.7"
   },
   "dependencies": {
-    "core-js": "2.4.1",
-    "tui-code-snippet": "^1.5.0",
-    "tui-color-picker": "^2.2.0"
+    "core-js": "2.4.1"
   }
 }

@@ -1,6 +1,5 @@
 import './js/polyfill';
 import ImageEditor from './js/imageEditor';
-import './css/index.styl';
 
 // commands
 import './js/command/addIcon';

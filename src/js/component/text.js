@@ -3,7 +3,7 @@
  * @fileoverview Text module
  */
 import fabric from 'fabric/dist/fabric.require';
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import Promise from 'core-js/library/es6/promise';
 import Component from '../interface/component';
 import consts from '../consts';
@@ -23,7 +23,6 @@ const resetStyles = {
     textAlign: 'left',
     textDecoraiton: ''
 };
-const {browser} = snippet;
 
 const TEXTAREA_CLASSNAME = 'tui-image-eidtor-textarea';
 const TEXTAREA_STYLES = util.makeStyleText({
@@ -385,11 +384,7 @@ class Text extends Component {
             scroll: this._onScroll.bind(this)
         });
 
-        if (browser.msie && browser.version === 9) {
-            fabric.util.addListener(textarea, 'keydown', this._listeners.keydown);
-        } else {
-            fabric.util.addListener(textarea, 'input', this._listeners.input);
-        }
+        fabric.util.addListener(textarea, 'input', this._listeners.input);
         fabric.util.addListener(textarea, 'blur', this._listeners.blur);
         fabric.util.addListener(textarea, 'scroll', this._listeners.scroll);
     }
@@ -406,11 +401,7 @@ class Text extends Component {
 
         this._textarea = null;
 
-        if (browser.msie && browser.version < 10) {
-            fabric.util.removeListener(textarea, 'keydown', this._listeners.keydown);
-        } else {
-            fabric.util.removeListener(textarea, 'input', this._listeners.input);
-        }
+        fabric.util.removeListener(textarea, 'input', this._listeners.input);
         fabric.util.removeListener(textarea, 'blur', this._listeners.blur);
         fabric.util.removeListener(textarea, 'scroll', this._listeners.scroll);
     }

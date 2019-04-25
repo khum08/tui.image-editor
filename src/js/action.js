@@ -1,4 +1,4 @@
-import {extend} from 'tui-code-snippet';
+import {extend} from './codeSnippet';
 import util from './util';
 import Imagetracer from './helper/imagetracer';
 

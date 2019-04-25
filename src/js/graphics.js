@@ -2,7 +2,7 @@
  * @author NHN Ent. FE Development Team <dl_javascript@nhnent.com>
  * @fileoverview Graphics module
  */
-import snippet from 'tui-code-snippet';
+import snippet from './codeSnippet';
 import Promise from 'core-js/library/es6/promise';
 import fabric from 'fabric/dist/fabric.require';
 import ImageLoader from './component/imageLoader';
@@ -22,12 +22,13 @@ import ShapeDrawingMode from './drawingMode/shape';
 import TextDrawingMode from './drawingMode/text';
 import consts from './consts';
 import util from './util';
+import CustomEvents from './customEvent';
 
 const components = consts.componentNames;
 const events = consts.eventNames;
 
 const {drawingModes, fObjectOptions} = consts;
-const {extend, stamp, isArray, isString, forEachArray, forEachOwnProperties, CustomEvents} = snippet;
+const {extend, stamp, isArray, isString, forEachArray, forEachOwnProperties} = snippet;
 
 const DEFAULT_CSS_MAX_WIDTH = 1000;
 const DEFAULT_CSS_MAX_HEIGHT = 800;

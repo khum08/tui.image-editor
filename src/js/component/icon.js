@@ -3,7 +3,7 @@
  * @fileoverview Add icon module
  */
 import fabric from 'fabric/dist/fabric.require';
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import Promise from 'core-js/library/es6/promise';
 import Component from '../interface/component';
 import consts from '../consts';

@@ -7,7 +7,7 @@ import Promise from 'core-js/library/es6/promise';
 import Component from '../interface/component';
 import consts from '../consts';
 import resizeHelper from '../helper/shapeResizeHelper';
-import {extend, inArray} from 'tui-code-snippet';
+import {extend, inArray} from '../codeSnippet';
 
 const {rejectMessages, eventNames} = consts;
 const KEY_CODES = consts.keyCodes;

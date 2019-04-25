@@ -2,20 +2,20 @@
  * @author NHN Ent. FE Development Team <dl_javascript@nhnent.com>
  * @fileoverview Image-editor application class
  */
-import snippet from 'tui-code-snippet';
+import snippet from './codeSnippet';
 import Promise from 'core-js/library/es6/promise';
 import Invoker from './invoker';
-import UI from './ui';
 import action from './action';
 import commandFactory from './factory/command';
 import Graphics from './graphics';
 import consts from './consts';
 import {sendHostName} from './util';
+import CustomEvents from './customEvent';
 
 const events = consts.eventNames;
 const commands = consts.commandNames;
 const {keyCodes, rejectMessages} = consts;
-const {isUndefined, forEach, CustomEvents} = snippet;
+const {isUndefined, forEach} = snippet;
 
 /**
  * Image editor
@@ -75,21 +75,12 @@ class ImageEditor {
     constructor(wrapper, options) {
         options = snippet.extend({
             includeUI: false,
-            usageStatistics: true
+            usageStatistics: false
         }, options);
 
         this.mode = null;
 
         this.activeObjectId = null;
-
-        /**
-         * UI instance
-         * @type {Ui}
-         */
-        if (options.includeUI) {
-            this.ui = new UI(wrapper, options.includeUI, this.getActions());
-            options = this.ui.setUiDefaultSelectionStyle(options);
-        }
 
         /**
          * Invoker

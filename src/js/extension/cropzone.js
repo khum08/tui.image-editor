@@ -2,7 +2,7 @@
  * @author NHN Ent. FE Development Team <dl_javascript@nhnent.com>
  * @fileoverview Cropzone extending fabric.Rect
  */
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import fabric from 'fabric/dist/fabric.require';
 import {clamp} from '../util';
 
