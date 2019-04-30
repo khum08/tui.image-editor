@@ -468,6 +468,14 @@ class Graphics {
     }
 
     /**
+     * Set canvas zoom
+     * @param {number} zoom - zoom level
+     */
+    setCanvasZoom(zoom) {
+        this._canvas.setZoom(zoom);
+    }
+
+    /**
      * Set image properties
      * {@link http://fabricjs.com/docs/fabric.Image.html#set}
      * @param {Object} setting - Image properties
@@ -756,6 +764,14 @@ class Graphics {
             width: image ? image.width : 0,
             height: image ? image.height : 0
         };
+    }
+
+    /**
+     * Get the canvas zoom level
+     * @returns {number} canvas zoom level
+     */
+    getCanvasZoom() {
+        return this._canvas.getZoom();
     }
 
     /**
