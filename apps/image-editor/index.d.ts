@@ -286,6 +286,7 @@ declare namespace tuiImageEditor {
     public flipX(): Promise<IFlipXYResolveObject>;
     public flipY(): Promise<IFlipXYResolveObject>;
     public getCanvasSize(): ICanvasSize;
+    public getCanvasZoom(): number;
     public getCropzoneRect(): IRectConfig;
     public getDrawingMode(): string;
     public getImageName(): string;
@@ -309,6 +310,7 @@ declare namespace tuiImageEditor {
     public rotate(angle: AngleType, isSilent?: boolean): Promise<AngleType>;
     public setAngle(angle: AngleType, isSilent?: boolean): Promise<AngleType>;
     public setBrush(option: IBrushOptions): void;
+    public setCanvasZoom(zoom: number): void;
     public setCropzoneRect(mode?: number): void;
     public setDrawingShape(type: string, options?: IShapeOptions): void;
     public setObjectPosition(id: number, posInfo?: IPositionConfig): Promise<void>;

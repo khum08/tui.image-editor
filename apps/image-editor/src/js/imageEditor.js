@@ -1730,6 +1730,17 @@ class ImageEditor {
   }
 
   /**
+   * Get the canvas zoom
+   * @returns {number} canvas zoom
+   * @example
+   * var canvasZoom = imageEditor.getCanvasZoom();
+   * console.log(canvasZoom);
+   */
+  getCanvasZoom() {
+    return this._graphics.getCanvasZoom();
+  }
+
+  /**
    * Get object position by originX, originY
    * @param {number} id - object id
    * @param {string} originX - can be 'left', 'center', 'right'
@@ -1790,6 +1801,17 @@ class ImageEditor {
    */
   setObjectPosition(id, posInfo) {
     return this.execute(commands.SET_OBJECT_POSITION, id, posInfo);
+  }
+
+  /**
+   * Set the canvas zoom
+   * @param {number} zoom - zoom level to set
+   * @example
+   * var zoom = 1.5;
+   * imageEditor.setCanvasZoom(zoom);
+   */
+  setCanvasZoom(zoom) {
+    this._graphics.setCanvasZoom(zoom);
   }
 }
 
