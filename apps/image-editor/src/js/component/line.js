@@ -134,6 +134,8 @@ class Line extends Component {
       strokeWidth: this._width,
       arrowType: this._arrowType,
       evented: false,
+      perPixelTargetFind: true,
+      targetFindTolerance: consts.defaultPixelTargetTolerance
     });
 
     this._line.set(fObjectOptions.SELECTION_STYLE);
@@ -175,6 +177,25 @@ class Line extends Component {
     const canvas = this.getCanvas();
 
     this.fire(eventNames.OBJECT_ADDED, this._createLineEventObjectProperties());
+
+    canvas.forEachObject(function (obj) { // eslint-disable-line
+      obj.set({
+        evented: true
+      });
+    });
+
+    this._line.setControlsVisibility({
+      bl: false,
+      br: false,
+      mb: false,
+      ml: true,
+      mr: true,
+      mt: false,
+      tl: false,
+      tr: false,
+      mtr: true
+    });
+    canvas.setActiveObject(this._line);
 
     this._line = null;
 
