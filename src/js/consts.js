@@ -219,5 +219,7 @@ module.exports = {
             max: 255,
             value: 45
         }
-    }
+    },
+
+    defaultPixelTargetTolerance: 10
 };
