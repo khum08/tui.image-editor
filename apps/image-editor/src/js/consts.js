@@ -385,6 +385,8 @@ export const defaultFilterRangeValues = {
   blurFilterRange: {
     value: 0.1,
   },
+
+  defaultPixelTargetTolerance: 10
 };
 
 export const emptyCropRectValues = {
