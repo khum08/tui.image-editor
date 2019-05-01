@@ -233,13 +233,13 @@ function stamp(obj) {
  *
  * alert(result);  // 1,2,3,4
  */
-function map(obj, iteratee, context, ...rest) {
+function map(obj, iteratee, context) {
     const resultArray = [];
 
     context = context || null;
 
-    forEach(obj, () => {
-        resultArray.push(iteratee.apply(context, rest));
+    forEach(obj, function() {
+        resultArray.push(iteratee.apply(context, arguments)); // eslint-disable-line
     });
 
     return resultArray;
@@ -286,7 +286,7 @@ function isObject(obj) {
  * alert(result2.b); // undefined
  * alert(result2.c); // 3
  */
-function filter(obj, iteratee, context, ...rest) {
+function filter(obj, iteratee, context) {
     let result;
     let add;
 
@@ -308,9 +308,9 @@ function filter(obj, iteratee, context, ...rest) {
         };
     }
 
-    forEach(obj, () => {
-        if (iteratee.apply(context, rest)) {
-            add(result, rest);
+    forEach(obj, function() {
+        if (iteratee.apply(context, arguments)) { // eslint-disable-line
+            add(result, arguments); // eslint-disable-line
         }
     }, context);
 
