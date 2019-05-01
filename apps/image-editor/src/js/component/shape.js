@@ -47,6 +47,7 @@ const SHAPE_INIT_OPTIONS = extend(
 const DEFAULT_TYPE = 'rect';
 const DEFAULT_WIDTH = 20;
 const DEFAULT_HEIGHT = 20;
+const MOUSE_MOVE_THRESHOLD = 5;
 
 /**
  * Make fill option
@@ -130,6 +131,13 @@ export default class Shape extends Component {
     this._withShiftKey = false;
 
     /**
+     * Has the mouse moved past the threshold
+     * @type {boolean}
+     * @private
+     */
+    this._mouseMoved = false;
+
+    /**
      * Event handler list
      * @type {Object}
      * @private
@@ -155,6 +163,13 @@ export default class Shape extends Component {
     canvas.defaultCursor = 'crosshair';
     canvas.selection = false;
     canvas.uniformScaling = true;
+
+    canvas.forEachObject(obj => {
+      obj.set({
+        evented: false
+      });
+    });
+
     canvas.on({
       'mouse:down': this._handlers.mousedown,
     });
@@ -459,14 +474,18 @@ export default class Shape extends Component {
     const shape = this._shapeObj;
 
     if (!shape) {
-      this.add(this._type, {
-        left: startPointX,
-        top: startPointY,
-        width,
-        height,
-      }).then((objectProps) => {
-        this.fire(eventNames.ADD_OBJECT, objectProps);
-      });
+      if (Math.abs(width) > MOUSE_MOVE_THRESHOLD && Math.abs(height) > MOUSE_MOVE_THRESHOLD) {
+        this._mouseMoved = true;
+        this.add(this._type, {
+          left: startPointX,
+          top: startPointY,
+          width,
+          height,
+          perPixelTargetFind: false
+        }).then(objectProps => {
+          this.fire(eventNames.ADD_OBJECT, objectProps);
+        });
+      }
     } else {
       this._shapeObj.set({
         isRegular: this._withShiftKey,
@@ -489,19 +508,30 @@ export default class Shape extends Component {
     const startPointY = this._startPoint.y;
     const shape = this._shapeObj;
 
-    if (!shape) {
-      this.add(this._type, {
-        left: startPointX,
-        top: startPointY,
-        width: DEFAULT_WIDTH,
-        height: DEFAULT_HEIGHT,
-      }).then((objectProps) => {
-        this.fire(eventNames.ADD_OBJECT, objectProps);
-      });
-    } else if (shape) {
-      resizeHelper.adjustOriginToCenter(shape);
-      this.fire(eventNames.OBJECT_ADDED, this.graphics.createObjectProperties(shape));
+    if (this._mouseMoved) {
+      if (!shape) {
+        this.add(this._type, {
+          left: startPointX,
+          top: startPointY,
+          width: DEFAULT_WIDTH,
+          height: DEFAULT_HEIGHT,
+          perPixelTargetFind: false
+        }).then(objectProps => {
+          this.fire(eventNames.ADD_OBJECT, objectProps);
+        });
+      } else if (shape) {
+        resizeHelper.adjustOriginToCenter(shape);
+        this.fire(eventNames.OBJECT_ADDED, this.graphics.createObjectProperties(shape));
+      }
     }
+    this._mouseMoved = false;
+    canvas.defaultCursor = 'default';
+
+    canvas.forEachObject(obj => {
+      obj.set({
+        evented: true
+      });
+    });
 
     canvas.off({
       'mouse:move': this._handlers.mousemove,
