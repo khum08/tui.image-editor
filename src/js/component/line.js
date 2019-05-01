@@ -116,7 +116,9 @@ class Line extends Component {
         this._line = new fabric.Line(points, {
             stroke: this._oColor.toRgba(),
             strokeWidth: this._width,
-            evented: false
+            evented: false,
+            perPixelTargetFind: true,
+            targetFindTolerance: consts.defaultPixelTargetTolerance
         });
 
         this._line.set(consts.fObjectOptions.SELECTION_STYLE);
@@ -158,6 +160,25 @@ class Line extends Component {
         const params = this.graphics.createObjectProperties(this._line);
 
         this.fire(eventNames.ADD_OBJECT, params);
+
+        canvas.forEachObject(function (obj) { // eslint-disable-line
+            obj.set({
+                evented: true
+            });
+        });
+
+        this._line.setControlsVisibility({
+            bl: false,
+            br: false,
+            mb: false,
+            ml: true,
+            mr: true,
+            mt: false,
+            tl: false,
+            tr: false,
+            mtr: true
+        });
+        canvas.setActiveObject(this._line);
 
         this._line = null;
 
