@@ -167,17 +167,6 @@ class Line extends Component {
             });
         });
 
-        this._line.setControlsVisibility({
-            bl: false,
-            br: false,
-            mb: false,
-            ml: true,
-            mr: true,
-            mt: false,
-            tl: false,
-            tr: false,
-            mtr: true
-        });
         canvas.setActiveObject(this._line);
 
         this._line = null;
