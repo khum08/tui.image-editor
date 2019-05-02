@@ -204,6 +204,7 @@ declare namespace tuiImageEditor {
     fontFamily: string;
     fontSize: string;
     fontStyle: string;
+    fontWeight: string;
     text: string;
     textAlign: string;
     textDecoration: string;
