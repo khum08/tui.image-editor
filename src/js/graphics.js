@@ -1003,6 +1003,7 @@ class Graphics {
     _onObjectSelected(fEvent) {
         const {target} = fEvent;
         const params = this.createObjectProperties(target);
+        this._canvas.bringToFront(target);
 
         this.fire(events.OBJECT_ACTIVATED, params);
     }
