@@ -83,10 +83,7 @@ declare namespace tuiImageEditor {
 
   interface IGenerateTextOptions {
     styles?: ITextStyleConfig;
-    position?: {
-      x: number;
-      y: number;
-    };
+    position?: IPosition;
   }
 
   interface ITextStyleConfig {
@@ -116,11 +113,19 @@ declare namespace tuiImageEditor {
     color: string;
   }
 
-  interface IPositionConfig {
+  interface IPosition {
     x: number;
     y: number;
+  }
+
+  interface IPositionConfig extends IPosition {
     originX: string;
     originY: string;
+  }
+
+  interface ITextPositionConfig {
+    originPosition: IPosition;
+    clientPosition: IPosition;
   }
 
   interface IToDataURLOptions {
