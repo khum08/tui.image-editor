@@ -6,6 +6,8 @@ import fabric from 'fabric/dist/fabric.require';
 import Component from '../interface/component';
 import consts from '../consts';
 
+const {eventNames} = consts;
+
 /**
  * FreeDrawing
  * @class FreeDrawing
@@ -28,6 +30,16 @@ class FreeDrawing extends Component {
          * @type {fabric.Color}
          */
         this.oColor = new fabric.Color('rgba(0, 0, 0, 0.5)');
+
+        /**
+         * Listeners
+         * @type {object.<string, function>}
+         * @private
+         */
+        this._listeners = {
+            mousedown: this._onFabricMouseDown.bind(this),
+            mouseup: this._onFabricMouseUp.bind(this)
+        };
     }
 
     /**
@@ -39,6 +51,10 @@ class FreeDrawing extends Component {
 
         canvas.isDrawingMode = true;
         this.setBrush(setting);
+
+        canvas.on({
+            'mouse:down': this._listeners.mousedown
+        });
     }
 
     /**
@@ -62,6 +78,47 @@ class FreeDrawing extends Component {
      */
     end() {
         const canvas = this.getCanvas();
+
+        canvas.isDrawingMode = false;
+        canvas.off('mouse:down', this._listeners.mousedown);
+    }
+
+    /**
+     * Mousedown event handler in fabric canvas
+     * @private
+     */
+    _onFabricMouseDown() {
+        const canvas = this.getCanvas();
+        canvas.isDrawingMode = true;
+
+        canvas.on({
+            'mouse:up': this._listeners.mouseup
+        });
+    }
+
+    /**
+     * Mouseup event handler in fabric canvas
+     * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event object
+     * @private
+     */
+    _onFabricMouseUp(fEvent) {
+        const canvas = this.getCanvas();
+
+        const target = canvas.findTarget(fEvent.e);
+        if (target) {
+            target.set({
+                perPixelTargetFind: false
+                // ,targetFindTolerance: consts.defaultPixelTargetTolerance
+            });
+
+            const params = this.graphics.createObjectProperties(target);
+            this.fire(eventNames.ADD_OBJECT, params);
+            canvas.setActiveObject(target);
+        }
+
+        canvas.off({
+            'mouse:up': this._listeners.mouseup
+        });
 
         canvas.isDrawingMode = false;
     }
