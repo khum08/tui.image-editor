@@ -231,6 +231,8 @@ declare namespace tuiImageEditor {
         cssMaxHeight?: number;
         usageStatistics?: boolean;
         selectionStyle?: ISelectionStyleConfig;
+        applyCropSelectionStyle?: boolean;
+        applyGroupSelectionStyle?: boolean;
     }
 
     class ImageEditor {
