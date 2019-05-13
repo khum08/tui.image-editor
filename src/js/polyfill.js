@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
 // Any copyright is dedicated to the Public Domain. http://creativecommons.org/publicdomain/zero/1.0/if (!Element.prototype.matches)
-    Element.prototype.matches = Element.prototype.msMatchesSelector || 
+    Element.prototype.matches = Element.prototype.msMatchesSelector ||
     Element.prototype.webkitMatchesSelector;
 
 if (!Element.prototype.closest)
@@ -10,7 +10,7 @@ if (!Element.prototype.closest)
         do {
             if (el.matches(s)) return el;
             el = el.parentElement || el.parentNode;
-        } while (el !== null && el.nodeType === 1); 
+        } while (el !== null && el.nodeType === 1);
         return null;
     };
 
@@ -33,7 +33,7 @@ if ("document" in window.self) {
 
 // Full polyfill for browsers with no classList support
 // Including IE < Edge missing SVGElement.classList
-if (!("classList" in document.createElement("_")) 
+if (!("classList" in document.createElement("_"))
 	|| document.createElementNS && !("classList" in document.createElementNS("http://www.w3.org/2000/svg","g"))) {
 
 (function (view) {
@@ -266,7 +266,7 @@ if (objCtr.defineProperty) {
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
-(function () {
+/*(function () {
     "use strict";
     if (typeof window !== "undefined" && window.addEventListener) {
         var cache = Object.create(null); // holds xhr objects to prevent multiple requests
@@ -487,6 +487,6 @@ if (objCtr.defineProperty) {
             winLoad();
         }
     }
-}());
+}());*/
 
 
