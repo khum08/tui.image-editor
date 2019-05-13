@@ -12,7 +12,8 @@ const events = consts.eventNames;
 const {rejectMessages} = consts;
 
 const pathMap = {
-    arrow: 'M 0 90 H 105 V 120 L 160 60 L 105 0 V 30 H 0 Z',
+    arrow: 'M 0 9 H 11 V 12 L 18 7 L 11 2 V 5 H 0 Z',
+    arrow2: 'M 0 90 H 105 V 120 L 160 60 L 105 0 V 30 H 0 Z',
     cancel: 'M 0 30 L 30 60 L 0 90 L 30 120 L 60 90 L 90 120 L 120 90 ' +
             'L 90 60 L 120 30 L 90 0 L 60 30 L 30 0 Z'
 };
@@ -61,8 +62,6 @@ class Icon extends Component {
             const canvas = this.getCanvas();
             const path = this._pathMap[type];
             const selectionStyle = consts.fObjectOptions.SELECTION_STYLE;
-            const registerdIcon = Object.keys(consts.defaultIconPath).indexOf(type) >= 0;
-            const useDragAddIcon = this.useDragAddIcon && registerdIcon;
             const icon = path ? this._createIcon(path) : null;
 
             if (!icon) {
@@ -76,7 +75,7 @@ class Icon extends Component {
 
             canvas.add(icon).setActiveObject(icon);
 
-            if (useDragAddIcon) {
+            if (this.useDragAddIcon) {
                 this._addWithDragEvent(canvas);
             }
 
@@ -90,24 +89,30 @@ class Icon extends Component {
      * @private
      */
     _addWithDragEvent(canvas) {
+        const fireStart = this.fire.bind(this);
+        const mouseMoveHandler = function(fEvent) {
+            canvas.selection = false;
+
+            fireStart(events.ICON_CREATE_RESIZE, {
+                moveOriginPointer: canvas.getPointer(fEvent.e)
+            });
+        };
+        let mouseUpHandlerRef = 0;
+        const mouseUpHandler = function(fEvent) {
+            fireStart(events.ICON_CREATE_END, {
+                moveOriginPointer: canvas.getPointer(fEvent.e)
+            });
+
+            canvas.defaultCursor = 'default';
+            canvas.off('mouse:up', mouseUpHandlerRef);
+            canvas.off('mouse:move', mouseMoveHandler.bind(this));
+            canvas.selection = true;
+        };
+        mouseUpHandlerRef = mouseUpHandler.bind(this);
+
         canvas.on({
-            'mouse:move': fEvent => {
-                canvas.selection = false;
-
-                this.fire(events.ICON_CREATE_RESIZE, {
-                    moveOriginPointer: canvas.getPointer(fEvent.e)
-                });
-            },
-            'mouse:up': fEvent => {
-                this.fire(events.ICON_CREATE_END, {
-                    moveOriginPointer: canvas.getPointer(fEvent.e)
-                });
-
-                canvas.defaultCursor = 'default';
-                canvas.off('mouse:up');
-                canvas.off('mouse:move');
-                canvas.selection = true;
-            }
+            'mouse:move': mouseMoveHandler.bind(this),
+            'mouse:up': mouseUpHandlerRef
         });
     }
 
