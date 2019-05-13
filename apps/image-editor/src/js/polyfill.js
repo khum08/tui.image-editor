@@ -241,7 +241,7 @@ if ('document' in window.self) {
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
-(function () {
+/*(function () {
   'use strict';
   if (typeof window !== 'undefined' && window.addEventListener) {
     var cache = Object.create(null); // holds xhr objects to prevent multiple requests
@@ -470,4 +470,4 @@ if ('document' in window.self) {
       winLoad();
     }
   }
-})();
+}());*/
