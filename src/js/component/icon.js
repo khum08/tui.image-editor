@@ -90,6 +90,7 @@ class Icon extends Component {
      */
     _addWithDragEvent(canvas) {
         const fireStart = this.fire.bind(this);
+        let mouseMoveHandlerRef = 0;
         const mouseMoveHandler = function(fEvent) {
             canvas.selection = false;
 
@@ -103,15 +104,16 @@ class Icon extends Component {
                 moveOriginPointer: canvas.getPointer(fEvent.e)
             });
 
+            canvas.selection = true;
             canvas.defaultCursor = 'default';
             canvas.off('mouse:up', mouseUpHandlerRef);
-            canvas.off('mouse:move', mouseMoveHandler.bind(this));
-            canvas.selection = true;
+            canvas.off('mouse:move', mouseMoveHandlerRef);
         };
         mouseUpHandlerRef = mouseUpHandler.bind(this);
+        mouseMoveHandlerRef = mouseMoveHandler.bind(this);
 
         canvas.on({
-            'mouse:move': mouseMoveHandler.bind(this),
+            'mouse:move': mouseMoveHandlerRef,
             'mouse:up': mouseUpHandlerRef
         });
     }
