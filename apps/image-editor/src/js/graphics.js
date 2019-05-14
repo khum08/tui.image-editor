@@ -1322,6 +1322,7 @@ class Graphics {
   changeSelectableAll(selectable) {
     this._canvas.forEachObject((obj) => {
       obj.selectable = selectable;
+      obj.evented = selectable;
       obj.hoverCursor = selectable ? 'move' : 'crosshair';
     });
   }
