@@ -1100,6 +1100,7 @@ class Graphics {
             'fontFamily',
             'fontSize',
             'fontStyle',
+            'fontWeight',
             'textAlign',
             'textDecoration'
         ];
