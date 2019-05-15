@@ -98,7 +98,7 @@ class ImageEditor {
             this.ui ? this.ui.getEditorArea() : wrapper, {
                 cssMaxWidth: options.cssMaxWidth,
                 cssMaxHeight: options.cssMaxHeight,
-                useItext: !!this.ui,
+                useItext: true,
                 useDragAddIcon: true
             }
         );
