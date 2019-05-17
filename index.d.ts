@@ -68,6 +68,10 @@ declare namespace tuiImageEditor {
         top?: number;
     }
 
+    interface IIconCreateResize {
+        moveOriginPointer?: IPosition;
+    }
+
     interface IShapeOptions {
         fill?: string;
         stroke?: string;
@@ -294,6 +298,7 @@ declare namespace tuiImageEditor {
         public toDataURL(options?: IToDataURLOptions): string;
         public undo(): Promise<any>;
         public on(eventName: string, handler: (...args: any[]) => void): void;
+        public off(eventName: string, handler: (...args: any[]) => void): void;
     }
 }
 
