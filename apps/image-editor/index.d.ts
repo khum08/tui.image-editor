@@ -69,7 +69,7 @@ declare namespace tuiImageEditor {
   }
 
   interface IIconCreateResize {
-    moveOriginPointer?: IPosition;
+    moveOriginPointer: IPosition;
   }
 
   interface IShapeOptions {
