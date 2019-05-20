@@ -123,6 +123,13 @@ class Component {
   adjustCanvasDimension() {
     this.graphics.adjustCanvasDimension();
   }
+
+  /**
+   * Adjust canvas dimension with scaling image for the rotation command
+   */
+  adjustCanvasDimensionForRotate() {
+    this.graphics.adjustCanvasDimensionForRotate();
+  }
 }
 
 export default Component;
