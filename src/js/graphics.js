@@ -433,7 +433,37 @@ class Graphics {
     adjustCanvasDimension() {
         const canvasImage = this.canvasImage.scale(1);
         const {width, height} = canvasImage.getBoundingRect();
-        const maxDimension = this._calcMaxDimension(width, height);
+        const tempMaxDimension = this._calcMaxDimension(width, height);
+
+        const zoomLevel = this.getCanvasZoom();
+        const maxDimension = zoomLevel <= 1 ? tempMaxDimension : {
+            width: tempMaxDimension.width * zoomLevel,
+            height: tempMaxDimension.height * zoomLevel
+        };
+
+        this.setCanvasCssDimension({
+            width: '100%',
+            height: '100%', // Set height '' for IE9
+            'max-width': `${maxDimension.width}px`,
+            'max-height': `${maxDimension.height}px`
+        });
+
+        this.setCanvasBackstoreDimension({
+            width: maxDimension.width,
+            height: maxDimension.height
+        });
+    }
+
+    /**
+     * Adjust canvas dimension with scaling image for rotate
+     */
+    adjustCanvasDimensionForRotate() {
+        const canvasImage = this.canvasImage.scale(1);
+        const {width, height} = canvasImage.getBoundingRect();
+        const maxDimension = {
+            width: height,
+            height: width
+        };
 
         this.setCanvasCssDimension({
             width: '100%',
@@ -944,6 +974,16 @@ class Graphics {
     _onMouseUp(fEvent) {
         const originPointer = this._canvas.getPointer(fEvent.e);
         this.fire(events.MOUSE_UP, fEvent.e, originPointer);
+    }
+
+    /**
+     * "mouse:move" canvas event handler
+     * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event
+     * @private
+     */
+    _onMouseMove(fEvent) {
+        const originPointer = this._canvas.getPointer(fEvent.e);
+        this.fire(events.MOUSE_MOVE, fEvent.e, originPointer);
     }
 
     /**

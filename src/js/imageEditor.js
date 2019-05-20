@@ -112,6 +112,7 @@ class ImageEditor {
             keydown: this._onKeyDown.bind(this),
             mousedown: this._onMouseDown.bind(this),
             mouseup: this._onMouseUp.bind(this),
+            mousemove: this._onMouseMove.bind(this),
             objectActivated: this._onObjectActivated.bind(this),
             objectMoved: this._onObjectMoved.bind(this),
             objectScaled: this._onObjectScaled.bind(this),
@@ -264,6 +265,7 @@ class ImageEditor {
         this._graphics.on({
             'mousedown': this._handlers.mousedown,
             'mouseup': this._handlers.mouseup,
+            'mousemove': this._handlers.mousemove,
             'objectMoved': this._handlers.objectMoved,
             'objectScaled': this._handlers.objectScaled,
             'objectActivated': this._handlers.objectActivated,
@@ -420,6 +422,37 @@ class ImageEditor {
          * });
          */
         this.fire(events.MOUSE_UP, event, originPointer);
+    }
+
+    /**
+     * mouse move event handler
+     * @param {Event} event mouse move event
+     * @param {Object} originPointer origin pointer
+     *  @param {Number} originPointer.x x position
+     *  @param {Number} originPointer.y y position
+     * @private
+     */
+    _onMouseMove(event, originPointer) {
+        /**
+         * The mouse up event with position x, y on canvas
+         * @event ImageEditor#mousemove
+         * @param {Object} event - browser mouse event object
+         * @param {Object} originPointer origin pointer
+         *  @param {Number} originPointer.x x position
+         *  @param {Number} originPointer.y y position
+         * @example
+         * imageEditor.on('mousemove', function(event, originPointer) {
+         *     console.log(event);
+         *     console.log(originPointer);
+         *     if (imageEditor.hasFilter('colorFilter')) {
+         *         imageEditor.applyFilter('colorFilter', {
+         *             x: parseInt(originPointer.x, 10),
+         *             y: parseInt(originPointer.y, 10)
+         *         });
+         *     }
+         * });
+         */
+        this.fire(events.MOUSE_MOVE, event, originPointer);
     }
 
     /**
@@ -1355,6 +1388,18 @@ class ImageEditor {
     }
 
     /**
+     * Resize canvas dimension quietly
+     * @param {{width: number, height: number}} dimension - Max width & height
+     * @returns {Promise}
+     */
+    resizeCanvasDimensionQuietly(dimension) {
+        this._graphics.setCssMaxDimension(dimension);
+        this._graphics.adjustCanvasDimension();
+
+        return Promise.resolve();
+    }
+
+    /**
      * Destroy
      */
     destroy() {
@@ -1471,6 +1516,14 @@ class ImageEditor {
      */
     getCanvasZoom() {
         return this._graphics.getCanvasZoom();
+    }
+
+    /**
+     * Get the current angle
+     * @returns {Number}
+     */
+    getCurrentAngle() {
+        return this._graphics.getCanvasImage().angle;
     }
 
     /**

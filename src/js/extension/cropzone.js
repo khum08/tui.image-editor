@@ -203,20 +203,23 @@ const Cropzone = fabric.util.createClass(fabric.Rect, /** @lends Cropzone.protot
             halfHeight = height / 2,
             left = this.getLeft(),
             top = this.getTop(),
-            canvasEl = ctx.canvas; // canvas element, not fabric object
+            canvasEl = ctx.canvas, // canvas element, not fabric object
+            zoomLevel = this.canvas.getZoom();
+        const canvasWidth = canvasEl.width / zoomLevel;
+        const canvasHeight = canvasEl.height / zoomLevel;
 
         return {
             x: snippet.map([
                 -(halfWidth + left), // x0
                 -(halfWidth), // x1
                 halfWidth, // x2
-                halfWidth + (canvasEl.width - left - width) // x3
+                halfWidth + (canvasWidth - left - width) // x3
             ], Math.ceil),
             y: snippet.map([
                 -(halfHeight + top), // y0
                 -(halfHeight), // y1
                 halfHeight, // y2
-                halfHeight + (canvasEl.height - top - height) // y3
+                halfHeight + (canvasHeight - top - height) // y3
             ], Math.ceil)
         };
     },
@@ -262,12 +265,13 @@ const Cropzone = fabric.util.createClass(fabric.Rect, /** @lends Cropzone.protot
      * @private
      */
     _onMoving() {
+        const zoomLevel = this.canvas.getZoom();
         const left = this.getLeft(),
             top = this.getTop(),
             width = this.getWidth(),
             height = this.getHeight(),
-            maxLeft = this.canvas.getWidth() - width,
-            maxTop = this.canvas.getHeight() - height;
+            maxLeft = (this.canvas.getWidth() / zoomLevel) - width,
+            maxTop = (this.canvas.getHeight() / zoomLevel) - height;
 
         this.setLeft(clamp(left, 0, maxLeft));
         this.setTop(clamp(top, 0, maxTop));
@@ -336,7 +340,9 @@ const Cropzone = fabric.util.createClass(fabric.Rect, /** @lends Cropzone.protot
      * @private
      */
     _calcBottomRightScalingSizeFromPointer(x, y) {
-        const {width: maxX, height: maxY} = this.canvas;
+        const zoomLevel = this.canvas.getZoom();
+        const maxX = this.canvas.width / zoomLevel;
+        const maxY = this.canvas.height / zoomLevel;
         const {left, top} = this;
 
         // When scaling "Bottom-Right corner": It fixes left and top coordinates
