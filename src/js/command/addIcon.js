@@ -25,6 +25,12 @@ const command = {
     execute(graphics, type, options) {
         const iconComp = graphics.getComponent(ICON);
 
+        if (this.undoData && this.undoData.object) {
+            graphics.add(this.undoData.object);
+
+            return Promise.resolve(this.undoData.object);
+        }
+
         return iconComp.add(type, options).then(objectProps => {
             this.undoData.object = graphics.getObject(objectProps.id);
 
