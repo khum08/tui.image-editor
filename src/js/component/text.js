@@ -131,6 +131,7 @@ class Text extends Component {
     start() {
         const canvas = this.getCanvas();
 
+        this.isPrevEditing = false;
         canvas.selection = false;
         canvas.defaultCursor = 'text';
         canvas.on({
