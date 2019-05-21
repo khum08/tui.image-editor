@@ -408,15 +408,16 @@ class Shape extends Component {
                 resizeHelper.adjustOriginToCenter(shape);
                 this.fire(eventNames.ADD_OBJECT_AFTER, this.graphics.createObjectProperties(shape));
             }
-        }
-        this._mouseMoved = false;
-        canvas.defaultCursor = 'default';
 
-        canvas.forEachObject(obj => {
-            obj.set({
-                evented: true
+            this._mouseMoved = false;
+            canvas.defaultCursor = 'default';
+
+            canvas.forEachObject(obj => {
+                obj.set({
+                    evented: true
+                });
             });
-        });
+        }
 
         canvas.off({
             'mouse:move': this._handlers.mousemove,
