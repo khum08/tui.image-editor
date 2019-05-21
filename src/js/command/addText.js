@@ -31,6 +31,12 @@ const command = {
     execute(graphics, text, options) {
         const textComp = graphics.getComponent(TEXT);
 
+        if (this.undoData && this.undoData.object) {
+            graphics.add(this.undoData.object);
+
+            return Promise.resolve(this.undoData.object);
+        }
+
         return textComp.add(text, options).then(objectProps => {
             this.undoData.object = graphics.getObject(objectProps.id);
 
