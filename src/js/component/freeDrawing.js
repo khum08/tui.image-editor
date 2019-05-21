@@ -6,8 +6,6 @@ import fabric from 'fabric/dist/fabric.require';
 import Component from '../interface/component';
 import consts from '../consts';
 
-const {eventNames} = consts;
-
 /**
  * FreeDrawing
  * @class FreeDrawing
@@ -108,11 +106,8 @@ class FreeDrawing extends Component {
         if (target) {
             target.set({
                 perPixelTargetFind: false
-                // ,targetFindTolerance: consts.defaultPixelTargetTolerance
             });
 
-            const params = this.graphics.createObjectProperties(target);
-            this.fire(eventNames.ADD_OBJECT, params);
             canvas.setActiveObject(target);
         }
 
