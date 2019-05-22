@@ -1,6 +1,6 @@
 /*!
  * tui-image-editor.js
- * @version 3.5.2-alm.1
+ * @version 3.5.2-alm.3
  * @author NHNEnt FE Development Lab <dl_javascript@nhnent.com>
  * @license MIT
  */
@@ -732,6 +732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            keydown: this._onKeyDown.bind(this),
 	            mousedown: this._onMouseDown.bind(this),
 	            mouseup: this._onMouseUp.bind(this),
+	            mousemove: this._onMouseMove.bind(this),
 	            objectActivated: this._onObjectActivated.bind(this),
 	            objectMoved: this._onObjectMoved.bind(this),
 	            objectScaled: this._onObjectScaled.bind(this),
@@ -896,6 +897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this._graphics.on({
 	                'mousedown': this._handlers.mousedown,
 	                'mouseup': this._handlers.mouseup,
+	                'mousemove': this._handlers.mousemove,
 	                'objectMoved': this._handlers.objectMoved,
 	                'objectScaled': this._handlers.objectScaled,
 	                'objectActivated': this._handlers.objectActivated,
@@ -1075,6 +1077,40 @@ return /******/ (function(modules) { // webpackBootstrap
 	             * });
 	             */
 	            this.fire(events.MOUSE_UP, event, originPointer);
+	        }
+
+	        /**
+	         * mouse move event handler
+	         * @param {Event} event mouse move event
+	         * @param {Object} originPointer origin pointer
+	         *  @param {Number} originPointer.x x position
+	         *  @param {Number} originPointer.y y position
+	         * @private
+	         */
+
+	    }, {
+	        key: '_onMouseMove',
+	        value: function _onMouseMove(event, originPointer) {
+	            /**
+	             * The mouse up event with position x, y on canvas
+	             * @event ImageEditor#mousemove
+	             * @param {Object} event - browser mouse event object
+	             * @param {Object} originPointer origin pointer
+	             *  @param {Number} originPointer.x x position
+	             *  @param {Number} originPointer.y y position
+	             * @example
+	             * imageEditor.on('mousemove', function(event, originPointer) {
+	             *     console.log(event);
+	             *     console.log(originPointer);
+	             *     if (imageEditor.hasFilter('colorFilter')) {
+	             *         imageEditor.applyFilter('colorFilter', {
+	             *             x: parseInt(originPointer.x, 10),
+	             *             y: parseInt(originPointer.y, 10)
+	             *         });
+	             *     }
+	             * });
+	             */
+	            this.fire(events.MOUSE_MOVE, event, originPointer);
 	        }
 
 	        /**
@@ -2193,6 +2229,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 
 	        /**
+	         * Resize canvas dimension quietly
+	         * @param {{width: number, height: number}} dimension - Max width & height
+	         * @returns {Promise}
+	         */
+
+	    }, {
+	        key: 'resizeCanvasDimensionQuietly',
+	        value: function resizeCanvasDimensionQuietly(dimension) {
+	            this._graphics.setCssMaxDimension(dimension);
+	            this._graphics.adjustCanvasDimension();
+
+	            return _promise2.default.resolve();
+	        }
+
+	        /**
 	         * Destroy
 	         */
 
@@ -2332,6 +2383,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'getCanvasZoom',
 	        value: function getCanvasZoom() {
 	            return this._graphics.getCanvasZoom();
+	        }
+
+	        /**
+	         * Get the current angle
+	         * @returns {Number}
+	         */
+
+	    }, {
+	        key: 'getCurrentAngle',
+	        value: function getCurrentAngle() {
+	            return this._graphics.getCanvasImage().angle;
 	        }
 
 	        /**
@@ -7900,6 +7962,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._handler = {
 	            onMouseDown: this._onMouseDown.bind(this),
 	            onMouseUp: this._onMouseUp.bind(this),
+	            onMouseMove: this._onMouseMove.bind(this),
 	            onObjectAdded: this._onObjectAdded.bind(this),
 	            onObjectRemoved: this._onObjectRemoved.bind(this),
 	            onObjectMoved: this._onObjectMoved.bind(this),
@@ -8267,7 +8330,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	                width = _canvasImage$getBound.width,
 	                height = _canvasImage$getBound.height;
 
-	            var maxDimension = this._calcMaxDimension(width, height);
+	            var tempMaxDimension = this._calcMaxDimension(width, height);
+
+	            var zoomLevel = this.getCanvasZoom();
+	            var maxDimension = zoomLevel <= 1 ? tempMaxDimension : {
+	                width: tempMaxDimension.width * zoomLevel,
+	                height: tempMaxDimension.height * zoomLevel
+	            };
+
+	            this.setCanvasCssDimension({
+	                width: '100%',
+	                height: '100%', // Set height '' for IE9
+	                'max-width': maxDimension.width + 'px',
+	                'max-height': maxDimension.height + 'px'
+	            });
+
+	            this.setCanvasBackstoreDimension({
+	                width: maxDimension.width,
+	                height: maxDimension.height
+	            });
+	        }
+
+	        /**
+	         * Adjust canvas dimension with scaling image for rotate
+	         */
+
+	    }, {
+	        key: 'adjustCanvasDimensionForRotate',
+	        value: function adjustCanvasDimensionForRotate() {
+	            var canvasImage = this.canvasImage.scale(1);
+
+	            var _canvasImage$getBound2 = canvasImage.getBoundingRect(),
+	                width = _canvasImage$getBound2.width,
+	                height = _canvasImage$getBound2.height;
+
+	            var maxDimension = {
+	                width: height,
+	                height: width
+	            };
 
 	            this.setCanvasCssDimension({
 	                width: '100%',
@@ -8857,6 +8957,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            canvas.on({
 	                'mouse:down': handler.onMouseDown,
 	                'mouse:up': handler.onMouseUp,
+	                'mouse:move': handler.onMouseMove,
 	                'object:added': handler.onObjectAdded,
 	                'object:removed': handler.onObjectRemoved,
 	                'object:moving': handler.onObjectMoved,
@@ -8892,6 +8993,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function _onMouseUp(fEvent) {
 	            var originPointer = this._canvas.getPointer(fEvent.e);
 	            this.fire(events.MOUSE_UP, fEvent.e, originPointer);
+	        }
+
+	        /**
+	         * "mouse:move" canvas event handler
+	         * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event
+	         * @private
+	         */
+
+	    }, {
+	        key: '_onMouseMove',
+	        value: function _onMouseMove(fEvent) {
+	            var originPointer = this._canvas.getPointer(fEvent.e);
+	            this.fire(events.MOUSE_MOVE, fEvent.e, originPointer);
 	        }
 
 	        /**
@@ -9275,164 +9389,174 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @ignore
 	 */
 	var Component = function () {
-	    function Component(name, graphics) {
-	        _classCallCheck(this, Component);
+	  function Component(name, graphics) {
+	    _classCallCheck(this, Component);
 
-	        /**
-	         * Component name
-	         * @type {string}
-	         */
-	        this.name = name;
+	    /**
+	     * Component name
+	     * @type {string}
+	     */
+	    this.name = name;
 
-	        /**
-	         * Graphics instance
-	         * @type {Graphics}
-	         */
-	        this.graphics = graphics;
+	    /**
+	     * Graphics instance
+	     * @type {Graphics}
+	     */
+	    this.graphics = graphics;
+	  }
+
+	  /**
+	   * Fire Graphics event
+	   * @returns {Object} return value
+	   */
+
+
+	  _createClass(Component, [{
+	    key: "fire",
+	    value: function fire() {
+	      var context = this.graphics;
+
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+
+	      return this.graphics.fire.apply(context, args);
 	    }
 
 	    /**
-	     * Fire Graphics event
-	     * @returns {Object} return value
+	     * Save image(background) of canvas
+	     * @param {string} name - Name of image
+	     * @param {fabric.Image} oImage - Fabric image instance
 	     */
 
+	  }, {
+	    key: "setCanvasImage",
+	    value: function setCanvasImage(name, oImage) {
+	      this.graphics.setCanvasImage(name, oImage);
+	    }
 
-	    _createClass(Component, [{
-	        key: "fire",
-	        value: function fire() {
-	            var context = this.graphics;
+	    /**
+	     * Returns canvas element of fabric.Canvas[[lower-canvas]]
+	     * @returns {HTMLCanvasElement}
+	     */
 
-	            for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	                args[_key] = arguments[_key];
-	            }
+	  }, {
+	    key: "getCanvasElement",
+	    value: function getCanvasElement() {
+	      return this.graphics.getCanvasElement();
+	    }
 
-	            return this.graphics.fire.apply(context, args);
-	        }
+	    /**
+	     * Get fabric.Canvas instance
+	     * @returns {fabric.Canvas}
+	     */
 
-	        /**
-	         * Save image(background) of canvas
-	         * @param {string} name - Name of image
-	         * @param {fabric.Image} oImage - Fabric image instance
-	         */
+	  }, {
+	    key: "getCanvas",
+	    value: function getCanvas() {
+	      return this.graphics.getCanvas();
+	    }
 
-	    }, {
-	        key: "setCanvasImage",
-	        value: function setCanvasImage(name, oImage) {
-	            this.graphics.setCanvasImage(name, oImage);
-	        }
+	    /**
+	     * Get canvasImage (fabric.Image instance)
+	     * @returns {fabric.Image}
+	     */
 
-	        /**
-	         * Returns canvas element of fabric.Canvas[[lower-canvas]]
-	         * @returns {HTMLCanvasElement}
-	         */
+	  }, {
+	    key: "getCanvasImage",
+	    value: function getCanvasImage() {
+	      return this.graphics.getCanvasImage();
+	    }
 
-	    }, {
-	        key: "getCanvasElement",
-	        value: function getCanvasElement() {
-	            return this.graphics.getCanvasElement();
-	        }
+	    /**
+	     * Get image name
+	     * @returns {string}
+	     */
 
-	        /**
-	         * Get fabric.Canvas instance
-	         * @returns {fabric.Canvas}
-	         */
+	  }, {
+	    key: "getImageName",
+	    value: function getImageName() {
+	      return this.graphics.getImageName();
+	    }
 
-	    }, {
-	        key: "getCanvas",
-	        value: function getCanvas() {
-	            return this.graphics.getCanvas();
-	        }
+	    /**
+	     * Get image editor
+	     * @returns {ImageEditor}
+	     */
 
-	        /**
-	         * Get canvasImage (fabric.Image instance)
-	         * @returns {fabric.Image}
-	         */
+	  }, {
+	    key: "getEditor",
+	    value: function getEditor() {
+	      return this.graphics.getEditor();
+	    }
 
-	    }, {
-	        key: "getCanvasImage",
-	        value: function getCanvasImage() {
-	            return this.graphics.getCanvasImage();
-	        }
+	    /**
+	     * Return component name
+	     * @returns {string}
+	     */
 
-	        /**
-	         * Get image name
-	         * @returns {string}
-	         */
+	  }, {
+	    key: "getName",
+	    value: function getName() {
+	      return this.name;
+	    }
 
-	    }, {
-	        key: "getImageName",
-	        value: function getImageName() {
-	            return this.graphics.getImageName();
-	        }
+	    /**
+	     * Set image properties
+	     * @param {Object} setting - Image properties
+	     * @param {boolean} [withRendering] - If true, The changed image will be reflected in the canvas
+	     */
 
-	        /**
-	         * Get image editor
-	         * @returns {ImageEditor}
-	         */
+	  }, {
+	    key: "setImageProperties",
+	    value: function setImageProperties(setting, withRendering) {
+	      this.graphics.setImageProperties(setting, withRendering);
+	    }
 
-	    }, {
-	        key: "getEditor",
-	        value: function getEditor() {
-	            return this.graphics.getEditor();
-	        }
+	    /**
+	     * Set canvas dimension - css only
+	     * @param {Object} dimension - Canvas css dimension
+	     */
 
-	        /**
-	         * Return component name
-	         * @returns {string}
-	         */
+	  }, {
+	    key: "setCanvasCssDimension",
+	    value: function setCanvasCssDimension(dimension) {
+	      this.graphics.setCanvasCssDimension(dimension);
+	    }
 
-	    }, {
-	        key: "getName",
-	        value: function getName() {
-	            return this.name;
-	        }
+	    /**
+	     * Set canvas dimension - css only
+	     * @param {Object} dimension - Canvas backstore dimension
+	     */
 
-	        /**
-	         * Set image properties
-	         * @param {Object} setting - Image properties
-	         * @param {boolean} [withRendering] - If true, The changed image will be reflected in the canvas
-	         */
+	  }, {
+	    key: "setCanvasBackstoreDimension",
+	    value: function setCanvasBackstoreDimension(dimension) {
+	      this.graphics.setCanvasBackstoreDimension(dimension);
+	    }
 
-	    }, {
-	        key: "setImageProperties",
-	        value: function setImageProperties(setting, withRendering) {
-	            this.graphics.setImageProperties(setting, withRendering);
-	        }
+	    /**
+	     * Adjust canvas dimension with scaling image
+	     */
 
-	        /**
-	         * Set canvas dimension - css only
-	         * @param {Object} dimension - Canvas css dimension
-	         */
+	  }, {
+	    key: "adjustCanvasDimension",
+	    value: function adjustCanvasDimension() {
+	      this.graphics.adjustCanvasDimension();
+	    }
 
-	    }, {
-	        key: "setCanvasCssDimension",
-	        value: function setCanvasCssDimension(dimension) {
-	            this.graphics.setCanvasCssDimension(dimension);
-	        }
+	    /**
+	     * Adjust canvas dimension with scaling image for the rotation command
+	     */
 
-	        /**
-	         * Set canvas dimension - css only
-	         * @param {Object} dimension - Canvas backstore dimension
-	         */
+	  }, {
+	    key: "adjustCanvasDimensionForRotate",
+	    value: function adjustCanvasDimensionForRotate() {
+	      this.graphics.adjustCanvasDimensionForRotate();
+	    }
+	  }]);
 
-	    }, {
-	        key: "setCanvasBackstoreDimension",
-	        value: function setCanvasBackstoreDimension(dimension) {
-	            this.graphics.setCanvasBackstoreDimension(dimension);
-	        }
-
-	        /**
-	         * Adjust canvas dimension with scaling image
-	         */
-
-	    }, {
-	        key: "adjustCanvasDimension",
-	        value: function adjustCanvasDimension() {
-	            this.graphics.adjustCanvasDimension();
-	        }
-	    }]);
-
-	    return Component;
+	  return Component;
 	}();
 
 	module.exports = Component;
@@ -9677,8 +9801,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: '_calcRectDimensionFromPoint',
 	        value: function _calcRectDimensionFromPoint(x, y) {
 	            var canvas = this.getCanvas();
-	            var canvasWidth = canvas.getWidth();
-	            var canvasHeight = canvas.getHeight();
+	            var zoomLevel = canvas.getZoom();
+	            var canvasWidth = canvas.getWidth() / zoomLevel;
+	            var canvasHeight = canvas.getHeight() / zoomLevel;
 	            var startX = this._startX;
 	            var startY = this._startY;
 	            var left = (0, _util.clamp)(x, 0, startX);
@@ -10125,18 +10250,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	            halfHeight = height / 2,
 	            left = this.getLeft(),
 	            top = this.getTop(),
-	            canvasEl = ctx.canvas; // canvas element, not fabric object
+	            canvasEl = ctx.canvas,
+	            // canvas element, not fabric object
+	        zoomLevel = this.canvas.getZoom();
+	        var canvasWidth = canvasEl.width / zoomLevel;
+	        var canvasHeight = canvasEl.height / zoomLevel;
 
 	        return {
 	            x: _codeSnippet2.default.map([-(halfWidth + left), // x0
 	            -halfWidth, // x1
 	            halfWidth, // x2
-	            halfWidth + (canvasEl.width - left - width) // x3
+	            halfWidth + (canvasWidth - left - width) // x3
 	            ], Math.ceil),
 	            y: _codeSnippet2.default.map([-(halfHeight + top), // y0
 	            -halfHeight, // y1
 	            halfHeight, // y2
-	            halfHeight + (canvasEl.height - top - height) // y3
+	            halfHeight + (canvasHeight - top - height) // y3
 	            ], Math.ceil)
 	        };
 	    },
@@ -10188,12 +10317,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @private
 	     */
 	    _onMoving: function _onMoving() {
+	        var zoomLevel = this.canvas.getZoom();
 	        var left = this.getLeft(),
 	            top = this.getTop(),
 	            width = this.getWidth(),
 	            height = this.getHeight(),
-	            maxLeft = this.canvas.getWidth() - width,
-	            maxTop = this.canvas.getHeight() - height;
+	            maxLeft = this.canvas.getWidth() / zoomLevel - width,
+	            maxTop = this.canvas.getHeight() / zoomLevel - height;
 
 	        this.setLeft((0, _util.clamp)(left, 0, maxLeft));
 	        this.setTop((0, _util.clamp)(top, 0, maxTop));
@@ -10267,9 +10397,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @private
 	     */
 	    _calcBottomRightScalingSizeFromPointer: function _calcBottomRightScalingSizeFromPointer(x, y) {
-	        var _canvas = this.canvas,
-	            maxX = _canvas.width,
-	            maxY = _canvas.height;
+	        var zoomLevel = this.canvas.getZoom();
+	        var maxX = this.canvas.width / zoomLevel;
+	        var maxY = this.canvas.height / zoomLevel;
 	        var left = this.left,
 	            top = this.top;
 
@@ -10658,7 +10788,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var canvasImage = this.getCanvasImage();
 	            var oldImageCenter = canvasImage.getCenterPoint();
 	            canvasImage.setAngle(angle).setCoords();
-	            this.adjustCanvasDimension();
+	            this.adjustCanvasDimensionForRotate();
 	            var newImageCenter = canvasImage.getCenterPoint();
 	            this._rotateForEachObject(oldImageCenter, newImageCenter, angle - oldAngle);
 
@@ -10749,8 +10879,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var eventNames = _consts2.default.eventNames;
-
 	/**
 	 * FreeDrawing
 	 * @class FreeDrawing
@@ -10758,7 +10886,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @extends {Component}
 	 * @ignore
 	 */
-
 	var FreeDrawing = function (_Component) {
 	    _inherits(FreeDrawing, _Component);
 
@@ -10873,11 +11000,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (target) {
 	                target.set({
 	                    perPixelTargetFind: false
-	                    // ,targetFindTolerance: consts.defaultPixelTargetTolerance
 	                });
 
-	                var params = this.graphics.createObjectProperties(target);
-	                this.fire(eventNames.ADD_OBJECT, params);
 	                canvas.setActiveObject(target);
 	            }
 
@@ -11305,6 +11429,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function start() {
 	            var canvas = this.getCanvas();
 
+	            this.isPrevEditing = false;
 	            canvas.selection = false;
 	            canvas.defaultCursor = 'text';
 	            canvas.on({
@@ -13300,15 +13425,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _shapeResizeHelper2.default.adjustOriginToCenter(shape);
 	                    this.fire(eventNames.ADD_OBJECT_AFTER, this.graphics.createObjectProperties(shape));
 	                }
-	            }
-	            this._mouseMoved = false;
-	            canvas.defaultCursor = 'default';
 
-	            canvas.forEachObject(function (obj) {
-	                obj.set({
-	                    evented: true
+	                this._mouseMoved = false;
+	                canvas.defaultCursor = 'default';
+
+	                canvas.forEachObject(function (obj) {
+	                    obj.set({
+	                        evented: true
+	                    });
 	                });
-	            });
+	            }
 
 	            canvas.off({
 	                'mouse:move': this._handlers.mousemove,
@@ -14150,6 +14276,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var iconComp = graphics.getComponent(ICON);
 
+	        if (this.undoData && this.undoData.object) {
+	            graphics.add(this.undoData.object);
+
+	            return _promise2.default.resolve(this.undoData.object);
+	        }
+
 	        return iconComp.add(type, options).then(function (objectProps) {
 	            _this.undoData.object = graphics.getObject(objectProps.id);
 
@@ -14426,6 +14558,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = this;
 
 	        var textComp = graphics.getComponent(TEXT);
+
+	        if (this.undoData && this.undoData.object) {
+	            graphics.add(this.undoData.object);
+
+	            return _promise2.default.resolve(this.undoData.object);
+	        }
 
 	        return textComp.add(text, options).then(function (objectProps) {
 	            _this.undoData.object = graphics.getObject(objectProps.id);
