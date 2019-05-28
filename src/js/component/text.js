@@ -228,10 +228,7 @@ class Text extends Component {
 
             if (this.useItext) {
                 newText = new fabric.IText(text, styles);
-                selectionStyle = snippet.extend({}, selectionStyle, {
-                    originX: 'left',
-                    originY: 'top'
-                });
+                selectionStyle = snippet.extend({}, selectionStyle);
             } else {
                 newText = new fabric.Text(text, styles);
             }
