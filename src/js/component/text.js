@@ -145,12 +145,12 @@ class Text extends Component {
         if (this.useItext) {
             canvas.forEachObject(obj => {
                 if (obj.type === 'i-text') {
-                    obj.set({
+                    /* obj.set({
                         left: obj.left - (obj.width / 2),
                         top: obj.top - (obj.height / 2),
                         originX: 'left',
                         originY: 'top'
-                    });
+                    });*/
                 }
             });
         } else {
@@ -175,12 +175,12 @@ class Text extends Component {
                     if (obj.text === '') {
                         obj.remove();
                     } else {
-                        obj.set({
+                        /* obj.set({
                             left: obj.left + (obj.width / 2),
                             top: obj.top + (obj.height / 2),
                             originX: 'center',
                             originY: 'center'
-                        });
+                        });*/
                     }
                 }
             });
