@@ -318,6 +318,7 @@ class Shape extends Component {
             scaling(fEvent) {
                 const pointer = canvas.getPointer(fEvent.e);
                 const currentObj = self._shapeObj;
+                resizeHelper.setOrigins(currentObj);
 
                 canvas.setCursor('crosshair');
                 resizeHelper.resize(currentObj, pointer, true);
