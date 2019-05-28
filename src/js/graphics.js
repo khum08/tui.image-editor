@@ -146,6 +146,7 @@ class Graphics {
             onMouseMove: this._onMouseMove.bind(this),
             onObjectAdded: this._onObjectAdded.bind(this),
             onObjectRemoved: this._onObjectRemoved.bind(this),
+            onObjectRotating: this._onObjectRotating.bind(this),
             onObjectMoved: this._onObjectMoved.bind(this),
             onObjectScaled: this._onObjectScaled.bind(this),
             onObjectSelected: this._onObjectSelected.bind(this),
@@ -949,6 +950,7 @@ class Graphics {
             'mouse:move': handler.onMouseMove,
             'object:added': handler.onObjectAdded,
             'object:removed': handler.onObjectRemoved,
+            'object:rotating': handler.onObjectRotating,
             'object:moving': handler.onObjectMoved,
             'object:scaling': handler.onObjectScaled,
             'object:selected': handler.onObjectSelected,
@@ -1009,8 +1011,22 @@ class Graphics {
      */
     _onObjectRemoved(fEvent) {
         const obj = fEvent.target;
+        const params = this.createObjectProperties(obj);
 
         this._removeFabricObject(stamp(obj));
+        this.fire(events.OBJECT_REMOVED, params);
+    }
+
+    /**
+     * "object:rotating" canvas event handler
+     * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event
+     * @private
+     */
+    _onObjectRotating(fEvent) {
+        const obj = fEvent.target;
+        const params = this.createObjectProperties(obj);
+
+        this.fire(events.OBJECT_ROTATING, params);
     }
 
     /**
@@ -1115,7 +1131,8 @@ class Graphics {
             'fill',
             'stroke',
             'strokeWidth',
-            'opacity'
+            'opacity',
+            'angle'
         ];
         const props = {
             id: stamp(obj),

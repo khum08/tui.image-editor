@@ -54,6 +54,8 @@ module.exports = {
      */
     eventNames: {
         OBJECT_ACTIVATED: 'objectActivated',
+        OBJECT_REMOVED: 'objectRemoved',
+        OBJECT_ROTATING: 'objectRotating',
         OBJECT_MOVED: 'objectMoved',
         OBJECT_SCALED: 'objectScaled',
         OBJECT_CREATED: 'objectCreated',

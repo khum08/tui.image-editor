@@ -83,6 +83,12 @@ class ImageEditor {
         this.activeObjectId = null;
 
         /**
+         * Flag that enables/disables removal of objects
+         * @type {boolean}
+         */
+        this.allowObjectRemoval = true;
+
+        /**
          * Invoker
          * @type {Invoker}
          * @private
@@ -114,6 +120,8 @@ class ImageEditor {
             mouseup: this._onMouseUp.bind(this),
             mousemove: this._onMouseMove.bind(this),
             objectActivated: this._onObjectActivated.bind(this),
+            objectRemoved: this._onObjectRemoved.bind(this),
+            objectRotating: this._onObjectRotating.bind(this),
             objectMoved: this._onObjectMoved.bind(this),
             objectScaled: this._onObjectScaled.bind(this),
             createdPath: this._onCreatedPath,
@@ -269,6 +277,8 @@ class ImageEditor {
             'objectMoved': this._handlers.objectMoved,
             'objectScaled': this._handlers.objectScaled,
             'objectActivated': this._handlers.objectActivated,
+            'objectRemoved': this._handlers.objectRemoved,
+            'objectRotating': this._handlers.objectRotating,
             'addText': this._handlers.addText,
             'addObject': this._handlers.addObject,
             'textEditing': this._handlers.textEditing,
@@ -309,6 +319,7 @@ class ImageEditor {
         const activeObject = this._graphics.getActiveObject();
         const activeObjectGroup = this._graphics.getActiveGroupObject();
         const existRemoveObject = activeObject || activeObjectGroup;
+        const canRemove = this.allowObjectRemoval;
 
         if ((e.ctrlKey || e.metaKey) && e.keyCode === keyCodes.Z) {
             // There is no error message on shortcut when it's empty
@@ -320,7 +331,7 @@ class ImageEditor {
             this.redo()['catch'](() => {});
         }
 
-        if (((e.keyCode === keyCodes.BACKSPACE || e.keyCode === keyCodes.DEL) && existRemoveObject)) {
+        if (((e.keyCode === keyCodes.BACKSPACE || e.keyCode === keyCodes.DEL) && existRemoveObject && canRemove)) {
             e.preventDefault();
             this.removeActiveObject();
         }
@@ -483,6 +494,46 @@ class ImageEditor {
          * });
          */
         this.fire(events.OBJECT_ACTIVATED, props);
+    }
+
+    /**
+     * 'objectRemoved' event handler
+     * @param {ObjectProps} props - object properties
+     * @private
+     */
+    _onObjectRemoved(props) {
+        /**
+         * The event when object is removed.
+         * @event ImageEditor#objectRemoved
+         * @param {ObjectProps} objectProps - object properties
+         * @example
+         * imageEditor.on('objectRemoved', function(props) {
+         *     console.log(props);
+         *     console.log(props.type);
+         *     console.log(props.id);
+         * });
+         */
+        this.fire(events.OBJECT_REMOVED, props);
+    }
+
+    /**
+     * 'objectRotating' event handler
+     * @param {ObjectProps} props - object properties
+     * @private
+     */
+    _onObjectRotating(props) {
+        /**
+         * The event when object is rotating.
+         * @event ImageEditor#objectRotating
+         * @param {ObjectProps} objectProps - object properties
+         * @example
+         * imageEditor.on('objectRotating', function(props) {
+         *     console.log(props);
+         *     console.log(props.type);
+         *     console.log(props.id);
+         * });
+         */
+        this.fire(events.OBJECT_ROTATING, props);
     }
 
     /**
@@ -1186,6 +1237,12 @@ class ImageEditor {
      * @private
      */
     _selectionCreated(eventTarget) {
+        eventTarget.set({
+            lockRotation: true,
+            lockScalingX: true,
+            lockScalingY: true,
+            hasControls: false
+        });
         this.fire(events.SELECTION_CREATED, eventTarget);
     }
 
@@ -1598,6 +1655,14 @@ class ImageEditor {
      */
     setCanvasZoom(zoom) {
         this._graphics.setCanvasZoom(zoom);
+    }
+
+    /**
+     * Sets the object removal flag
+     * @param {boolean} allow - allow flag
+     */
+    setAllowObjectRemoval(allow) {
+        this.allowObjectRemoval = allow;
     }
 }
 
