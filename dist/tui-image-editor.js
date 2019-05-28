@@ -1,6 +1,6 @@
 /*!
  * tui-image-editor.js
- * @version 3.5.2-alm.3
+ * @version 3.5.2-alm.4
  * @author NHNEnt FE Development Lab <dl_javascript@nhnent.com>
  * @license MIT
  */
@@ -705,6 +705,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.activeObjectId = null;
 
 	        /**
+	         * Flag that enables/disables removal of objects
+	         * @type {boolean}
+	         */
+	        this.allowObjectRemoval = true;
+
+	        /**
 	         * Invoker
 	         * @type {Invoker}
 	         * @private
@@ -734,6 +740,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            mouseup: this._onMouseUp.bind(this),
 	            mousemove: this._onMouseMove.bind(this),
 	            objectActivated: this._onObjectActivated.bind(this),
+	            objectRemoved: this._onObjectRemoved.bind(this),
+	            objectRotating: this._onObjectRotating.bind(this),
 	            objectMoved: this._onObjectMoved.bind(this),
 	            objectScaled: this._onObjectScaled.bind(this),
 	            createdPath: this._onCreatedPath,
@@ -901,6 +909,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'objectMoved': this._handlers.objectMoved,
 	                'objectScaled': this._handlers.objectScaled,
 	                'objectActivated': this._handlers.objectActivated,
+	                'objectRemoved': this._handlers.objectRemoved,
+	                'objectRotating': this._handlers.objectRotating,
 	                'addText': this._handlers.addText,
 	                'addObject': this._handlers.addObject,
 	                'textEditing': this._handlers.textEditing,
@@ -950,6 +960,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var activeObject = this._graphics.getActiveObject();
 	            var activeObjectGroup = this._graphics.getActiveGroupObject();
 	            var existRemoveObject = activeObject || activeObjectGroup;
+	            var canRemove = this.allowObjectRemoval;
 
 	            if ((e.ctrlKey || e.metaKey) && e.keyCode === keyCodes.Z) {
 	                // There is no error message on shortcut when it's empty
@@ -961,7 +972,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.redo()['catch'](function () {});
 	            }
 
-	            if ((e.keyCode === keyCodes.BACKSPACE || e.keyCode === keyCodes.DEL) && existRemoveObject) {
+	            if ((e.keyCode === keyCodes.BACKSPACE || e.keyCode === keyCodes.DEL) && existRemoveObject && canRemove) {
 	                e.preventDefault();
 	                this.removeActiveObject();
 	            }
@@ -1147,6 +1158,52 @@ return /******/ (function(modules) { // webpackBootstrap
 	             * });
 	             */
 	            this.fire(events.OBJECT_ACTIVATED, props);
+	        }
+
+	        /**
+	         * 'objectRemoved' event handler
+	         * @param {ObjectProps} props - object properties
+	         * @private
+	         */
+
+	    }, {
+	        key: '_onObjectRemoved',
+	        value: function _onObjectRemoved(props) {
+	            /**
+	             * The event when object is removed.
+	             * @event ImageEditor#objectRemoved
+	             * @param {ObjectProps} objectProps - object properties
+	             * @example
+	             * imageEditor.on('objectRemoved', function(props) {
+	             *     console.log(props);
+	             *     console.log(props.type);
+	             *     console.log(props.id);
+	             * });
+	             */
+	            this.fire(events.OBJECT_REMOVED, props);
+	        }
+
+	        /**
+	         * 'objectRotating' event handler
+	         * @param {ObjectProps} props - object properties
+	         * @private
+	         */
+
+	    }, {
+	        key: '_onObjectRotating',
+	        value: function _onObjectRotating(props) {
+	            /**
+	             * The event when object is rotating.
+	             * @event ImageEditor#objectRotating
+	             * @param {ObjectProps} objectProps - object properties
+	             * @example
+	             * imageEditor.on('objectRotating', function(props) {
+	             *     console.log(props);
+	             *     console.log(props.type);
+	             *     console.log(props.id);
+	             * });
+	             */
+	            this.fire(events.OBJECT_ROTATING, props);
 	        }
 
 	        /**
@@ -1982,6 +2039,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: '_selectionCreated',
 	        value: function _selectionCreated(eventTarget) {
+	            eventTarget.set({
+	                lockRotation: true,
+	                lockScalingX: true,
+	                lockScalingY: true,
+	                hasControls: false
+	            });
 	            this.fire(events.SELECTION_CREATED, eventTarget);
 	        }
 
@@ -2477,6 +2540,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'setCanvasZoom',
 	        value: function setCanvasZoom(zoom) {
 	            this._graphics.setCanvasZoom(zoom);
+	        }
+
+	        /**
+	         * Sets the object removal flag
+	         * @param {boolean} allow - allow flag
+	         */
+
+	    }, {
+	        key: 'setAllowObjectRemoval',
+	        value: function setAllowObjectRemoval(allow) {
+	            this.allowObjectRemoval = allow;
 	        }
 	    }]);
 
@@ -5233,6 +5307,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    eventNames: {
 	        OBJECT_ACTIVATED: 'objectActivated',
+	        OBJECT_REMOVED: 'objectRemoved',
+	        OBJECT_ROTATING: 'objectRotating',
 	        OBJECT_MOVED: 'objectMoved',
 	        OBJECT_SCALED: 'objectScaled',
 	        OBJECT_CREATED: 'objectCreated',
@@ -7965,6 +8041,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            onMouseMove: this._onMouseMove.bind(this),
 	            onObjectAdded: this._onObjectAdded.bind(this),
 	            onObjectRemoved: this._onObjectRemoved.bind(this),
+	            onObjectRotating: this._onObjectRotating.bind(this),
 	            onObjectMoved: this._onObjectMoved.bind(this),
 	            onObjectScaled: this._onObjectScaled.bind(this),
 	            onObjectSelected: this._onObjectSelected.bind(this),
@@ -8960,6 +9037,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'mouse:move': handler.onMouseMove,
 	                'object:added': handler.onObjectAdded,
 	                'object:removed': handler.onObjectRemoved,
+	                'object:rotating': handler.onObjectRotating,
 	                'object:moving': handler.onObjectMoved,
 	                'object:scaling': handler.onObjectScaled,
 	                'object:selected': handler.onObjectSelected,
@@ -9035,8 +9113,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: '_onObjectRemoved',
 	        value: function _onObjectRemoved(fEvent) {
 	            var obj = fEvent.target;
+	            var params = this.createObjectProperties(obj);
 
 	            this._removeFabricObject(stamp(obj));
+	            this.fire(events.OBJECT_REMOVED, params);
+	        }
+
+	        /**
+	         * "object:rotating" canvas event handler
+	         * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event
+	         * @private
+	         */
+
+	    }, {
+	        key: '_onObjectRotating',
+	        value: function _onObjectRotating(fEvent) {
+	            var obj = fEvent.target;
+	            var params = this.createObjectProperties(obj);
+
+	            this.fire(events.OBJECT_ROTATING, params);
 	        }
 
 	        /**
@@ -9163,7 +9258,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'createObjectProperties',
 	        value: function createObjectProperties(obj) {
-	            var predefinedKeys = ['left', 'top', 'width', 'height', 'fill', 'stroke', 'strokeWidth', 'opacity'];
+	            var predefinedKeys = ['left', 'top', 'width', 'height', 'fill', 'stroke', 'strokeWidth', 'opacity', 'angle'];
 	            var props = {
 	                id: stamp(obj),
 	                type: obj.type
@@ -11443,12 +11538,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (this.useItext) {
 	                canvas.forEachObject(function (obj) {
 	                    if (obj.type === 'i-text') {
-	                        obj.set({
-	                            left: obj.left - obj.width / 2,
-	                            top: obj.top - obj.height / 2,
+	                        /* obj.set({
+	                            left: obj.left - (obj.width / 2),
+	                            top: obj.top - (obj.height / 2),
 	                            originX: 'left',
 	                            originY: 'top'
-	                        });
+	                        });*/
 	                    }
 	                });
 	            } else {
@@ -11476,12 +11571,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        if (obj.text === '') {
 	                            obj.remove();
 	                        } else {
-	                            obj.set({
-	                                left: obj.left + obj.width / 2,
-	                                top: obj.top + obj.height / 2,
+	                            /* obj.set({
+	                                left: obj.left + (obj.width / 2),
+	                                top: obj.top + (obj.height / 2),
 	                                originX: 'center',
 	                                originY: 'center'
-	                            });
+	                            });*/
 	                        }
 	                    }
 	                });
@@ -13322,6 +13417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                scaling: function scaling(fEvent) {
 	                    var pointer = canvas.getPointer(fEvent.e);
 	                    var currentObj = self._shapeObj;
+	                    _shapeResizeHelper2.default.setOrigins(currentObj);
 
 	                    canvas.setCursor('crosshair');
 	                    _shapeResizeHelper2.default.resize(currentObj, pointer, true);
@@ -13575,7 +13671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var origin = shape.getPointByOrigin(originX, originY);
 	    var left = shape.getLeft() - (centerPoint.x - origin.x);
-	    var top = shape.getTop() - (centerPoint.x - origin.y);
+	    var top = shape.getTop() - (centerPoint.y - origin.y);
 
 	    shape.set({
 	        originX: originX,
@@ -15521,10 +15617,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return _promise2.default.reject(rejectMessages.noObject);
 	        }
 
-	        this.undoData.props = {};
-	        _codeSnippet2.default.forEachOwnProperties(props, function (value, key) {
-	            _this.undoData.props[key] = targetObj[key];
-	        });
+	        if (this.undoData && !this.undoData.props && targetObj.originalState) {
+	            this.undoData.props = {};
+	            _codeSnippet2.default.forEachOwnProperties(props, function (value, key) {
+	                _this.undoData.props[key] = targetObj.originalState[key];
+	            });
+	        }
 
 	        graphics.setObjectProperties(id, props);
 
