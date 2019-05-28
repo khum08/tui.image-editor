@@ -176,6 +176,12 @@ class ImageEditor {
     this.activeObjectId = null;
 
     /**
+     * Flag that enables/disables removal of objects
+     * @type {boolean}
+     */
+    this.allowObjectRemoval = true;
+
+    /**
      * UI instance
      * @type {Ui}
      */
@@ -215,6 +221,7 @@ class ImageEditor {
       mouseup: this._onMouseUp.bind(this),
       mousemove: this._onMouseMove.bind(this),
       objectActivated: this._onObjectActivated.bind(this),
+      objectRemoved: this._onObjectRemoved.bind(this),
       objectMoved: this._onObjectMoved.bind(this),
       objectScaled: this._onObjectScaled.bind(this),
       objectRotated: this._onObjectRotated.bind(this),
@@ -353,6 +360,7 @@ class ImageEditor {
       [OBJECT_ROTATED]: this._handlers.objectRotated,
       [OBJECT_ACTIVATED]: this._handlers.objectActivated,
       [OBJECT_ADDED]: this._handlers.objectAdded,
+      'objectRemoved': this._handlers.objectRemoved,
       [OBJECT_MODIFIED]: this._handlers.objectModified,
       [ADD_TEXT]: this._handlers.addText,
       [ADD_OBJECT]: this._handlers.addObject,
@@ -392,6 +400,7 @@ class ImageEditor {
   _onKeyDown(e) {
     const { ctrlKey, keyCode, metaKey } = e;
     const isModifierKey = ctrlKey || metaKey;
+    const canRemove = this.allowObjectRemoval;
 
     if (isModifierKey) {
       if (keyCode === keyCodes.C) {
@@ -411,7 +420,7 @@ class ImageEditor {
     const isDeleteKey = keyCode === keyCodes.BACKSPACE || keyCode === keyCodes.DEL;
     const isRemoveReady = this._graphics.isReadyRemoveObject();
 
-    if (!this.isColorPickerInputBoxEditing && isRemoveReady && isDeleteKey) {
+    if (!this.isColorPickerInputBoxEditing && isRemoveReady && isDeleteKey && canRemove) {
       e.preventDefault();
       this.removeActiveObject();
     }
@@ -564,6 +573,26 @@ class ImageEditor {
      * });
      */
     this.fire(events.OBJECT_ACTIVATED, props);
+  }
+
+  /**
+   * 'objectRemoved' event handler
+   * @param {ObjectProps} props - object properties
+   * @private
+   */
+  _onObjectRemoved(props) {
+    /**
+     * The event when object is removed.
+     * @event ImageEditor#objectRemoved
+     * @param {ObjectProps} objectProps - object properties
+     * @example
+     * imageEditor.on('objectRemoved', function(props) {
+     *     console.log(props);
+     *     console.log(props.type);
+     *     console.log(props.id);
+     * });
+     */
+    this.fire(events.OBJECT_REMOVED, props);
   }
 
   /**
@@ -1440,6 +1469,12 @@ class ImageEditor {
    * @private
    */
   _selectionCreated(eventTarget) {
+    eventTarget.set({
+      lockRotation: true,
+      lockScalingX: true,
+      lockScalingY: true,
+      hasControls: false
+    });
     this.fire(SELECTION_CREATED, eventTarget);
   }
 
@@ -1865,6 +1900,14 @@ class ImageEditor {
    */
   setCanvasZoom(zoom) {
     this._graphics.setCanvasZoom(zoom);
+  }
+
+  /**
+   * Sets the object removal flag
+   * @param {boolean} allow - allow flag
+   */
+  setAllowObjectRemoval(allow) {
+    this.allowObjectRemoval = allow;
   }
 }
 

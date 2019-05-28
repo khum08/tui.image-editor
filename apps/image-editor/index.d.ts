@@ -322,6 +322,7 @@ declare namespace tuiImageEditor {
     public resizeCanvasDimension(dimension: ICanvasSize): Promise<void>;
     public resizeCanvasDimensionQuietly(dimension: ICanvasSize): Promise<void>;
     public rotate(angle: AngleType, isSilent?: boolean): Promise<AngleType>;
+    public setAllowObjectRemoval(allow: boolean): void;
     public setAngle(angle: AngleType, isSilent?: boolean): Promise<AngleType>;
     public setBrush(option: IBrushOptions): void;
     public setCanvasZoom(zoom: number): void;

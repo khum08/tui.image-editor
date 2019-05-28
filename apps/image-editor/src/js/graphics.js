@@ -1212,8 +1212,10 @@ class Graphics {
    */
   _onObjectRemoved(fEvent) {
     const obj = fEvent.target;
+    const params = this.createObjectProperties(obj);
 
     this._removeFabricObject(stamp(obj));
+    this.fire(events.OBJECT_REMOVED, params);
   }
 
   /**
