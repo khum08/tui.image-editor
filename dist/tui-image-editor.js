@@ -11629,10 +11629,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                if (_this2.useItext) {
 	                    newText = new _fabric2.default.IText(text, styles);
-	                    selectionStyle = _codeSnippet2.default.extend({}, selectionStyle, {
-	                        originX: 'left',
-	                        originY: 'top'
-	                    });
+	                    selectionStyle = _codeSnippet2.default.extend({}, selectionStyle);
 	                } else {
 	                    newText = new _fabric2.default.Text(text, styles);
 	                }
