@@ -159,6 +159,7 @@ class Graphics {
         this._createDrawingModeInstances();
         this._createComponents();
         this._attachCanvasEvents();
+        this._fixITextOnChrome();
     }
 
     /**
@@ -958,6 +959,38 @@ class Graphics {
             'selection:cleared': handler.onSelectionCleared,
             'selection:created': handler.onSelectionCreated
         });
+    }
+
+    /**
+     * Fixes a chrome bug that would cause spaces to insert new lines when editing an interactive text object
+     * This function is taken from fabric.js 1.6.7
+     * @private
+     */
+    _fixITextOnChrome() {
+        fabric.IText.prototype.initHiddenTextarea = function() {
+            this.hiddenTextarea = fabric.document.createElement('textarea');
+            this.hiddenTextarea.setAttribute('autocapitalize', 'off');
+            const style = this._calcTextareaPosition();
+            this.hiddenTextarea.style.cssText = `position: absolute; top: ${style.top
+            }; left: ${style.left};` +
+                ` opacity: 0; width: 0px; height: 0px; z-index: -999; white-space: nowrap;`;
+            fabric.document.body.appendChild(this.hiddenTextarea);
+            fabric.util.addListener(this.hiddenTextarea, 'keydown', this.onKeyDown.bind(this));
+            fabric.util.addListener(this.hiddenTextarea, 'keyup', this.onKeyUp.bind(this));
+            fabric.util.addListener(this.hiddenTextarea, 'input', this.onInput.bind(this));
+            fabric.util.addListener(this.hiddenTextarea, 'copy', this.copy.bind(this));
+            fabric.util.addListener(this.hiddenTextarea, 'cut', this.cut.bind(this));
+            fabric.util.addListener(this.hiddenTextarea, 'paste', this.paste.bind(this));
+            fabric.util.addListener(this.hiddenTextarea, 'compositionstart',
+                this.onCompositionStart.bind(this));
+            fabric.util.addListener(this.hiddenTextarea, 'compositionupdate',
+                this.onCompositionUpdate.bind(this));
+            fabric.util.addListener(this.hiddenTextarea, 'compositionend', this.onCompositionEnd.bind(this));
+            if (!this._clickHandlerInitialized && this.canvas) {
+                fabric.util.addListener(this.canvas.upperCanvasEl, 'click', this.onClick.bind(this));
+                this._clickHandlerInitialized = true;
+            }
+        };
     }
 
     /**
