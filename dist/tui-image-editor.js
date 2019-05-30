@@ -1,6 +1,6 @@
 /*!
  * tui-image-editor.js
- * @version 3.5.2-alm.4
+ * @version 3.5.2-alm.5
  * @author NHNEnt FE Development Lab <dl_javascript@nhnent.com>
  * @license MIT
  */
@@ -8054,6 +8054,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._createDrawingModeInstances();
 	        this._createComponents();
 	        this._attachCanvasEvents();
+	        this._fixITextOnChrome();
 	    }
 
 	    /**
@@ -9045,6 +9046,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'selection:cleared': handler.onSelectionCleared,
 	                'selection:created': handler.onSelectionCreated
 	            });
+	        }
+
+	        /**
+	         * Fixes a chrome bug that would cause spaces to insert new lines when editing an interactive text object
+	         * This function is taken from fabric.js 1.6.7
+	         * @private
+	         */
+
+	    }, {
+	        key: '_fixITextOnChrome',
+	        value: function _fixITextOnChrome() {
+	            _fabric2.default.IText.prototype.initHiddenTextarea = function () {
+	                this.hiddenTextarea = _fabric2.default.document.createElement('textarea');
+	                this.hiddenTextarea.setAttribute('autocapitalize', 'off');
+	                var style = this._calcTextareaPosition();
+	                this.hiddenTextarea.style.cssText = 'position: absolute; top: ' + style.top + '; left: ' + style.left + ';' + ' opacity: 0; width: 0px; height: 0px; z-index: -999; white-space: nowrap;';
+	                _fabric2.default.document.body.appendChild(this.hiddenTextarea);
+	                _fabric2.default.util.addListener(this.hiddenTextarea, 'keydown', this.onKeyDown.bind(this));
+	                _fabric2.default.util.addListener(this.hiddenTextarea, 'keyup', this.onKeyUp.bind(this));
+	                _fabric2.default.util.addListener(this.hiddenTextarea, 'input', this.onInput.bind(this));
+	                _fabric2.default.util.addListener(this.hiddenTextarea, 'copy', this.copy.bind(this));
+	                _fabric2.default.util.addListener(this.hiddenTextarea, 'cut', this.cut.bind(this));
+	                _fabric2.default.util.addListener(this.hiddenTextarea, 'paste', this.paste.bind(this));
+	                _fabric2.default.util.addListener(this.hiddenTextarea, 'compositionstart', this.onCompositionStart.bind(this));
+	                _fabric2.default.util.addListener(this.hiddenTextarea, 'compositionupdate', this.onCompositionUpdate.bind(this));
+	                _fabric2.default.util.addListener(this.hiddenTextarea, 'compositionend', this.onCompositionEnd.bind(this));
+	                if (!this._clickHandlerInitialized && this.canvas) {
+	                    _fabric2.default.util.addListener(this.canvas.upperCanvasEl, 'click', this.onClick.bind(this));
+	                    this._clickHandlerInitialized = true;
+	                }
+	            };
 	        }
 
 	        /**
