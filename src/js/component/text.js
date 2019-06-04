@@ -579,8 +579,12 @@ class Text extends Component {
         const newClickTime = (new Date()).getTime();
 
         if (this._isDoubleClick(newClickTime)) {
+            const obj = fEvent.target;
             if (!this.useItext) {
                 this._changeToEditingMode(fEvent.target);
+            } else if (obj) {
+                obj.selectAll();
+                obj.renderCursorOrSelection();
             }
             this.fire(events.TEXT_EDITING); // fire editing text event
         }
