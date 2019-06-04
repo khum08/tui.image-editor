@@ -8906,7 +8906,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this._canvas = new _fabric2.default.Canvas(canvasElement, {
 	                containerClass: 'tui-image-editor-canvas-container',
 	                enableRetinaScaling: false,
-	                targetFindTolerance: _consts2.default.defaultPixelTargetTolerance
+	                targetFindTolerance: _consts2.default.defaultPixelTargetTolerance,
+	                rotationCursor: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAABu0lEQVQ4T33SvWtTYRQG8OfcphY3JeBg4r3nflgldQuWLoLgIIiDq7gUF7VgMav/gIsolEIWoVCcnF2KCN2sQjY/a27ueW9jBrXgINSS3vfIDclFQ8g7Hp7fy+GcQ5jwgiBwKbOGgGbbyMqkDI0Xa7XascPfB3fiNFkLPYYqHnVSeTie+w+GzDegeAagHBspspHrLrTT9OO/uIAB811SNAHsKPCGgEaOzzIvfRV5y8zsWBt20vR1/sEA+r5/zrH6AcCL2Mit+dPz5d3e7g8AMwBsngmYH5DicUa4ICKfBzDy/OcKvXaYHVW63e7BpGFUq9XjczOlbwC2YiM3h5D3odhsp9KYhEa1yOWnSliOjZwcwNBjVcLtjsjGNBgyL0OxERuhIfT6gNOITbI+Fbr+fZB9EhszO2r1kwK92MiVqdDjfKKV2Mj5IfRWFLRuHVpKkuTdJOz7/qJjdQeg1byzAazX67O/fu6/B3DKOnR1HAdngovk2FcgfD9RLi+0Wq1+cQBRJapq6Wg7XyuAbSK8hCop6DqAywCSks0ufdnb6xUHUIw7iua0n60q9B4BDEABpFA0MwdrIvJnlP0LSd+3DztycRoAAAAASUVORK5CYII=) 6 6, alias'
 	            });
 	        }
 
@@ -10232,7 +10233,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._fillOuterRect(ctx, 'rgba(0, 0, 0, 0.55)');
 
 	        if (this.options.lineWidth) {
-	            this._fillInnerRect(ctx);
 	            this._strokeBorder(ctx, 'rgb(255, 255, 255)', {
 	                lineWidth: this.options.lineWidth
 	            });
@@ -12081,8 +12081,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var newClickTime = new Date().getTime();
 
 	            if (this._isDoubleClick(newClickTime)) {
+	                var obj = fEvent.target;
 	                if (!this.useItext) {
 	                    this._changeToEditingMode(fEvent.target);
+	                } else if (obj) {
+	                    obj.selectAll();
+	                    obj.renderCursorOrSelection();
 	                }
 	                this.fire(events.TEXT_EDITING); // fire editing text event
 	            }
