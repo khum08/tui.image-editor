@@ -67,7 +67,6 @@ const Cropzone = fabric.util.createClass(fabric.Rect, /** @lends Cropzone.protot
         this._fillOuterRect(ctx, 'rgba(0, 0, 0, 0.55)');
 
         if (this.options.lineWidth) {
-            this._fillInnerRect(ctx);
             this._strokeBorder(ctx, 'rgb(255, 255, 255)', {
                 lineWidth: this.options.lineWidth
             });
