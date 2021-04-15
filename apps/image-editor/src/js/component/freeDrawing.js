@@ -36,7 +36,7 @@ class FreeDrawing extends Component {
      */
     this._listeners = {
       mousedown: this._onFabricMouseDown.bind(this),
-      mouseup: this._onFabricMouseUp.bind(this)
+      mouseup: this._onFabricMouseUp.bind(this),
     };
   }
 
@@ -51,7 +51,7 @@ class FreeDrawing extends Component {
     this.setBrush(setting);
 
     canvas.on({
-      'mouse:down': this._listeners.mousedown
+      'mouse:down': this._listeners.mousedown,
     });
   }
 
@@ -90,7 +90,7 @@ class FreeDrawing extends Component {
     canvas.isDrawingMode = true;
 
     canvas.on({
-      'mouse:up': this._listeners.mouseup
+      'mouse:up': this._listeners.mouseup,
     });
   }
 
@@ -105,14 +105,14 @@ class FreeDrawing extends Component {
     const target = canvas.findTarget(fEvent.e);
     if (target) {
       target.set({
-        perPixelTargetFind: false
+        perPixelTargetFind: false,
       });
 
       canvas.setActiveObject(target);
     }
 
     canvas.off({
-      'mouse:up': this._listeners.mouseup
+      'mouse:up': this._listeners.mouseup,
     });
 
     canvas.isDrawingMode = false;

@@ -33,6 +33,7 @@ import {
   eventNames as events,
   drawingModes,
   fObjectOptions,
+  defaultPixelTargetTolerance,
 } from '@/consts';
 
 const {
@@ -589,10 +590,13 @@ class Graphics {
     const tempMaxDimension = this._calcMaxDimension(width, height);
 
     const zoomLevel = this.getCanvasZoom();
-    const maxDimension = zoomLevel <= 1 ? tempMaxDimension : {
-      width: tempMaxDimension.width * zoomLevel,
-      height: tempMaxDimension.height * zoomLevel
-    };
+    const maxDimension =
+      zoomLevel <= 1
+        ? tempMaxDimension
+        : {
+            width: tempMaxDimension.width * zoomLevel,
+            height: tempMaxDimension.height * zoomLevel,
+          };
 
     this.setCanvasCssDimension({
       width: '100%',
@@ -612,10 +616,10 @@ class Graphics {
    */
   adjustCanvasDimensionForRotate() {
     const canvasImage = this.canvasImage.scale(1);
-    const {width, height} = canvasImage.getBoundingRect();
+    const { width, height } = canvasImage.getBoundingRect();
     const maxDimension = {
-        width: height,
-        height: width,
+      width: height,
+      height: width,
     };
 
     this.setCanvasCssDimension({
@@ -1025,8 +1029,9 @@ class Graphics {
     this._canvas = new fabric.Canvas(canvasElement, {
       containerClass: 'tui-image-editor-canvas-container',
       enableRetinaScaling: false,
-      targetFindTolerance: consts.defaultPixelTargetTolerance,
-      rotationCursor: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAD3ElEQVRIS5WWbUyVZRjH//+ewxhsraNrAQVZk7b0NI5tUrAgHGy2rIQDBL6cc8CWQxYyEIXVigQzJnYqczN5EcHsg+gH7UVdBLodjjleRKCXrQ/MHBsbK2E12ALPrnY/yCPneM7hdH97dv+v63dd133d1/0QYSwRKQQQTfJkGHIfCcMxEJFiAMp5C4DdJP8Nx05p/hdgeHgYVqt1AEA+yT/CgYQL2Amg+dnEZ1Dz3rso3rHjDsktJLuWgywLEJE1AH5VjhKfelr3l5mViUaXS8xmcy2AgyQlGCgoQETWARjyer3o7+vDiZZWXOnpMfzExcVhu9OBXaWl3wFwkpwKBAkIEJFyAEfaWlvx5bFjmLoT0BaaSUNlVZWCjAGwkRzxhzwAEJF9ABq3FhSgv68/ZIljYmPhuf6T0vwOIJfkLyEBIpIF4Mfc7GyMDPsGYzabMT09bdi/nJGBto529X0OwFsk/wlZIhExAfjtUENDYktTs6Fda7HgwMcHVXvqh6xpGir36mVRmkqSn4dK0yiRiLw5MTHRmZWxAXNzc7pN8gvJaOvomI+KiroIIPullFQcOXoU65PXq+00kp6w21REzrY0NecfamjQbSIjI9F99Spi42IdAB4F8Nk9Z1cAqDswuZxzn5ssIreLHY6EXnevbmfLy8Vhl+s6yVQRqbgHUPQPSHoXnYvIIyqeYMClJZKNmVkYG1MdB73uW7dtqyV5QEScAKZIfusftYiUAfjCb+zcIqnfSh/AhrR0jI+P6z4Ou1wqixqSjaFKISLfNx9v2lRSusuQiUhAwFS+Ldd8c2hIF6ou2VtT3UlSjeqAS0QeBvD3qxtfweWuHxYyr6vD+7W1F0jm+GfQ/VF9fWZ728LIj09IQFdPtzciImIdyZ8DEURk/+jI6Ie2zZuN7favTiEtPb2EpN7rS0tUeWNw8NOCvHxDXFa+GxV79qix/AbJ0aUQESkBcFw5Hx1Z2HosJgbua555TdMeJ/mnP2AlgL+c2+245rnf3uUVFXinrMyrmbRvAPSplw3A6wCeL7Lb4em9r91fXwe70/k1SftiMD6zSESqAHxitTyHmZkZI+AnV61Cjs2G1YmrcXf+LgYHBnDh/HkfzYspKTh1+vSsZtLWkLwdDPAQABXpa0kWC2ZnZkM1kLGXZE3CiZPtWLFyRSHJzqVGgaapKsFZAJvysnOgnslgiyQcRU7sq672RkVH7wz0UxDsPVCZqHI19rrduHzpEm7eGMLk5CRMJhOeiI9HSmoqCrcUqm5TJ/w2SXU+D6yQT6aIqBlUtHioANRYUOsWADeAMwAuhnoy/wO8rHIopxJHwwAAAABJRU5ErkJggg==) 6 6, alias'
+      targetFindTolerance: defaultPixelTargetTolerance,
+      rotationCursor:
+        'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAD3ElEQVRIS5WWbUyVZRjH//+ewxhsraNrAQVZk7b0NI5tUrAgHGy2rIQDBL6cc8CWQxYyEIXVigQzJnYqczN5EcHsg+gH7UVdBLodjjleRKCXrQ/MHBsbK2E12ALPrnY/yCPneM7hdH97dv+v63dd133d1/0QYSwRKQQQTfJkGHIfCcMxEJFiAMp5C4DdJP8Nx05p/hdgeHgYVqt1AEA+yT/CgYQL2Amg+dnEZ1Dz3rso3rHjDsktJLuWgywLEJE1AH5VjhKfelr3l5mViUaXS8xmcy2AgyQlGCgoQETWARjyer3o7+vDiZZWXOnpMfzExcVhu9OBXaWl3wFwkpwKBAkIEJFyAEfaWlvx5bFjmLoT0BaaSUNlVZWCjAGwkRzxhzwAEJF9ABq3FhSgv68/ZIljYmPhuf6T0vwOIJfkLyEBIpIF4Mfc7GyMDPsGYzabMT09bdi/nJGBto529X0OwFsk/wlZIhExAfjtUENDYktTs6Fda7HgwMcHVXvqh6xpGir36mVRmkqSn4dK0yiRiLw5MTHRmZWxAXNzc7pN8gvJaOvomI+KiroIIPullFQcOXoU65PXq+00kp6w21REzrY0NecfamjQbSIjI9F99Spi42IdAB4F8Nk9Z1cAqDswuZxzn5ssIreLHY6EXnevbmfLy8Vhl+s6yVQRqbgHUPQPSHoXnYvIIyqeYMClJZKNmVkYG1MdB73uW7dtqyV5QEScAKZIfusftYiUAfjCb+zcIqnfSh/AhrR0jI+P6z4Ou1wqixqSjaFKISLfNx9v2lRSusuQiUhAwFS+Ldd8c2hIF6ou2VtT3UlSjeqAS0QeBvD3qxtfweWuHxYyr6vD+7W1F0jm+GfQ/VF9fWZ728LIj09IQFdPtzciImIdyZ8DEURk/+jI6Ie2zZuN7favTiEtPb2EpN7rS0tUeWNw8NOCvHxDXFa+GxV79qix/AbJ0aUQESkBcFw5Hx1Z2HosJgbua555TdMeJ/mnP2AlgL+c2+245rnf3uUVFXinrMyrmbRvAPSplw3A6wCeL7Lb4em9r91fXwe70/k1SftiMD6zSESqAHxitTyHmZkZI+AnV61Cjs2G1YmrcXf+LgYHBnDh/HkfzYspKTh1+vSsZtLWkLwdDPAQABXpa0kWC2ZnZkM1kLGXZE3CiZPtWLFyRSHJzqVGgaapKsFZAJvysnOgnslgiyQcRU7sq672RkVH7wz0UxDsPVCZqHI19rrduHzpEm7eGMLk5CRMJhOeiI9HSmoqCrcUqm5TJ/w2SXU+D6yQT6aIqBlUtHioANRYUOsWADeAMwAuhnoy/wO8rHIopxJHwwAAAABJRU5ErkJggg==) 6 6, alias',
     });
   }
 
@@ -1180,7 +1185,7 @@ class Graphics {
   _onMouseUp(fEvent) {
     const originPointer = this._canvas.getPointer(fEvent.e);
     this.fire(events.MOUSE_UP, fEvent.e, originPointer);
-    }
+  }
 
   /**
    * "mouse:move" canvas event handler

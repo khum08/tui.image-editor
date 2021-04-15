@@ -164,9 +164,9 @@ export default class Shape extends Component {
     canvas.selection = false;
     canvas.uniformScaling = true;
 
-    canvas.forEachObject(obj => {
+    canvas.forEachObject((obj) => {
       obj.set({
-        evented: false
+        evented: false,
       });
     });
 
@@ -482,8 +482,8 @@ export default class Shape extends Component {
           top: startPointY,
           width,
           height,
-          perPixelTargetFind: false
-        }).then(objectProps => {
+          perPixelTargetFind: false,
+        }).then((objectProps) => {
           this.fire(eventNames.ADD_OBJECT, objectProps);
         });
       }
@@ -516,8 +516,8 @@ export default class Shape extends Component {
           top: startPointY,
           width: DEFAULT_WIDTH,
           height: DEFAULT_HEIGHT,
-          perPixelTargetFind: false
-        }).then(objectProps => {
+          perPixelTargetFind: false,
+        }).then((objectProps) => {
           this.fire(eventNames.ADD_OBJECT, objectProps);
         });
       } else if (shape) {
@@ -528,9 +528,9 @@ export default class Shape extends Component {
       this._mouseMoved = false;
       canvas.defaultCursor = 'default';
 
-      canvas.forEachObject(obj => {
+      canvas.forEachObject((obj) => {
         obj.set({
-          evented: true
+          evented: true,
         });
       });
     }

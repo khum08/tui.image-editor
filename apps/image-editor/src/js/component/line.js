@@ -6,7 +6,7 @@ import snippet from 'tui-code-snippet';
 import fabric from 'fabric';
 import Component from '@/interface/component';
 import ArrowLine from '@/extension/arrowLine';
-import { eventNames, componentNames, fObjectOptions } from '@/consts';
+import { eventNames, componentNames, fObjectOptions, defaultPixelTargetTolerance } from '@/consts';
 
 /**
  * Line
@@ -135,7 +135,7 @@ class Line extends Component {
       arrowType: this._arrowType,
       evented: false,
       perPixelTargetFind: true,
-      targetFindTolerance: consts.defaultPixelTargetTolerance
+      targetFindTolerance: defaultPixelTargetTolerance,
     });
 
     this._line.set(fObjectOptions.SELECTION_STYLE);
@@ -180,7 +180,7 @@ class Line extends Component {
 
     canvas.forEachObject(function (obj) { // eslint-disable-line
       obj.set({
-        evented: true
+        evented: true,
       });
     });
 

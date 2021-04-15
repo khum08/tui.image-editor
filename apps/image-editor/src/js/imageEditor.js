@@ -22,11 +22,14 @@ const { isUndefined, forEach, CustomEvents } = snippet;
 
 const {
   MOUSE_DOWN,
+  MOUSE_UP,
+  MOUSE_MOVE,
   OBJECT_MOVED,
   OBJECT_SCALED,
   OBJECT_ACTIVATED,
   OBJECT_ROTATED,
   OBJECT_ADDED,
+  OBJECT_REMOVED,
   OBJECT_MODIFIED,
   ADD_TEXT,
   ADD_OBJECT,
@@ -353,14 +356,14 @@ class ImageEditor {
   _attachGraphicsEvents() {
     this._graphics.on({
       [MOUSE_DOWN]: this._handlers.mousedown,
-      'mouseup': this._handlers.mouseup,
-      'mousemove': this._handlers.mousemove,
+      [MOUSE_UP]: this._handlers.mouseup,
+      [MOUSE_MOVE]: this._handlers.mousemove,
       [OBJECT_MOVED]: this._handlers.objectMoved,
       [OBJECT_SCALED]: this._handlers.objectScaled,
       [OBJECT_ROTATED]: this._handlers.objectRotated,
       [OBJECT_ACTIVATED]: this._handlers.objectActivated,
       [OBJECT_ADDED]: this._handlers.objectAdded,
-      'objectRemoved': this._handlers.objectRemoved,
+      [OBJECT_REMOVED]: this._handlers.objectRemoved,
       [OBJECT_MODIFIED]: this._handlers.objectModified,
       [ADD_TEXT]: this._handlers.addText,
       [ADD_OBJECT]: this._handlers.addObject,
@@ -1473,7 +1476,7 @@ class ImageEditor {
       lockRotation: true,
       lockScalingX: true,
       lockScalingY: true,
-      hasControls: false
+      hasControls: false,
     });
     this.fire(SELECTION_CREATED, eventTarget);
   }
@@ -1692,7 +1695,7 @@ class ImageEditor {
     return Promise.resolve();
   }
 
-    /**
+  /**
    * Destroy
    */
   destroy() {
