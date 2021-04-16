@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Error-message factory
  */
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import { keyMirror } from '@/util';
 
 const types = keyMirror('UN_IMPLEMENTATION', 'NO_COMPONENT_NAME');

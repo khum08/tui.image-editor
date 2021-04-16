@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Add filter module
  */
-import { isUndefined, extend, forEach, filter } from 'tui-code-snippet';
+import { isUndefined, extend, forEach, filter } from '../codeSnippet';
 import fabric from 'fabric';
 import Component from '@/interface/component';
 import { Promise } from '@/util';

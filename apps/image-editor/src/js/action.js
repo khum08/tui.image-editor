@@ -1,4 +1,4 @@
-import { extend } from 'tui-code-snippet';
+import { extend } from './codeSnippet';
 import Imagetracer from '@/helper/imagetracer';
 import { isSupportFileApi, base64ToBlob, toInteger, isEmptyCropzone } from '@/util';
 import { eventNames, historyNames, drawingModes, drawingMenuNames, zoomModes } from '@/consts';

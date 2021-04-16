@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Image crop module (start cropping, end cropping)
  */
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import fabric from 'fabric';
 import Component from '@/interface/component';
 import Cropzone from '@/extension/cropzone';

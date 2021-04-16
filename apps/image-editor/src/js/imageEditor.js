@@ -2,9 +2,8 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Image-editor application class
  */
-import snippet from 'tui-code-snippet';
+import snippet from './codeSnippet';
 import Invoker from '@/invoker';
-import UI from '@/ui';
 import action from '@/action';
 import commandFactory from '@/factory/command';
 import Graphics from '@/graphics';
@@ -17,8 +16,9 @@ import {
   rejectMessages,
   OBJ_TYPE,
 } from '@/consts';
+import CustomEvents from './customEvent';
 
-const { isUndefined, forEach, CustomEvents } = snippet;
+const { isUndefined, forEach } = snippet;
 
 const {
   MOUSE_DOWN,
@@ -169,7 +169,7 @@ class ImageEditor {
     options = snippet.extend(
       {
         includeUI: false,
-        usageStatistics: true,
+        usageStatistics: false,
       },
       options
     );
@@ -183,18 +183,6 @@ class ImageEditor {
      * @type {boolean}
      */
     this.allowObjectRemoval = true;
-
-    /**
-     * UI instance
-     * @type {Ui}
-     */
-    if (options.includeUI) {
-      const UIOption = options.includeUI;
-      UIOption.usageStatistics = options.usageStatistics;
-
-      this.ui = new UI(wrapper, UIOption, this.getActions());
-      options = this.ui.setUiDefaultSelectionStyle(options);
-    }
 
     /**
      * Invoker

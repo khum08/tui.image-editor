@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Change text styles
  */
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import commandFactory from '@/factory/command';
 import { Promise } from '@/util';
 import { componentNames, rejectMessages, commandNames } from '@/consts';

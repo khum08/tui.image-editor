@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Command interface
  */
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import errorMessage from '@/factory/errorMessage';
 
 const createMessage = errorMessage.create;

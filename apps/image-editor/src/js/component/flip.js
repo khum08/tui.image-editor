@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Image flip module
  */
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import Component from '@/interface/component';
 import { Promise } from '@/util';
 import { componentNames, rejectMessages } from '@/consts';

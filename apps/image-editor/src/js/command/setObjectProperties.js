@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Set object properties
  */
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import commandFactory from '@/factory/command';
 import { Promise } from '@/util';
 import { commandNames, rejectMessages } from '@/consts';

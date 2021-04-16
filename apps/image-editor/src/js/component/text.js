@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Text module
  */
-import snippet from 'tui-code-snippet';
+import snippet from '../codeSnippet';
 import fabric from 'fabric';
 import Component from '@/interface/component';
 import { Promise } from '@/util';

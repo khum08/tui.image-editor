@@ -1,6 +1,5 @@
 import '@/polyfill';
 import ImageEditor from '@/imageEditor';
-import '@css/index.styl';
 
 // commands
 import '@/command/addIcon';

@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Util
  */
-import { forEach, sendHostname, extend, isString, pick, inArray } from 'tui-code-snippet';
+import { forEach, extend, isString, pick, inArray } from './codeSnippet';
 import Promise from 'core-js-pure/features/promise';
 import {
   commandNames,
@@ -16,7 +16,6 @@ import {
 const FLOATING_POINT_DIGIT = 2;
 const CSS_PREFIX = 'tui-image-editor-';
 const { min, max } = Math;
-let hostnameSent = false;
 
 /**
  * Export Promise Class (for simplified module path)
@@ -137,14 +136,7 @@ export function getRgb(color, alpha) {
 /**
  * send hostname
  */
-export function sendHostName() {
-  if (hostnameSent) {
-    return;
-  }
-  hostnameSent = true;
-
-  sendHostname('image-editor', 'UA-129999381-1');
-}
+export function sendHostName() {}
 
 /**
  * Apply css resource

@@ -2,7 +2,7 @@
  * @author NHN. FE Development Team <dl_javascript@nhn.com>
  * @fileoverview Graphics module
  */
-import snippet from 'tui-code-snippet';
+import snippet from './codeSnippet';
 import fabric from 'fabric';
 import ImageLoader from '@/component/imageLoader';
 import Cropper from '@/component/cropper';
@@ -35,16 +35,9 @@ import {
   fObjectOptions,
   defaultPixelTargetTolerance,
 } from '@/consts';
+import CustomEvents from './customEvent';
 
-const {
-  extend,
-  stamp,
-  isArray,
-  isString,
-  forEachArray,
-  forEachOwnProperties,
-  CustomEvents,
-} = snippet;
+const { extend, stamp, isArray, isString, forEachArray, forEachOwnProperties } = snippet;
 const DEFAULT_CSS_MAX_WIDTH = 1000;
 const DEFAULT_CSS_MAX_HEIGHT = 800;
 const EXTRA_PX_FOR_PASTE = 10;
