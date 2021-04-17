@@ -9,7 +9,8 @@ import { Promise } from '@/util';
 import { eventNames as events, rejectMessages, componentNames, fObjectOptions } from '@/consts';
 
 const pathMap = {
-  arrow: 'M 0 90 H 105 V 120 L 160 60 L 105 0 V 30 H 0 Z',
+  arrow: 'M 0 9 H 11 V 12 L 18 7 L 11 2 V 5 H 0 Z',
+  arrow2: 'M 0 90 H 105 V 120 L 160 60 L 105 0 V 30 H 0 Z',
   cancel:
     'M 0 30 L 30 60 L 0 90 L 30 120 L 60 90 L 90 120 L 120 90 ' +
     'L 90 60 L 120 30 L 90 0 L 60 30 L 30 0 Z',

@@ -328,6 +328,7 @@ declare namespace tuiImageEditor {
     public setCanvasZoom(zoom: number): void;
     public setCropzoneRect(mode?: number): void;
     public setDrawingShape(type: string, options?: IShapeOptions): void;
+    public setDrawingIcon(type: string, iconColor: string);
     public setObjectPosition(id: number, posInfo?: IPositionConfig): Promise<void>;
     public setObjectProperties(id: number, keyValue?: IGraphicObjectProps): Promise<void>;
     public setObjectPropertiesQuietly(id: number, keyValue?: IGraphicObjectProps): Promise<void>;
