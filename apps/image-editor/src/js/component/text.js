@@ -118,12 +118,6 @@ class Text extends Component {
       'text:changed': this._listeners.textChanged,
     });
 
-    canvas.forEachObject((obj) => {
-      if (obj.type === 'i-text') {
-        this.adjustOriginPosition(obj, 'start');
-      }
-    });
-
     this.setCanvasRatio();
   }
 
@@ -140,8 +134,6 @@ class Text extends Component {
       if (obj.type === 'i-text') {
         if (obj.text === '') {
           canvas.remove(obj);
-        } else {
-          this.adjustOriginPosition(obj, 'end');
         }
       }
     });
