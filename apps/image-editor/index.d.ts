@@ -307,7 +307,7 @@ declare namespace tuiImageEditor {
     public getObjectProperties(
       id: number,
       keys: string | string[] | IGraphicObjectProps
-    ): IGraphicObjectProps;
+    ): IGraphicObjectProps | null;
     public hasFilter(type: string): boolean;
     public isEmptyRedoStack(): boolean;
     public isEmptyUndoStack(): boolean;
