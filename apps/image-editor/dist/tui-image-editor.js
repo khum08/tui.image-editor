@@ -6,14 +6,14 @@
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("fabric")["fabric"], require("tui-code-snippet"), require("tui-color-picker"));
+		module.exports = factory(require("fabric")["fabric"]);
 	else if(typeof define === 'function' && define.amd)
-		define(["fabric", "tui-code-snippet", "tui-color-picker"], factory);
+		define(["fabric"], factory);
 	else if(typeof exports === 'object')
-		exports["ImageEditor"] = factory(require("fabric")["fabric"], require("tui-code-snippet"), require("tui-color-picker"));
+		exports["ImageEditor"] = factory(require("fabric")["fabric"]);
 	else
-		root["tui"] = root["tui"] || {}, root["tui"]["ImageEditor"] = factory(root["fabric"], root["tui"]["util"], root["tui"]["colorPicker"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE_fabric__, __WEBPACK_EXTERNAL_MODULE_tui_code_snippet__, __WEBPACK_EXTERNAL_MODULE_tui_color_picker__) {
+		root["tui"] = root["tui"] || {}, root["tui"]["ImageEditor"] = factory(root["fabric"]);
+})(window, function(__WEBPACK_EXTERNAL_MODULE_fabric__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -3324,17 +3324,6 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./src/css/index.styl":
-/*!****************************!*\
-  !*** ./src/css/index.styl ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -3350,8 +3339,6 @@ __webpack_require__(/*! @/polyfill */ "./src/js/polyfill.js");
 var _imageEditor = __webpack_require__(/*! @/imageEditor */ "./src/js/imageEditor.js");
 
 var _imageEditor2 = _interopRequireDefault(_imageEditor);
-
-__webpack_require__(/*! @css/index.styl */ "./src/css/index.styl");
 
 __webpack_require__(/*! @/command/addIcon */ "./src/js/command/addIcon.js");
 
@@ -3414,7 +3401,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ./codeSnippet */ "./src/js/codeSnippet.js");
 
 var _imagetracer = __webpack_require__(/*! @/helper/imagetracer */ "./src/js/helper/imagetracer.js");
 
@@ -3507,7 +3494,7 @@ exports.default = {
       }
     };
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       initLoadImage: function initLoadImage(imagePath, imageName) {
         return _this.loadImageFromURL(imagePath, imageName).then(function (sizeValue) {
           exitCropOnAction();
@@ -3619,7 +3606,7 @@ exports.default = {
   _iconAction: function _iconAction() {
     var _this2 = this;
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       changeColor: function changeColor(color) {
         if (_this2.activeObjectId) {
           _this2.changeIconColor(_this2.activeObjectId, color);
@@ -3667,7 +3654,7 @@ exports.default = {
   _drawAction: function _drawAction() {
     var _this3 = this;
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       setDrawMode: function setDrawMode(type, settings) {
         _this3.stopDrawingMode();
         if (type === 'free') {
@@ -3693,7 +3680,7 @@ exports.default = {
   _maskAction: function _maskAction() {
     var _this4 = this;
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       loadImageFromURL: function loadImageFromURL(imgUrl, file) {
         return _this4.loadImageFromURL(_this4.toDataURL(), 'FilterImage').then(function () {
           _this4.addImageObject(imgUrl).then(function () {
@@ -3719,7 +3706,7 @@ exports.default = {
   _textAction: function _textAction() {
     var _this5 = this;
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       changeTextStyle: function changeTextStyle(styleObj, isSilent) {
         if (_this5.activeObjectId) {
           _this5.changeTextStyle(_this5.activeObjectId, styleObj, isSilent);
@@ -3737,7 +3724,7 @@ exports.default = {
   _rotateAction: function _rotateAction() {
     var _this6 = this;
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       rotate: function rotate(angle, isSilent) {
         _this6.rotate(angle, isSilent);
         _this6.ui.resizeEditor();
@@ -3760,7 +3747,7 @@ exports.default = {
   _shapeAction: function _shapeAction() {
     var _this7 = this;
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       changeShape: function changeShape(changeShapeObject, isSilent) {
         if (_this7.activeObjectId) {
           _this7.changeShape(_this7.activeObjectId, changeShapeObject, isSilent);
@@ -3781,7 +3768,7 @@ exports.default = {
   _cropAction: function _cropAction() {
     var _this8 = this;
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       crop: function crop() {
         var cropRect = _this8.getCropzoneRect();
         if (cropRect && !(0, _util.isEmptyCropzone)(cropRect)) {
@@ -3838,7 +3825,7 @@ exports.default = {
   _flipAction: function _flipAction() {
     var _this9 = this;
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       flip: function flip(flipType) {
         return _this9[flipType]();
       }
@@ -3854,7 +3841,7 @@ exports.default = {
   _filterAction: function _filterAction() {
     var _this10 = this;
 
-    return (0, _tuiCodeSnippet.extend)({
+    return (0, _codeSnippet.extend)({
       applyFilter: function applyFilter(applying, type, options, isSilent) {
         if (applying) {
           _this10.applyFilter(type, options, isSilent);
@@ -4052,8 +4039,482 @@ exports.default = {
    * @param {ImageEditor} ImageEditor instance
    */
   mixin: function mixin(ImageEditor) {
-    (0, _tuiCodeSnippet.extend)(ImageEditor.prototype, this);
+    (0, _codeSnippet.extend)(ImageEditor.prototype, this);
   }
+};
+
+/***/ }),
+
+/***/ "./src/js/codeSnippet.js":
+/*!*******************************!*\
+  !*** ./src/js/codeSnippet.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* eslint-disable */
+/*!
+ * @file This file contains functions from tui.code-snippet@1.5.2 that are required by our custom
+ * build of this package.
+ * @author NHN. FE Development Lab <dl_javascript@nhn.com>
+ * @license MIT
+ */
+
+/**
+ * The last id of stamp
+ * @type {number}
+ * @private
+ */
+var lastId = 0;
+
+/**
+ * Extend the target object from other objects.
+ * @param {object} target - Object that will be extended
+ * @param {...object} objects - Objects as sources
+ * @returns {object} Extended object
+ * @memberof tui.util
+ */
+function extend(target, objects) {
+  // eslint-disable-line no-unused-vars
+  var hasOwnProp = Object.prototype.hasOwnProperty;
+  var source, prop, i, len;
+
+  for (i = 1, len = arguments.length; i < len; i += 1) {
+    source = arguments[i];
+    for (prop in source) {
+      if (hasOwnProp.call(source, prop)) {
+        target[prop] = source[prop];
+      }
+    }
+  }
+
+  return target;
+}
+
+/**
+ * Create a new array or plain object with all elements(or properties)
+ * that pass the test implemented by the provided function.<br>
+ * Callback function(iteratee) is invoked with three arguments:
+ *  - The value of the property(or The value of the element)
+ *  - The name of the property(or The index of the element)
+ *  - The object being traversed
+ * @param {Object} obj Object(plain object or Array) that will be traversed
+ * @param {function} iteratee Callback function
+ * @param {Object} [context] Context(this) of callback function
+ * @returns {Object} plain object or Array
+ * @memberof tui.util
+ * @example
+ * //-- #1. Get Module --//
+ * var util = require('tui-code-snippet'); // node, commonjs
+ * var util = tui.util; // distribution file
+ *
+ * //-- #2. Use property --//
+ * var result1 = util.filter([0,1,2,3], function(value) {
+ *     return (value % 2 === 0);
+ * });
+ * alert(result1); // [0, 2]
+ *
+ * var result2 = util.filter({a : 1, b: 2, c: 3}, function(value) {
+ *     return (value % 2 !== 0);
+ * });
+ * alert(result2.a); // 1
+ * alert(result2.b); // undefined
+ * alert(result2.c); // 3
+ */
+function filter(obj, iteratee, context) {
+  var result, add;
+
+  context = context || null;
+
+  if (!isObject(obj) || !isFunction(iteratee)) {
+    throw new Error('wrong parameter');
+  }
+
+  if (isArray(obj)) {
+    result = [];
+    add = function add(subResult, args) {
+      subResult.push(args[0]);
+    };
+  } else {
+    result = {};
+    add = function add(subResult, args) {
+      subResult[args[1]] = args[0];
+    };
+  }
+
+  forEach(obj, function () {
+    if (iteratee.apply(context, arguments)) {
+      add(result, arguments);
+    }
+  }, context);
+
+  return result;
+}
+
+/**
+ * Execute the provided callback once for each property of object(or element of array) which actually exist.<br>
+ * If the object is Array-like object(ex-arguments object), It needs to transform to Array.(see 'ex2' of example).<br>
+ * If the callback function returns false, the loop will be stopped.<br>
+ * Callback function(iteratee) is invoked with three arguments:
+ *  - The value of the property(or The value of the element)
+ *  - The name of the property(or The index of the element)
+ *  - The object being traversed
+ * @param {Object} obj The object that will be traversed
+ * @param {function} iteratee Callback function
+ * @param {Object} [context] Context(this) of callback function
+ * @memberof tui.util
+ * @example
+ * //-- #1. Get Module --//
+ * var util = require('tui-code-snippet'); // node, commonjs
+ * var util = tui.util; // distribution file
+ *
+ * //-- #2. Use property --//
+ * var sum = 0;
+ *
+ * util.forEach([1,2,3], function(value){
+ *     sum += value;
+ * });
+ * alert(sum); // 6
+ *
+ * // In case of Array-like object
+ * var array = Array.prototype.slice.call(arrayLike); // change to array
+ * util.forEach(array, function(value){
+ *     sum += value;
+ * });
+ */
+function forEach(obj, iteratee, context) {
+  if (isArray(obj)) {
+    forEachArray(obj, iteratee, context);
+  } else {
+    forEachOwnProperties(obj, iteratee, context);
+  }
+}
+
+/**
+ * Execute the provided callback once for each element present
+ * in the array(or Array-like object) in ascending order.<br>
+ * If the callback function returns false, the loop will be stopped.<br>
+ * Callback function(iteratee) is invoked with three arguments:
+ *  - The value of the element
+ *  - The index of the element
+ *  - The array(or Array-like object) being traversed
+ * @param {Array} arr The array(or Array-like object) that will be traversed
+ * @param {function} iteratee Callback function
+ * @param {Object} [context] Context(this) of callback function
+ * @memberof tui.util
+ * @example
+ * //-- #1. Get Module --//
+ * var util = require('tui-code-snippet'); // node, commonjs
+ * var util = tui.util; // distribution file
+ *
+ * //-- #2. Use property --//
+ * var sum = 0;
+ *
+ * util.forEachArray([1,2,3], function(value){
+ *     sum += value;
+ * });
+ * alert(sum); // 6
+ */
+function forEachArray(arr, iteratee, context) {
+  var index = 0;
+  var len = arr.length;
+
+  context = context || null;
+
+  for (; index < len; index += 1) {
+    if (iteratee.call(context, arr[index], index, arr) === false) {
+      break;
+    }
+  }
+}
+
+/**
+ * Execute the provided callback once for each property of object which actually exist.<br>
+ * If the callback function returns false, the loop will be stopped.<br>
+ * Callback function(iteratee) is invoked with three arguments:
+ *  - The value of the property
+ *  - The name of the property
+ *  - The object being traversed
+ * @param {Object} obj The object that will be traversed
+ * @param {function} iteratee  Callback function
+ * @param {Object} [context] Context(this) of callback function
+ * @memberof tui.util
+ * @example
+ * //-- #1. Get Module --//
+ * var util = require('tui-code-snippet'); // node, commonjs
+ * var util = tui.util; // distribution file
+ *
+ * //-- #2. Use property --//
+ * var sum = 0;
+ *
+ * util.forEachOwnProperties({a:1,b:2,c:3}, function(value){
+ *     sum += value;
+ * });
+ * alert(sum); // 6
+ **/
+function forEachOwnProperties(obj, iteratee, context) {
+  var key;
+
+  context = context || null;
+
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (iteratee.call(context, obj[key], key, obj) === false) {
+        break;
+      }
+    }
+  }
+}
+
+/**
+ * Returns the first index at which a given element can be found in the array
+ * from start index(default 0), or -1 if it is not present.<br>
+ * It compares searchElement to elements of the Array using strict equality
+ * (the same method used by the ===, or triple-equals, operator).
+ * @param {*} searchElement Element to locate in the array
+ * @param {Array} array Array that will be traversed.
+ * @param {number} startIndex Start index in array for searching (default 0)
+ * @returns {number} the First index at which a given element, or -1 if it is not present
+ * @memberof tui.util
+ * @example
+ * //-- #1. Get Module --//
+ * var util = require('tui-code-snippet'); // node, commonjs
+ * var util = tui.util; // distribution file
+ *
+ * //-- #2. Use property --//
+ * var arr = ['one', 'two', 'three', 'four'];
+ * var idx1 = util.inArray('one', arr, 3); // -1
+ * var idx2 = util.inArray('one', arr); // 0
+ */
+var inArray = function inArray(searchElement, array, startIndex) {
+  var i;
+  var length;
+  startIndex = startIndex || 0;
+
+  if (!isArray(array)) {
+    return -1;
+  }
+
+  if (Array.prototype.indexOf) {
+    return Array.prototype.indexOf.call(array, searchElement, startIndex);
+  }
+
+  length = array.length;
+  for (i = startIndex; startIndex >= 0 && i < length; i += 1) {
+    if (array[i] === searchElement) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+/**
+ * Check whether the given variable is an instance of Array or not.<br>
+ *  If the given variable is an instance of Array, return true.
+ * @param {*} obj - Target for checking
+ * @returns {boolean} Is array instance?
+ * @memberof tui.util
+ */
+function isArray(obj) {
+  return obj instanceof Array;
+}
+
+/**
+ * Check whether the given variable is existing or not.<br>
+ *  If the given variable is not null and not undefined, returns true.
+ * @param {*} param - Target for checking
+ * @returns {boolean} Is existy?
+ * @memberof tui.util
+ * @example
+ * //-- #1. Get Module --//
+ * var util = require('tui-code-snippet'); // node, commonjs
+ * var util = tui.util; // distribution file
+ *
+ * //-- #2. Use property --//
+ * util.isExisty(''); //true
+ * util.isExisty(0); //true
+ * util.isExisty([]); //true
+ * util.isExisty({}); //true
+ * util.isExisty(null); //false
+ * util.isExisty(undefined); //false
+ */
+function isExisty(param) {
+  return !isUndefined(param) && !isNull(param);
+}
+
+/**
+ * Check whether the given variable is a function or not.<br>
+ *  If the given variable is a function, return true.
+ * @param {*} obj - Target for checking
+ * @returns {boolean} Is function?
+ * @memberof tui.util
+ */
+function isFunction(obj) {
+  return obj instanceof Function;
+}
+
+/**
+ * Check whether the given variable is null or not.<br>
+ *  If the given variable(arguments[0]) is null, returns true.
+ * @param {*} obj - Target for checking
+ * @returns {boolean} Is null?
+ * @memberof tui.util
+ */
+function isNull(obj) {
+  return obj === null;
+}
+
+/**
+ * Check whether the given variable is an object or not.<br>
+ *  If the given variable is an object, return true.
+ * @param {*} obj - Target for checking
+ * @returns {boolean} Is object?
+ * @memberof tui.util
+ */
+function isObject(obj) {
+  return obj === Object(obj);
+}
+
+/**
+ * Check whether the given variable is a string or not.<br>
+ *  If the given variable is a string, return true.
+ * @param {*} obj - Target for checking
+ * @returns {boolean} Is string?
+ * @memberof tui.util
+ */
+function isString(obj) {
+  return typeof obj === 'string' || obj instanceof String;
+}
+
+/**
+ * Check whether the given variable is undefined or not.<br>
+ *  If the given variable is undefined, returns true.
+ * @param {*} obj - Target for checking
+ * @returns {boolean} Is undefined?
+ * @memberof tui.util
+ */
+function isUndefined(obj) {
+  return obj === undefined; // eslint-disable-line no-undefined
+}
+
+/**
+ * Execute the provided callback function once for each element in an array, in order,
+ * and constructs a new array from the results.<br>
+ * If the object is Array-like object(ex-arguments object),
+ * It needs to transform to Array.(see 'ex2' of forEach example)<br>
+ * Callback function(iteratee) is invoked with three arguments:
+ *  - The value of the property(or The value of the element)
+ *  - The name of the property(or The index of the element)
+ *  - The object being traversed
+ * @param {Object} obj The object that will be traversed
+ * @param {function} iteratee Callback function
+ * @param {Object} [context] Context(this) of callback function
+ * @returns {Array} A new array composed of returned values from callback function
+ * @memberof tui.util
+ * @example
+ * //-- #1. Get Module --//
+ * var util = require('tui-code-snippet'); // node, commonjs
+ * var util = tui.util; // distribution file
+ *
+ * //-- #2. Use property --//
+ * var result = util.map([0,1,2,3], function(value) {
+ *     return value + 1;
+ * });
+ *
+ * alert(result);  // 1,2,3,4
+ */
+function map(obj, iteratee, context) {
+  var resultArray = [];
+
+  context = context || null;
+
+  forEach(obj, function () {
+    resultArray.push(iteratee.apply(context, arguments));
+  });
+
+  return resultArray;
+}
+
+/**
+ * Retrieve a nested item from the given object/array
+ * @param {object|Array} obj - Object for retrieving
+ * @param {...string|number} paths - Paths of property
+ * @returns {*} Value
+ * @memberof tui.util
+ * @example
+ * //-- #1. Get Module --//
+ * var util = require('tui-code-snippet'); // node, commonjs
+ * var util = tui.util; // distribution file
+ *
+ * //-- #2. Use property --//
+ * var obj = {
+ *     'key1': 1,
+ *     'nested' : {
+ *         'key1': 11,
+ *         'nested': {
+ *             'key1': 21
+ *         }
+ *     }
+ * };
+ * util.pick(obj, 'nested', 'nested', 'key1'); // 21
+ * util.pick(obj, 'nested', 'nested', 'key2'); // undefined
+ *
+ * var arr = ['a', 'b', 'c'];
+ * util.pick(arr, 1); // 'b'
+ */
+function pick(obj, paths) {
+  // eslint-disable-line no-unused-vars
+  var args = arguments;
+  var target = args[0];
+  var i = 1;
+  var length = args.length;
+
+  for (; i < length; i += 1) {
+    if (isUndefined(target) || isNull(target)) {
+      return;
+    }
+
+    target = target[args[i]];
+  }
+
+  return target; // eslint-disable-line consistent-return
+}
+
+/**
+ * Assign a unique id to an object
+ * @param {object} obj - Object that will be assigned id.
+ * @returns {number} Stamped id
+ * @memberof tui.util
+ */
+function stamp(obj) {
+  if (!obj.__fe_id) {
+    lastId += 1;
+    obj.__fe_id = lastId; // eslint-disable-line camelcase
+  }
+
+  return obj.__fe_id;
+}
+
+module.exports = {
+  extend: extend,
+  filter: filter,
+  forEach: forEach,
+  forEachArray: forEachArray,
+  forEachOwnProperties: forEachOwnProperties,
+  inArray: inArray,
+  isArray: isArray,
+  isExisty: isExisty,
+  isFunction: isFunction,
+  isObject: isObject,
+  isString: isString,
+  isUndefined: isUndefined,
+  map: map,
+  pick: pick,
+  stamp: stamp
 };
 
 /***/ }),
@@ -4104,6 +4565,12 @@ var command = {
     var _this = this;
 
     var iconComp = graphics.getComponent(ICON);
+
+    if (this.undoData && this.undoData.object) {
+      graphics.add(this.undoData.object);
+
+      return _util.Promise.resolve(this.undoData.object);
+    }
 
     return iconComp.add(type, options).then(function (objectProps) {
       _this.undoData.object = graphics.getObject(objectProps.id);
@@ -4466,9 +4933,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _command = __webpack_require__(/*! @/factory/command */ "./src/js/factory/command.js");
 
@@ -4532,7 +4999,7 @@ var command = {
         return Promise.reject(_consts.rejectMessages.invalidParameters);
       }
 
-      _tuiCodeSnippet2.default.extend(options, { mask: maskObj });
+      _codeSnippet2.default.extend(options, { mask: maskObj });
       graphics.remove(options.mask);
     }
     if (!this.isRedo) {
@@ -4732,9 +5199,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _command = __webpack_require__(/*! @/factory/command */ "./src/js/factory/command.js");
 
@@ -4771,7 +5238,7 @@ function makeUndoData(options, targetObj) {
     options: {}
   };
 
-  _tuiCodeSnippet2.default.forEachOwnProperties(options, function (value, key) {
+  _codeSnippet2.default.forEachOwnProperties(options, function (value, key) {
     undoData.options[key] = targetObj[key];
   });
 
@@ -4927,9 +5394,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _command = __webpack_require__(/*! @/factory/command */ "./src/js/factory/command.js");
 
@@ -4965,7 +5432,7 @@ function makeUndoData(styles, targetObj) {
     object: targetObj,
     styles: {}
   };
-  _tuiCodeSnippet2.default.forEachOwnProperties(styles, function (value, key) {
+  _codeSnippet2.default.forEachOwnProperties(styles, function (value, key) {
     var undoValue = targetObj[key];
     undoData.styles[key] = undoValue;
   });
@@ -5648,9 +6115,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _command = __webpack_require__(/*! @/factory/command */ "./src/js/factory/command.js");
 
@@ -5692,10 +6159,12 @@ var command = {
       return _util.Promise.reject(_consts.rejectMessages.noObject);
     }
 
-    this.undoData.props = {};
-    _tuiCodeSnippet2.default.forEachOwnProperties(props, function (value, key) {
-      _this.undoData.props[key] = targetObj[key];
-    });
+    if (this.undoData && !this.undoData.props && targetObj.originalState) {
+      this.undoData.props = {};
+      _codeSnippet2.default.forEachOwnProperties(props, function (value, key) {
+        _this.undoData.props[key] = targetObj.originalState[key];
+      });
+    }
 
     graphics.setObjectProperties(id, props);
 
@@ -5740,9 +6209,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _fabric = __webpack_require__(/*! fabric */ "fabric");
 
@@ -5858,7 +6327,7 @@ var Cropper = function (_Component) {
         obj.evented = false;
       });
 
-      this._cropzone = new _cropzone2.default(canvas, _tuiCodeSnippet2.default.extend({
+      this._cropzone = new _cropzone2.default(canvas, _codeSnippet2.default.extend({
         left: 0,
         top: 0,
         width: 0.5,
@@ -5983,8 +6452,9 @@ var Cropper = function (_Component) {
     key: '_calcRectDimensionFromPoint',
     value: function _calcRectDimensionFromPoint(x, y) {
       var canvas = this.getCanvas();
-      var canvasWidth = canvas.getWidth();
-      var canvasHeight = canvas.getHeight();
+      var zoomLevel = canvas.getZoom();
+      var canvasWidth = canvas.getWidth() / zoomLevel;
+      var canvasHeight = canvas.getHeight() / zoomLevel;
       var startX = this._startX;
       var startY = this._startY;
       var left = (0, _util.clamp)(x, 0, startX);
@@ -6142,7 +6612,7 @@ var Cropper = function (_Component) {
 
       var scaleWidth = getScale(width, originalWidth);
 
-      var _snippet$map = _tuiCodeSnippet2.default.map([width, height], function (sizeValue) {
+      var _snippet$map = _codeSnippet2.default.map([width, height], function (sizeValue) {
         return sizeValue * scaleWidth;
       });
 
@@ -6152,7 +6622,7 @@ var Cropper = function (_Component) {
 
       var scaleHeight = getScale(height, originalHeight);
 
-      var _snippet$map2 = _tuiCodeSnippet2.default.map([width, height], function (sizeValue) {
+      var _snippet$map2 = _codeSnippet2.default.map([width, height], function (sizeValue) {
         return (0, _util.fixFloatingPoint)(sizeValue * scaleHeight);
       });
 
@@ -6221,7 +6691,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
 var _fabric = __webpack_require__(/*! fabric */ "fabric");
 
@@ -6386,7 +6856,7 @@ var Filter = function (_Component) {
         return null;
       }
 
-      return (0, _tuiCodeSnippet.extend)({}, imgFilter.options);
+      return (0, _codeSnippet.extend)({}, imgFilter.options);
     }
 
     /**
@@ -6399,13 +6869,13 @@ var Filter = function (_Component) {
   }, {
     key: '_changeFilterValues',
     value: function _changeFilterValues(imgFilter, options) {
-      (0, _tuiCodeSnippet.forEach)(options, function (value, key) {
-        if (!(0, _tuiCodeSnippet.isUndefined)(imgFilter[key])) {
+      (0, _codeSnippet.forEach)(options, function (value, key) {
+        if (!(0, _codeSnippet.isUndefined)(imgFilter[key])) {
           imgFilter[key] = value;
         }
       });
-      (0, _tuiCodeSnippet.forEach)(imgFilter.options, function (value, key) {
-        if (!(0, _tuiCodeSnippet.isUndefined)(options[key])) {
+      (0, _codeSnippet.forEach)(imgFilter.options, function (value, key) {
+        if (!(0, _codeSnippet.isUndefined)(options[key])) {
           imgFilter.options[key] = options[key];
         }
       });
@@ -6508,7 +6978,7 @@ var Filter = function (_Component) {
     key: '_removeFilter',
     value: function _removeFilter(sourceImg, type) {
       var fabricType = this._getFabricFilterType(type);
-      sourceImg.filters = (0, _tuiCodeSnippet.filter)(sourceImg.filters, function (value) {
+      sourceImg.filters = (0, _codeSnippet.filter)(sourceImg.filters, function (value) {
         return value.type !== fabricType;
       });
     }
@@ -6551,9 +7021,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _component = __webpack_require__(/*! @/interface/component */ "./src/js/interface/component.js");
 
@@ -6625,7 +7095,7 @@ var Flip = function (_Component) {
         return _util.Promise.reject(_consts.rejectMessages.flip);
       }
 
-      _tuiCodeSnippet2.default.extend(setting, newSetting);
+      _codeSnippet2.default.extend(setting, newSetting);
       this.setImageProperties(setting, true);
       this._invertAngle(isChangingFlipX, isChangingFlipY);
       this._flipObjects(isChangingFlipX, isChangingFlipY);
@@ -6810,6 +7280,16 @@ var FreeDrawing = function (_Component) {
      * @type {fabric.Color}
      */
     _this.oColor = new _fabric2.default.Color('rgba(0, 0, 0, 0.5)');
+
+    /**
+     * Listeners
+     * @type {object.<string, function>}
+     * @private
+     */
+    _this._listeners = {
+      mousedown: _this._onFabricMouseDown.bind(_this),
+      mouseup: _this._onFabricMouseUp.bind(_this)
+    };
     return _this;
   }
 
@@ -6826,6 +7306,10 @@ var FreeDrawing = function (_Component) {
 
       canvas.isDrawingMode = true;
       this.setBrush(setting);
+
+      canvas.on({
+        'mouse:down': this._listeners.mousedown
+      });
     }
 
     /**
@@ -6857,6 +7341,50 @@ var FreeDrawing = function (_Component) {
       var canvas = this.getCanvas();
 
       canvas.isDrawingMode = false;
+      canvas.off('mouse:down', this._listeners.mousedown);
+    }
+
+    /**
+     * Mousedown event handler in fabric canvas
+     * @private
+     */
+
+  }, {
+    key: '_onFabricMouseDown',
+    value: function _onFabricMouseDown() {
+      var canvas = this.getCanvas();
+      canvas.isDrawingMode = true;
+
+      canvas.on({
+        'mouse:up': this._listeners.mouseup
+      });
+    }
+
+    /**
+     * Mouseup event handler in fabric canvas
+     * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event object
+     * @private
+     */
+
+  }, {
+    key: '_onFabricMouseUp',
+    value: function _onFabricMouseUp(fEvent) {
+      var canvas = this.getCanvas();
+
+      var target = canvas.findTarget(fEvent.e);
+      if (target) {
+        target.set({
+          perPixelTargetFind: false
+        });
+
+        canvas.setActiveObject(target);
+      }
+
+      canvas.off({
+        'mouse:up': this._listeners.mouseup
+      });
+
+      canvas.isDrawingMode = false;
     }
   }]);
 
@@ -6883,9 +7411,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _fabric = __webpack_require__(/*! fabric */ "fabric");
 
@@ -6912,7 +7440,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var pathMap = {
-  arrow: 'M 0 90 H 105 V 120 L 160 60 L 105 0 V 30 H 0 Z',
+  arrow: 'M 0 9 H 11 V 12 L 18 7 L 11 2 V 5 H 0 Z',
+  arrow2: 'M 0 90 H 105 V 120 L 160 60 L 105 0 V 30 H 0 Z',
   cancel: 'M 0 30 L 30 60 L 0 90 L 30 120 L 60 90 L 90 120 L 120 90 ' + 'L 90 60 L 120 30 L 90 0 L 60 30 L 30 0 Z'
 };
 
@@ -7041,7 +7570,7 @@ var Icon = function (_Component) {
           reject(_consts.rejectMessages.invalidParameters);
         }
 
-        icon.set(_tuiCodeSnippet2.default.extend({
+        icon.set(_codeSnippet2.default.extend({
           type: 'icon',
           fill: _this2._oColor
         }, selectionStyle, options, _this2.graphics.controlStyle));
@@ -7062,7 +7591,7 @@ var Icon = function (_Component) {
     value: function registerPaths(pathInfos) {
       var _this3 = this;
 
-      _tuiCodeSnippet2.default.forEach(pathInfos, function (path, type) {
+      _codeSnippet2.default.forEach(pathInfos, function (path, type) {
         _this3._pathMap[type] = path;
       }, this);
     }
@@ -7344,9 +7873,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _fabric = __webpack_require__(/*! fabric */ "fabric");
 
@@ -7526,7 +8055,9 @@ var Line = function (_Component) {
         stroke: this._oColor.toRgba(),
         strokeWidth: this._width,
         arrowType: this._arrowType,
-        evented: false
+        evented: false,
+        perPixelTargetFind: true,
+        targetFindTolerance: _consts.defaultPixelTargetTolerance
       });
 
       this._line.set(_consts.fObjectOptions.SELECTION_STYLE);
@@ -7575,6 +8106,15 @@ var Line = function (_Component) {
 
       this.fire(_consts.eventNames.OBJECT_ADDED, this._createLineEventObjectProperties());
 
+      canvas.forEachObject(function (obj) {
+        // eslint-disable-line
+        obj.set({
+          evented: true
+        });
+      });
+
+      canvas.setActiveObject(this._line);
+
       this._line = null;
 
       canvas.off({
@@ -7600,7 +8140,7 @@ var Line = function (_Component) {
           y2 = _line.y2;
 
 
-      return _tuiCodeSnippet2.default.extend({}, params, {
+      return _codeSnippet2.default.extend({}, params, {
         startPosition: {
           x: x1,
           y: y1
@@ -7709,7 +8249,7 @@ var Rotation = function (_Component) {
       var canvasImage = this.getCanvasImage();
       var oldImageCenter = canvasImage.getCenterPoint();
       canvasImage.set({ angle: angle }).setCoords();
-      this.adjustCanvasDimension();
+      this.adjustCanvasDimensionForRotate();
       var newImageCenter = canvasImage.getCenterPoint();
       this._rotateForEachObject(oldImageCenter, newImageCenter, angle - oldAngle);
 
@@ -7786,7 +8326,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
 var _fabric = __webpack_require__(/*! fabric */ "fabric");
 
@@ -7818,7 +8358,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
-var SHAPE_INIT_OPTIONS = (0, _tuiCodeSnippet.extend)({
+var SHAPE_INIT_OPTIONS = (0, _codeSnippet.extend)({
   strokeWidth: 1,
   stroke: '#000000',
   fill: '#ffffff',
@@ -7830,6 +8370,7 @@ var SHAPE_INIT_OPTIONS = (0, _tuiCodeSnippet.extend)({
 var DEFAULT_TYPE = 'rect';
 var DEFAULT_WIDTH = 20;
 var DEFAULT_HEIGHT = 20;
+var MOUSE_MOVE_THRESHOLD = 5;
 
 /**
  * Make fill option
@@ -7856,7 +8397,7 @@ function makeFabricFillOption(options, canvasImage, createStaticCanvas) {
     extOption = { fill: fill };
   }
 
-  return (0, _tuiCodeSnippet.extend)({}, options, extOption);
+  return (0, _codeSnippet.extend)({}, options, extOption);
 }
 
 /**
@@ -7894,7 +8435,7 @@ var Shape = function (_Component) {
      * @type {Object}
      * @private
      */
-    _this._options = (0, _tuiCodeSnippet.extend)({}, SHAPE_INIT_OPTIONS);
+    _this._options = (0, _codeSnippet.extend)({}, SHAPE_INIT_OPTIONS);
 
     /**
      * Whether the shape object is selected or not
@@ -7916,6 +8457,13 @@ var Shape = function (_Component) {
      * @private
      */
     _this._withShiftKey = false;
+
+    /**
+     * Has the mouse moved past the threshold
+     * @type {boolean}
+     * @private
+     */
+    _this._mouseMoved = false;
 
     /**
      * Event handler list
@@ -7948,6 +8496,13 @@ var Shape = function (_Component) {
       canvas.defaultCursor = 'crosshair';
       canvas.selection = false;
       canvas.uniformScaling = true;
+
+      canvas.forEachObject(function (obj) {
+        obj.set({
+          evented: false
+        });
+      });
+
       canvas.on({
         'mouse:down': this._handlers.mousedown
       });
@@ -8001,7 +8556,7 @@ var Shape = function (_Component) {
       this._type = type;
 
       if (options) {
-        this._options = (0, _tuiCodeSnippet.extend)(this._options, options);
+        this._options = (0, _codeSnippet.extend)(this._options, options);
       }
     }
 
@@ -8151,7 +8706,7 @@ var Shape = function (_Component) {
           instance = new _fabric2.default.Rect(options);
           break;
         case 'circle':
-          instance = new _fabric2.default.Ellipse((0, _tuiCodeSnippet.extend)({
+          instance = new _fabric2.default.Ellipse((0, _codeSnippet.extend)({
             type: 'circle'
           }, options));
           break;
@@ -8181,7 +8736,7 @@ var Shape = function (_Component) {
           createStaticCanvas = _graphics2.createStaticCanvas;
 
 
-      options = (0, _tuiCodeSnippet.extend)({}, SHAPE_INIT_OPTIONS, this._options, selectionStyles, options);
+      options = (0, _codeSnippet.extend)({}, SHAPE_INIT_OPTIONS, this._options, selectionStyles, options);
 
       return makeFabricFillOption(options, canvasImage, createStaticCanvas);
     }
@@ -8234,6 +8789,7 @@ var Shape = function (_Component) {
         scaling: function scaling(fEvent) {
           var pointer = canvas.getPointer(fEvent.e);
           var currentObj = self._shapeObj;
+          _shapeResizeHelper2.default.setOrigins(currentObj);
 
           canvas.setCursor('crosshair');
           _shapeResizeHelper2.default.resize(currentObj, pointer, true);
@@ -8288,14 +8844,18 @@ var Shape = function (_Component) {
       var shape = this._shapeObj;
 
       if (!shape) {
-        this.add(this._type, {
-          left: startPointX,
-          top: startPointY,
-          width: width,
-          height: height
-        }).then(function (objectProps) {
-          _this4.fire(_consts.eventNames.ADD_OBJECT, objectProps);
-        });
+        if (Math.abs(width) > MOUSE_MOVE_THRESHOLD && Math.abs(height) > MOUSE_MOVE_THRESHOLD) {
+          this._mouseMoved = true;
+          this.add(this._type, {
+            left: startPointX,
+            top: startPointY,
+            width: width,
+            height: height,
+            perPixelTargetFind: false
+          }).then(function (objectProps) {
+            _this4.fire(_consts.eventNames.ADD_OBJECT, objectProps);
+          });
+        }
       } else {
         this._shapeObj.set({
           isRegular: this._withShiftKey
@@ -8323,18 +8883,30 @@ var Shape = function (_Component) {
       var startPointY = this._startPoint.y;
       var shape = this._shapeObj;
 
-      if (!shape) {
-        this.add(this._type, {
-          left: startPointX,
-          top: startPointY,
-          width: DEFAULT_WIDTH,
-          height: DEFAULT_HEIGHT
-        }).then(function (objectProps) {
-          _this5.fire(_consts.eventNames.ADD_OBJECT, objectProps);
+      if (this._mouseMoved) {
+        if (!shape) {
+          this.add(this._type, {
+            left: startPointX,
+            top: startPointY,
+            width: DEFAULT_WIDTH,
+            height: DEFAULT_HEIGHT,
+            perPixelTargetFind: false
+          }).then(function (objectProps) {
+            _this5.fire(_consts.eventNames.ADD_OBJECT, objectProps);
+          });
+        } else if (shape) {
+          _shapeResizeHelper2.default.adjustOriginToCenter(shape);
+          this.fire(_consts.eventNames.OBJECT_ADDED, this.graphics.createObjectProperties(shape));
+        }
+
+        this._mouseMoved = false;
+        canvas.defaultCursor = 'default';
+
+        canvas.forEachObject(function (obj) {
+          obj.set({
+            evented: true
+          });
         });
-      } else if (shape) {
-        _shapeResizeHelper2.default.adjustOriginToCenter(shape);
-        this.fire(_consts.eventNames.OBJECT_ADDED, this.graphics.createObjectProperties(shape));
       }
 
       canvas.off({
@@ -8482,9 +9054,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _fabric = __webpack_require__(/*! fabric */ "fabric");
 
@@ -8616,10 +9188,9 @@ var Text = function (_Component) {
   _createClass(Text, [{
     key: 'start',
     value: function start() {
-      var _this2 = this;
-
       var canvas = this.getCanvas();
 
+      this.isPrevEditing = false;
       canvas.selection = false;
       canvas.defaultCursor = 'text';
       canvas.on({
@@ -8629,12 +9200,6 @@ var Text = function (_Component) {
         'before:selection:cleared': this._listeners.selectClear,
         'object:scaling': this._listeners.scaling,
         'text:changed': this._listeners.textChanged
-      });
-
-      canvas.forEachObject(function (obj) {
-        if (obj.type === 'i-text') {
-          _this2.adjustOriginPosition(obj, 'start');
-        }
       });
 
       this.setCanvasRatio();
@@ -8647,8 +9212,6 @@ var Text = function (_Component) {
   }, {
     key: 'end',
     value: function end() {
-      var _this3 = this;
-
       var canvas = this.getCanvas();
 
       canvas.selection = true;
@@ -8658,8 +9221,6 @@ var Text = function (_Component) {
         if (obj.type === 'i-text') {
           if (obj.text === '') {
             canvas.remove(obj);
-          } else {
-            _this3.adjustOriginPosition(obj, 'end');
           }
         }
       });
@@ -8724,33 +9285,30 @@ var Text = function (_Component) {
   }, {
     key: 'add',
     value: function add(text, options) {
-      var _this4 = this;
+      var _this2 = this;
 
       return new _util.Promise(function (resolve) {
-        var canvas = _this4.getCanvas();
+        var canvas = _this2.getCanvas();
         var newText = null;
         var selectionStyle = _consts.fObjectOptions.SELECTION_STYLE;
-        var styles = _this4._defaultStyles;
+        var styles = _this2._defaultStyles;
 
-        _this4._setInitPos(options.position);
+        _this2._setInitPos(options.position);
 
         if (options.styles) {
-          styles = _tuiCodeSnippet2.default.extend(styles, options.styles);
+          styles = _codeSnippet2.default.extend(styles, options.styles);
         }
 
-        if (!_tuiCodeSnippet2.default.isExisty(options.autofocus)) {
+        if (!_codeSnippet2.default.isExisty(options.autofocus)) {
           options.autofocus = true;
         }
 
         newText = new _fabric2.default.IText(text, styles);
-        selectionStyle = _tuiCodeSnippet2.default.extend({}, selectionStyle, {
-          originX: 'left',
-          originY: 'top'
-        });
+        selectionStyle = _codeSnippet2.default.extend({}, selectionStyle);
 
         newText.set(selectionStyle);
         newText.on({
-          mouseup: _this4._onFabricMouseUp.bind(_this4)
+          mouseup: _this2._onFabricMouseUp.bind(_this2)
         });
 
         canvas.add(newText);
@@ -8764,8 +9322,8 @@ var Text = function (_Component) {
           canvas.setActiveObject(newText);
         }
 
-        _this4.isPrevEditing = true;
-        resolve(_this4.graphics.createObjectProperties(newText));
+        _this2.isPrevEditing = true;
+        resolve(_this2.graphics.createObjectProperties(newText));
       });
     }
 
@@ -8779,12 +9337,12 @@ var Text = function (_Component) {
   }, {
     key: 'change',
     value: function change(activeObj, text) {
-      var _this5 = this;
+      var _this3 = this;
 
       return new _util.Promise(function (resolve) {
         activeObj.set('text', text);
 
-        _this5.getCanvas().renderAll();
+        _this3.getCanvas().renderAll();
         resolve();
       });
     }
@@ -8806,22 +9364,22 @@ var Text = function (_Component) {
   }, {
     key: 'setStyle',
     value: function setStyle(activeObj, styleObj) {
-      var _this6 = this;
+      var _this4 = this;
 
       return new _util.Promise(function (resolve) {
-        _tuiCodeSnippet2.default.forEach(styleObj, function (val, key) {
+        _codeSnippet2.default.forEach(styleObj, function (val, key) {
           if (activeObj[key] === val && key !== 'fontSize') {
             styleObj[key] = resetStyles[key] || '';
           }
-        }, _this6);
+        }, _this4);
 
         if ('textDecoration' in styleObj) {
-          _tuiCodeSnippet2.default.extend(styleObj, _this6._getTextDecorationAdaptObject(styleObj.textDecoration));
+          _codeSnippet2.default.extend(styleObj, _this4._getTextDecorationAdaptObject(styleObj.textDecoration));
         }
 
         activeObj.set(styleObj);
 
-        _this6.getCanvas().renderAll();
+        _this4.getCanvas().renderAll();
         resolve();
       });
     }
@@ -8953,14 +9511,14 @@ var Text = function (_Component) {
   }, {
     key: '_onKeyDown',
     value: function _onKeyDown() {
-      var _this7 = this;
+      var _this5 = this;
 
       var ratio = this.getCanvasRatio();
       var obj = this._editingObj;
       var textareaStyle = this._textarea.style;
 
       setTimeout(function () {
-        obj.text(_this7._textarea.value);
+        obj.text(_this5._textarea.value);
 
         textareaStyle.width = Math.ceil(obj.width / ratio) + 'px';
         textareaStyle.height = Math.ceil(obj.height / ratio) + 'px';
@@ -8998,7 +9556,7 @@ var Text = function (_Component) {
         this.getCanvas().add(editingObj);
 
         var params = {
-          id: _tuiCodeSnippet2.default.stamp(editingObj),
+          id: _codeSnippet2.default.stamp(editingObj),
           type: editingObj.type,
           text: textContent
         };
@@ -10101,7 +10659,7 @@ exports.default = Zoom;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.emptyCropRectValues = exports.defaultFilterRangeValues = exports.defaultTextRangeValues = exports.defaultShapeStrokeValues = exports.defaultDrawRangeValues = exports.defaultRotateRangeValues = exports.defaultIconPath = exports.rejectMessages = exports.fObjectOptions = exports.keyCodes = exports.zoomModes = exports.drawingMenuNames = exports.drawingModes = exports.historyNames = exports.selectorNames = exports.eventNames = exports.commandNames = exports.CROPZONE_DEFAULT_OPTIONS = exports.SHAPE_DEFAULT_OPTIONS = exports.componentNames = exports.filterType = exports.OBJ_TYPE = exports.SHAPE_TYPE = exports.SHAPE_FILL_TYPE = exports.HELP_MENUS = exports.DELETE_HELP_MENUS = exports.COMMAND_HELP_MENUS = exports.ZOOM_HELP_MENUS = undefined;
+exports.emptyCropRectValues = exports.defaultPixelTargetTolerance = exports.defaultFilterRangeValues = exports.defaultTextRangeValues = exports.defaultShapeStrokeValues = exports.defaultDrawRangeValues = exports.defaultRotateRangeValues = exports.defaultIconPath = exports.rejectMessages = exports.fObjectOptions = exports.keyCodes = exports.zoomModes = exports.drawingMenuNames = exports.drawingModes = exports.historyNames = exports.selectorNames = exports.eventNames = exports.commandNames = exports.CROPZONE_DEFAULT_OPTIONS = exports.SHAPE_DEFAULT_OPTIONS = exports.componentNames = exports.filterType = exports.OBJ_TYPE = exports.SHAPE_TYPE = exports.SHAPE_FILL_TYPE = exports.HELP_MENUS = exports.DELETE_HELP_MENUS = exports.COMMAND_HELP_MENUS = exports.ZOOM_HELP_MENUS = undefined;
 
 var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
 
@@ -10233,6 +10791,7 @@ var commandNames = exports.commandNames = {
  */
 var eventNames = exports.eventNames = {
   OBJECT_ACTIVATED: 'objectActivated',
+  OBJECT_REMOVED: 'objectRemoved',
   OBJECT_MOVED: 'objectMoved',
   OBJECT_SCALED: 'objectScaled',
   OBJECT_CREATED: 'objectCreated',
@@ -10465,12 +11024,622 @@ var defaultFilterRangeValues = exports.defaultFilterRangeValues = {
   }
 };
 
+var defaultPixelTargetTolerance = exports.defaultPixelTargetTolerance = 10;
+
 var emptyCropRectValues = exports.emptyCropRectValues = {
   LEFT: 0,
   TOP: 0,
   WIDTH: 0.5,
   HEIGHT: 0.5
 };
+
+/***/ }),
+
+/***/ "./src/js/customEvent.js":
+/*!*******************************!*\
+  !*** ./src/js/customEvent.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* eslint-disable */
+/*!
+ * @file This file is src/customEvent.js from tui.code-snippet@1.5.2 with some minor edits to use
+ * our new codeSnippet.js file.
+ * @author NHN. FE Development Lab <dl_javascript@nhn.com>
+ * @license MIT
+ */
+
+/**
+ * @fileoverview
+ *  This module provides some functions for custom events.<br>
+ *  And it is implemented in the observer design pattern.
+ * @author NHN.
+ *         FE Development Lab <dl_javascript@nhn.com>
+ */
+
+
+
+var snippet = __webpack_require__(/*! ./codeSnippet */ "./src/js/codeSnippet.js");
+
+var R_EVENTNAME_SPLIT = /\s+/g;
+
+/**
+ * A unit of event handler item.
+ * @ignore
+ * @typedef {object} HandlerItem
+ * @property {function} fn - event handler
+ * @property {object} ctx - context of event handler
+ */
+
+/**
+ * @class
+ * @memberof tui.util
+ * @example
+ * // node, commonjs
+ * var CustomEvents = require('tui-code-snippet').CustomEvents;
+ * @example
+ * // distribution file, script
+ * <script src='path-to/tui-code-snippt.js'></script>
+ * <script>
+ * var CustomEvents = tui.util.CustomEvents;
+ * </script>
+ */
+function CustomEvents() {
+    /**
+     * @type {HandlerItem[]}
+     */
+    this.events = null;
+
+    /**
+     * only for checking specific context event was binded
+     * @type {object[]}
+     */
+    this.contexts = null;
+}
+
+/**
+ * Mixin custom events feature to specific constructor
+ * @param {function} func - constructor
+ * @example
+ * //-- #1. Get Module --//
+ * var CustomEvents = require('tui-code-snippet').CustomEvents; // node, commonjs
+ * var CustomEvents = tui.util.CustomEvents; // distribution file
+ *
+ * //-- #2. Use property --//
+ * var model;
+ * function Model() {
+ *     this.name = '';
+ * }
+ * CustomEvents.mixin(Model);
+ *
+ * model = new Model();
+ * model.on('change', function() { this.name = 'model'; }, this);
+ * model.fire('change');
+ * alert(model.name); // 'model';
+ */
+CustomEvents.mixin = function (func) {
+    snippet.extend(func.prototype, CustomEvents.prototype);
+};
+
+/**
+ * Get HandlerItem object
+ * @param {function} handler - handler function
+ * @param {object} [context] - context for handler
+ * @returns {HandlerItem} HandlerItem object
+ * @private
+ */
+CustomEvents.prototype._getHandlerItem = function (handler, context) {
+    var item = { handler: handler };
+
+    if (context) {
+        item.context = context;
+    }
+
+    return item;
+};
+
+/**
+ * Get event object safely
+ * @param {string} [eventName] - create sub event map if not exist.
+ * @returns {(object|array)} event object. if you supplied `eventName`
+ *  parameter then make new array and return it
+ * @private
+ */
+CustomEvents.prototype._safeEvent = function (eventName) {
+    var events = this.events;
+    var byName;
+
+    if (!events) {
+        events = this.events = {};
+    }
+
+    if (eventName) {
+        byName = events[eventName];
+
+        if (!byName) {
+            byName = [];
+            events[eventName] = byName;
+        }
+
+        events = byName;
+    }
+
+    return events;
+};
+
+/**
+ * Get context array safely
+ * @returns {array} context array
+ * @private
+ */
+CustomEvents.prototype._safeContext = function () {
+    var context = this.contexts;
+
+    if (!context) {
+        context = this.contexts = [];
+    }
+
+    return context;
+};
+
+/**
+ * Get index of context
+ * @param {object} ctx - context that used for bind custom event
+ * @returns {number} index of context
+ * @private
+ */
+CustomEvents.prototype._indexOfContext = function (ctx) {
+    var context = this._safeContext();
+    var index = 0;
+
+    while (context[index]) {
+        if (ctx === context[index][0]) {
+            return index;
+        }
+
+        index += 1;
+    }
+
+    return -1;
+};
+
+/**
+ * Memorize supplied context for recognize supplied object is context or
+ *  name: handler pair object when off()
+ * @param {object} ctx - context object to memorize
+ * @private
+ */
+CustomEvents.prototype._memorizeContext = function (ctx) {
+    var context, index;
+
+    if (!snippet.isExisty(ctx)) {
+        return;
+    }
+
+    context = this._safeContext();
+    index = this._indexOfContext(ctx);
+
+    if (index > -1) {
+        context[index][1] += 1;
+    } else {
+        context.push([ctx, 1]);
+    }
+};
+
+/**
+ * Forget supplied context object
+ * @param {object} ctx - context object to forget
+ * @private
+ */
+CustomEvents.prototype._forgetContext = function (ctx) {
+    var context, contextIndex;
+
+    if (!snippet.isExisty(ctx)) {
+        return;
+    }
+
+    context = this._safeContext();
+    contextIndex = this._indexOfContext(ctx);
+
+    if (contextIndex > -1) {
+        context[contextIndex][1] -= 1;
+
+        if (context[contextIndex][1] <= 0) {
+            context.splice(contextIndex, 1);
+        }
+    }
+};
+
+/**
+ * Bind event handler
+ * @param {(string|{name:string, handler:function})} eventName - custom
+ *  event name or an object {eventName: handler}
+ * @param {(function|object)} [handler] - handler function or context
+ * @param {object} [context] - context for binding
+ * @private
+ */
+CustomEvents.prototype._bindEvent = function (eventName, handler, context) {
+    var events = this._safeEvent(eventName);
+    this._memorizeContext(context);
+    events.push(this._getHandlerItem(handler, context));
+};
+
+/**
+ * Bind event handlers
+ * @param {(string|{name:string, handler:function})} eventName - custom
+ *  event name or an object {eventName: handler}
+ * @param {(function|object)} [handler] - handler function or context
+ * @param {object} [context] - context for binding
+ * //-- #1. Get Module --//
+ * var CustomEvents = require('tui-code-snippet').CustomEvents; // node, commonjs
+ * var CustomEvents = tui.util.CustomEvents; // distribution file
+ *
+ * //-- #2. Use property --//
+ * // # 2.1 Basic Usage
+ * CustomEvents.on('onload', handler);
+ *
+ * // # 2.2 With context
+ * CustomEvents.on('onload', handler, myObj);
+ *
+ * // # 2.3 Bind by object that name, handler pairs
+ * CustomEvents.on({
+ *     'play': handler,
+ *     'pause': handler2
+ * });
+ *
+ * // # 2.4 Bind by object that name, handler pairs with context object
+ * CustomEvents.on({
+ *     'play': handler
+ * }, myObj);
+ */
+CustomEvents.prototype.on = function (eventName, handler, context) {
+    var self = this;
+
+    if (snippet.isString(eventName)) {
+        // [syntax 1, 2]
+        eventName = eventName.split(R_EVENTNAME_SPLIT);
+        snippet.forEach(eventName, function (name) {
+            self._bindEvent(name, handler, context);
+        });
+    } else if (snippet.isObject(eventName)) {
+        // [syntax 3, 4]
+        context = handler;
+        snippet.forEach(eventName, function (func, name) {
+            self.on(name, func, context);
+        });
+    }
+};
+
+/**
+ * Bind one-shot event handlers
+ * @param {(string|{name:string,handler:function})} eventName - custom
+ *  event name or an object {eventName: handler}
+ * @param {function|object} [handler] - handler function or context
+ * @param {object} [context] - context for binding
+ */
+CustomEvents.prototype.once = function (eventName, handler, context) {
+    var self = this;
+
+    if (snippet.isObject(eventName)) {
+        context = handler;
+        snippet.forEach(eventName, function (func, name) {
+            self.once(name, func, context);
+        });
+
+        return;
+    }
+
+    function onceHandler() {
+        // eslint-disable-line require-jsdoc
+        handler.apply(context, arguments);
+        self.off(eventName, onceHandler, context);
+    }
+
+    this.on(eventName, onceHandler, context);
+};
+
+/**
+ * Splice supplied array by callback result
+ * @param {array} arr - array to splice
+ * @param {function} predicate - function return boolean
+ * @private
+ */
+CustomEvents.prototype._spliceMatches = function (arr, predicate) {
+    var i = 0;
+    var len;
+
+    if (!snippet.isArray(arr)) {
+        return;
+    }
+
+    for (len = arr.length; i < len; i += 1) {
+        if (predicate(arr[i]) === true) {
+            arr.splice(i, 1);
+            len -= 1;
+            i -= 1;
+        }
+    }
+};
+
+/**
+ * Get matcher for unbind specific handler events
+ * @param {function} handler - handler function
+ * @returns {function} handler matcher
+ * @private
+ */
+CustomEvents.prototype._matchHandler = function (handler) {
+    var self = this;
+
+    return function (item) {
+        var needRemove = handler === item.handler;
+
+        if (needRemove) {
+            self._forgetContext(item.context);
+        }
+
+        return needRemove;
+    };
+};
+
+/**
+ * Get matcher for unbind specific context events
+ * @param {object} context - context
+ * @returns {function} object matcher
+ * @private
+ */
+CustomEvents.prototype._matchContext = function (context) {
+    var self = this;
+
+    return function (item) {
+        var needRemove = context === item.context;
+
+        if (needRemove) {
+            self._forgetContext(item.context);
+        }
+
+        return needRemove;
+    };
+};
+
+/**
+ * Get matcher for unbind specific hander, context pair events
+ * @param {function} handler - handler function
+ * @param {object} context - context
+ * @returns {function} handler, context matcher
+ * @private
+ */
+CustomEvents.prototype._matchHandlerAndContext = function (handler, context) {
+    var self = this;
+
+    return function (item) {
+        var matchHandler = handler === item.handler;
+        var matchContext = context === item.context;
+        var needRemove = matchHandler && matchContext;
+
+        if (needRemove) {
+            self._forgetContext(item.context);
+        }
+
+        return needRemove;
+    };
+};
+
+/**
+ * Unbind event by event name
+ * @param {string} eventName - custom event name to unbind
+ * @param {function} [handler] - handler function
+ * @private
+ */
+CustomEvents.prototype._offByEventName = function (eventName, handler) {
+    var self = this;
+    var forEach = snippet.forEachArray;
+    var andByHandler = snippet.isFunction(handler);
+    var matchHandler = self._matchHandler(handler);
+
+    eventName = eventName.split(R_EVENTNAME_SPLIT);
+
+    forEach(eventName, function (name) {
+        var handlerItems = self._safeEvent(name);
+
+        if (andByHandler) {
+            self._spliceMatches(handlerItems, matchHandler);
+        } else {
+            forEach(handlerItems, function (item) {
+                self._forgetContext(item.context);
+            });
+
+            self.events[name] = [];
+        }
+    });
+};
+
+/**
+ * Unbind event by handler function
+ * @param {function} handler - handler function
+ * @private
+ */
+CustomEvents.prototype._offByHandler = function (handler) {
+    var self = this;
+    var matchHandler = this._matchHandler(handler);
+
+    snippet.forEach(this._safeEvent(), function (handlerItems) {
+        self._spliceMatches(handlerItems, matchHandler);
+    });
+};
+
+/**
+ * Unbind event by object(name: handler pair object or context object)
+ * @param {object} obj - context or {name: handler} pair object
+ * @param {function} handler - handler function
+ * @private
+ */
+CustomEvents.prototype._offByObject = function (obj, handler) {
+    var self = this;
+    var matchFunc;
+
+    if (this._indexOfContext(obj) < 0) {
+        snippet.forEach(obj, function (func, name) {
+            self.off(name, func);
+        });
+    } else if (snippet.isString(handler)) {
+        matchFunc = this._matchContext(obj);
+
+        self._spliceMatches(this._safeEvent(handler), matchFunc);
+    } else if (snippet.isFunction(handler)) {
+        matchFunc = this._matchHandlerAndContext(handler, obj);
+
+        snippet.forEach(this._safeEvent(), function (handlerItems) {
+            self._spliceMatches(handlerItems, matchFunc);
+        });
+    } else {
+        matchFunc = this._matchContext(obj);
+
+        snippet.forEach(this._safeEvent(), function (handlerItems) {
+            self._spliceMatches(handlerItems, matchFunc);
+        });
+    }
+};
+
+/**
+ * Unbind custom events
+ * @param {(string|object|function)} eventName - event name or context or
+ *  {name: handler} pair object or handler function
+ * @param {(function)} handler - handler function
+ * @example
+ * //-- #1. Get Module --//
+ * var CustomEvents = require('tui-code-snippet').CustomEvents; // node, commonjs
+ * var CustomEvents = tui.util.CustomEvents; // distribution file
+ *
+ * //-- #2. Use property --//
+ * // # 2.1 off by event name
+ * CustomEvents.off('onload');
+ *
+ * // # 2.2 off by event name and handler
+ * CustomEvents.off('play', handler);
+ *
+ * // # 2.3 off by handler
+ * CustomEvents.off(handler);
+ *
+ * // # 2.4 off by context
+ * CustomEvents.off(myObj);
+ *
+ * // # 2.5 off by context and handler
+ * CustomEvents.off(myObj, handler);
+ *
+ * // # 2.6 off by context and event name
+ * CustomEvents.off(myObj, 'onload');
+ *
+ * // # 2.7 off by an Object.<string, function> that is {eventName: handler}
+ * CustomEvents.off({
+ *   'play': handler,
+ *   'pause': handler2
+ * });
+ *
+ * // # 2.8 off the all events
+ * CustomEvents.off();
+ */
+CustomEvents.prototype.off = function (eventName, handler) {
+    if (snippet.isString(eventName)) {
+        // [syntax 1, 2]
+        this._offByEventName(eventName, handler);
+    } else if (!arguments.length) {
+        // [syntax 8]
+        this.events = {};
+        this.contexts = [];
+    } else if (snippet.isFunction(eventName)) {
+        // [syntax 3]
+        this._offByHandler(eventName);
+    } else if (snippet.isObject(eventName)) {
+        // [syntax 4, 5, 6]
+        this._offByObject(eventName, handler);
+    }
+};
+
+/**
+ * Fire custom event
+ * @param {string} eventName - name of custom event
+ */
+CustomEvents.prototype.fire = function (eventName) {
+    // eslint-disable-line
+    this.invoke.apply(this, arguments);
+};
+
+/**
+ * Fire a event and returns the result of operation 'boolean AND' with all
+ *  listener's results.
+ *
+ * So, It is different from {@link CustomEvents#fire}.
+ *
+ * In service code, use this as a before event in component level usually
+ *  for notifying that the event is cancelable.
+ * @param {string} eventName - Custom event name
+ * @param {...*} data - Data for event
+ * @returns {boolean} The result of operation 'boolean AND'
+ * @example
+ * var map = new Map();
+ * map.on({
+ *     'beforeZoom': function() {
+ *         // It should cancel the 'zoom' event by some conditions.
+ *         if (that.disabled && this.getState()) {
+ *             return false;
+ *         }
+ *         return true;
+ *     }
+ * });
+ *
+ * if (this.invoke('beforeZoom')) {    // check the result of 'beforeZoom'
+ *     // if true,
+ *     // doSomething
+ * }
+ */
+CustomEvents.prototype.invoke = function (eventName) {
+    var events, args, index, item;
+
+    if (!this.hasListener(eventName)) {
+        return true;
+    }
+
+    events = this._safeEvent(eventName);
+    args = Array.prototype.slice.call(arguments, 1);
+    index = 0;
+
+    while (events[index]) {
+        item = events[index];
+
+        if (item.handler.apply(item.context, args) === false) {
+            return false;
+        }
+
+        index += 1;
+    }
+
+    return true;
+};
+
+/**
+ * Return whether at least one of the handlers is registered in the given
+ *  event name.
+ * @param {string} eventName - Custom event name
+ * @returns {boolean} Is there at least one handler in event name?
+ */
+CustomEvents.prototype.hasListener = function (eventName) {
+    return this.getListenerLength(eventName) > 0;
+};
+
+/**
+ * Return a count of events registered.
+ * @param {string} eventName - Custom event name
+ * @returns {number} number of event
+ */
+CustomEvents.prototype.getListenerLength = function (eventName) {
+    var events = this._safeEvent(eventName);
+
+    return events.length;
+};
+
+module.exports = CustomEvents;
 
 /***/ }),
 
@@ -11429,9 +12598,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _fabric = __webpack_require__(/*! fabric */ "fabric");
 
@@ -11499,7 +12668,7 @@ var Cropzone = _fabric2.default.util.createClass(_fabric2.default.Rect,
    * @override
    */
   initialize: function initialize(canvas, options, extendsOptions) {
-    options = _tuiCodeSnippet2.default.extend(options, extendsOptions);
+    options = _codeSnippet2.default.extend(options, extendsOptions);
     options.type = 'cropzone';
 
     this.callSuper('initialize', options);
@@ -11550,7 +12719,6 @@ var Cropzone = _fabric2.default.util.createClass(_fabric2.default.Rect,
     this._fillOuterRect(ctx, 'rgba(0, 0, 0, 0.5)');
 
     if (this.options.lineWidth) {
-      this._fillInnerRect(ctx);
       this._strokeBorder(ctx, 'rgb(255, 255, 255)', {
         lineWidth: this.options.lineWidth
       });
@@ -11712,11 +12880,11 @@ var Cropzone = _fabric2.default.util.createClass(_fabric2.default.Rect,
     var canvasWidth = canvas.getWidth(); // fabric object
 
     return {
-      x: _tuiCodeSnippet2.default.map([-(halfWidth + left), // x0
+      x: _codeSnippet2.default.map([-(halfWidth + left), // x0
       -halfWidth, // x1
       halfWidth, // x2
       halfWidth + (canvasWidth - left - width)], Math.ceil),
-      y: _tuiCodeSnippet2.default.map([-(halfHeight + top), // y0
+      y: _codeSnippet2.default.map([-(halfHeight + top), // y0
       -halfHeight, // y1
       halfHeight, // y2
       halfHeight + (canvasHeight - top - height)], Math.ceil)
@@ -12389,9 +13557,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
 
@@ -12416,7 +13584,7 @@ var map = {
 };
 
 exports.default = {
-  types: _tuiCodeSnippet2.default.extend({}, types),
+  types: _codeSnippet2.default.extend({}, types),
 
   create: function create(type) {
     type = type.toLowerCase();
@@ -12452,9 +13620,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ./codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _fabric = __webpack_require__(/*! fabric */ "fabric");
 
@@ -12538,17 +13706,20 @@ var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
 
 var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
 
+var _customEvent = __webpack_require__(/*! ./customEvent */ "./src/js/customEvent.js");
+
+var _customEvent2 = _interopRequireDefault(_customEvent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var extend = _tuiCodeSnippet2.default.extend,
-    stamp = _tuiCodeSnippet2.default.stamp,
-    isArray = _tuiCodeSnippet2.default.isArray,
-    isString = _tuiCodeSnippet2.default.isString,
-    forEachArray = _tuiCodeSnippet2.default.forEachArray,
-    forEachOwnProperties = _tuiCodeSnippet2.default.forEachOwnProperties,
-    CustomEvents = _tuiCodeSnippet2.default.CustomEvents;
+var extend = _codeSnippet2.default.extend,
+    stamp = _codeSnippet2.default.stamp,
+    isArray = _codeSnippet2.default.isArray,
+    isString = _codeSnippet2.default.isString,
+    forEachArray = _codeSnippet2.default.forEachArray,
+    forEachOwnProperties = _codeSnippet2.default.forEachOwnProperties;
 
 var DEFAULT_CSS_MAX_WIDTH = 1000;
 var DEFAULT_CSS_MAX_HEIGHT = 800;
@@ -12658,6 +13829,8 @@ var Graphics = function () {
      */
     this._handler = {
       onMouseDown: this._onMouseDown.bind(this),
+      onMouseUp: this._onMouseUp.bind(this),
+      onMouseMove: this._onMouseMove.bind(this),
       onObjectAdded: this._onObjectAdded.bind(this),
       onObjectRemoved: this._onObjectRemoved.bind(this),
       onObjectMoved: this._onObjectMoved.bind(this),
@@ -13219,7 +14392,44 @@ var Graphics = function () {
           width = _canvasImage$getBound.width,
           height = _canvasImage$getBound.height;
 
-      var maxDimension = this._calcMaxDimension(width, height);
+      var tempMaxDimension = this._calcMaxDimension(width, height);
+
+      var zoomLevel = this.getCanvasZoom();
+      var maxDimension = zoomLevel <= 1 ? tempMaxDimension : {
+        width: tempMaxDimension.width * zoomLevel,
+        height: tempMaxDimension.height * zoomLevel
+      };
+
+      this.setCanvasCssDimension({
+        width: '100%',
+        height: '100%', // Set height '' for IE9
+        'max-width': maxDimension.width + 'px',
+        'max-height': maxDimension.height + 'px'
+      });
+
+      this.setCanvasBackstoreDimension({
+        width: maxDimension.width,
+        height: maxDimension.height
+      });
+    }
+
+    /**
+     * Adjust canvas dimension with scaling image for rotate
+     */
+
+  }, {
+    key: 'adjustCanvasDimensionForRotate',
+    value: function adjustCanvasDimensionForRotate() {
+      var canvasImage = this.canvasImage.scale(1);
+
+      var _canvasImage$getBound2 = canvasImage.getBoundingRect(),
+          width = _canvasImage$getBound2.width,
+          height = _canvasImage$getBound2.height;
+
+      var maxDimension = {
+        width: height,
+        height: width
+      };
 
       this.setCanvasCssDimension({
         width: '100%',
@@ -13257,6 +14467,17 @@ var Graphics = function () {
     key: 'setCanvasBackstoreDimension',
     value: function setCanvasBackstoreDimension(dimension) {
       this._canvas.setDimensions(dimension, backstoreOnly);
+    }
+
+    /**
+     * Set canvas zoom
+     * @param {number} zoom - zoom level
+     */
+
+  }, {
+    key: 'setCanvasZoom',
+    value: function setCanvasZoom(zoom) {
+      this._canvas.setZoom(zoom);
     }
 
     /**
@@ -13632,6 +14853,17 @@ var Graphics = function () {
     }
 
     /**
+     * Get the canvas zoom level
+     * @returns {number} canvas zoom level
+     */
+
+  }, {
+    key: 'getCanvasZoom',
+    value: function getCanvasZoom() {
+      return this._canvas.getZoom();
+    }
+
+    /**
      * Create fabric static canvas
      * @returns {Object} {{width: number, height: number}} image size
      */
@@ -13698,7 +14930,9 @@ var Graphics = function () {
 
       this._canvas = new _fabric2.default.Canvas(canvasElement, {
         containerClass: 'tui-image-editor-canvas-container',
-        enableRetinaScaling: false
+        enableRetinaScaling: false,
+        targetFindTolerance: _consts.defaultPixelTargetTolerance,
+        rotationCursor: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAD3ElEQVRIS5WWbUyVZRjH//+ewxhsraNrAQVZk7b0NI5tUrAgHGy2rIQDBL6cc8CWQxYyEIXVigQzJnYqczN5EcHsg+gH7UVdBLodjjleRKCXrQ/MHBsbK2E12ALPrnY/yCPneM7hdH97dv+v63dd133d1/0QYSwRKQQQTfJkGHIfCcMxEJFiAMp5C4DdJP8Nx05p/hdgeHgYVqt1AEA+yT/CgYQL2Amg+dnEZ1Dz3rso3rHjDsktJLuWgywLEJE1AH5VjhKfelr3l5mViUaXS8xmcy2AgyQlGCgoQETWARjyer3o7+vDiZZWXOnpMfzExcVhu9OBXaWl3wFwkpwKBAkIEJFyAEfaWlvx5bFjmLoT0BaaSUNlVZWCjAGwkRzxhzwAEJF9ABq3FhSgv68/ZIljYmPhuf6T0vwOIJfkLyEBIpIF4Mfc7GyMDPsGYzabMT09bdi/nJGBto529X0OwFsk/wlZIhExAfjtUENDYktTs6Fda7HgwMcHVXvqh6xpGir36mVRmkqSn4dK0yiRiLw5MTHRmZWxAXNzc7pN8gvJaOvomI+KiroIIPullFQcOXoU65PXq+00kp6w21REzrY0NecfamjQbSIjI9F99Spi42IdAB4F8Nk9Z1cAqDswuZxzn5ssIreLHY6EXnevbmfLy8Vhl+s6yVQRqbgHUPQPSHoXnYvIIyqeYMClJZKNmVkYG1MdB73uW7dtqyV5QEScAKZIfusftYiUAfjCb+zcIqnfSh/AhrR0jI+P6z4Ou1wqixqSjaFKISLfNx9v2lRSusuQiUhAwFS+Ldd8c2hIF6ou2VtT3UlSjeqAS0QeBvD3qxtfweWuHxYyr6vD+7W1F0jm+GfQ/VF9fWZ728LIj09IQFdPtzciImIdyZ8DEURk/+jI6Ie2zZuN7favTiEtPb2EpN7rS0tUeWNw8NOCvHxDXFa+GxV79qix/AbJ0aUQESkBcFw5Hx1Z2HosJgbua555TdMeJ/mnP2AlgL+c2+245rnf3uUVFXinrMyrmbRvAPSplw3A6wCeL7Lb4em9r91fXwe70/k1SftiMD6zSESqAHxitTyHmZkZI+AnV61Cjs2G1YmrcXf+LgYHBnDh/HkfzYspKTh1+vSsZtLWkLwdDPAQABXpa0kWC2ZnZkM1kLGXZE3CiZPtWLFyRSHJzqVGgaapKsFZAJvysnOgnslgiyQcRU7sq672RkVH7wz0UxDsPVCZqHI19rrduHzpEm7eGMLk5CRMJhOeiI9HSmoqCrcUqm5TJ/w2SXU+D6yQT6aIqBlUtHioANRYUOsWADeAMwAuhnoy/wO8rHIopxJHwwAAAABJRU5ErkJggg==) 6 6, alias'
       });
     }
 
@@ -13829,6 +15063,8 @@ var Graphics = function () {
       var handler = this._handler;
       canvas.on({
         'mouse:down': handler.onMouseDown,
+        'mouse:up': handler.onMouseUp,
+        'mouse:move': handler.onMouseMove,
         'object:added': handler.onObjectAdded,
         'object:removed': handler.onObjectRemoved,
         'object:moving': handler.onObjectMoved,
@@ -13872,6 +15108,32 @@ var Graphics = function () {
     }
 
     /**
+     * "mouse:up" canvas event handler
+     * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event
+     * @private
+     */
+
+  }, {
+    key: '_onMouseUp',
+    value: function _onMouseUp(fEvent) {
+      var originPointer = this._canvas.getPointer(fEvent.e);
+      this.fire(_consts.eventNames.MOUSE_UP, fEvent.e, originPointer);
+    }
+
+    /**
+     * "mouse:move" canvas event handler
+     * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event
+     * @private
+     */
+
+  }, {
+    key: '_onMouseMove',
+    value: function _onMouseMove(fEvent) {
+      var originPointer = this._canvas.getPointer(fEvent.e);
+      this.fire(_consts.eventNames.MOUSE_MOVE, fEvent.e, originPointer);
+    }
+
+    /**
      * "object:added" canvas event handler
      * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event
      * @private
@@ -13898,8 +15160,10 @@ var Graphics = function () {
     key: '_onObjectRemoved',
     value: function _onObjectRemoved(fEvent) {
       var obj = fEvent.target;
+      var params = this.createObjectProperties(obj);
 
       this._removeFabricObject(stamp(obj));
+      this.fire(_consts.eventNames.OBJECT_REMOVED, params);
     }
 
     /**
@@ -14011,6 +15275,7 @@ var Graphics = function () {
       var target = fEvent.target;
 
       var params = this.createObjectProperties(target);
+      this._canvas.bringToFront(target);
 
       this.fire(_consts.eventNames.OBJECT_ACTIVATED, params);
     }
@@ -14087,6 +15352,7 @@ var Graphics = function () {
     value: function changeSelectableAll(selectable) {
       this._canvas.forEachObject(function (obj) {
         obj.selectable = selectable;
+        obj.evented = selectable;
         obj.hoverCursor = selectable ? 'move' : 'crosshair';
       });
     }
@@ -14130,7 +15396,7 @@ var Graphics = function () {
   }, {
     key: '_createTextProperties',
     value: function _createTextProperties(obj) {
-      var predefinedKeys = ['text', 'fontFamily', 'fontSize', 'fontStyle', 'textAlign', 'textDecoration', 'fontWeight'];
+      var predefinedKeys = ['text', 'fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'textAlign', 'textDecoration', 'fontWeight'];
       var props = {};
       extend(props, (0, _util.getProperties)(obj, predefinedKeys));
 
@@ -14221,7 +15487,7 @@ var Graphics = function () {
     value: function _cloneObject(targetObjects) {
       var _this8 = this;
 
-      var addedObjects = _tuiCodeSnippet2.default.map(targetObjects, function (targetObject) {
+      var addedObjects = _codeSnippet2.default.map(targetObjects, function (targetObject) {
         return _this8._cloneObjectItem(targetObject);
       });
 
@@ -14279,7 +15545,7 @@ var Graphics = function () {
         var rightEdge = left + width / 2;
         var bottomEdge = top + height / 2;
 
-        clonedObject.set(_tuiCodeSnippet2.default.extend({
+        clonedObject.set(_codeSnippet2.default.extend({
           left: addExtraPx(left, rightEdge + EXTRA_PX_FOR_PASTE > canvasWidth),
           top: addExtraPx(top, bottomEdge + EXTRA_PX_FOR_PASTE > canvasHeight)
         }, _consts.fObjectOptions.SELECTION_STYLE));
@@ -14316,7 +15582,7 @@ var Graphics = function () {
   return Graphics;
 }();
 
-CustomEvents.mixin(Graphics);
+_customEvent2.default.mixin(Graphics);
 
 exports.default = Graphics;
 
@@ -15518,7 +16784,7 @@ exports.getCachedUndoDataForDimension = getCachedUndoDataForDimension;
 exports.makeSelectionUndoData = makeSelectionUndoData;
 exports.makeSelectionUndoDatum = makeSelectionUndoDatum;
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
 /**
  * Cached selection's info
@@ -15611,7 +16877,7 @@ function makeSelectionUndoDatum(id, obj, isSelection) {
     angle: obj.angle,
     scaleX: obj.scaleX,
     scaleY: obj.scaleY
-  } : (0, _tuiCodeSnippet.extend)({ id: id }, obj);
+  } : (0, _codeSnippet.extend)({ id: id }, obj);
 }
 
 /***/ }),
@@ -15637,7 +16903,7 @@ exports.resetFillPatternCanvas = resetFillPatternCanvas;
 exports.reMakePatternImageSource = reMakePatternImageSource;
 exports.getCachedCanvasImageElement = getCachedCanvasImageElement;
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
 var _shapeResizeHelper = __webpack_require__(/*! @/helper/shapeResizeHelper */ "./src/js/helper/shapeResizeHelper.js");
 
@@ -15753,7 +17019,7 @@ function rePositionFilterTypeFillImage(shapeObj) {
  * @returns {object}
  */
 function makeFilterOptionFromFabricImage(imageObject) {
-  return (0, _tuiCodeSnippet.map)(imageObject.filters, function (filter) {
+  return (0, _codeSnippet.map)(imageObject.filters, function (filter) {
     var _Object$keys = Object.keys(filter),
         key = _Object$keys[0];
 
@@ -15885,7 +17151,7 @@ function calculateDimensionRightBottomEdge(overflowAreaPositionFixer, _ref3) {
     y: (insideCanvasRealImageHeight - height) / 2
   };
 
-  (0, _tuiCodeSnippet.forEach)(['x', 'y'], function (type) {
+  (0, _codeSnippet.forEach)(['x', 'y'], function (type) {
     var cropDistance2 = diff[type];
     if (cropDistance2 > 0) {
       var _overflowAreaPosition = overflowAreaPositionFixer(type, cropDistance2, left, top);
@@ -15924,7 +17190,7 @@ function calculateDimensionLeftTopEdge(overflowAreaPositionFixer, _ref4) {
     height: height
   };
 
-  (0, _tuiCodeSnippet.forEach)(['x', 'y'], function (type) {
+  (0, _codeSnippet.forEach)(['x', 'y'], function (type) {
     var cropDistance = type === 'x' ? cropX : cropY;
     var compareSize = dimension[POSITION_DIMENSION_MAP[type]];
     var standardSize = cachedCanvasImageElement[POSITION_DIMENSION_MAP[type]];
@@ -16114,7 +17380,7 @@ function getReversePositionForFlip(_ref6) {
 function calculateLinePointsOutsideCanvas(type, shapePointNavigation, shapeNeighborPointNavigation) {
   var minimumPoint = 0;
   var minimumPointIndex = 0;
-  (0, _tuiCodeSnippet.forEach)(shapePointNavigation, function (point, index) {
+  (0, _codeSnippet.forEach)(shapePointNavigation, function (point, index) {
     if (point[type] < minimumPoint) {
       minimumPoint = point[type];
       minimumPointIndex = index;
@@ -16154,7 +17420,7 @@ function calculateLineAngleOfOutsideCanvas(type, shapePointNavigation, linePoint
 
   var horizontalVerticalAngle = type === 'x' ? 180 : 270;
 
-  return (0, _tuiCodeSnippet.map)([endPointIndex1, endPointIndex2], function (pointIndex) {
+  return (0, _codeSnippet.map)([endPointIndex1, endPointIndex2], function (pointIndex) {
     var startPoint = shapePointNavigation[startPointIndex];
     var endPoint = shapePointNavigation[pointIndex];
     var diffY = startPoint.y - endPoint.y;
@@ -16245,7 +17511,7 @@ function getRotatedDimension(shapeObj) {
 function makeFillImage(copiedCanvasElement, currentCanvasImageAngle, filterOption) {
   var fillImage = new fabric.Image(copiedCanvasElement);
 
-  (0, _tuiCodeSnippet.forEach)(_tuiCodeSnippet.extend.apply(undefined, [{}].concat(filterOption)), function (value, key) {
+  (0, _codeSnippet.forEach)(_codeSnippet.extend.apply(undefined, [{}].concat(filterOption)), function (value, key) {
     var fabricFilterClassName = (0, _util.capitalizeString)(key);
     var filter = new fabric.Image.filters[fabricFilterClassName](_defineProperty({}, FILTER_OPTION_MAP[key], value));
     fillImage.filters.push(filter);
@@ -16553,17 +17819,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ./codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _invoker3 = __webpack_require__(/*! @/invoker */ "./src/js/invoker.js");
 
 var _invoker4 = _interopRequireDefault(_invoker3);
-
-var _ui = __webpack_require__(/*! @/ui */ "./src/js/ui.js");
-
-var _ui2 = _interopRequireDefault(_ui);
 
 var _action = __webpack_require__(/*! @/action */ "./src/js/action.js");
 
@@ -16583,21 +17845,27 @@ var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
 
 var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
 
+var _customEvent = __webpack_require__(/*! ./customEvent */ "./src/js/customEvent.js");
+
+var _customEvent2 = _interopRequireDefault(_customEvent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var isUndefined = _tuiCodeSnippet2.default.isUndefined,
-    forEach = _tuiCodeSnippet2.default.forEach,
-    CustomEvents = _tuiCodeSnippet2.default.CustomEvents;
+var isUndefined = _codeSnippet2.default.isUndefined,
+    forEach = _codeSnippet2.default.forEach;
 var MOUSE_DOWN = _consts.eventNames.MOUSE_DOWN,
+    MOUSE_UP = _consts.eventNames.MOUSE_UP,
+    MOUSE_MOVE = _consts.eventNames.MOUSE_MOVE,
     OBJECT_MOVED = _consts.eventNames.OBJECT_MOVED,
     OBJECT_SCALED = _consts.eventNames.OBJECT_SCALED,
     OBJECT_ACTIVATED = _consts.eventNames.OBJECT_ACTIVATED,
     OBJECT_ROTATED = _consts.eventNames.OBJECT_ROTATED,
     OBJECT_ADDED = _consts.eventNames.OBJECT_ADDED,
+    OBJECT_REMOVED = _consts.eventNames.OBJECT_REMOVED,
     OBJECT_MODIFIED = _consts.eventNames.OBJECT_MODIFIED,
     ADD_TEXT = _consts.eventNames.ADD_TEXT,
     ADD_OBJECT = _consts.eventNames.ADD_OBJECT,
@@ -16736,9 +18004,9 @@ var ImageEditor = function () {
   function ImageEditor(wrapper, options) {
     _classCallCheck(this, ImageEditor);
 
-    options = _tuiCodeSnippet2.default.extend({
+    options = _codeSnippet2.default.extend({
       includeUI: false,
-      usageStatistics: true
+      usageStatistics: false
     }, options);
 
     this.mode = null;
@@ -16746,16 +18014,10 @@ var ImageEditor = function () {
     this.activeObjectId = null;
 
     /**
-     * UI instance
-     * @type {Ui}
+     * Flag that enables/disables removal of objects
+     * @type {boolean}
      */
-    if (options.includeUI) {
-      var UIOption = options.includeUI;
-      UIOption.usageStatistics = options.usageStatistics;
-
-      this.ui = new _ui2.default(wrapper, UIOption, this.getActions());
-      options = this.ui.setUiDefaultSelectionStyle(options);
-    }
+    this.allowObjectRemoval = true;
 
     /**
      * Invoker
@@ -16782,7 +18044,10 @@ var ImageEditor = function () {
     this._handlers = {
       keydown: this._onKeyDown.bind(this),
       mousedown: this._onMouseDown.bind(this),
+      mouseup: this._onMouseUp.bind(this),
+      mousemove: this._onMouseMove.bind(this),
       objectActivated: this._onObjectActivated.bind(this),
+      objectRemoved: this._onObjectRemoved.bind(this),
       objectMoved: this._onObjectMoved.bind(this),
       objectScaled: this._onObjectScaled.bind(this),
       objectRotated: this._onObjectRotated.bind(this),
@@ -16942,7 +18207,7 @@ var ImageEditor = function () {
     value: function _attachGraphicsEvents() {
       var _graphics$on;
 
-      this._graphics.on((_graphics$on = {}, _defineProperty(_graphics$on, MOUSE_DOWN, this._handlers.mousedown), _defineProperty(_graphics$on, OBJECT_MOVED, this._handlers.objectMoved), _defineProperty(_graphics$on, OBJECT_SCALED, this._handlers.objectScaled), _defineProperty(_graphics$on, OBJECT_ROTATED, this._handlers.objectRotated), _defineProperty(_graphics$on, OBJECT_ACTIVATED, this._handlers.objectActivated), _defineProperty(_graphics$on, OBJECT_ADDED, this._handlers.objectAdded), _defineProperty(_graphics$on, OBJECT_MODIFIED, this._handlers.objectModified), _defineProperty(_graphics$on, ADD_TEXT, this._handlers.addText), _defineProperty(_graphics$on, ADD_OBJECT, this._handlers.addObject), _defineProperty(_graphics$on, TEXT_EDITING, this._handlers.textEditing), _defineProperty(_graphics$on, TEXT_CHANGED, this._handlers.textChanged), _defineProperty(_graphics$on, ICON_CREATE_RESIZE, this._handlers.iconCreateResize), _defineProperty(_graphics$on, ICON_CREATE_END, this._handlers.iconCreateEnd), _defineProperty(_graphics$on, SELECTION_CLEARED, this._handlers.selectionCleared), _defineProperty(_graphics$on, SELECTION_CREATED, this._handlers.selectionCreated), _graphics$on));
+      this._graphics.on((_graphics$on = {}, _defineProperty(_graphics$on, MOUSE_DOWN, this._handlers.mousedown), _defineProperty(_graphics$on, MOUSE_UP, this._handlers.mouseup), _defineProperty(_graphics$on, MOUSE_MOVE, this._handlers.mousemove), _defineProperty(_graphics$on, OBJECT_MOVED, this._handlers.objectMoved), _defineProperty(_graphics$on, OBJECT_SCALED, this._handlers.objectScaled), _defineProperty(_graphics$on, OBJECT_ROTATED, this._handlers.objectRotated), _defineProperty(_graphics$on, OBJECT_ACTIVATED, this._handlers.objectActivated), _defineProperty(_graphics$on, OBJECT_ADDED, this._handlers.objectAdded), _defineProperty(_graphics$on, OBJECT_REMOVED, this._handlers.objectRemoved), _defineProperty(_graphics$on, OBJECT_MODIFIED, this._handlers.objectModified), _defineProperty(_graphics$on, ADD_TEXT, this._handlers.addText), _defineProperty(_graphics$on, ADD_OBJECT, this._handlers.addObject), _defineProperty(_graphics$on, TEXT_EDITING, this._handlers.textEditing), _defineProperty(_graphics$on, TEXT_CHANGED, this._handlers.textChanged), _defineProperty(_graphics$on, ICON_CREATE_RESIZE, this._handlers.iconCreateResize), _defineProperty(_graphics$on, ICON_CREATE_END, this._handlers.iconCreateEnd), _defineProperty(_graphics$on, SELECTION_CLEARED, this._handlers.selectionCleared), _defineProperty(_graphics$on, SELECTION_CREATED, this._handlers.selectionCreated), _graphics$on));
     }
 
     /**
@@ -16984,6 +18249,7 @@ var ImageEditor = function () {
           metaKey = e.metaKey;
 
       var isModifierKey = ctrlKey || metaKey;
+      var canRemove = this.allowObjectRemoval;
 
       if (isModifierKey) {
         if (keyCode === _consts.keyCodes.C) {
@@ -17003,7 +18269,7 @@ var ImageEditor = function () {
       var isDeleteKey = keyCode === _consts.keyCodes.BACKSPACE || keyCode === _consts.keyCodes.DEL;
       var isRemoveReady = this._graphics.isReadyRemoveObject();
 
-      if (!this.isColorPickerInputBoxEditing && isRemoveReady && isDeleteKey) {
+      if (!this.isColorPickerInputBoxEditing && isRemoveReady && isDeleteKey && canRemove) {
         e.preventDefault();
         this.removeActiveObject();
       }
@@ -17054,6 +18320,74 @@ var ImageEditor = function () {
        */
 
       this.fire(_consts.eventNames.MOUSE_DOWN, event, originPointer);
+    }
+
+    /**
+     * mouse up event handler
+     * @param {Event} event mouse down event
+     * @param {Object} originPointer origin pointer
+     *  @param {Number} originPointer.x x position
+     *  @param {Number} originPointer.y y position
+     * @private
+     */
+
+  }, {
+    key: '_onMouseUp',
+    value: function _onMouseUp(event, originPointer) {
+      /**
+       * The mouse up event with position x, y on canvas
+       * @event ImageEditor#mouseup
+       * @param {Object} event - browser mouse event object
+       * @param {Object} originPointer origin pointer
+       *  @param {Number} originPointer.x x position
+       *  @param {Number} originPointer.y y position
+       * @example
+       * imageEditor.on('mouseup', function(event, originPointer) {
+       *     console.log(event);
+       *     console.log(originPointer);
+       *     if (imageEditor.hasFilter('colorFilter')) {
+       *         imageEditor.applyFilter('colorFilter', {
+       *             x: parseInt(originPointer.x, 10),
+       *             y: parseInt(originPointer.y, 10)
+       *         });
+       *     }
+       * });
+       */
+      this.fire(_consts.eventNames.MOUSE_UP, event, originPointer);
+    }
+
+    /**
+     * mouse move event handler
+     * @param {Event} event mouse move event
+     * @param {Object} originPointer origin pointer
+     *  @param {Number} originPointer.x x position
+     *  @param {Number} originPointer.y y position
+     * @private
+     */
+
+  }, {
+    key: '_onMouseMove',
+    value: function _onMouseMove(event, originPointer) {
+      /**
+       * The mouse up event with position x, y on canvas
+       * @event ImageEditor#mousemove
+       * @param {Object} event - browser mouse event object
+       * @param {Object} originPointer origin pointer
+       *  @param {Number} originPointer.x x position
+       *  @param {Number} originPointer.y y position
+       * @example
+       * imageEditor.on('mousemove', function(event, originPointer) {
+       *     console.log(event);
+       *     console.log(originPointer);
+       *     if (imageEditor.hasFilter('colorFilter')) {
+       *         imageEditor.applyFilter('colorFilter', {
+       *             x: parseInt(originPointer.x, 10),
+       *             y: parseInt(originPointer.y, 10)
+       *         });
+       *     }
+       * });
+       */
+      this.fire(_consts.eventNames.MOUSE_MOVE, event, originPointer);
     }
 
     /**
@@ -17112,6 +18446,29 @@ var ImageEditor = function () {
        * });
        */
       this.fire(_consts.eventNames.OBJECT_ACTIVATED, props);
+    }
+
+    /**
+     * 'objectRemoved' event handler
+     * @param {ObjectProps} props - object properties
+     * @private
+     */
+
+  }, {
+    key: '_onObjectRemoved',
+    value: function _onObjectRemoved(props) {
+      /**
+       * The event when object is removed.
+       * @event ImageEditor#objectRemoved
+       * @param {ObjectProps} objectProps - object properties
+       * @example
+       * imageEditor.on('objectRemoved', function(props) {
+       *     console.log(props);
+       *     console.log(props.type);
+       *     console.log(props.id);
+       * });
+       */
+      this.fire(_consts.eventNames.OBJECT_REMOVED, props);
     }
 
     /**
@@ -18164,6 +19521,14 @@ var ImageEditor = function () {
   }, {
     key: '_selectionCreated',
     value: function _selectionCreated(eventTarget) {
+      if (eventTarget.type === 'activeSelection') {
+        eventTarget.set({
+          lockRotation: true,
+          lockScalingX: true,
+          lockScalingY: true,
+          hasControls: false
+        });
+      }
       this.fire(SELECTION_CREATED, eventTarget);
     }
 
@@ -18416,6 +19781,21 @@ var ImageEditor = function () {
     }
 
     /**
+     * Resize canvas dimension quietly
+     * @param {{width: number, height: number}} dimension - Max width & height
+     * @returns {Promise}
+     */
+
+  }, {
+    key: 'resizeCanvasDimensionQuietly',
+    value: function resizeCanvasDimensionQuietly(dimension) {
+      this._graphics.setCssMaxDimension(dimension);
+      this._graphics.adjustCanvasDimension();
+
+      return _util.Promise.resolve();
+    }
+
+    /**
      * Destroy
      */
 
@@ -18549,6 +19929,31 @@ var ImageEditor = function () {
     }
 
     /**
+     * Get the canvas zoom
+     * @returns {number} canvas zoom
+     * @example
+     * var canvasZoom = imageEditor.getCanvasZoom();
+     * console.log(canvasZoom);
+     */
+
+  }, {
+    key: 'getCanvasZoom',
+    value: function getCanvasZoom() {
+      return this._graphics.getCanvasZoom();
+    }
+
+    /**
+     * Get the current angle
+     * @returns {Number}
+     */
+
+  }, {
+    key: 'getCurrentAngle',
+    value: function getCurrentAngle() {
+      return this._graphics.getCanvasImage().angle;
+    }
+
+    /**
      * Get object position by originX, originY
      * @param {number} id - object id
      * @param {string} originX - can be 'left', 'center', 'right'
@@ -18616,13 +20021,38 @@ var ImageEditor = function () {
     value: function setObjectPosition(id, posInfo) {
       return this.execute(_consts.commandNames.SET_OBJECT_POSITION, id, posInfo);
     }
+
+    /**
+     * Set the canvas zoom
+     * @param {number} zoom - zoom level to set
+     * @example
+     * var zoom = 1.5;
+     * imageEditor.setCanvasZoom(zoom);
+     */
+
+  }, {
+    key: 'setCanvasZoom',
+    value: function setCanvasZoom(zoom) {
+      this._graphics.setCanvasZoom(zoom);
+    }
+
+    /**
+     * Sets the object removal flag
+     * @param {boolean} allow - allow flag
+     */
+
+  }, {
+    key: 'setAllowObjectRemoval',
+    value: function setAllowObjectRemoval(allow) {
+      this.allowObjectRemoval = allow;
+    }
   }]);
 
   return ImageEditor;
 }();
 
 _action2.default.mixin(ImageEditor);
-CustomEvents.mixin(ImageEditor);
+_customEvent2.default.mixin(ImageEditor);
 
 exports.default = ImageEditor;
 
@@ -18648,9 +20078,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ../codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _errorMessage = __webpack_require__(/*! @/factory/errorMessage */ "./src/js/factory/errorMessage.js");
 
@@ -18766,7 +20196,7 @@ var Command = function () {
       }
 
       if (!isSilent) {
-        _tuiCodeSnippet2.default.extend(this.undoData, undoData);
+        _codeSnippet2.default.extend(this.undoData, undoData);
         cachedUndoDataForSilent = null;
       } else if (!cachedUndoDataForSilent) {
         cachedUndoDataForSilent = undoData;
@@ -19002,6 +20432,16 @@ var Component = function () {
     value: function adjustCanvasDimension() {
       this.graphics.adjustCanvasDimension();
     }
+
+    /**
+     * Adjust canvas dimension with scaling image for the rotation command
+     */
+
+  }, {
+    key: "adjustCanvasDimensionForRotate",
+    value: function adjustCanvasDimensionForRotate() {
+      this.graphics.adjustCanvasDimensionForRotate();
+    }
   }]);
 
   return Component;
@@ -19123,9 +20563,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ./codeSnippet */ "./src/js/codeSnippet.js");
 
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
+var _codeSnippet2 = _interopRequireDefault(_codeSnippet);
 
 var _command = __webpack_require__(/*! @/factory/command */ "./src/js/factory/command.js");
 
@@ -19135,13 +20575,16 @@ var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
 
 var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
 
+var _customEvent = __webpack_require__(/*! ./customEvent */ "./src/js/customEvent.js");
+
+var _customEvent2 = _interopRequireDefault(_customEvent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var isFunction = _tuiCodeSnippet2.default.isFunction,
-    isString = _tuiCodeSnippet2.default.isString,
-    CustomEvents = _tuiCodeSnippet2.default.CustomEvents;
+var isFunction = _codeSnippet2.default.isFunction,
+    isString = _codeSnippet2.default.isString;
 
 /**
  * Invoker
@@ -19494,7 +20937,7 @@ var Invoker = function () {
   return Invoker;
 }();
 
-CustomEvents.mixin(Invoker);
+_customEvent2.default.mixin(Invoker);
 
 exports.default = Invoker;
 
@@ -19744,21 +21187,20 @@ if ('document' in window.self) {
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
-(function () {
+/*(function () {
   'use strict';
-
   if (typeof window !== 'undefined' && window.addEventListener) {
     var cache = Object.create(null); // holds xhr objects to prevent multiple requests
     var checkUseElems;
     var tid; // timeout id
-    var debouncedCheck = function debouncedCheck() {
+    var debouncedCheck = function () {
       clearTimeout(tid);
       tid = setTimeout(checkUseElems, 100);
     };
-    var unobserveChanges = function unobserveChanges() {
+    var unobserveChanges = function () {
       return;
     };
-    var observeChanges = function observeChanges() {
+    var observeChanges = function () {
       var observer;
       window.addEventListener('resize', debouncedCheck, false);
       window.addEventListener('orientationchange', debouncedCheck, false);
@@ -19767,9 +21209,9 @@ if ('document' in window.self) {
         observer.observe(document.documentElement, {
           childList: true,
           subtree: true,
-          attributes: true
+          attributes: true,
         });
-        unobserveChanges = function unobserveChanges() {
+        unobserveChanges = function () {
           try {
             observer.disconnect();
             window.removeEventListener('resize', debouncedCheck, false);
@@ -19778,14 +21220,14 @@ if ('document' in window.self) {
         };
       } else {
         document.documentElement.addEventListener('DOMSubtreeModified', debouncedCheck, false);
-        unobserveChanges = function unobserveChanges() {
+        unobserveChanges = function () {
           document.documentElement.removeEventListener('DOMSubtreeModified', debouncedCheck, false);
           window.removeEventListener('resize', debouncedCheck, false);
           window.removeEventListener('orientationchange', debouncedCheck, false);
         };
       }
     };
-    var createRequest = function createRequest(url) {
+    var createRequest = function (url) {
       // In IE 9, cross origin requests can only be sent using XDomainRequest.
       // XDomainRequest would fail if CORS headers are not set.
       // Therefore, XDomainRequest should only be used with cross origin requests.
@@ -19815,7 +21257,7 @@ if ('document' in window.self) {
       return Request;
     };
     var xlinkNS = 'http://www.w3.org/1999/xlink';
-    checkUseElems = function checkUseElems() {
+    checkUseElems = function () {
       var base;
       var bcr;
       var fallback = ''; // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
@@ -19883,7 +21325,10 @@ if ('document' in window.self) {
           // failed to get bounding rectangle of the use element
           bcr = false;
         }
-        href = uses[i].getAttribute('href') || uses[i].getAttributeNS(xlinkNS, 'href') || uses[i].getAttribute('xlink:href');
+        href =
+          uses[i].getAttribute('href') ||
+          uses[i].getAttributeNS(xlinkNS, 'href') ||
+          uses[i].getAttribute('xlink:href');
         if (href && href.split) {
           url = href.split('#');
         } else {
@@ -19907,11 +21352,14 @@ if ('document' in window.self) {
             xhr = cache[base];
             if (xhr !== true) {
               // true signifies that prepending the SVG was not required
-              setTimeout(attrUpdateFunc({
-                useEl: uses[i],
-                base: base,
-                hash: hash
-              }), 0);
+              setTimeout(
+                attrUpdateFunc({
+                  useEl: uses[i],
+                  base: base,
+                  hash: hash,
+                }),
+                0
+              );
             }
             if (xhr === undefined) {
               Request = createRequest(base);
@@ -19940,11 +21388,14 @@ if ('document' in window.self) {
               cache[base] = true;
             }
           } else if (base.length && cache[base]) {
-            setTimeout(attrUpdateFunc({
-              useEl: uses[i],
-              base: base,
-              hash: hash
-            }), 0);
+            setTimeout(
+              attrUpdateFunc({
+                useEl: uses[i],
+                base: base,
+                hash: hash,
+              }),
+              0
+            );
           }
         }
       }
@@ -19952,6004 +21403,20 @@ if ('document' in window.self) {
       inProgressCount += 1;
       observeIfDone();
     };
-    var _winLoad;
-    _winLoad = function winLoad() {
-      window.removeEventListener('load', _winLoad, false); // to prevent memory leaks
+    var winLoad;
+    winLoad = function () {
+      window.removeEventListener('load', winLoad, false); // to prevent memory leaks
       tid = setTimeout(checkUseElems, 0);
     };
     if (document.readyState !== 'complete') {
       // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
-      window.addEventListener('load', _winLoad, false);
+      window.addEventListener('load', winLoad, false);
     } else {
       // No need to add a listener if the document is already loaded, initialize immediately.
-      _winLoad();
+      winLoad();
     }
   }
-})();
-
-/***/ }),
-
-/***/ "./src/js/ui.js":
-/*!**********************!*\
-  !*** ./src/js/ui.js ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
-
-var _mainContainer = __webpack_require__(/*! @/ui/template/mainContainer */ "./src/js/ui/template/mainContainer.js");
-
-var _mainContainer2 = _interopRequireDefault(_mainContainer);
-
-var _controls = __webpack_require__(/*! @/ui/template/controls */ "./src/js/ui/template/controls.js");
-
-var _controls2 = _interopRequireDefault(_controls);
-
-var _theme = __webpack_require__(/*! @/ui/theme/theme */ "./src/js/ui/theme/theme.js");
-
-var _theme2 = _interopRequireDefault(_theme);
-
-var _shape = __webpack_require__(/*! @/ui/shape */ "./src/js/ui/shape.js");
-
-var _shape2 = _interopRequireDefault(_shape);
-
-var _crop = __webpack_require__(/*! @/ui/crop */ "./src/js/ui/crop.js");
-
-var _crop2 = _interopRequireDefault(_crop);
-
-var _flip = __webpack_require__(/*! @/ui/flip */ "./src/js/ui/flip.js");
-
-var _flip2 = _interopRequireDefault(_flip);
-
-var _rotate = __webpack_require__(/*! @/ui/rotate */ "./src/js/ui/rotate.js");
-
-var _rotate2 = _interopRequireDefault(_rotate);
-
-var _text = __webpack_require__(/*! @/ui/text */ "./src/js/ui/text.js");
-
-var _text2 = _interopRequireDefault(_text);
-
-var _mask = __webpack_require__(/*! @/ui/mask */ "./src/js/ui/mask.js");
-
-var _mask2 = _interopRequireDefault(_mask);
-
-var _icon = __webpack_require__(/*! @/ui/icon */ "./src/js/ui/icon.js");
-
-var _icon2 = _interopRequireDefault(_icon);
-
-var _draw = __webpack_require__(/*! @/ui/draw */ "./src/js/ui/draw.js");
-
-var _draw2 = _interopRequireDefault(_draw);
-
-var _filter = __webpack_require__(/*! @/ui/filter */ "./src/js/ui/filter.js");
-
-var _filter2 = _interopRequireDefault(_filter);
-
-var _history = __webpack_require__(/*! @/ui/history */ "./src/js/ui/history.js");
-
-var _history2 = _interopRequireDefault(_history);
-
-var _locale = __webpack_require__(/*! @/ui/locale/locale */ "./src/js/ui/locale/locale.js");
-
-var _locale2 = _interopRequireDefault(_locale);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var SUB_UI_COMPONENT = {
-  Shape: _shape2.default,
-  Crop: _crop2.default,
-  Flip: _flip2.default,
-  Rotate: _rotate2.default,
-  Text: _text2.default,
-  Mask: _mask2.default,
-  Icon: _icon2.default,
-  Draw: _draw2.default,
-  Filter: _filter2.default
-};
-
-var CustomEvents = _tuiCodeSnippet2.default.CustomEvents;
-
-
-var BI_EXPRESSION_MINSIZE_WHEN_TOP_POSITION = '1300';
-var HISTORY_MENU = 'history';
-var HISTORY_PANEL_CLASS_NAME = 'tie-panel-history';
-
-var CLASS_NAME_ON = 'on';
-var ZOOM_BUTTON_TYPE = {
-  ZOOM_IN: 'zoomIn',
-  HAND: 'hand'
-};
-
-/**
- * Default UI Class
- * @class
- * @param {string|HTMLElement} element - Wrapper's element or selector
- * @param {Object} [options] - Ui setting options
- *   @param {number} options.loadImage - Init default load image
- *   @param {number} options.initMenu - Init start menu
- *   @param {Boolean} [options.menuBarPosition=bottom] - Let
- *   @param {Boolean} [options.applyCropSelectionStyle=false] - Let
- *   @param {Boolean} [options.usageStatistics=false] - Use statistics or not
- *   @param {Object} [options.uiSize] - ui size of editor
- *     @param {string} options.uiSize.width - width of ui
- *     @param {string} options.uiSize.height - height of ui
- * @param {Object} actions - ui action instance
- */
-
-var Ui = function () {
-  function Ui(element, options, actions) {
-    _classCallCheck(this, Ui);
-
-    this.options = this._initializeOption(options);
-    this._actions = actions;
-    this.submenu = false;
-    this.imageSize = {};
-    this.uiSize = {};
-    this._locale = new _locale2.default(this.options.locale);
-    this.theme = new _theme2.default(this.options.theme);
-    this.eventHandler = {};
-    this._submenuChangeTransection = false;
-    this._selectedElement = null;
-    this._mainElement = null;
-    this._editorElementWrap = null;
-    this._editorElement = null;
-    this._menuBarElement = null;
-    this._subMenuElement = null;
-    this._makeUiElement(element);
-    this._setUiSize();
-    this._initMenuEvent = false;
-
-    this._makeSubMenu();
-
-    this._attachHistoryEvent();
-    this._attachZoomEvent();
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Ui, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeUiEvent();
-      this._destroyAllMenu();
-      this._selectedElement.innerHTML = '';
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Set Default Selection for includeUI
-     * @param {Object} option - imageEditor options
-     * @returns {Object} - extends selectionStyle option
-     * @ignore
-     */
-
-  }, {
-    key: 'setUiDefaultSelectionStyle',
-    value: function setUiDefaultSelectionStyle(option) {
-      return _tuiCodeSnippet2.default.extend({
-        applyCropSelectionStyle: true,
-        applyGroupSelectionStyle: true,
-        selectionStyle: {
-          cornerStyle: 'circle',
-          cornerSize: 16,
-          cornerColor: '#fff',
-          cornerStrokeColor: '#fff',
-          transparentCorners: false,
-          lineWidth: 2,
-          borderColor: '#fff'
-        }
-      }, option);
-    }
-
-    /**
-     * Change editor size
-     * @param {Object} resizeInfo - ui & image size info
-     *   @param {Object} [resizeInfo.uiSize] - image size dimension
-     *     @param {string} resizeInfo.uiSize.width - ui width
-     *     @param {string} resizeInfo.uiSize.height - ui height
-     *   @param {Object} [resizeInfo.imageSize] - image size dimension
-     *     @param {Number} resizeInfo.imageSize.oldWidth - old width
-     *     @param {Number} resizeInfo.imageSize.oldHeight - old height
-     *     @param {Number} resizeInfo.imageSize.newWidth - new width
-     *     @param {Number} resizeInfo.imageSize.newHeight - new height
-     * @example
-     * // Change the image size and ui size, and change the affected ui state together.
-     * imageEditor.ui.resizeEditor({
-     *     imageSize: {oldWidth: 100, oldHeight: 100, newWidth: 700, newHeight: 700},
-     *     uiSize: {width: 1000, height: 1000}
-     * });
-     * @example
-     * // Apply the ui state while preserving the previous attribute (for example, if responsive Ui)
-     * imageEditor.ui.resizeEditor();
-     */
-
-  }, {
-    key: 'resizeEditor',
-    value: function resizeEditor() {
-      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          uiSize = _ref.uiSize,
-          _ref$imageSize = _ref.imageSize,
-          imageSize = _ref$imageSize === undefined ? this.imageSize : _ref$imageSize;
-
-      if (imageSize !== this.imageSize) {
-        this.imageSize = imageSize;
-      }
-      if (uiSize) {
-        this._setUiSize(uiSize);
-      }
-
-      var _getCanvasMaxDimensio = this._getCanvasMaxDimension(),
-          width = _getCanvasMaxDimensio.width,
-          height = _getCanvasMaxDimensio.height;
-
-      var editorElementStyle = this._editorElement.style;
-      var menuBarPosition = this.options.menuBarPosition;
-
-
-      editorElementStyle.height = height + 'px';
-      editorElementStyle.width = width + 'px';
-
-      this._setEditorPosition(menuBarPosition);
-
-      this._editorElementWrap.style.bottom = '0px';
-      this._editorElementWrap.style.top = '0px';
-      this._editorElementWrap.style.left = '0px';
-      this._editorElementWrap.style.width = '100%';
-
-      var selectElementClassList = this._selectedElement.classList;
-
-      if (menuBarPosition === 'top' && this._selectedElement.offsetWidth < BI_EXPRESSION_MINSIZE_WHEN_TOP_POSITION) {
-        selectElementClassList.add('tui-image-editor-top-optimization');
-      } else {
-        selectElementClassList.remove('tui-image-editor-top-optimization');
-      }
-    }
-
-    /**
-     * Toggle zoom button status
-     * @param {string} type - type of zoom button
-     */
-
-  }, {
-    key: 'toggleZoomButtonStatus',
-    value: function toggleZoomButtonStatus(type) {
-      var targetClassList = this._buttonElements[type].classList;
-
-      targetClassList.toggle(CLASS_NAME_ON);
-
-      if (type === ZOOM_BUTTON_TYPE.ZOOM_IN) {
-        this._buttonElements[ZOOM_BUTTON_TYPE.HAND].classList.remove(CLASS_NAME_ON);
-      } else {
-        this._buttonElements[ZOOM_BUTTON_TYPE.ZOOM_IN].classList.remove(CLASS_NAME_ON);
-      }
-    }
-
-    /**
-     * Turn off zoom-in button status
-     */
-
-  }, {
-    key: 'offZoomInButtonStatus',
-    value: function offZoomInButtonStatus() {
-      var zoomInClassList = this._buttonElements[ZOOM_BUTTON_TYPE.ZOOM_IN].classList;
-
-      zoomInClassList.remove(CLASS_NAME_ON);
-    }
-
-    /**
-     * Change hand button status
-     * @param {boolean} enabled - status to change
-     */
-
-  }, {
-    key: 'changeHandButtonStatus',
-    value: function changeHandButtonStatus(enabled) {
-      var handClassList = this._buttonElements[ZOOM_BUTTON_TYPE.HAND].classList;
-
-      handClassList[enabled ? 'add' : 'remove'](CLASS_NAME_ON);
-    }
-
-    /**
-     * Change help button status
-     * @param {string} buttonType - target button type
-     * @param {Boolean} enableStatus - enabled status
-     * @ignore
-     */
-
-  }, {
-    key: 'changeHelpButtonEnabled',
-    value: function changeHelpButtonEnabled(buttonType, enableStatus) {
-      var buttonClassList = this._buttonElements[buttonType].classList;
-
-      buttonClassList[enableStatus ? 'add' : 'remove']('enabled');
-    }
-
-    /**
-     * Change delete button status
-     * @param {Object} [options] - Ui setting options
-     *   @param {object} [options.loadImage] - Init default load image
-     *   @param {string} [options.initMenu] - Init start menu
-     *   @param {string} [options.menuBarPosition=bottom] - Let
-     *   @param {boolean} [options.applyCropSelectionStyle=false] - Let
-     *   @param {boolean} [options.usageStatistics=false] - Send statistics ping or not
-     * @returns {Object} initialize option
-     * @private
-     */
-
-  }, {
-    key: '_initializeOption',
-    value: function _initializeOption(options) {
-      return _tuiCodeSnippet2.default.extend({
-        loadImage: {
-          path: '',
-          name: ''
-        },
-        locale: {},
-        menuIconPath: '',
-        menu: ['crop', 'flip', 'rotate', 'draw', 'shape', 'icon', 'text', 'mask', 'filter'],
-        initMenu: '',
-        uiSize: {
-          width: '100%',
-          height: '100%'
-        },
-        menuBarPosition: 'bottom'
-      }, options);
-    }
-
-    /**
-     * Set ui container size
-     * @param {Object} uiSize - ui dimension
-     *   @param {string} uiSize.width - css width property
-     *   @param {string} uiSize.height - css height property
-     * @private
-     */
-
-  }, {
-    key: '_setUiSize',
-    value: function _setUiSize() {
-      var uiSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.options.uiSize;
-
-      var elementDimension = this._selectedElement.style;
-      elementDimension.width = uiSize.width;
-      elementDimension.height = uiSize.height;
-    }
-
-    /**
-     * Make submenu dom element
-     * @private
-     */
-
-  }, {
-    key: '_makeSubMenu',
-    value: function _makeSubMenu() {
-      var _this = this;
-
-      _tuiCodeSnippet2.default.forEach(this.options.menu, function (menuName) {
-        var SubComponentClass = SUB_UI_COMPONENT[menuName.replace(/^[a-z]/, function ($0) {
-          return $0.toUpperCase();
-        })];
-
-        // make menu element
-        _this._makeMenuElement(menuName);
-
-        // menu btn element
-        _this._buttonElements[menuName] = _this._menuBarElement.querySelector('.tie-btn-' + menuName);
-
-        // submenu ui instance
-        _this[menuName] = new SubComponentClass(_this._subMenuElement, {
-          locale: _this._locale,
-          makeSvgIcon: _this.theme.makeMenSvgIconSet.bind(_this.theme),
-          menuBarPosition: _this.options.menuBarPosition,
-          usageStatistics: _this.options.usageStatistics
-        });
-      });
-    }
-
-    /**
-     * Attach history event
-     * @private
-     */
-
-  }, {
-    key: '_attachHistoryEvent',
-    value: function _attachHistoryEvent() {
-      this.on(_consts.eventNames.EXECUTE_COMMAND, this._addHistory.bind(this));
-      this.on(_consts.eventNames.AFTER_UNDO, this._selectPrevHistory.bind(this));
-      this.on(_consts.eventNames.AFTER_REDO, this._selectNextHistory.bind(this));
-    }
-
-    /**
-     * Attach zoom event
-     * @private
-     */
-
-  }, {
-    key: '_attachZoomEvent',
-    value: function _attachZoomEvent() {
-      var _this2 = this;
-
-      this.on(_consts.eventNames.HAND_STARTED, function () {
-        _this2.offZoomInButtonStatus();
-        _this2.changeHandButtonStatus(true);
-      });
-      this.on(_consts.eventNames.HAND_STOPPED, function () {
-        return _this2.changeHandButtonStatus(false);
-      });
-    }
-
-    /**
-     * Make primary ui dom element
-     * @param {string|HTMLElement} element - Wrapper's element or selector
-     * @private
-     */
-
-  }, {
-    key: '_makeUiElement',
-    value: function _makeUiElement(element) {
-      var selectedElement = void 0;
-
-      window.snippet = _tuiCodeSnippet2.default;
-
-      if (element.nodeType) {
-        selectedElement = element;
-      } else {
-        selectedElement = document.querySelector(element);
-      }
-      var selector = (0, _util.getSelector)(selectedElement);
-
-      selectedElement.classList.add('tui-image-editor-container');
-      selectedElement.innerHTML = (0, _controls2.default)({
-        locale: this._locale,
-        biImage: this.theme.getStyle('common.bi'),
-        loadButtonStyle: this.theme.getStyle('loadButton'),
-        downloadButtonStyle: this.theme.getStyle('downloadButton'),
-        menuBarPosition: this.options.menuBarPosition
-      }) + (0, _mainContainer2.default)({
-        locale: this._locale,
-        biImage: this.theme.getStyle('common.bi'),
-        commonStyle: this.theme.getStyle('common'),
-        headerStyle: this.theme.getStyle('header'),
-        loadButtonStyle: this.theme.getStyle('loadButton'),
-        downloadButtonStyle: this.theme.getStyle('downloadButton'),
-        submenuStyle: this.theme.getStyle('submenu')
-      });
-
-      this._selectedElement = selectedElement;
-      this._selectedElement.classList.add(this.options.menuBarPosition);
-
-      this._mainElement = selector('.tui-image-editor-main');
-      this._editorElementWrap = selector('.tui-image-editor-wrap');
-      this._editorElement = selector('.tui-image-editor');
-      this._helpMenuBarElement = selector('.tui-image-editor-help-menu');
-      this._menuBarElement = selector('.tui-image-editor-menu');
-      this._subMenuElement = selector('.tui-image-editor-submenu');
-      this._buttonElements = {
-        download: this._selectedElement.querySelectorAll('.tui-image-editor-download-btn'),
-        load: this._selectedElement.querySelectorAll('.tui-image-editor-load-btn')
-      };
-
-      this._addHelpMenus();
-
-      this._historyMenu = new _history2.default(this._buttonElements[HISTORY_MENU], {
-        locale: this._locale,
-        makeSvgIcon: this.theme.makeMenSvgIconSet.bind(this.theme)
-      });
-
-      this._activateZoomMenus();
-    }
-
-    /**
-     * Activate help menus for zoom.
-     * @private
-     */
-
-  }, {
-    key: '_activateZoomMenus',
-    value: function _activateZoomMenus() {
-      var _this3 = this;
-
-      _tuiCodeSnippet2.default.forEach(_consts.ZOOM_HELP_MENUS, function (menu) {
-        _this3.changeHelpButtonEnabled(menu, true);
-      });
-    }
-
-    /**
-     * make array for help menu output, including partitions.
-     * @returns {Array}
-     * @private
-     */
-
-  }, {
-    key: '_makeHelpMenuWithPartition',
-    value: function _makeHelpMenuWithPartition() {
-      return [].concat(_consts.ZOOM_HELP_MENUS, [''], _consts.COMMAND_HELP_MENUS, [''], _consts.DELETE_HELP_MENUS);
-    }
-
-    /**
-     * Add help menu
-     * @private
-     */
-
-  }, {
-    key: '_addHelpMenus',
-    value: function _addHelpMenus() {
-      var _this4 = this;
-
-      var helpMenuWithPartition = this._makeHelpMenuWithPartition();
-
-      _tuiCodeSnippet2.default.forEach(helpMenuWithPartition, function (menuName) {
-        if (!menuName) {
-          _this4._makeMenuPartitionElement();
-        } else {
-          _this4._makeMenuElement(menuName, ['normal', 'disabled', 'hover'], 'help');
-
-          _this4._buttonElements[menuName] = _this4._helpMenuBarElement.querySelector('.tie-btn-' + menuName);
-        }
-      });
-    }
-
-    /**
-     * Make menu partition element
-     * @private
-     */
-
-  }, {
-    key: '_makeMenuPartitionElement',
-    value: function _makeMenuPartitionElement() {
-      var partitionElement = document.createElement('li');
-      var partitionInnerElement = document.createElement('div');
-      partitionElement.className = (0, _util.cls)('item');
-      partitionInnerElement.className = (0, _util.cls)('icpartition');
-      partitionElement.appendChild(partitionInnerElement);
-
-      this._helpMenuBarElement.appendChild(partitionElement);
-    }
-
-    /**
-     * Make menu button element
-     * @param {string} menuName - menu name
-     * @param {Array} useIconTypes - Possible values are  \['normal', 'active', 'hover', 'disabled'\]
-     * @param {string} menuType - 'normal' or 'help'
-     * @private
-     */
-
-  }, {
-    key: '_makeMenuElement',
-    value: function _makeMenuElement(menuName) {
-      var useIconTypes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ['normal', 'active', 'hover'];
-      var menuType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'normal';
-
-      var btnElement = document.createElement('li');
-      var menuItemHtml = this.theme.makeMenSvgIconSet(useIconTypes, menuName);
-
-      this._addTooltipAttribute(btnElement, menuName);
-      btnElement.className = 'tie-btn-' + menuName + ' ' + (0, _util.cls)('item') + ' ' + menuType;
-      btnElement.innerHTML = menuItemHtml;
-
-      if (menuType === 'normal') {
-        this._menuBarElement.appendChild(btnElement);
-      } else {
-        this._helpMenuBarElement.appendChild(btnElement);
-      }
-    }
-
-    /**
-     * Add help action event
-     * @private
-     */
-
-  }, {
-    key: '_addHelpActionEvent',
-    value: function _addHelpActionEvent() {
-      var _this5 = this;
-
-      _tuiCodeSnippet2.default.forEach(_consts.HELP_MENUS, function (helpName) {
-        _this5.eventHandler[helpName] = function (event) {
-          return _this5._actions.main[helpName](event);
-        };
-        _this5._buttonElements[helpName].addEventListener('click', _this5.eventHandler[helpName]);
-      });
-    }
-
-    /**
-     * Remove help action event
-     * @private
-     */
-
-  }, {
-    key: '_removeHelpActionEvent',
-    value: function _removeHelpActionEvent() {
-      var _this6 = this;
-
-      _tuiCodeSnippet2.default.forEach(_consts.HELP_MENUS, function (helpName) {
-        _this6._buttonElements[helpName].removeEventListener('click', _this6.eventHandler[helpName]);
-      });
-    }
-
-    /**
-     * Add history
-     * @param {Command|string} command - command or command name
-     */
-
-  }, {
-    key: '_addHistory',
-    value: function _addHistory(command) {
-      if (!(0, _util.isSilentCommand)(command)) {
-        var historyTitle = typeof command === 'string' ? { name: command } : (0, _util.getHistoryTitle)(command);
-
-        this._historyMenu.add(historyTitle);
-      }
-    }
-
-    /**
-     * Init history
-     */
-
-  }, {
-    key: 'initHistory',
-    value: function initHistory() {
-      this._historyMenu.init();
-    }
-
-    /**
-     * Clear history
-     */
-
-  }, {
-    key: 'clearHistory',
-    value: function clearHistory() {
-      this._historyMenu.clear();
-    }
-
-    /**
-     * Select prev history
-     */
-
-  }, {
-    key: '_selectPrevHistory',
-    value: function _selectPrevHistory() {
-      this._historyMenu.prev();
-    }
-
-    /**
-     * Select next history
-     */
-
-  }, {
-    key: '_selectNextHistory',
-    value: function _selectNextHistory() {
-      this._historyMenu.next();
-    }
-
-    /**
-     * Toggle history menu
-     * @param {object} event - event object
-     */
-
-  }, {
-    key: 'toggleHistoryMenu',
-    value: function toggleHistoryMenu(event) {
-      var target = event.target;
-
-      var item = target.closest('.' + HISTORY_PANEL_CLASS_NAME);
-
-      if (item) {
-        return;
-      }
-
-      var historyButtonClassList = this._buttonElements[HISTORY_MENU].classList;
-
-      historyButtonClassList.toggle('opened');
-    }
-
-    /**
-     * Add attribute for menu tooltip
-     * @param {HTMLElement} element - menu element
-     * @param {string} tooltipName - tooltipName
-     * @private
-     */
-
-  }, {
-    key: '_addTooltipAttribute',
-    value: function _addTooltipAttribute(element, tooltipName) {
-      element.setAttribute('tooltip-content', this._locale.localize(tooltipName.replace(/^[a-z]/g, function ($0) {
-        return $0.toUpperCase();
-      })));
-    }
-
-    /**
-     * Add download event
-     * @private
-     */
-
-  }, {
-    key: '_addDownloadEvent',
-    value: function _addDownloadEvent() {
-      var _this7 = this;
-
-      this.eventHandler.download = function () {
-        return _this7._actions.main.download();
-      };
-      _tuiCodeSnippet2.default.forEach(this._buttonElements.download, function (element) {
-        element.addEventListener('click', _this7.eventHandler.download);
-      });
-    }
-  }, {
-    key: '_removeDownloadEvent',
-    value: function _removeDownloadEvent() {
-      var _this8 = this;
-
-      _tuiCodeSnippet2.default.forEach(this._buttonElements.download, function (element) {
-        element.removeEventListener('click', _this8.eventHandler.download);
-      });
-    }
-
-    /**
-     * Add load event
-     * @private
-     */
-
-  }, {
-    key: '_addLoadEvent',
-    value: function _addLoadEvent() {
-      var _this9 = this;
-
-      this.eventHandler.loadImage = function (event) {
-        return _this9._actions.main.load(event.target.files[0]);
-      };
-
-      _tuiCodeSnippet2.default.forEach(this._buttonElements.load, function (element) {
-        element.addEventListener('change', _this9.eventHandler.loadImage);
-      });
-    }
-
-    /**
-     * Remove load event
-     * @private
-     */
-
-  }, {
-    key: '_removeLoadEvent',
-    value: function _removeLoadEvent() {
-      var _this10 = this;
-
-      _tuiCodeSnippet2.default.forEach(this._buttonElements.load, function (element) {
-        element.removeEventListener('change', _this10.eventHandler.loadImage);
-      });
-    }
-
-    /**
-     * Add menu event
-     * @param {string} menuName - menu name
-     * @private
-     */
-
-  }, {
-    key: '_addMainMenuEvent',
-    value: function _addMainMenuEvent(menuName) {
-      var _this11 = this;
-
-      this.eventHandler[menuName] = function () {
-        return _this11.changeMenu(menuName);
-      };
-      this._buttonElements[menuName].addEventListener('click', this.eventHandler[menuName]);
-    }
-
-    /**
-     * Add menu event
-     * @param {string} menuName - menu name
-     * @private
-     */
-
-  }, {
-    key: '_addSubMenuEvent',
-    value: function _addSubMenuEvent(menuName) {
-      var _this12 = this;
-
-      this[menuName].addEvent(this._actions[menuName]);
-      this[menuName].on(_consts.eventNames.INPUT_BOX_EDITING_STARTED, function () {
-        return _this12.fire(_consts.eventNames.INPUT_BOX_EDITING_STARTED);
-      });
-      this[menuName].on(_consts.eventNames.INPUT_BOX_EDITING_STOPPED, function () {
-        return _this12.fire(_consts.eventNames.INPUT_BOX_EDITING_STOPPED);
-      });
-    }
-
-    /**
-     * Add menu event
-     * @private
-     */
-
-  }, {
-    key: '_addMenuEvent',
-    value: function _addMenuEvent() {
-      var _this13 = this;
-
-      _tuiCodeSnippet2.default.forEach(this.options.menu, function (menuName) {
-        _this13._addMainMenuEvent(menuName);
-        _this13._addSubMenuEvent(menuName);
-      });
-    }
-
-    /**
-     * Remove menu event
-     * @private
-     */
-
-  }, {
-    key: '_removeMainMenuEvent',
-    value: function _removeMainMenuEvent() {
-      var _this14 = this;
-
-      _tuiCodeSnippet2.default.forEach(this.options.menu, function (menuName) {
-        _this14._buttonElements[menuName].removeEventListener('click', _this14.eventHandler[menuName]);
-        _this14[menuName].off(_consts.eventNames.INPUT_BOX_EDITING_STARTED);
-        _this14[menuName].off(_consts.eventNames.INPUT_BOX_EDITING_STOPPED);
-      });
-    }
-
-    /**
-     * Get editor area element
-     * @returns {HTMLElement} editor area html element
-     * @ignore
-     */
-
-  }, {
-    key: 'getEditorArea',
-    value: function getEditorArea() {
-      return this._editorElement;
-    }
-
-    /**
-     * Add event for menu items
-     * @ignore
-     */
-
-  }, {
-    key: 'activeMenuEvent',
-    value: function activeMenuEvent() {
-      if (this._initMenuEvent) {
-        return;
-      }
-
-      this._addHelpActionEvent();
-      this._addDownloadEvent();
-      this._addMenuEvent();
-      this._initMenu();
-      this._historyMenu.addEvent(this._actions.history);
-      this._initMenuEvent = true;
-    }
-
-    /**
-     * Remove ui event
-     * @private
-     */
-
-  }, {
-    key: '_removeUiEvent',
-    value: function _removeUiEvent() {
-      this._removeHelpActionEvent();
-      this._removeDownloadEvent();
-      this._removeLoadEvent();
-      this._removeMainMenuEvent();
-      this._historyMenu.removeEvent();
-    }
-
-    /**
-     * Destroy all menu instance
-     * @private
-     */
-
-  }, {
-    key: '_destroyAllMenu',
-    value: function _destroyAllMenu() {
-      var _this15 = this;
-
-      _tuiCodeSnippet2.default.forEach(this.options.menu, function (menuName) {
-        _this15[menuName].destroy();
-      });
-
-      this._historyMenu.destroy();
-    }
-
-    /**
-     * Init canvas
-     * @ignore
-     */
-
-  }, {
-    key: 'initCanvas',
-    value: function initCanvas() {
-      var _this16 = this;
-
-      var loadImageInfo = this._getLoadImage();
-      if (loadImageInfo.path) {
-        this._actions.main.initLoadImage(loadImageInfo.path, loadImageInfo.name).then(function () {
-          _this16.activeMenuEvent();
-        });
-      }
-
-      this._addLoadEvent();
-
-      var gridVisual = document.createElement('div');
-
-      gridVisual.className = (0, _util.cls)('grid-visual');
-      var grid = '<table>\n           <tr><td class="dot left-top"></td><td></td><td class="dot right-top"></td></tr>\n           <tr><td></td><td></td><td></td></tr>\n           <tr><td class="dot left-bottom"></td><td></td><td class="dot right-bottom"></td></tr>\n         </table>';
-      gridVisual.innerHTML = grid;
-      this._editorContainerElement = this._editorElement.querySelector('.tui-image-editor-canvas-container');
-      this._editorContainerElement.appendChild(gridVisual);
-    }
-
-    /**
-     * get editor area element
-     * @returns {Object} load image option
-     * @private
-     */
-
-  }, {
-    key: '_getLoadImage',
-    value: function _getLoadImage() {
-      return this.options.loadImage;
-    }
-
-    /**
-     * change menu
-     * @param {string} menuName - menu name
-     * @param {boolean} toggle - whether toogle or not
-     * @param {boolean} discardSelection - discard selection
-     * @ignore
-     */
-
-  }, {
-    key: 'changeMenu',
-    value: function changeMenu(menuName) {
-      var toggle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-      var discardSelection = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-      if (!this._submenuChangeTransection) {
-        this._submenuChangeTransection = true;
-        this._changeMenu(menuName, toggle, discardSelection);
-        this._submenuChangeTransection = false;
-      }
-    }
-
-    /**
-     * change menu
-     * @param {string} menuName - menu name
-     * @param {boolean} toggle - whether toggle or not
-     * @param {boolean} discardSelection - discard selection
-     * @private
-     */
-
-  }, {
-    key: '_changeMenu',
-    value: function _changeMenu(menuName, toggle, discardSelection) {
-      if (this.submenu) {
-        this._buttonElements[this.submenu].classList.remove('active');
-        this._mainElement.classList.remove('tui-image-editor-menu-' + this.submenu);
-        if (discardSelection) {
-          this._actions.main.discardSelection();
-        }
-        this._actions.main.changeSelectableAll(true);
-        this[this.submenu].changeStandbyMode();
-      }
-
-      if (this.submenu === menuName && toggle) {
-        this.submenu = null;
-      } else {
-        this._buttonElements[menuName].classList.add('active');
-        this._mainElement.classList.add('tui-image-editor-menu-' + menuName);
-        this.submenu = menuName;
-        this[this.submenu].changeStartMode();
-      }
-
-      this.resizeEditor();
-    }
-
-    /**
-     * Init menu
-     * @private
-     */
-
-  }, {
-    key: '_initMenu',
-    value: function _initMenu() {
-      if (this.options.initMenu) {
-        var evt = document.createEvent('MouseEvents');
-        evt.initEvent('click', true, false);
-        this._buttonElements[this.options.initMenu].dispatchEvent(evt);
-      }
-
-      if (this.icon) {
-        this.icon.registerDefaultIcon();
-      }
-    }
-
-    /**
-     * Get canvas max Dimension
-     * @returns {Object} - width & height of editor
-     * @private
-     */
-
-  }, {
-    key: '_getCanvasMaxDimension',
-    value: function _getCanvasMaxDimension() {
-      var _editorContainerEleme = this._editorContainerElement.style,
-          maxWidth = _editorContainerEleme.maxWidth,
-          maxHeight = _editorContainerEleme.maxHeight;
-
-      var width = parseFloat(maxWidth);
-      var height = parseFloat(maxHeight);
-
-      return {
-        width: width,
-        height: height
-      };
-    }
-
-    /**
-     * Set editor position
-     * @param {string} menuBarPosition - top or right or bottom or left
-     * @private
-     */
-    // eslint-disable-next-line complexity
-
-  }, {
-    key: '_setEditorPosition',
-    value: function _setEditorPosition(menuBarPosition) {
-      var _getCanvasMaxDimensio2 = this._getCanvasMaxDimension(),
-          width = _getCanvasMaxDimensio2.width,
-          height = _getCanvasMaxDimensio2.height;
-
-      var editorElementStyle = this._editorElement.style;
-      var top = 0;
-      var left = 0;
-
-      if (this.submenu) {
-        if (menuBarPosition === 'bottom') {
-          if (height > this._editorElementWrap.scrollHeight - 150) {
-            top = (height - this._editorElementWrap.scrollHeight) / 2;
-          } else {
-            top = 150 / 2 * -1;
-          }
-        } else if (menuBarPosition === 'top') {
-          if (height > this._editorElementWrap.offsetHeight - 150) {
-            top = 150 / 2 - (height - (this._editorElementWrap.offsetHeight - 150)) / 2;
-          } else {
-            top = 150 / 2;
-          }
-        } else if (menuBarPosition === 'left') {
-          if (width > this._editorElementWrap.offsetWidth - 248) {
-            left = 248 / 2 - (width - (this._editorElementWrap.offsetWidth - 248)) / 2;
-          } else {
-            left = 248 / 2;
-          }
-        } else if (menuBarPosition === 'right') {
-          if (width > this._editorElementWrap.scrollWidth - 248) {
-            left = (width - this._editorElementWrap.scrollWidth) / 2;
-          } else {
-            left = 248 / 2 * -1;
-          }
-        }
-      }
-      editorElementStyle.top = top + 'px';
-      editorElementStyle.left = left + 'px';
-    }
-  }]);
-
-  return Ui;
-}();
-
-CustomEvents.mixin(Ui);
-
-exports.default = Ui;
-
-/***/ }),
-
-/***/ "./src/js/ui/crop.js":
-/*!***************************!*\
-  !*** ./src/js/ui/crop.js ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
-
-var _submenuBase = __webpack_require__(/*! @/ui/submenuBase */ "./src/js/ui/submenuBase.js");
-
-var _submenuBase2 = _interopRequireDefault(_submenuBase);
-
-var _crop = __webpack_require__(/*! @/ui/template/submenu/crop */ "./src/js/ui/template/submenu/crop.js");
-
-var _crop2 = _interopRequireDefault(_crop);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * Crop ui class
- * @class
- * @ignore
- */
-var Crop = function (_Submenu) {
-  _inherits(Crop, _Submenu);
-
-  function Crop(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon,
-        menuBarPosition = _ref.menuBarPosition,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Crop);
-
-    var _this = _possibleConstructorReturn(this, (Crop.__proto__ || Object.getPrototypeOf(Crop)).call(this, subMenuElement, {
-      locale: locale,
-      name: 'crop',
-      makeSvgIcon: makeSvgIcon,
-      menuBarPosition: menuBarPosition,
-      templateHtml: _crop2.default,
-      usageStatistics: usageStatistics
-    }));
-
-    _this.status = 'active';
-
-    _this._els = {
-      apply: _this.selector('.tie-crop-button .apply'),
-      cancel: _this.selector('.tie-crop-button .cancel'),
-      preset: _this.selector('.tie-crop-preset-button')
-    };
-
-    _this.defaultPresetButton = _this._els.preset.querySelector('.preset-none');
-    return _this;
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Crop, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeEvent();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Add event for crop
-     * @param {Object} actions - actions for crop
-     *   @param {Function} actions.crop - crop action
-     *   @param {Function} actions.cancel - cancel action
-     *   @param {Function} actions.preset - draw rectzone at a predefined ratio
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(actions) {
-      var apply = this._applyEventHandler.bind(this);
-      var cancel = this._cancelEventHandler.bind(this);
-      var cropzonePreset = this._cropzonePresetEventHandler.bind(this);
-
-      this.eventHandler = {
-        apply: apply,
-        cancel: cancel,
-        cropzonePreset: cropzonePreset
-      };
-
-      this.actions = actions;
-      this._els.apply.addEventListener('click', apply);
-      this._els.cancel.addEventListener('click', cancel);
-      this._els.preset.addEventListener('click', cropzonePreset);
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      this._els.apply.removeEventListener('click', this.eventHandler.apply);
-      this._els.cancel.removeEventListener('click', this.eventHandler.cancel);
-      this._els.preset.removeEventListener('click', this.eventHandler.cropzonePreset);
-    }
-  }, {
-    key: '_applyEventHandler',
-    value: function _applyEventHandler() {
-      this.actions.crop();
-      this._els.apply.classList.remove('active');
-    }
-  }, {
-    key: '_cancelEventHandler',
-    value: function _cancelEventHandler() {
-      this.actions.cancel();
-      this._els.apply.classList.remove('active');
-    }
-  }, {
-    key: '_cropzonePresetEventHandler',
-    value: function _cropzonePresetEventHandler(event) {
-      var button = event.target.closest('.tui-image-editor-button.preset');
-      if (button) {
-        var _button$className$mat = button.className.match(/preset-[^\s]+/),
-            presetType = _button$className$mat[0];
-
-        this._setPresetButtonActive(button);
-        this.actions.preset(presetType);
-      }
-    }
-
-    /**
-     * Executed when the menu starts.
-     */
-
-  }, {
-    key: 'changeStartMode',
-    value: function changeStartMode() {
-      this.actions.modeChange('crop');
-    }
-
-    /**
-     * Returns the menu to its default state.
-     */
-
-  }, {
-    key: 'changeStandbyMode',
-    value: function changeStandbyMode() {
-      this.actions.stopDrawingMode();
-      this._setPresetButtonActive();
-    }
-
-    /**
-     * Change apply button status
-     * @param {Boolean} enableStatus - apply button status
-     */
-
-  }, {
-    key: 'changeApplyButtonStatus',
-    value: function changeApplyButtonStatus(enableStatus) {
-      if (enableStatus) {
-        this._els.apply.classList.add('active');
-      } else {
-        this._els.apply.classList.remove('active');
-      }
-    }
-
-    /**
-     * Set preset button to active status
-     * @param {HTMLElement} button - event target element
-     * @private
-     */
-
-  }, {
-    key: '_setPresetButtonActive',
-    value: function _setPresetButtonActive() {
-      var button = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultPresetButton;
-
-      _tuiCodeSnippet2.default.forEach([].slice.call(this._els.preset.querySelectorAll('.preset')), function (presetButton) {
-        presetButton.classList.remove('active');
-      });
-
-      if (button) {
-        button.classList.add('active');
-      }
-    }
-  }]);
-
-  return Crop;
-}(_submenuBase2.default);
-
-exports.default = Crop;
-
-/***/ }),
-
-/***/ "./src/js/ui/draw.js":
-/*!***************************!*\
-  !*** ./src/js/ui/draw.js ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _colorpicker = __webpack_require__(/*! @/ui/tools/colorpicker */ "./src/js/ui/tools/colorpicker.js");
-
-var _colorpicker2 = _interopRequireDefault(_colorpicker);
-
-var _range = __webpack_require__(/*! @/ui/tools/range */ "./src/js/ui/tools/range.js");
-
-var _range2 = _interopRequireDefault(_range);
-
-var _submenuBase = __webpack_require__(/*! @/ui/submenuBase */ "./src/js/ui/submenuBase.js");
-
-var _submenuBase2 = _interopRequireDefault(_submenuBase);
-
-var _draw = __webpack_require__(/*! @/ui/template/submenu/draw */ "./src/js/ui/template/submenu/draw.js");
-
-var _draw2 = _interopRequireDefault(_draw);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var DRAW_OPACITY = 0.7;
-
-/**
- * Draw ui class
- * @class
- * @ignore
- */
-
-var Draw = function (_Submenu) {
-  _inherits(Draw, _Submenu);
-
-  function Draw(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon,
-        menuBarPosition = _ref.menuBarPosition,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Draw);
-
-    var _this = _possibleConstructorReturn(this, (Draw.__proto__ || Object.getPrototypeOf(Draw)).call(this, subMenuElement, {
-      locale: locale,
-      name: 'draw',
-      makeSvgIcon: makeSvgIcon,
-      menuBarPosition: menuBarPosition,
-      templateHtml: _draw2.default,
-      usageStatistics: usageStatistics
-    }));
-
-    _this._els = {
-      lineSelectButton: _this.selector('.tie-draw-line-select-button'),
-      drawColorPicker: new _colorpicker2.default(_this.selector('.tie-draw-color'), '#00a9ff', _this.toggleDirection, _this.usageStatistics),
-      drawRange: new _range2.default({
-        slider: _this.selector('.tie-draw-range'),
-        input: _this.selector('.tie-draw-range-value')
-      }, _consts.defaultDrawRangeValues)
-    };
-
-    _this.type = null;
-    _this.color = _this._els.drawColorPicker.color;
-    _this.width = _this._els.drawRange.value;
-
-    _this.colorPickerInputBox = _this._els.drawColorPicker.colorpickerElement.querySelector(_consts.selectorNames.COLOR_PICKER_INPUT_BOX);
-    return _this;
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Draw, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeEvent();
-      this._els.drawColorPicker.destroy();
-      this._els.drawRange.destroy();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Add event for draw
-     * @param {Object} actions - actions for crop
-     *   @param {Function} actions.setDrawMode - set draw mode
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(actions) {
-      this.eventHandler.changeDrawType = this._changeDrawType.bind(this);
-
-      this.actions = actions;
-      this._els.lineSelectButton.addEventListener('click', this.eventHandler.changeDrawType);
-      this._els.drawColorPicker.on('change', this._changeDrawColor.bind(this));
-      this._els.drawRange.on('change', this._changeDrawRange.bind(this));
-
-      this.colorPickerInputBox.addEventListener(_consts.eventNames.FOCUS, this._onStartEditingInputBox.bind(this));
-      this.colorPickerInputBox.addEventListener(_consts.eventNames.BLUR, this._onStopEditingInputBox.bind(this));
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      this._els.lineSelectButton.removeEventListener('click', this.eventHandler.changeDrawType);
-      this._els.drawColorPicker.off();
-      this._els.drawRange.off();
-
-      this.colorPickerInputBox.removeEventListener(_consts.eventNames.FOCUS, this._onStartEditingInputBox.bind(this));
-      this.colorPickerInputBox.removeEventListener(_consts.eventNames.BLUR, this._onStopEditingInputBox.bind(this));
-    }
-
-    /**
-     * set draw mode - action runner
-     */
-
-  }, {
-    key: 'setDrawMode',
-    value: function setDrawMode() {
-      this.actions.setDrawMode(this.type, {
-        width: this.width,
-        color: (0, _util.getRgb)(this.color, DRAW_OPACITY)
-      });
-    }
-
-    /**
-     * Returns the menu to its default state.
-     */
-
-  }, {
-    key: 'changeStandbyMode',
-    value: function changeStandbyMode() {
-      this.type = null;
-      this.actions.stopDrawingMode();
-      this.actions.changeSelectableAll(true);
-      this._els.lineSelectButton.classList.remove('free');
-      this._els.lineSelectButton.classList.remove('line');
-    }
-
-    /**
-     * Executed when the menu starts.
-     */
-
-  }, {
-    key: 'changeStartMode',
-    value: function changeStartMode() {
-      this.type = 'free';
-      this._els.lineSelectButton.classList.add('free');
-      this.setDrawMode();
-    }
-
-    /**
-     * Change draw type event
-     * @param {object} event - line select event
-     * @private
-     */
-
-  }, {
-    key: '_changeDrawType',
-    value: function _changeDrawType(event) {
-      var button = event.target.closest('.tui-image-editor-button');
-      if (button) {
-        var lineType = this.getButtonType(button, ['free', 'line']);
-        this.actions.discardSelection();
-
-        if (this.type === lineType) {
-          this.changeStandbyMode();
-
-          return;
-        }
-
-        this.changeStandbyMode();
-        this.type = lineType;
-        this._els.lineSelectButton.classList.add(lineType);
-        this.setDrawMode();
-      }
-    }
-
-    /**
-     * Change drawing color
-     * @param {string} color - select drawing color
-     * @private
-     */
-
-  }, {
-    key: '_changeDrawColor',
-    value: function _changeDrawColor(color) {
-      this.color = color || 'transparent';
-      if (!this.type) {
-        this.changeStartMode();
-      } else {
-        this.setDrawMode();
-      }
-    }
-
-    /**
-     * Change drawing Range
-     * @param {number} value - select drawing range
-     * @private
-     */
-
-  }, {
-    key: '_changeDrawRange',
-    value: function _changeDrawRange(value) {
-      this.width = value;
-      if (!this.type) {
-        this.changeStartMode();
-      } else {
-        this.setDrawMode();
-      }
-    }
-  }]);
-
-  return Draw;
-}(_submenuBase2.default);
-
-exports.default = Draw;
-
-/***/ }),
-
-/***/ "./src/js/ui/filter.js":
-/*!*****************************!*\
-  !*** ./src/js/ui/filter.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
-
-var _colorpicker = __webpack_require__(/*! @/ui/tools/colorpicker */ "./src/js/ui/tools/colorpicker.js");
-
-var _colorpicker2 = _interopRequireDefault(_colorpicker);
-
-var _range = __webpack_require__(/*! @/ui/tools/range */ "./src/js/ui/tools/range.js");
-
-var _range2 = _interopRequireDefault(_range);
-
-var _submenuBase = __webpack_require__(/*! @/ui/submenuBase */ "./src/js/ui/submenuBase.js");
-
-var _submenuBase2 = _interopRequireDefault(_submenuBase);
-
-var _filter = __webpack_require__(/*! @/ui/template/submenu/filter */ "./src/js/ui/template/submenu/filter.js");
-
-var _filter2 = _interopRequireDefault(_filter);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var PICKER_CONTROL_HEIGHT = '130px';
-var BLEND_OPTIONS = ['add', 'diff', 'subtract', 'multiply', 'screen', 'lighten', 'darken'];
-var FILTER_OPTIONS = ['grayscale', 'invert', 'sepia', 'vintage', 'blur', 'sharpen', 'emboss', 'remove-white', 'brightness', 'noise', 'pixelate', 'color-filter', 'tint', 'multiply', 'blend'];
-var filterNameMap = {
-  grayscale: 'grayscale',
-  invert: 'invert',
-  sepia: 'sepia',
-  blur: 'blur',
-  sharpen: 'sharpen',
-  emboss: 'emboss',
-  removeWhite: 'removeColor',
-  brightness: 'brightness',
-  contrast: 'contrast',
-  saturation: 'saturation',
-  vintage: 'vintage',
-  polaroid: 'polaroid',
-  noise: 'noise',
-  pixelate: 'pixelate',
-  colorFilter: 'removeColor',
-  tint: 'blendColor',
-  multiply: 'blendColor',
-  blend: 'blendColor',
-  hue: 'hue',
-  gamma: 'gamma'
-};
-var RANGE_INSTANCE_NAMES = ['removewhiteDistanceRange', 'colorfilterThresholdRange', 'pixelateRange', 'noiseRange', 'brightnessRange', 'tintOpacity'];
-var COLORPICKER_INSTANCE_NAMES = ['filterBlendColor', 'filterMultiplyColor', 'filterTintColor'];
-
-/**
- * Filter ui class
- * @class
- * @ignore
- */
-
-var Filter = function (_Submenu) {
-  _inherits(Filter, _Submenu);
-
-  function Filter(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        menuBarPosition = _ref.menuBarPosition,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Filter);
-
-    var _this = _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).call(this, subMenuElement, {
-      locale: locale,
-      name: 'filter',
-      menuBarPosition: menuBarPosition,
-      templateHtml: _filter2.default,
-      usageStatistics: usageStatistics
-    }));
-
-    _this.selectBoxShow = false;
-
-    _this.checkedMap = {};
-    _this._makeControlElement();
-    return _this;
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Filter, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeEvent();
-      this._destroyToolInstance();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Remove event for filter
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      var _this2 = this;
-
-      _tuiCodeSnippet2.default.forEach(FILTER_OPTIONS, function (filter) {
-        var filterCheckElement = _this2.selector('.tie-' + filter);
-        var filterNameCamelCase = (0, _util.toCamelCase)(filter);
-
-        filterCheckElement.removeEventListener('change', _this2.eventHandler[filterNameCamelCase]);
-      });
-
-      _tuiCodeSnippet2.default.forEach([].concat(RANGE_INSTANCE_NAMES, COLORPICKER_INSTANCE_NAMES), function (instanceName) {
-        _this2._els[instanceName].off();
-      });
-
-      this._els.blendType.removeEventListener('change', this.eventHandler.changeBlendFilter);
-      this._els.blendType.removeEventListener('click', this.eventHandler.changeBlendFilter);
-
-      _tuiCodeSnippet2.default.forEachArray(this.colorPickerInputBoxes, function (inputBox) {
-        inputBox.removeEventListener(_consts.eventNames.FOCUS, _this2._onStartEditingInputBox.bind(_this2));
-        inputBox.removeEventListener(_consts.eventNames.BLUR, _this2._onStopEditingInputBox.bind(_this2));
-      }, this);
-    }
-  }, {
-    key: '_destroyToolInstance',
-    value: function _destroyToolInstance() {
-      var _this3 = this;
-
-      _tuiCodeSnippet2.default.forEach([].concat(RANGE_INSTANCE_NAMES, COLORPICKER_INSTANCE_NAMES), function (instanceName) {
-        _this3._els[instanceName].destroy();
-      });
-    }
-
-    /**
-     * Add event for filter
-     * @param {Object} actions - actions for crop
-     *   @param {Function} actions.applyFilter - apply filter option
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(_ref2) {
-      var _this4 = this;
-
-      var applyFilter = _ref2.applyFilter;
-
-      var changeFilterState = function changeFilterState(filterName) {
-        return _this4._changeFilterState.bind(_this4, applyFilter, filterName);
-      };
-      var changeFilterStateForRange = function changeFilterStateForRange(filterName) {
-        return function (value, isLast) {
-          return _this4._changeFilterState(applyFilter, filterName, isLast);
-        };
-      };
-
-      this.eventHandler = {
-        changeBlendFilter: changeFilterState('blend'),
-        blandTypeClick: function blandTypeClick(event) {
-          return event.stopPropagation();
-        }
-      };
-
-      _tuiCodeSnippet2.default.forEach(FILTER_OPTIONS, function (filter) {
-        var filterCheckElement = _this4.selector('.tie-' + filter);
-        var filterNameCamelCase = (0, _util.toCamelCase)(filter);
-        _this4.checkedMap[filterNameCamelCase] = filterCheckElement;
-        _this4.eventHandler[filterNameCamelCase] = changeFilterState(filterNameCamelCase);
-
-        filterCheckElement.addEventListener('change', _this4.eventHandler[filterNameCamelCase]);
-      });
-
-      this._els.removewhiteDistanceRange.on('change', changeFilterStateForRange('removeWhite'));
-      this._els.colorfilterThresholdRange.on('change', changeFilterStateForRange('colorFilter'));
-      this._els.pixelateRange.on('change', changeFilterStateForRange('pixelate'));
-      this._els.noiseRange.on('change', changeFilterStateForRange('noise'));
-      this._els.brightnessRange.on('change', changeFilterStateForRange('brightness'));
-
-      this._els.filterBlendColor.on('change', this.eventHandler.changeBlendFilter);
-      this._els.filterMultiplyColor.on('change', changeFilterState('multiply'));
-      this._els.filterTintColor.on('change', changeFilterState('tint'));
-      this._els.tintOpacity.on('change', changeFilterStateForRange('tint'));
-      this._els.filterMultiplyColor.on('changeShow', this.colorPickerChangeShow.bind(this));
-      this._els.filterTintColor.on('changeShow', this.colorPickerChangeShow.bind(this));
-      this._els.filterBlendColor.on('changeShow', this.colorPickerChangeShow.bind(this));
-
-      this._els.blendType.addEventListener('change', this.eventHandler.changeBlendFilter);
-      this._els.blendType.addEventListener('click', this.eventHandler.blandTypeClick);
-
-      _tuiCodeSnippet2.default.forEachArray(this.colorPickerInputBoxes, function (inputBox) {
-        inputBox.addEventListener(_consts.eventNames.FOCUS, _this4._onStartEditingInputBox.bind(_this4));
-        inputBox.addEventListener(_consts.eventNames.BLUR, _this4._onStopEditingInputBox.bind(_this4));
-      }, this);
-    }
-
-    /**
-     * Set filter for undo changed
-     * @param {Object} changedFilterInfos - changed command infos
-     *   @param {string} type - filter type
-     *   @param {string} action - add or remove
-     *   @param {Object} options - filter options
-     */
-
-  }, {
-    key: 'setFilterState',
-    value: function setFilterState(changedFilterInfos) {
-      var type = changedFilterInfos.type,
-          options = changedFilterInfos.options,
-          action = changedFilterInfos.action;
-
-      var filterName = this._getFilterNameFromOptions(type, options);
-      var isRemove = action === 'remove';
-
-      if (!isRemove) {
-        this._setFilterState(filterName, options);
-      }
-
-      this.checkedMap[filterName].checked = !isRemove;
-    }
-
-    /**
-     * Init all filter's checkbox to unchecked state
-     */
-
-  }, {
-    key: 'initFilterCheckBoxState',
-    value: function initFilterCheckBoxState() {
-      _tuiCodeSnippet2.default.forEach(this.checkedMap, function (filter) {
-        filter.checked = false;
-      }, this);
-    }
-
-    /**
-     * Set filter for undo changed
-     * @param {string} filterName - filter name
-     * @param {Object} options - filter options
-     * @private
-     */
-    // eslint-disable-next-line complexity
-
-  }, {
-    key: '_setFilterState',
-    value: function _setFilterState(filterName, options) {
-      if (filterName === 'colorFilter') {
-        this._els.colorfilterThresholdRange.value = options.distance;
-      } else if (filterName === 'removeWhite') {
-        this._els.removewhiteDistanceRange.value = options.distance;
-      } else if (filterName === 'pixelate') {
-        this._els.pixelateRange.value = options.blocksize;
-      } else if (filterName === 'brightness') {
-        this._els.brightnessRange.value = options.brightness;
-      } else if (filterName === 'noise') {
-        this._els.noiseRange.value = options.noise;
-      } else if (filterName === 'tint') {
-        this._els.tintOpacity.value = options.alpha;
-        this._els.filterTintColor.color = options.color;
-      } else if (filterName === 'blend') {
-        this._els.filterBlendColor.color = options.color;
-      } else if (filterName === 'multiply') {
-        this._els.filterMultiplyColor.color = options.color;
-      }
-    }
-
-    /**
-     * Get filter name
-     * @param {string} type - filter type
-     * @param {Object} options - filter options
-     * @returns {string} filter name
-     * @private
-     */
-
-  }, {
-    key: '_getFilterNameFromOptions',
-    value: function _getFilterNameFromOptions(type, options) {
-      var filterName = type;
-
-      if (type === 'removeColor') {
-        filterName = _tuiCodeSnippet2.default.isExisty(options.useAlpha) ? 'removeWhite' : 'colorFilter';
-      } else if (type === 'blendColor') {
-        filterName = {
-          add: 'blend',
-          multiply: 'multiply',
-          tint: 'tint'
-        }[options.mode];
-      }
-
-      return filterName;
-    }
-
-    /**
-     * Add event for filter
-     * @param {Function} applyFilter - actions for firter
-     * @param {string} filterName - filter name
-     * @param {boolean} [isLast] - Is last change
-     */
-
-  }, {
-    key: '_changeFilterState',
-    value: function _changeFilterState(applyFilter, filterName) {
-      var isLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-      var apply = this.checkedMap[filterName].checked;
-      var type = filterNameMap[filterName];
-
-      var checkboxGroup = this.checkedMap[filterName].closest('.tui-image-editor-checkbox-group');
-      if (checkboxGroup) {
-        if (apply) {
-          checkboxGroup.classList.remove('tui-image-editor-disabled');
-        } else {
-          checkboxGroup.classList.add('tui-image-editor-disabled');
-        }
-      }
-      applyFilter(apply, type, this._getFilterOption(filterName), !isLast);
-    }
-
-    /**
-     * Get filter option
-     * @param {String} type - filter type
-     * @returns {Object} filter option object
-     * @private
-     */
-    // eslint-disable-next-line complexity
-
-  }, {
-    key: '_getFilterOption',
-    value: function _getFilterOption(type) {
-      var option = {};
-      switch (type) {
-        case 'removeWhite':
-          option.color = '#FFFFFF';
-          option.useAlpha = false;
-          option.distance = parseFloat(this._els.removewhiteDistanceRange.value);
-          break;
-        case 'colorFilter':
-          option.color = '#FFFFFF';
-          option.distance = parseFloat(this._els.colorfilterThresholdRange.value);
-          break;
-        case 'pixelate':
-          option.blocksize = (0, _util.toInteger)(this._els.pixelateRange.value);
-          break;
-        case 'noise':
-          option.noise = (0, _util.toInteger)(this._els.noiseRange.value);
-          break;
-        case 'brightness':
-          option.brightness = parseFloat(this._els.brightnessRange.value);
-          break;
-        case 'blend':
-          option.mode = 'add';
-          option.color = this._els.filterBlendColor.color;
-          option.mode = this._els.blendType.value;
-          break;
-        case 'multiply':
-          option.mode = 'multiply';
-          option.color = this._els.filterMultiplyColor.color;
-          break;
-        case 'tint':
-          option.mode = 'tint';
-          option.color = this._els.filterTintColor.color;
-          option.alpha = this._els.tintOpacity.value;
-          break;
-        case 'blur':
-          option.blur = this._els.blurRange.value;
-          break;
-        default:
-          break;
-      }
-
-      return option;
-    }
-
-    /**
-     * Make submenu range and colorpicker control
-     * @private
-     */
-
-  }, {
-    key: '_makeControlElement',
-    value: function _makeControlElement() {
-      this._els = {
-        removewhiteDistanceRange: new _range2.default({ slider: this.selector('.tie-removewhite-distance-range') }, _consts.defaultFilterRangeValues.removewhiteDistanceRange),
-        brightnessRange: new _range2.default({ slider: this.selector('.tie-brightness-range') }, _consts.defaultFilterRangeValues.brightnessRange),
-        noiseRange: new _range2.default({ slider: this.selector('.tie-noise-range') }, _consts.defaultFilterRangeValues.noiseRange),
-        pixelateRange: new _range2.default({ slider: this.selector('.tie-pixelate-range') }, _consts.defaultFilterRangeValues.pixelateRange),
-        colorfilterThresholdRange: new _range2.default({ slider: this.selector('.tie-colorfilter-threshold-range') }, _consts.defaultFilterRangeValues.colorfilterThresholdRange),
-        filterTintColor: new _colorpicker2.default(this.selector('.tie-filter-tint-color'), '#03bd9e', this.toggleDirection, this.usageStatistics),
-        filterMultiplyColor: new _colorpicker2.default(this.selector('.tie-filter-multiply-color'), '#515ce6', this.toggleDirection, this.usageStatistics),
-        filterBlendColor: new _colorpicker2.default(this.selector('.tie-filter-blend-color'), '#ffbb3b', this.toggleDirection, this.usageStatistics),
-        blurRange: _consts.defaultFilterRangeValues.blurFilterRange
-      };
-
-      this._els.tintOpacity = this._pickerWithRange(this._els.filterTintColor.pickerControl);
-      this._els.blendType = this._pickerWithSelectbox(this._els.filterBlendColor.pickerControl);
-
-      this.colorPickerControls.push(this._els.filterTintColor);
-      this.colorPickerControls.push(this._els.filterMultiplyColor);
-      this.colorPickerControls.push(this._els.filterBlendColor);
-
-      this.colorPickerInputBoxes = [];
-      this.colorPickerInputBoxes.push(this._els.filterTintColor.colorpickerElement.querySelector(_consts.selectorNames.COLOR_PICKER_INPUT_BOX));
-      this.colorPickerInputBoxes.push(this._els.filterMultiplyColor.colorpickerElement.querySelector(_consts.selectorNames.COLOR_PICKER_INPUT_BOX));
-      this.colorPickerInputBoxes.push(this._els.filterBlendColor.colorpickerElement.querySelector(_consts.selectorNames.COLOR_PICKER_INPUT_BOX));
-    }
-
-    /**
-     * Make submenu control for picker & range mixin
-     * @param {HTMLElement} pickerControl - pickerControl dom element
-     * @returns {Range}
-     * @private
-     */
-
-  }, {
-    key: '_pickerWithRange',
-    value: function _pickerWithRange(pickerControl) {
-      var rangeWrap = document.createElement('div');
-      var rangeLabel = document.createElement('label');
-      var slider = document.createElement('div');
-
-      slider.id = 'tie-filter-tint-opacity';
-      rangeLabel.innerHTML = 'Opacity';
-      rangeWrap.appendChild(rangeLabel);
-      rangeWrap.appendChild(slider);
-      pickerControl.appendChild(rangeWrap);
-      pickerControl.style.height = PICKER_CONTROL_HEIGHT;
-
-      return new _range2.default({ slider: slider }, _consts.defaultFilterRangeValues.tintOpacityRange);
-    }
-
-    /**
-     * Make submenu control for picker & selectbox
-     * @param {HTMLElement} pickerControl - pickerControl dom element
-     * @returns {HTMLElement}
-     * @private
-     */
-
-  }, {
-    key: '_pickerWithSelectbox',
-    value: function _pickerWithSelectbox(pickerControl) {
-      var selectlistWrap = document.createElement('div');
-      var selectlist = document.createElement('select');
-      var optionlist = document.createElement('ul');
-
-      selectlistWrap.className = 'tui-image-editor-selectlist-wrap';
-      optionlist.className = 'tui-image-editor-selectlist';
-
-      selectlistWrap.appendChild(selectlist);
-      selectlistWrap.appendChild(optionlist);
-
-      this._makeSelectOptionList(selectlist);
-
-      pickerControl.appendChild(selectlistWrap);
-      pickerControl.style.height = PICKER_CONTROL_HEIGHT;
-
-      this._drawSelectOptionList(selectlist, optionlist);
-      this._pickerWithSelectboxForAddEvent(selectlist, optionlist);
-
-      return selectlist;
-    }
-
-    /**
-     * Make selectbox option list custom style
-     * @param {HTMLElement} selectlist - selectbox element
-     * @param {HTMLElement} optionlist - custom option list item element
-     * @private
-     */
-
-  }, {
-    key: '_drawSelectOptionList',
-    value: function _drawSelectOptionList(selectlist, optionlist) {
-      var options = selectlist.querySelectorAll('option');
-      _tuiCodeSnippet2.default.forEach(options, function (option) {
-        var optionElement = document.createElement('li');
-        optionElement.innerHTML = option.innerHTML;
-        optionElement.setAttribute('data-item', option.value);
-        optionlist.appendChild(optionElement);
-      });
-    }
-
-    /**
-     * custom selectbox custom event
-     * @param {HTMLElement} selectlist - selectbox element
-     * @param {HTMLElement} optionlist - custom option list item element
-     * @private
-     */
-
-  }, {
-    key: '_pickerWithSelectboxForAddEvent',
-    value: function _pickerWithSelectboxForAddEvent(selectlist, optionlist) {
-      var _this5 = this;
-
-      optionlist.addEventListener('click', function (event) {
-        var optionValue = event.target.getAttribute('data-item');
-        var fireEvent = document.createEvent('HTMLEvents');
-
-        selectlist.querySelector('[value="' + optionValue + '"]').selected = true;
-        fireEvent.initEvent('change', true, true);
-
-        selectlist.dispatchEvent(fireEvent);
-
-        _this5.selectBoxShow = false;
-        optionlist.style.display = 'none';
-      });
-
-      selectlist.addEventListener('mousedown', function (event) {
-        event.preventDefault();
-        _this5.selectBoxShow = !_this5.selectBoxShow;
-        optionlist.style.display = _this5.selectBoxShow ? 'block' : 'none';
-        optionlist.setAttribute('data-selectitem', selectlist.value);
-        optionlist.querySelector('[data-item=\'' + selectlist.value + '\']').classList.add('active');
-      });
-    }
-
-    /**
-     * Make option list for select control
-     * @param {HTMLElement} selectlist - blend option select list element
-     * @private
-     */
-
-  }, {
-    key: '_makeSelectOptionList',
-    value: function _makeSelectOptionList(selectlist) {
-      _tuiCodeSnippet2.default.forEach(BLEND_OPTIONS, function (option) {
-        var selectOption = document.createElement('option');
-        selectOption.setAttribute('value', option);
-        selectOption.innerHTML = option.replace(/^[a-z]/, function ($0) {
-          return $0.toUpperCase();
-        });
-        selectlist.appendChild(selectOption);
-      });
-    }
-  }]);
-
-  return Filter;
-}(_submenuBase2.default);
-
-exports.default = Filter;
-
-/***/ }),
-
-/***/ "./src/js/ui/flip.js":
-/*!***************************!*\
-  !*** ./src/js/ui/flip.js ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
-
-var _submenuBase = __webpack_require__(/*! @/ui/submenuBase */ "./src/js/ui/submenuBase.js");
-
-var _submenuBase2 = _interopRequireDefault(_submenuBase);
-
-var _flip = __webpack_require__(/*! @/ui/template/submenu/flip */ "./src/js/ui/template/submenu/flip.js");
-
-var _flip2 = _interopRequireDefault(_flip);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * Flip ui class
- * @class
- * @ignore
- */
-var Flip = function (_Submenu) {
-  _inherits(Flip, _Submenu);
-
-  function Flip(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon,
-        menuBarPosition = _ref.menuBarPosition,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Flip);
-
-    var _this = _possibleConstructorReturn(this, (Flip.__proto__ || Object.getPrototypeOf(Flip)).call(this, subMenuElement, {
-      locale: locale,
-      name: 'flip',
-      makeSvgIcon: makeSvgIcon,
-      menuBarPosition: menuBarPosition,
-      templateHtml: _flip2.default,
-      usageStatistics: usageStatistics
-    }));
-
-    _this.flipStatus = false;
-
-    _this._els = {
-      flipButton: _this.selector('.tie-flip-button')
-    };
-    return _this;
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Flip, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeEvent();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Add event for flip
-     * @param {Object} actions - actions for flip
-     *   @param {Function} actions.flip - flip action
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(actions) {
-      this.eventHandler.changeFlip = this._changeFlip.bind(this);
-      this._actions = actions;
-      this._els.flipButton.addEventListener('click', this.eventHandler.changeFlip);
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      this._els.flipButton.removeEventListener('click', this.eventHandler.changeFlip);
-    }
-
-    /**
-     * change Flip status
-     * @param {object} event - change event
-     * @private
-     */
-
-  }, {
-    key: '_changeFlip',
-    value: function _changeFlip(event) {
-      var _this2 = this;
-
-      var button = event.target.closest('.tui-image-editor-button');
-      if (button) {
-        var flipType = this.getButtonType(button, ['flipX', 'flipY', 'resetFlip']);
-        if (!this.flipStatus && flipType === 'resetFlip') {
-          return;
-        }
-
-        this._actions.flip(flipType).then(function (flipStatus) {
-          var flipClassList = _this2._els.flipButton.classList;
-          _this2.flipStatus = false;
-
-          flipClassList.remove('resetFlip');
-          _tuiCodeSnippet2.default.forEach(['flipX', 'flipY'], function (type) {
-            flipClassList.remove(type);
-            if (flipStatus[type]) {
-              flipClassList.add(type);
-              flipClassList.add('resetFlip');
-              _this2.flipStatus = true;
-            }
-          });
-        });
-      }
-    }
-  }]);
-
-  return Flip;
-}(_submenuBase2.default);
-
-exports.default = Flip;
-
-/***/ }),
-
-/***/ "./src/js/ui/history.js":
-/*!******************************!*\
-  !*** ./src/js/ui/history.js ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _panelMenu = __webpack_require__(/*! @/ui/panelMenu */ "./src/js/ui/panelMenu.js");
-
-var _panelMenu2 = _interopRequireDefault(_panelMenu);
-
-var _history = __webpack_require__(/*! @/ui/template/submenu/history */ "./src/js/ui/template/submenu/history.js");
-
-var _history2 = _interopRequireDefault(_history);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var historyClassName = 'history-item';
-var selectedClassName = 'selected-item';
-var disabledClassName = 'disabled-item';
-
-/**
- * History ui class
- * @class
- * @ignore
- */
-
-var History = function (_Panel) {
-  _inherits(History, _Panel);
-
-  function History(menuElement, _ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon;
-
-    _classCallCheck(this, History);
-
-    var _this = _possibleConstructorReturn(this, (History.__proto__ || Object.getPrototypeOf(History)).call(this, menuElement, { name: 'history' }));
-
-    menuElement.classList.add('enabled');
-
-    _this.locale = locale;
-    _this.makeSvgIcon = makeSvgIcon;
-    _this._eventHandler = {};
-    _this._historyIndex = _this.getListLength();
-    return _this;
-  }
-
-  /**
-   * Add history
-   * @param {string} name - name of history
-   * @param {?string} detail - detail information of history
-   */
-
-
-  _createClass(History, [{
-    key: 'add',
-    value: function add(_ref2) {
-      var name = _ref2.name,
-          detail = _ref2.detail;
-
-      if (this._hasDisabledItem()) {
-        this.deleteListItemElement(this._historyIndex + 1, this.getListLength());
-      }
-
-      var html = (0, _history2.default)({ locale: this.locale, makeSvgIcon: this.makeSvgIcon, name: name, detail: detail });
-      var item = this.makeListItemElement(html);
-
-      this.pushListItemElement(item);
-      this._historyIndex = this.getListLength() - 1;
-      this._selectItem(this._historyIndex);
-    }
-
-    /**
-     * Init history
-     */
-
-  }, {
-    key: 'init',
-    value: function init() {
-      this.deleteListItemElement(1, this.getListLength());
-      this._historyIndex = 0;
-      this._selectItem(this._historyIndex);
-    }
-
-    /**
-     * Clear history
-     */
-
-  }, {
-    key: 'clear',
-    value: function clear() {
-      this.deleteListItemElement(0, this.getListLength());
-      this._historyIndex = -1;
-    }
-
-    /**
-     * Select previous history of current selected history
-     */
-
-  }, {
-    key: 'prev',
-    value: function prev() {
-      this._historyIndex -= 1;
-      this._selectItem(this._historyIndex);
-    }
-
-    /**
-     * Select next history of current selected history
-     */
-
-  }, {
-    key: 'next',
-    value: function next() {
-      this._historyIndex += 1;
-      this._selectItem(this._historyIndex);
-    }
-
-    /**
-     * Whether history menu has disabled item
-     * @returns {boolean}
-     */
-
-  }, {
-    key: '_hasDisabledItem',
-    value: function _hasDisabledItem() {
-      return this.getListLength() - 1 > this._historyIndex;
-    }
-
-    /**
-     * Add history menu event
-     * @private
-     */
-
-  }, {
-    key: '_addHistoryEventListener',
-    value: function _addHistoryEventListener() {
-      var _this2 = this;
-
-      this._eventHandler.history = function (event) {
-        return _this2._clickHistoryItem(event);
-      };
-      this.listElement.addEventListener('click', this._eventHandler.history);
-    }
-
-    /**
-     * Remove history menu event
-     * @private
-     */
-
-  }, {
-    key: '_removeHistoryEventListener',
-    value: function _removeHistoryEventListener() {
-      this.listElement.removeEventListener('click', this._eventHandler.history);
-    }
-
-    /**
-     * onClick history menu event listener
-     * @param {object} event - event object
-     * @private
-     */
-
-  }, {
-    key: '_clickHistoryItem',
-    value: function _clickHistoryItem(event) {
-      var target = event.target;
-
-      var item = target.closest('.' + historyClassName);
-
-      if (!item) {
-        return;
-      }
-
-      var index = Number.parseInt(item.getAttribute('data-index'), 10);
-
-      if (index !== this._historyIndex) {
-        var count = Math.abs(index - this._historyIndex);
-
-        if (index < this._historyIndex) {
-          this._actions.undo(count);
-        } else {
-          this._actions.redo(count);
-        }
-      }
-    }
-
-    /**
-     * Change item's state to selected state
-     * @param {number} index - index of selected item
-     */
-
-  }, {
-    key: '_selectItem',
-    value: function _selectItem(index) {
-      for (var i = 0; i < this.getListLength(); i += 1) {
-        this.removeClass(i, selectedClassName);
-        this.removeClass(i, disabledClassName);
-        if (i > index) {
-          this.addClass(i, disabledClassName);
-        }
-      }
-      this.addClass(index, selectedClassName);
-    }
-
-    /**
-     * Destroys the instance.
-     */
-
-  }, {
-    key: 'destroy',
-    value: function destroy() {
-      this.removeEvent();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Add event for history
-     * @param {Object} actions - actions for crop
-     *   @param {Function} actions.undo - undo action
-     *   @param {Function} actions.redo - redo action
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(actions) {
-      this._actions = actions;
-      this._addHistoryEventListener();
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: 'removeEvent',
-    value: function removeEvent() {
-      this._removeHistoryEventListener();
-    }
-  }]);
-
-  return History;
-}(_panelMenu2.default);
-
-exports.default = History;
-
-/***/ }),
-
-/***/ "./src/js/ui/icon.js":
-/*!***************************!*\
-  !*** ./src/js/ui/icon.js ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
-
-var _colorpicker = __webpack_require__(/*! @/ui/tools/colorpicker */ "./src/js/ui/tools/colorpicker.js");
-
-var _colorpicker2 = _interopRequireDefault(_colorpicker);
-
-var _submenuBase = __webpack_require__(/*! @/ui/submenuBase */ "./src/js/ui/submenuBase.js");
-
-var _submenuBase2 = _interopRequireDefault(_submenuBase);
-
-var _icon = __webpack_require__(/*! @/ui/template/submenu/icon */ "./src/js/ui/template/submenu/icon.js");
-
-var _icon2 = _interopRequireDefault(_icon);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * Icon ui class
- * @class
- * @ignore
- */
-var Icon = function (_Submenu) {
-  _inherits(Icon, _Submenu);
-
-  function Icon(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon,
-        menuBarPosition = _ref.menuBarPosition,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Icon);
-
-    var _this = _possibleConstructorReturn(this, (Icon.__proto__ || Object.getPrototypeOf(Icon)).call(this, subMenuElement, {
-      locale: locale,
-      name: 'icon',
-      makeSvgIcon: makeSvgIcon,
-      menuBarPosition: menuBarPosition,
-      templateHtml: _icon2.default,
-      usageStatistics: usageStatistics
-    }));
-
-    _this.iconType = null;
-    _this._iconMap = {};
-
-    _this._els = {
-      registerIconButton: _this.selector('.tie-icon-image-file'),
-      addIconButton: _this.selector('.tie-icon-add-button'),
-      iconColorpicker: new _colorpicker2.default(_this.selector('.tie-icon-color'), '#ffbb3b', _this.toggleDirection, _this.usageStatistics)
-    };
-
-    _this.colorPickerInputBox = _this._els.iconColorpicker.colorpickerElement.querySelector(_consts.selectorNames.COLOR_PICKER_INPUT_BOX);
-    return _this;
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Icon, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeEvent();
-      this._els.iconColorpicker.destroy();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Add event for icon
-     * @param {Object} actions - actions for icon
-     *   @param {Function} actions.registerCustomIcon - register icon
-     *   @param {Function} actions.addIcon - add icon
-     *   @param {Function} actions.changeColor - change icon color
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(actions) {
-      var registerIcon = this._registerIconHandler.bind(this);
-      var addIcon = this._addIconHandler.bind(this);
-
-      this.eventHandler = {
-        registerIcon: registerIcon,
-        addIcon: addIcon
-      };
-
-      this.actions = actions;
-      this._els.iconColorpicker.on('change', this._changeColorHandler.bind(this));
-      this._els.registerIconButton.addEventListener('change', registerIcon);
-      this._els.addIconButton.addEventListener('click', addIcon);
-
-      this.colorPickerInputBox.addEventListener(_consts.eventNames.FOCUS, this._onStartEditingInputBox.bind(this));
-      this.colorPickerInputBox.addEventListener(_consts.eventNames.BLUR, this._onStopEditingInputBox.bind(this));
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      this._els.iconColorpicker.off();
-      this._els.registerIconButton.removeEventListener('change', this.eventHandler.registerIcon);
-      this._els.addIconButton.removeEventListener('click', this.eventHandler.addIcon);
-
-      this.colorPickerInputBox.removeEventListener(_consts.eventNames.FOCUS, this._onStartEditingInputBox.bind(this));
-      this.colorPickerInputBox.removeEventListener(_consts.eventNames.BLUR, this._onStopEditingInputBox.bind(this));
-    }
-
-    /**
-     * Clear icon type
-     */
-
-  }, {
-    key: 'clearIconType',
-    value: function clearIconType() {
-      this._els.addIconButton.classList.remove(this.iconType);
-      this.iconType = null;
-    }
-
-    /**
-     * Register default icon
-     */
-
-  }, {
-    key: 'registerDefaultIcon',
-    value: function registerDefaultIcon() {
-      var _this2 = this;
-
-      _tuiCodeSnippet2.default.forEach(_consts.defaultIconPath, function (path, type) {
-        _this2.actions.registerDefaultIcons(type, path);
-      });
-    }
-
-    /**
-     * Set icon picker color
-     * @param {string} iconColor - rgb color string
-     */
-
-  }, {
-    key: 'setIconPickerColor',
-    value: function setIconPickerColor(iconColor) {
-      this._els.iconColorpicker.color = iconColor;
-    }
-
-    /**
-     * Returns the menu to its default state.
-     */
-
-  }, {
-    key: 'changeStandbyMode',
-    value: function changeStandbyMode() {
-      this.clearIconType();
-      this.actions.cancelAddIcon();
-    }
-
-    /**
-     * Change icon color
-     * @param {string} color - color for change
-     * @private
-     */
-
-  }, {
-    key: '_changeColorHandler',
-    value: function _changeColorHandler(color) {
-      color = color || 'transparent';
-      this.actions.changeColor(color);
-    }
-
-    /**
-     * Change icon color
-     * @param {object} event - add button event object
-     * @private
-     */
-
-  }, {
-    key: '_addIconHandler',
-    value: function _addIconHandler(event) {
-      var button = event.target.closest('.tui-image-editor-button');
-
-      if (button) {
-        var iconType = button.getAttribute('data-icontype');
-        var iconColor = this._els.iconColorpicker.color;
-        this.actions.discardSelection();
-        this.actions.changeSelectableAll(false);
-        this._els.addIconButton.classList.remove(this.iconType);
-        this._els.addIconButton.classList.add(iconType);
-
-        if (this.iconType === iconType) {
-          this.changeStandbyMode();
-        } else {
-          this.actions.addIcon(iconType, iconColor);
-          this.iconType = iconType;
-        }
-      }
-    }
-
-    /**
-     * register icon
-     * @param {object} event - file change event object
-     * @private
-     */
-
-  }, {
-    key: '_registerIconHandler',
-    value: function _registerIconHandler(event) {
-      var imgUrl = void 0;
-
-      if (!_util.isSupportFileApi) {
-        alert('This browser does not support file-api');
-      }
-
-      var _event$target$files = event.target.files,
-          file = _event$target$files[0];
-
-
-      if (file) {
-        imgUrl = URL.createObjectURL(file);
-        this.actions.registerCustomIcon(imgUrl, file);
-      }
-    }
-  }]);
-
-  return Icon;
-}(_submenuBase2.default);
-
-exports.default = Icon;
-
-/***/ }),
-
-/***/ "./src/js/ui/locale/locale.js":
-/*!************************************!*\
-  !*** ./src/js/ui/locale/locale.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Translate messages
- */
-var Locale = function () {
-  /**
-   * @constructor
-   * @param {Object} locale - Locale object for initialise
-   */
-  function Locale(locale) {
-    _classCallCheck(this, Locale);
-
-    this._locale = locale;
-  }
-
-  /**
-   * localize message
-   * @param {string} message - message who will be localized
-   * @returns {string}
-   */
-
-
-  _createClass(Locale, [{
-    key: "localize",
-    value: function localize(message) {
-      return this._locale[message] || message;
-    }
-  }]);
-
-  return Locale;
-}();
-
-exports.default = Locale;
-
-/***/ }),
-
-/***/ "./src/js/ui/mask.js":
-/*!***************************!*\
-  !*** ./src/js/ui/mask.js ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _submenuBase = __webpack_require__(/*! @/ui/submenuBase */ "./src/js/ui/submenuBase.js");
-
-var _submenuBase2 = _interopRequireDefault(_submenuBase);
-
-var _mask = __webpack_require__(/*! @/ui/template/submenu/mask */ "./src/js/ui/template/submenu/mask.js");
-
-var _mask2 = _interopRequireDefault(_mask);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * Mask ui class
- * @class
- * @ignore
- */
-var Mask = function (_Submenu) {
-  _inherits(Mask, _Submenu);
-
-  function Mask(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon,
-        menuBarPosition = _ref.menuBarPosition,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Mask);
-
-    var _this = _possibleConstructorReturn(this, (Mask.__proto__ || Object.getPrototypeOf(Mask)).call(this, subMenuElement, {
-      locale: locale,
-      name: 'mask',
-      makeSvgIcon: makeSvgIcon,
-      menuBarPosition: menuBarPosition,
-      templateHtml: _mask2.default,
-      usageStatistics: usageStatistics
-    }));
-
-    _this._els = {
-      applyButton: _this.selector('.tie-mask-apply'),
-      maskImageButton: _this.selector('.tie-mask-image-file')
-    };
-    return _this;
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Mask, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeEvent();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Add event for mask
-     * @param {Object} actions - actions for crop
-     *   @param {Function} actions.loadImageFromURL - load image action
-     *   @param {Function} actions.applyFilter - apply filter action
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(actions) {
-      var loadMaskFile = this._loadMaskFile.bind(this);
-      var applyMask = this._applyMask.bind(this);
-
-      this.eventHandler = {
-        loadMaskFile: loadMaskFile,
-        applyMask: applyMask
-      };
-
-      this.actions = actions;
-      this._els.maskImageButton.addEventListener('change', loadMaskFile);
-      this._els.applyButton.addEventListener('click', applyMask);
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      this._els.maskImageButton.removeEventListener('change', this.eventHandler.loadMaskFile);
-      this._els.applyButton.removeEventListener('click', this.eventHandler.applyMask);
-    }
-
-    /**
-     * Apply mask
-     * @private
-     */
-
-  }, {
-    key: '_applyMask',
-    value: function _applyMask() {
-      this.actions.applyFilter();
-      this._els.applyButton.classList.remove('active');
-    }
-
-    /**
-     * Load mask file
-     * @param {object} event - File change event object
-     * @private
-     */
-
-  }, {
-    key: '_loadMaskFile',
-    value: function _loadMaskFile(event) {
-      var imgUrl = void 0;
-
-      if (!(0, _util.isSupportFileApi)()) {
-        alert('This browser does not support file-api');
-      }
-
-      var _event$target$files = event.target.files,
-          file = _event$target$files[0];
-
-
-      if (file) {
-        imgUrl = URL.createObjectURL(file);
-        this.actions.loadImageFromURL(imgUrl, file);
-        this._els.applyButton.classList.add('active');
-      }
-    }
-  }]);
-
-  return Mask;
-}(_submenuBase2.default);
-
-exports.default = Mask;
-
-/***/ }),
-
-/***/ "./src/js/ui/panelMenu.js":
-/*!********************************!*\
-  !*** ./src/js/ui/panelMenu.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Menu Panel Class
- * @class
- * @ignore
- */
-
-var Panel = function () {
-  /**
-   * @param {HTMLElement} menuElement - menu dom element
-   * @param {Object} options - menu options
-   *   @param {string} options.name - name of panel menu
-   */
-  function Panel(menuElement, _ref) {
-    var name = _ref.name;
-
-    _classCallCheck(this, Panel);
-
-    this.name = name;
-    this.items = [];
-
-    this.panelElement = this._makePanelElement();
-    this.listElement = this._makeListElement();
-
-    this.panelElement.appendChild(this.listElement);
-    menuElement.appendChild(this.panelElement);
-  }
-
-  /**
-   * Make Panel element
-   * @returns {HTMLElement}
-   */
-
-
-  _createClass(Panel, [{
-    key: '_makePanelElement',
-    value: function _makePanelElement() {
-      var panel = document.createElement('div');
-
-      panel.className = 'tie-panel-' + this.name;
-
-      return panel;
-    }
-
-    /**
-     * Make list element
-     * @returns {HTMLElement} list element
-     * @private
-     */
-
-  }, {
-    key: '_makeListElement',
-    value: function _makeListElement() {
-      var list = document.createElement('ol');
-
-      list.className = this.name + '-list';
-
-      return list;
-    }
-
-    /**
-     * Make list item element
-     * @param {string} html - history list item html
-     * @returns {HTMLElement} list item element
-     */
-
-  }, {
-    key: 'makeListItemElement',
-    value: function makeListItemElement(html) {
-      var listItem = document.createElement('li');
-
-      listItem.innerHTML = html;
-      listItem.className = this.name + '-item';
-      listItem.setAttribute('data-index', this.items.length);
-
-      return listItem;
-    }
-
-    /**
-     * Push list item element
-     * @param {HTMLElement} item - list item element to add to the list
-     */
-
-  }, {
-    key: 'pushListItemElement',
-    value: function pushListItemElement(item) {
-      this.listElement.appendChild(item);
-      this.listElement.scrollTop += item.offsetHeight;
-      this.items.push(item);
-    }
-
-    /**
-     * Delete list item element
-     * @param {number} start - start index to delete
-     * @param {number} end - end index to delete
-     */
-
-  }, {
-    key: 'deleteListItemElement',
-    value: function deleteListItemElement(start, end) {
-      var items = this.items;
-
-
-      for (var i = start; i < end; i += 1) {
-        this.listElement.removeChild(items[i]);
-      }
-      items.splice(start, end - start + 1);
-    }
-
-    /**
-     * Get list's length
-     * @returns {number}
-     */
-
-  }, {
-    key: 'getListLength',
-    value: function getListLength() {
-      return this.items.length;
-    }
-
-    /**
-     * Add class name of item
-     * @param {number} index - index of item
-     * @param {string} className - class name to add
-     */
-
-  }, {
-    key: 'addClass',
-    value: function addClass(index, className) {
-      if (this.items[index]) {
-        this.items[index].classList.add(className);
-      }
-    }
-
-    /**
-     * Remove class name of item
-     * @param {number} index - index of item
-     * @param {string} className - class name to remove
-     */
-
-  }, {
-    key: 'removeClass',
-    value: function removeClass(index, className) {
-      if (this.items[index]) {
-        this.items[index].classList.remove(className);
-      }
-    }
-
-    /**
-     * Toggle class name of item
-     * @param {number} index - index of item
-     * @param {string} className - class name to remove
-     */
-
-  }, {
-    key: 'toggleClass',
-    value: function toggleClass(index, className) {
-      if (this.items[index]) {
-        this.items[index].classList.toggle(className);
-      }
-    }
-  }]);
-
-  return Panel;
-}();
-
-exports.default = Panel;
-
-/***/ }),
-
-/***/ "./src/js/ui/rotate.js":
-/*!*****************************!*\
-  !*** ./src/js/ui/rotate.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _range = __webpack_require__(/*! @/ui/tools/range */ "./src/js/ui/tools/range.js");
-
-var _range2 = _interopRequireDefault(_range);
-
-var _submenuBase = __webpack_require__(/*! @/ui/submenuBase */ "./src/js/ui/submenuBase.js");
-
-var _submenuBase2 = _interopRequireDefault(_submenuBase);
-
-var _rotate = __webpack_require__(/*! @/ui/template/submenu/rotate */ "./src/js/ui/template/submenu/rotate.js");
-
-var _rotate2 = _interopRequireDefault(_rotate);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CLOCKWISE = 30;
-var COUNTERCLOCKWISE = -30;
-
-/**
- * Rotate ui class
- * @class
- * @ignore
- */
-
-var Rotate = function (_Submenu) {
-  _inherits(Rotate, _Submenu);
-
-  function Rotate(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon,
-        menuBarPosition = _ref.menuBarPosition,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Rotate);
-
-    var _this = _possibleConstructorReturn(this, (Rotate.__proto__ || Object.getPrototypeOf(Rotate)).call(this, subMenuElement, {
-      locale: locale,
-      name: 'rotate',
-      makeSvgIcon: makeSvgIcon,
-      menuBarPosition: menuBarPosition,
-      templateHtml: _rotate2.default,
-      usageStatistics: usageStatistics
-    }));
-
-    _this._value = 0;
-
-    _this._els = {
-      rotateButton: _this.selector('.tie-rotate-button'),
-      rotateRange: new _range2.default({
-        slider: _this.selector('.tie-rotate-range'),
-        input: _this.selector('.tie-rotate-range-value')
-      }, _consts.defaultRotateRangeValues)
-    };
-    return _this;
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Rotate, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeEvent();
-      this._els.rotateRange.destroy();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-  }, {
-    key: 'setRangeBarAngle',
-    value: function setRangeBarAngle(type, angle) {
-      var resultAngle = angle;
-
-      if (type === 'rotate') {
-        resultAngle = parseInt(this._els.rotateRange.value, 10) + angle;
-      }
-
-      this._setRangeBarRatio(resultAngle);
-    }
-  }, {
-    key: '_setRangeBarRatio',
-    value: function _setRangeBarRatio(angle) {
-      this._els.rotateRange.value = angle;
-    }
-
-    /**
-     * Add event for rotate
-     * @param {Object} actions - actions for crop
-     *   @param {Function} actions.rotate - rotate action
-     *   @param {Function} actions.setAngle - set angle action
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(actions) {
-      this.eventHandler.rotationAngleChanged = this._changeRotateForButton.bind(this);
-
-      // {rotate, setAngle}
-      this.actions = actions;
-      this._els.rotateButton.addEventListener('click', this.eventHandler.rotationAngleChanged);
-      this._els.rotateRange.on('change', this._changeRotateForRange.bind(this));
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      this._els.rotateButton.removeEventListener('click', this.eventHandler.rotationAngleChanged);
-      this._els.rotateRange.off();
-    }
-
-    /**
-     * Change rotate for range
-     * @param {number} value - angle value
-     * @param {boolean} isLast - Is last change
-     * @private
-     */
-
-  }, {
-    key: '_changeRotateForRange',
-    value: function _changeRotateForRange(value, isLast) {
-      var angle = (0, _util.toInteger)(value);
-      this.actions.setAngle(angle, !isLast);
-      this._value = angle;
-    }
-
-    /**
-     * Change rotate for button
-     * @param {object} event - add button event object
-     * @private
-     */
-
-  }, {
-    key: '_changeRotateForButton',
-    value: function _changeRotateForButton(event) {
-      var button = event.target.closest('.tui-image-editor-button');
-      var angle = this._els.rotateRange.value;
-
-      if (button) {
-        var rotateType = this.getButtonType(button, ['counterclockwise', 'clockwise']);
-        var rotateAngle = {
-          clockwise: CLOCKWISE,
-          counterclockwise: COUNTERCLOCKWISE
-        }[rotateType];
-        var newAngle = parseInt(angle, 10) + rotateAngle;
-        var isRotatable = newAngle >= -360 && newAngle <= 360;
-        if (isRotatable) {
-          this.actions.rotate(rotateAngle);
-        }
-      }
-    }
-  }]);
-
-  return Rotate;
-}(_submenuBase2.default);
-
-exports.default = Rotate;
-
-/***/ }),
-
-/***/ "./src/js/ui/shape.js":
-/*!****************************!*\
-  !*** ./src/js/ui/shape.js ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
-
-var _colorpicker = __webpack_require__(/*! @/ui/tools/colorpicker */ "./src/js/ui/tools/colorpicker.js");
-
-var _colorpicker2 = _interopRequireDefault(_colorpicker);
-
-var _range = __webpack_require__(/*! @/ui/tools/range */ "./src/js/ui/tools/range.js");
-
-var _range2 = _interopRequireDefault(_range);
-
-var _submenuBase = __webpack_require__(/*! @/ui/submenuBase */ "./src/js/ui/submenuBase.js");
-
-var _submenuBase2 = _interopRequireDefault(_submenuBase);
-
-var _shape = __webpack_require__(/*! @/ui/template/submenu/shape */ "./src/js/ui/template/submenu/shape.js");
-
-var _shape2 = _interopRequireDefault(_shape);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SHAPE_DEFAULT_OPTION = {
-  stroke: '#ffbb3b',
-  fill: '',
-  strokeWidth: 3
-};
-
-/**
- * Shape ui class
- * @class
- * @ignore
- */
-
-var Shape = function (_Submenu) {
-  _inherits(Shape, _Submenu);
-
-  function Shape(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon,
-        menuBarPosition = _ref.menuBarPosition,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Shape);
-
-    var _this = _possibleConstructorReturn(this, (Shape.__proto__ || Object.getPrototypeOf(Shape)).call(this, subMenuElement, {
-      locale: locale,
-      name: 'shape',
-      makeSvgIcon: makeSvgIcon,
-      menuBarPosition: menuBarPosition,
-      templateHtml: _shape2.default,
-      usageStatistics: usageStatistics
-    }));
-
-    _this.type = null;
-    _this.options = SHAPE_DEFAULT_OPTION;
-
-    _this._els = {
-      shapeSelectButton: _this.selector('.tie-shape-button'),
-      shapeColorButton: _this.selector('.tie-shape-color-button'),
-      strokeRange: new _range2.default({
-        slider: _this.selector('.tie-stroke-range'),
-        input: _this.selector('.tie-stroke-range-value')
-      }, _consts.defaultShapeStrokeValues),
-      fillColorpicker: new _colorpicker2.default(_this.selector('.tie-color-fill'), '', _this.toggleDirection, _this.usageStatistics),
-      strokeColorpicker: new _colorpicker2.default(_this.selector('.tie-color-stroke'), '#ffbb3b', _this.toggleDirection, _this.usageStatistics)
-    };
-
-    _this.colorPickerControls.push(_this._els.fillColorpicker);
-    _this.colorPickerControls.push(_this._els.strokeColorpicker);
-
-    _this.colorPickerInputBoxes = [];
-    _this.colorPickerInputBoxes.push(_this._els.fillColorpicker.colorpickerElement.querySelector(_consts.selectorNames.COLOR_PICKER_INPUT_BOX));
-    _this.colorPickerInputBoxes.push(_this._els.strokeColorpicker.colorpickerElement.querySelector(_consts.selectorNames.COLOR_PICKER_INPUT_BOX));
-    return _this;
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Shape, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeEvent();
-      this._els.strokeRange.destroy();
-      this._els.fillColorpicker.destroy();
-      this._els.strokeColorpicker.destroy();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Add event for shape
-     * @param {Object} actions - actions for shape
-     *   @param {Function} actions.changeShape - change shape mode
-     *   @param {Function} actions.setDrawingShape - set drawing shape
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(actions) {
-      var _this2 = this;
-
-      this.eventHandler.shapeTypeSelected = this._changeShapeHandler.bind(this);
-      this.actions = actions;
-
-      this._els.shapeSelectButton.addEventListener('click', this.eventHandler.shapeTypeSelected);
-      this._els.strokeRange.on('change', this._changeStrokeRangeHandler.bind(this));
-      this._els.fillColorpicker.on('change', this._changeFillColorHandler.bind(this));
-      this._els.strokeColorpicker.on('change', this._changeStrokeColorHandler.bind(this));
-      this._els.fillColorpicker.on('changeShow', this.colorPickerChangeShow.bind(this));
-      this._els.strokeColorpicker.on('changeShow', this.colorPickerChangeShow.bind(this));
-
-      _tuiCodeSnippet2.default.forEachArray(this.colorPickerInputBoxes, function (inputBox) {
-        inputBox.addEventListener(_consts.eventNames.FOCUS, _this2._onStartEditingInputBox.bind(_this2));
-        inputBox.addEventListener(_consts.eventNames.BLUR, _this2._onStopEditingInputBox.bind(_this2));
-      }, this);
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      var _this3 = this;
-
-      this._els.shapeSelectButton.removeEventListener('click', this.eventHandler.shapeTypeSelected);
-      this._els.strokeRange.off();
-      this._els.fillColorpicker.off();
-      this._els.strokeColorpicker.off();
-
-      _tuiCodeSnippet2.default.forEachArray(this.colorPickerInputBoxes, function (inputBox) {
-        inputBox.removeEventListener(_consts.eventNames.FOCUS, _this3._onStartEditingInputBox.bind(_this3));
-        inputBox.removeEventListener(_consts.eventNames.BLUR, _this3._onStopEditingInputBox.bind(_this3));
-      }, this);
-    }
-
-    /**
-     * Set Shape status
-     * @param {Object} options - options of shape status
-     *   @param {string} strokeWidth - stroke width
-     *   @param {string} strokeColor - stroke color
-     *   @param {string} fillColor - fill color
-     */
-
-  }, {
-    key: 'setShapeStatus',
-    value: function setShapeStatus(_ref2) {
-      var strokeWidth = _ref2.strokeWidth,
-          strokeColor = _ref2.strokeColor,
-          fillColor = _ref2.fillColor;
-
-      this._els.strokeRange.value = strokeWidth;
-      this._els.strokeColorpicker.color = strokeColor;
-      this._els.fillColorpicker.color = fillColor;
-      this.options.stroke = strokeColor;
-      this.options.fill = fillColor;
-      this.options.strokeWidth = strokeWidth;
-
-      this.actions.setDrawingShape(this.type, { strokeWidth: strokeWidth });
-    }
-
-    /**
-     * Executed when the menu starts.
-     */
-
-  }, {
-    key: 'changeStartMode',
-    value: function changeStartMode() {
-      this.actions.stopDrawingMode();
-    }
-
-    /**
-     * Returns the menu to its default state.
-     */
-
-  }, {
-    key: 'changeStandbyMode',
-    value: function changeStandbyMode() {
-      this.type = null;
-      this.actions.changeSelectableAll(true);
-      this._els.shapeSelectButton.classList.remove('circle');
-      this._els.shapeSelectButton.classList.remove('triangle');
-      this._els.shapeSelectButton.classList.remove('rect');
-    }
-
-    /**
-     * set range stroke max value
-     * @param {number} maxValue - expect max value for change
-     */
-
-  }, {
-    key: 'setMaxStrokeValue',
-    value: function setMaxStrokeValue(maxValue) {
-      var strokeMaxValue = maxValue;
-      if (strokeMaxValue <= 0) {
-        strokeMaxValue = _consts.defaultShapeStrokeValues.max;
-      }
-      this._els.strokeRange.max = strokeMaxValue;
-    }
-
-    /**
-     * Set stroke value
-     * @param {number} value - expect value for strokeRange change
-     */
-
-  }, {
-    key: 'setStrokeValue',
-    value: function setStrokeValue(value) {
-      this._els.strokeRange.value = value;
-      this._els.strokeRange.trigger('change');
-    }
-
-    /**
-     * Get stroke value
-     * @returns {number} - stroke range value
-     */
-
-  }, {
-    key: 'getStrokeValue',
-    value: function getStrokeValue() {
-      return this._els.strokeRange.value;
-    }
-
-    /**
-     * Change icon color
-     * @param {object} event - add button event object
-     * @private
-     */
-
-  }, {
-    key: '_changeShapeHandler',
-    value: function _changeShapeHandler(event) {
-      var button = event.target.closest('.tui-image-editor-button');
-      if (button) {
-        this.actions.stopDrawingMode();
-        this.actions.discardSelection();
-        var shapeType = this.getButtonType(button, ['circle', 'triangle', 'rect']);
-
-        if (this.type === shapeType) {
-          this.changeStandbyMode();
-
-          return;
-        }
-        this.changeStandbyMode();
-        this.type = shapeType;
-        event.currentTarget.classList.add(shapeType);
-        this.actions.changeSelectableAll(false);
-        this.actions.modeChange('shape');
-      }
-    }
-
-    /**
-     * Change stroke range
-     * @param {number} value - stroke range value
-     * @param {boolean} isLast - Is last change
-     * @private
-     */
-
-  }, {
-    key: '_changeStrokeRangeHandler',
-    value: function _changeStrokeRangeHandler(value, isLast) {
-      this.options.strokeWidth = (0, _util.toInteger)(value);
-      this.actions.changeShape({
-        strokeWidth: value
-      }, !isLast);
-
-      this.actions.setDrawingShape(this.type, this.options);
-    }
-
-    /**
-     * Change shape color
-     * @param {string} color - fill color
-     * @private
-     */
-
-  }, {
-    key: '_changeFillColorHandler',
-    value: function _changeFillColorHandler(color) {
-      color = color || 'transparent';
-      this.options.fill = color;
-      this.actions.changeShape({
-        fill: color
-      });
-    }
-
-    /**
-     * Change shape stroke color
-     * @param {string} color - fill color
-     * @private
-     */
-
-  }, {
-    key: '_changeStrokeColorHandler',
-    value: function _changeStrokeColorHandler(color) {
-      color = color || 'transparent';
-      this.options.stroke = color;
-      this.actions.changeShape({
-        stroke: color
-      });
-    }
-  }]);
-
-  return Shape;
-}(_submenuBase2.default);
-
-exports.default = Shape;
-
-/***/ }),
-
-/***/ "./src/js/ui/submenuBase.js":
-/*!**********************************!*\
-  !*** ./src/js/ui/submenuBase.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Submenu Base Class
- * @class
- * @ignore
- */
-var Submenu = function () {
-  /**
-   * @param {HTMLElement} subMenuElement - submenu dom element
-   * @param {Locale} locale - translate text
-   * @param {string} name - name of sub menu
-   * @param {Object} iconStyle - style of icon
-   * @param {string} menuBarPosition - position of menu
-   * @param {*} templateHtml - template for SubMenuElement
-   * @param {boolean} [usageStatistics=false] - template for SubMenuElement
-   */
-  function Submenu(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        name = _ref.name,
-        makeSvgIcon = _ref.makeSvgIcon,
-        menuBarPosition = _ref.menuBarPosition,
-        templateHtml = _ref.templateHtml,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Submenu);
-
-    this.subMenuElement = subMenuElement;
-    this.menuBarPosition = menuBarPosition;
-    this.toggleDirection = menuBarPosition === 'top' ? 'down' : 'up';
-    this.colorPickerControls = [];
-    this.usageStatistics = usageStatistics;
-    this.eventHandler = {};
-    this._makeSubMenuElement({
-      locale: locale,
-      name: name,
-      makeSvgIcon: makeSvgIcon,
-      templateHtml: templateHtml
-    });
-  }
-
-  /**
-   * editor dom ui query selector
-   * @param {string} selectName - query selector string name
-   * @returns {HTMLElement}
-   */
-
-
-  _createClass(Submenu, [{
-    key: 'selector',
-    value: function selector(selectName) {
-      return this.subMenuElement.querySelector(selectName);
-    }
-
-    /**
-     * change show state change for colorpicker instance
-     * @param {Colorpicker} occurredControl - target Colorpicker Instance
-     */
-
-  }, {
-    key: 'colorPickerChangeShow',
-    value: function colorPickerChangeShow(occurredControl) {
-      this.colorPickerControls.forEach(function (pickerControl) {
-        if (occurredControl !== pickerControl) {
-          pickerControl.hide();
-        }
-      });
-    }
-
-    /**
-     * Get button type
-     * @param {HTMLElement} button - event target element
-     * @param {array} buttonNames - Array of button names
-     * @returns {string} - button type
-     */
-
-  }, {
-    key: 'getButtonType',
-    value: function getButtonType(button, buttonNames) {
-      return button.className.match(RegExp('(' + buttonNames.join('|') + ')'))[0];
-    }
-
-    /**
-     * Get button type
-     * @param {HTMLElement} target - event target element
-     * @param {string} removeClass - remove class name
-     * @param {string} addClass - add class name
-     */
-
-  }, {
-    key: 'changeClass',
-    value: function changeClass(target, removeClass, addClass) {
-      target.classList.remove(removeClass);
-      target.classList.add(addClass);
-    }
-
-    /**
-     * Interface method whose implementation is optional.
-     * Returns the menu to its default state.
-     */
-
-  }, {
-    key: 'changeStandbyMode',
-    value: function changeStandbyMode() {}
-
-    /**
-     * Interface method whose implementation is optional.
-     * Executed when the menu starts.
-     */
-
-  }, {
-    key: 'changeStartMode',
-    value: function changeStartMode() {}
-
-    /**
-     * Make submenu dom element
-     * @param {Locale} locale - translate text
-     * @param {string} name - submenu name
-     * @param {Object} iconStyle -  icon style
-     * @param {*} templateHtml - template for SubMenuElement
-     * @private
-     */
-
-  }, {
-    key: '_makeSubMenuElement',
-    value: function _makeSubMenuElement(_ref2) {
-      var locale = _ref2.locale,
-          name = _ref2.name,
-          iconStyle = _ref2.iconStyle,
-          makeSvgIcon = _ref2.makeSvgIcon,
-          templateHtml = _ref2.templateHtml;
-
-      var iconSubMenu = document.createElement('div');
-      iconSubMenu.className = 'tui-image-editor-menu-' + name;
-      iconSubMenu.innerHTML = templateHtml({
-        locale: locale,
-        iconStyle: iconStyle,
-        makeSvgIcon: makeSvgIcon
-      });
-
-      this.subMenuElement.appendChild(iconSubMenu);
-    }
-  }, {
-    key: '_onStartEditingInputBox',
-    value: function _onStartEditingInputBox() {
-      this.fire(_consts.eventNames.INPUT_BOX_EDITING_STARTED);
-    }
-  }, {
-    key: '_onStopEditingInputBox',
-    value: function _onStopEditingInputBox() {
-      this.fire(_consts.eventNames.INPUT_BOX_EDITING_STOPPED);
-    }
-  }]);
-
-  return Submenu;
-}();
-
-_tuiCodeSnippet.CustomEvents.mixin(Submenu);
-
-exports.default = Submenu;
-
-/***/ }),
-
-/***/ "./src/js/ui/template/controls.js":
-/*!****************************************!*\
-  !*** ./src/js/ui/template/controls.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        biImage = _ref.biImage,
-        loadButtonStyle = _ref.loadButtonStyle,
-        downloadButtonStyle = _ref.downloadButtonStyle,
-        menuBarPosition = _ref.menuBarPosition;
-    return '\n    <ul class="tui-image-editor-help-menu ' + (0, _util.getHelpMenuBarPosition)(menuBarPosition) + '"></ul>\n    <div class="tui-image-editor-controls">\n        <div class="tui-image-editor-controls-logo">\n            <img src="' + biImage + '" />\n        </div>\n        <ul class="tui-image-editor-menu"></ul>\n\n        <div class="tui-image-editor-controls-buttons">\n            <div style="' + loadButtonStyle + '">\n                ' + locale.localize('Load') + '\n                <input type="file" class="tui-image-editor-load-btn" />\n            </div>\n            <button class="tui-image-editor-download-btn" style="' + downloadButtonStyle + '">\n                ' + locale.localize('Download') + '\n            </button>\n        </div>\n    </div>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/mainContainer.js":
-/*!*********************************************!*\
-  !*** ./src/js/ui/template/mainContainer.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        biImage = _ref.biImage,
-        commonStyle = _ref.commonStyle,
-        headerStyle = _ref.headerStyle,
-        loadButtonStyle = _ref.loadButtonStyle,
-        downloadButtonStyle = _ref.downloadButtonStyle,
-        submenuStyle = _ref.submenuStyle;
-    return '\n    <div class="tui-image-editor-main-container" style="' + commonStyle + '">\n        <div class="tui-image-editor-header" style="' + headerStyle + '">\n            <div class="tui-image-editor-header-logo">\n                <img src="' + biImage + '" />\n            </div>\n            <div class="tui-image-editor-header-buttons">\n                <div style="' + loadButtonStyle + '">\n                    ' + locale.localize('Load') + '\n                    <input type="file" class="tui-image-editor-load-btn" />\n                </div>\n                <button class="tui-image-editor-download-btn" style="' + downloadButtonStyle + '">\n                    ' + locale.localize('Download') + '\n                </button>\n            </div>\n        </div>\n        <div class="tui-image-editor-main">\n            <div class="tui-image-editor-submenu">\n                <div class="tui-image-editor-submenu-style" style="' + submenuStyle + '"></div>\n            </div>\n            <div class="tui-image-editor-wrap">\n                <div class="tui-image-editor-size-wrap">\n                    <div class="tui-image-editor-align-wrap">\n                        <div class="tui-image-editor"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/style.js":
-/*!*************************************!*\
-  !*** ./src/js/ui/template/style.js ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function (_ref) {
-    var subMenuLabelActive = _ref.subMenuLabelActive,
-        subMenuLabelNormal = _ref.subMenuLabelNormal,
-        subMenuRangeTitle = _ref.subMenuRangeTitle,
-        submenuPartitionVertical = _ref.submenuPartitionVertical,
-        submenuPartitionHorizontal = _ref.submenuPartitionHorizontal,
-        submenuCheckbox = _ref.submenuCheckbox,
-        submenuRangePointer = _ref.submenuRangePointer,
-        submenuRangeValue = _ref.submenuRangeValue,
-        submenuColorpickerTitle = _ref.submenuColorpickerTitle,
-        submenuColorpickerButton = _ref.submenuColorpickerButton,
-        submenuRangeBar = _ref.submenuRangeBar,
-        submenuRangeSubbar = _ref.submenuRangeSubbar,
-        submenuDisabledRangePointer = _ref.submenuDisabledRangePointer,
-        submenuDisabledRangeBar = _ref.submenuDisabledRangeBar,
-        submenuDisabledRangeSubbar = _ref.submenuDisabledRangeSubbar,
-        submenuIconSize = _ref.submenuIconSize,
-        menuIconSize = _ref.menuIconSize,
-        biSize = _ref.biSize,
-        menuIconStyle = _ref.menuIconStyle,
-        submenuIconStyle = _ref.submenuIconStyle;
-    return "\n    .tie-icon-add-button.icon-bubble .tui-image-editor-button[data-icontype=\"icon-bubble\"] label,\n    .tie-icon-add-button.icon-heart .tui-image-editor-button[data-icontype=\"icon-heart\"] label,\n    .tie-icon-add-button.icon-location .tui-image-editor-button[data-icontype=\"icon-location\"] label,\n    .tie-icon-add-button.icon-polygon .tui-image-editor-button[data-icontype=\"icon-polygon\"] label,\n    .tie-icon-add-button.icon-star .tui-image-editor-button[data-icontype=\"icon-star\"] label,\n    .tie-icon-add-button.icon-star-2 .tui-image-editor-button[data-icontype=\"icon-star-2\"] label,\n    .tie-icon-add-button.icon-arrow-3 .tui-image-editor-button[data-icontype=\"icon-arrow-3\"] label,\n    .tie-icon-add-button.icon-arrow-2 .tui-image-editor-button[data-icontype=\"icon-arrow-2\"] label,\n    .tie-icon-add-button.icon-arrow .tui-image-editor-button[data-icontype=\"icon-arrow\"] label,\n    .tie-icon-add-button.icon-bubble .tui-image-editor-button[data-icontype=\"icon-bubble\"] label,\n    .tie-draw-line-select-button.line .tui-image-editor-button.line label,\n    .tie-draw-line-select-button.free .tui-image-editor-button.free label,\n    .tie-flip-button.flipX .tui-image-editor-button.flipX label,\n    .tie-flip-button.flipY .tui-image-editor-button.flipY label,\n    .tie-flip-button.resetFlip .tui-image-editor-button.resetFlip label,\n    .tie-crop-button .tui-image-editor-button.apply.active label,\n    .tie-crop-preset-button .tui-image-editor-button.preset.active label,\n    .tie-shape-button.rect .tui-image-editor-button.rect label,\n    .tie-shape-button.circle .tui-image-editor-button.circle label,\n    .tie-shape-button.triangle .tui-image-editor-button.triangle label,\n    .tie-text-effect-button .tui-image-editor-button.active label,\n    .tie-text-align-button.left .tui-image-editor-button.left label,\n    .tie-text-align-button.center .tui-image-editor-button.center label,\n    .tie-text-align-button.right .tui-image-editor-button.right label,\n    .tie-mask-apply.apply.active .tui-image-editor-button.apply label,\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button:hover > label,\n    .tui-image-editor-container .tui-image-editor-checkbox label > span {\n        " + subMenuLabelActive + "\n    }\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button > label,\n    .tui-image-editor-container .tui-image-editor-range-wrap.tui-image-editor-newline.short label,\n    .tui-image-editor-container .tui-image-editor-range-wrap.tui-image-editor-newline.short label > span {\n        " + subMenuLabelNormal + "\n    }\n    .tui-image-editor-container .tui-image-editor-range-wrap label > span {\n        " + subMenuRangeTitle + "\n    }\n    .tui-image-editor-container .tui-image-editor-partition > div {\n        " + submenuPartitionVertical + "\n    }\n    .tui-image-editor-container.left .tui-image-editor-submenu .tui-image-editor-partition > div,\n    .tui-image-editor-container.right .tui-image-editor-submenu .tui-image-editor-partition > div {\n        " + submenuPartitionHorizontal + "\n    }\n    .tui-image-editor-container .tui-image-editor-checkbox label > span:before {\n        " + submenuCheckbox + "\n    }\n    .tui-image-editor-container .tui-image-editor-checkbox label > input:checked + span:before {\n        border: 0;\n    }\n    .tui-image-editor-container .tui-image-editor-virtual-range-pointer {\n        " + submenuRangePointer + "\n    }\n    .tui-image-editor-container .tui-image-editor-virtual-range-bar {\n        " + submenuRangeBar + "\n    }\n    .tui-image-editor-container .tui-image-editor-virtual-range-subbar {\n        " + submenuRangeSubbar + "\n    }\n    .tui-image-editor-container .tui-image-editor-disabled .tui-image-editor-virtual-range-pointer {\n        " + submenuDisabledRangePointer + "\n    }\n    .tui-image-editor-container .tui-image-editor-disabled .tui-image-editor-virtual-range-subbar {\n        " + submenuDisabledRangeSubbar + "\n    }\n    .tui-image-editor-container .tui-image-editor-disabled .tui-image-editor-virtual-range-bar {\n        " + submenuDisabledRangeBar + "\n    }\n    .tui-image-editor-container .tui-image-editor-range-value {\n        " + submenuRangeValue + "\n    }\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button .color-picker-value + label {\n        " + submenuColorpickerTitle + "\n    }\n    .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button .color-picker-value {\n        " + submenuColorpickerButton + "\n    }\n    .tui-image-editor-container .svg_ic-menu {\n        " + menuIconSize + "\n    }\n    .tui-image-editor-container .svg_ic-submenu {\n        " + submenuIconSize + "\n    }\n    .tui-image-editor-container .tui-image-editor-controls-logo > img,\n    .tui-image-editor-container .tui-image-editor-header-logo > img {\n        " + biSize + "\n    }\n    .tui-image-editor-menu use.normal.use-default,\n    .tui-image-editor-help-menu use.normal.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.normal.color + ";\n        stroke: " + menuIconStyle.normal.color + ";\n    }\n    .tui-image-editor-menu use.active.use-default,\n    .tui-image-editor-help-menu use.active.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.active.color + ";\n        stroke: " + menuIconStyle.active.color + ";\n    }\n    .tui-image-editor-menu use.hover.use-default,\n    .tui-image-editor-help-menu use.hover.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.hover.color + ";\n        stroke: " + menuIconStyle.hover.color + ";\n    }\n    .tui-image-editor-menu use.disabled.use-default,\n    .tui-image-editor-help-menu use.disabled.use-default {\n        fill-rule: evenodd;\n        fill: " + menuIconStyle.disabled.color + ";\n        stroke: " + menuIconStyle.disabled.color + ";\n    }\n    .tui-image-editor-submenu use.normal.use-default {\n        fill-rule: evenodd;\n        fill: " + submenuIconStyle.normal.color + ";\n        stroke: " + submenuIconStyle.normal.color + ";\n    }\n    .tui-image-editor-submenu use.active.use-default {\n        fill-rule: evenodd;\n        fill: " + submenuIconStyle.active.color + ";\n        stroke: " + submenuIconStyle.active.color + ";\n    }\n";
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/crop.js":
-/*!********************************************!*\
-  !*** ./src/js/ui/template/submenu/crop.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Object} submenuInfo - submenu info for make template
- *   @param {Locale} locale - Translate text
- *   @param {Function} makeSvgIcon - svg icon generator
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon;
-    return '\n    <ul class="tui-image-editor-submenu-item">\n        <li class="tie-crop-preset-button">\n            <div class="tui-image-editor-button preset preset-none active">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'shape-rectangle', true) + '\n                </div>\n                <label> ' + locale.localize('Custom') + ' </label>\n            </div>\n            <div class="tui-image-editor-button preset preset-square">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'crop', true) + '\n                </div>\n                <label> ' + locale.localize('Square') + ' </label>\n            </div>\n            <div class="tui-image-editor-button preset preset-3-2">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'crop', true) + '\n                </div>\n                <label> ' + locale.localize('3:2') + ' </label>\n            </div>\n            <div class="tui-image-editor-button preset preset-4-3">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'crop', true) + '\n                </div>\n                <label> ' + locale.localize('4:3') + ' </label>\n            </div>\n            <div class="tui-image-editor-button preset preset-5-4">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'crop', true) + '\n                </div>\n                <label> ' + locale.localize('5:4') + ' </label>\n            </div>\n            <div class="tui-image-editor-button preset preset-7-5">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'crop', true) + '\n                </div>\n                <label> ' + locale.localize('7:5') + ' </label>\n            </div>\n            <div class="tui-image-editor-button preset preset-16-9">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'crop', true) + '\n                </div>\n                <label> ' + locale.localize('16:9') + ' </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition tui-image-editor-newline">\n        </li>\n        <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li class="tie-crop-button action">\n            <div class="tui-image-editor-button apply">\n                ' + makeSvgIcon(['normal', 'active'], 'apply') + '\n                <label>\n                    ' + locale.localize('Apply') + '\n                </label>\n            </div>\n            <div class="tui-image-editor-button cancel">\n                ' + makeSvgIcon(['normal', 'active'], 'cancel') + '\n                <label>\n                    ' + locale.localize('Cancel') + '\n                </label>\n            </div>\n        </li>\n    </ul>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/draw.js":
-/*!********************************************!*\
-  !*** ./src/js/ui/template/submenu/draw.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Object} submenuInfo - submenu info for make template
- *   @param {Locale} locale - Translate text
- *   @param {Function} makeSvgIcon - svg icon generator
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon;
-    return '\n    <ul class="tui-image-editor-submenu-item">\n        <li class="tie-draw-line-select-button">\n            <div class="tui-image-editor-button free">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'draw-free', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Free') + '\n                </label>\n            </div>\n            <div class="tui-image-editor-button line">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'draw-line', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Straight') + '\n                </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition">\n            <div></div>\n        </li>\n        <li>\n            <div class="tie-draw-color" title="' + locale.localize('Color') + '"></div>\n        </li>\n        <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li class="tui-image-editor-newline tui-image-editor-range-wrap">\n            <label class="range">' + locale.localize('Range') + '</label>\n            <div class="tie-draw-range"></div>\n            <input class="tie-draw-range-value tui-image-editor-range-value" value="0" />\n        </li>\n    </ul>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/filter.js":
-/*!**********************************************!*\
-  !*** ./src/js/ui/template/submenu/filter.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Locale} locale - Translate text
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale;
-    return '\n    <ul class="tui-image-editor-submenu-item">\n        <li class="tui-image-editor-submenu-align">\n            <div class="tui-image-editor-checkbox-wrap fixed-width">\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-grayscale">\n                        <span>' + locale.localize('Grayscale') + '</span>\n                    </label>\n                </div>\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-invert">\n                        <span>' + locale.localize('Invert') + '</span>\n                    </label>\n                </div>\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-sepia">\n                        <span>' + locale.localize('Sepia') + '</span>\n                    </label>\n                </div>\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-vintage">\n                        <span>' + locale.localize('Sepia2') + '</span>\n                    </label>\n                </div>\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-blur">\n                        <span>' + locale.localize('Blur') + '</span>\n                    </label>\n                </div>\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-sharpen">\n                        <span>' + locale.localize('Sharpen') + '</span>\n                    </label>\n                </div>\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-emboss">\n                        <span>' + locale.localize('Emboss') + '</span>\n                    </label>\n                </div>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition">\n            <div></div>\n        </li>\n        <li class="tui-image-editor-submenu-align">\n            <div class="tui-image-editor-checkbox-group tui-image-editor-disabled" style="margin-bottom: 7px;">\n                <div class="tui-image-editor-checkbox-wrap">\n                    <div class="tui-image-editor-checkbox">\n                        <label>\n                            <input type="checkbox" class="tie-remove-white">\n                            <span>' + locale.localize('Remove White') + '</span>\n                        </label>\n                    </div>\n                </div>\n                <div class="tui-image-editor-newline tui-image-editor-range-wrap short">\n                    <label>' + locale.localize('Distance') + '</label>\n                    <div class="tie-removewhite-distance-range"></div>\n                </div>\n            </div>\n            <div class="tui-image-editor-checkbox-group tui-image-editor-disabled">\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-brightness">\n                        <span>' + locale.localize('Brightness') + '</span>\n                    </label>\n                </div>\n                <div class="tui-image-editor-range-wrap short">\n                    <div class="tie-brightness-range"></div>\n                </div>\n            </div>\n            <div class="tui-image-editor-checkbox-group tui-image-editor-disabled">\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-noise">\n                        <span>' + locale.localize('Noise') + '</span>\n                    </label>\n                </div>\n                <div class="tui-image-editor-range-wrap short">\n                    <div class="tie-noise-range"></div>\n                </div>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li class="tui-image-editor-submenu-align">\n            <div class="tui-image-editor-checkbox-group tui-image-editor-disabled">\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-pixelate">\n                        <span>' + locale.localize('Pixelate') + '</span>\n                    </label>\n                </div>\n                <div class="tui-image-editor-range-wrap short">\n                    <div class="tie-pixelate-range"></div>\n                </div>\n            </div>\n            <div class="tui-image-editor-checkbox-group tui-image-editor-disabled">\n                <div class="tui-image-editor-newline tui-image-editor-checkbox-wrap">\n                    <div class="tui-image-editor-checkbox">\n                        <label>\n                            <input type="checkbox" class="tie-color-filter">\n                            <span>' + locale.localize('Color Filter') + '</span>\n                        </label>\n                    </div>\n                </div>\n                <div class="tui-image-editor-newline tui-image-editor-range-wrap short">\n                    <label>' + locale.localize('Threshold') + '</label>\n                    <div class="tie-colorfilter-threshold-range"></div>\n                </div>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition">\n            <div></div>\n        </li>\n        <li>\n            <div class="filter-color-item">\n                <div class="tie-filter-tint-color" title="' + locale.localize('Tint') + '"></div>\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-tint">\n                        <span></span>\n                    </label>\n                </div>\n            </div>\n            <div class="filter-color-item">\n                <div class="tie-filter-multiply-color" title="' + locale.localize('Multiply') + '"></div>\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-multiply">\n                        <span></span>\n                    </label>\n                </div>\n            </div>\n            <div class="filter-color-item">\n                <div class="tie-filter-blend-color" title="' + locale.localize('Blend') + '"></div>\n                <div class="tui-image-editor-checkbox">\n                    <label>\n                        <input type="checkbox" class="tie-blend">\n                        <span></span>\n                    </label>\n                </div>\n            </div>\n        </li>\n    </ul>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/flip.js":
-/*!********************************************!*\
-  !*** ./src/js/ui/template/submenu/flip.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Object} submenuInfo - submenu info for make template
- *   @param {Locale} locale - Translate text
- *   @param {Function} makeSvgIcon - svg icon generator
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon;
-    return '\n    <ul class="tie-flip-button tui-image-editor-submenu-item">\n        <li>\n            <div class="tui-image-editor-button flipX">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'flip-x', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Flip X') + '\n                </label>\n            </div>\n            <div class="tui-image-editor-button flipY">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'flip-y', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Flip Y') + '\n                </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition">\n            <div></div>\n        </li>\n        <li>\n            <div class="tui-image-editor-button resetFlip">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'flip-reset', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Reset') + '\n                </label>\n            </div>\n        </li>\n    </ul>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/history.js":
-/*!***********************************************!*\
-  !*** ./src/js/ui/template/submenu/history.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Object} submenuInfo - submenu info for make template
- *   @param {Locale} locale - Translate text
- *   @param {Function} makeSvgIcon - svg icon generator
- *   @param {string} name - history name
- *   @param {string} detail - history detail information
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon,
-        name = _ref.name,
-        detail = _ref.detail;
-    return '\n    <div class="tui-image-editor-history-item history">\n        <div class="history-item-icon">\n            ' + makeSvgIcon(['normal', 'active'], 'history-' + name.toLowerCase(), true) + '\n        </div>\n        <span>\n            ' + locale.localize(name) + '\n            ' + (detail ? '(' + locale.localize(detail) + ')' : '') + '\n        </span>\n        <div class="history-item-checkbox">\n            ' + makeSvgIcon(['normal'], 'history-check', true) + '\n        </div>\n    </div>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/icon.js":
-/*!********************************************!*\
-  !*** ./src/js/ui/template/submenu/icon.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Object} submenuInfo - submenu info for make template
- *   @param {Locale} locale - Translate text
- *   @param {Function} makeSvgIcon - svg icon generator
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon;
-    return '\n    <ul class="tui-image-editor-submenu-item">\n        <li class="tie-icon-add-button">\n            <div class="tui-image-editor-button" data-icontype="icon-arrow">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-arrow', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Arrow') + '\n                </label>\n            </div>\n            <div class="tui-image-editor-button" data-icontype="icon-arrow-2">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-arrow-2', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Arrow-2') + '\n                </label>\n            </div>\n            <div class="tui-image-editor-button" data-icontype="icon-arrow-3">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-arrow-3', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Arrow-3') + '\n                </label>\n            </div>\n            <div class="tui-image-editor-button" data-icontype="icon-star">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-star', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Star-1') + '\n                </label>\n            </div>\n            <div class="tui-image-editor-button" data-icontype="icon-star-2">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-star-2', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Star-2') + '\n                </label>\n            </div>\n\n            <div class="tui-image-editor-button" data-icontype="icon-polygon">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-polygon', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Polygon') + '\n                </label>\n            </div>\n\n            <div class="tui-image-editor-button" data-icontype="icon-location">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-location', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Location') + '\n                </label>\n            </div>\n\n            <div class="tui-image-editor-button" data-icontype="icon-heart">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-heart', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Heart') + '\n                </label>\n            </div>\n\n            <div class="tui-image-editor-button" data-icontype="icon-bubble">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-bubble', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Bubble') + '\n                </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition">\n            <div></div>\n        </li>\n        <li class="tie-icon-add-button">\n            <div class="tui-image-editor-button" style="margin:0">\n                <div>\n                    <input type="file" accept="image/*" class="tie-icon-image-file">\n                    ' + makeSvgIcon(['normal', 'active'], 'icon-load', true) + '\n                </div>\n                <label>\n                    ' + locale.localize('Custom icon') + '\n                </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition">\n            <div></div>\n        </li>\n        <li>\n            <div class="tie-icon-color" title="' + locale.localize('Color') + '"></div>\n        </li>\n    </ul>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/mask.js":
-/*!********************************************!*\
-  !*** ./src/js/ui/template/submenu/mask.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Object} submenuInfo - submenu info for make template
- *   @param {Locale} locale - Translate text
- *   @param {Function} makeSvgIcon - svg icon generator
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon;
-    return '\n    <ul class="tui-image-editor-submenu-item">\n        <li>\n            <div class="tui-image-editor-button">\n                <div>\n                    <input type="file" accept="image/*" class="tie-mask-image-file">\n                    ' + makeSvgIcon(['normal', 'active'], 'mask-load', true) + '\n                </div>\n                <label> ' + locale.localize('Load Mask Image') + ' </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li class="tie-mask-apply tui-image-editor-newline apply" style="margin-top: 22px;margin-bottom: 5px">\n            <div class="tui-image-editor-button apply">\n                ' + makeSvgIcon(['normal', 'active'], 'apply') + '\n                <label>\n                    ' + locale.localize('Apply') + '\n                </label>\n            </div>\n        </li>\n    </ul>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/rotate.js":
-/*!**********************************************!*\
-  !*** ./src/js/ui/template/submenu/rotate.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Object} submenuInfo - submenu info for make template
- *   @param {Locale} locale - Translate text
- *   @param {Function} makeSvgIcon - svg icon generator
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon;
-    return '\n    <ul class="tui-image-editor-submenu-item">\n        <li class="tie-rotate-button">\n            <div class="tui-image-editor-button clockwise">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'rotate-clockwise', true) + '\n                </div>\n                <label> 30 </label>\n            </div>\n            <div class="tui-image-editor-button counterclockwise">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'rotate-counterclockwise', true) + '\n                </div>\n                <label> -30 </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li class="tui-image-editor-newline tui-image-editor-range-wrap">\n            <label class="range">' + locale.localize('Range') + '</label>\n            <div class="tie-rotate-range"></div>\n            <input class="tie-rotate-range-value tui-image-editor-range-value" value="0" />\n        </li>\n    </ul>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/shape.js":
-/*!*********************************************!*\
-  !*** ./src/js/ui/template/submenu/shape.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Object} submenuInfo - submenu info for make template
- *   @param {Locale} locale - Translate text
- *   @param {Function} makeSvgIcon - svg icon generator
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon;
-    return '\n    <ul class="tui-image-editor-submenu-item">\n        <li class="tie-shape-button">\n            <div class="tui-image-editor-button rect">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'shape-rectangle', true) + '\n                </div>\n                <label> ' + locale.localize('Rectangle') + ' </label>\n            </div>\n            <div class="tui-image-editor-button circle">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'shape-circle', true) + '\n                </div>\n                <label> ' + locale.localize('Circle') + ' </label>\n            </div>\n            <div class="tui-image-editor-button triangle">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'shape-triangle', true) + '\n                </div>\n                <label> ' + locale.localize('Triangle') + ' </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition">\n            <div></div>\n        </li>\n        <li class="tie-shape-color-button">\n            <div class="tie-color-fill" title="' + locale.localize('Fill') + '"></div>\n            <div class="tie-color-stroke" title="' + locale.localize('Stroke') + '"></div>\n        </li>\n        <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li class="tui-image-editor-newline tui-image-editor-range-wrap">\n            <label class="range">' + locale.localize('Stroke') + '</label>\n            <div class="tie-stroke-range"></div>\n            <input class="tie-stroke-range-value tui-image-editor-range-value" value="0" />\n        </li>\n    </ul>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/template/submenu/text.js":
-/*!********************************************!*\
-  !*** ./src/js/ui/template/submenu/text.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-/**
- * @param {Object} submenuInfo - submenu info for make template
- *   @param {Locale} locale - Translate text
- *   @param {Function} makeSvgIcon - svg icon generator
- * @returns {string}
- */
-exports.default = function (_ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon;
-    return '\n    <ul class="tui-image-editor-submenu-item">\n        <li class="tie-text-effect-button">\n            <div class="tui-image-editor-button bold">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'text-bold', true) + '\n                </div>\n                <label> ' + locale.localize('Bold') + ' </label>\n            </div>\n            <div class="tui-image-editor-button italic">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'text-italic', true) + '\n                </div>\n                <label> ' + locale.localize('Italic') + ' </label>\n            </div>\n            <div class="tui-image-editor-button underline">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'text-underline', true) + '\n                </div>\n                <label> ' + locale.localize('Underline') + ' </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition">\n            <div></div>\n        </li>\n        <li class="tie-text-align-button">\n            <div class="tui-image-editor-button left">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'text-align-left', true) + '\n                </div>\n                <label> ' + locale.localize('Left') + ' </label>\n            </div>\n            <div class="tui-image-editor-button center">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'text-align-center', true) + '\n                </div>\n                <label> ' + locale.localize('Center') + ' </label>\n            </div>\n            <div class="tui-image-editor-button right">\n                <div>\n                    ' + makeSvgIcon(['normal', 'active'], 'text-align-right', true) + '\n                </div>\n                <label> ' + locale.localize('Right') + ' </label>\n            </div>\n        </li>\n        <li class="tui-image-editor-partition">\n            <div></div>\n        </li>\n        <li>\n            <div class="tie-text-color" title="' + locale.localize('Color') + '"></div>\n        </li>\n        <li class="tui-image-editor-partition only-left-right">\n            <div></div>\n        </li>\n        <li class="tui-image-editor-newline tui-image-editor-range-wrap">\n            <label class="range">' + locale.localize('Text size') + '</label>\n            <div class="tie-text-range"></div>\n            <input class="tie-text-range-value tui-image-editor-range-value" value="0" />\n        </li>\n    </ul>\n';
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/text.js":
-/*!***************************!*\
-  !*** ./src/js/ui/text.js ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _range = __webpack_require__(/*! @/ui/tools/range */ "./src/js/ui/tools/range.js");
-
-var _range2 = _interopRequireDefault(_range);
-
-var _colorpicker = __webpack_require__(/*! @/ui/tools/colorpicker */ "./src/js/ui/tools/colorpicker.js");
-
-var _colorpicker2 = _interopRequireDefault(_colorpicker);
-
-var _submenuBase = __webpack_require__(/*! @/ui/submenuBase */ "./src/js/ui/submenuBase.js");
-
-var _submenuBase2 = _interopRequireDefault(_submenuBase);
-
-var _text = __webpack_require__(/*! @/ui/template/submenu/text */ "./src/js/ui/template/submenu/text.js");
-
-var _text2 = _interopRequireDefault(_text);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * Crop ui class
- * @class
- * @ignore
- */
-var Text = function (_Submenu) {
-  _inherits(Text, _Submenu);
-
-  function Text(subMenuElement, _ref) {
-    var locale = _ref.locale,
-        makeSvgIcon = _ref.makeSvgIcon,
-        menuBarPosition = _ref.menuBarPosition,
-        usageStatistics = _ref.usageStatistics;
-
-    _classCallCheck(this, Text);
-
-    var _this = _possibleConstructorReturn(this, (Text.__proto__ || Object.getPrototypeOf(Text)).call(this, subMenuElement, {
-      locale: locale,
-      name: 'text',
-      makeSvgIcon: makeSvgIcon,
-      menuBarPosition: menuBarPosition,
-      templateHtml: _text2.default,
-      usageStatistics: usageStatistics
-    }));
-
-    _this.effect = {
-      bold: false,
-      italic: false,
-      underline: false
-    };
-    _this.align = 'left';
-    _this._els = {
-      textEffectButton: _this.selector('.tie-text-effect-button'),
-      textAlignButton: _this.selector('.tie-text-align-button'),
-      textColorpicker: new _colorpicker2.default(_this.selector('.tie-text-color'), '#ffbb3b', _this.toggleDirection, _this.usageStatistics),
-      textRange: new _range2.default({
-        slider: _this.selector('.tie-text-range'),
-        input: _this.selector('.tie-text-range-value')
-      }, _consts.defaultTextRangeValues)
-    };
-
-    _this.colorPickerInputBox = _this._els.textColorpicker.colorpickerElement.querySelector(_consts.selectorNames.COLOR_PICKER_INPUT_BOX);
-    return _this;
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Text, [{
-    key: 'destroy',
-    value: function destroy() {
-      this._removeEvent();
-      this._els.textColorpicker.destroy();
-      this._els.textRange.destroy();
-
-      (0, _util.assignmentForDestroy)(this);
-    }
-
-    /**
-     * Add event for text
-     * @param {Object} actions - actions for text
-     *   @param {Function} actions.changeTextStyle - change text style
-     */
-
-  }, {
-    key: 'addEvent',
-    value: function addEvent(actions) {
-      var setTextEffect = this._setTextEffectHandler.bind(this);
-      var setTextAlign = this._setTextAlignHandler.bind(this);
-
-      this.eventHandler = {
-        setTextEffect: setTextEffect,
-        setTextAlign: setTextAlign
-      };
-
-      this.actions = actions;
-      this._els.textEffectButton.addEventListener('click', setTextEffect);
-      this._els.textAlignButton.addEventListener('click', setTextAlign);
-      this._els.textRange.on('change', this._changeTextRnageHandler.bind(this));
-      this._els.textColorpicker.on('change', this._changeColorHandler.bind(this));
-
-      this.colorPickerInputBox.addEventListener(_consts.eventNames.FOCUS, this._onStartEditingInputBox.bind(this));
-      this.colorPickerInputBox.addEventListener(_consts.eventNames.BLUR, this._onStopEditingInputBox.bind(this));
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      var _eventHandler = this.eventHandler,
-          setTextEffect = _eventHandler.setTextEffect,
-          setTextAlign = _eventHandler.setTextAlign;
-
-
-      this._els.textEffectButton.removeEventListener('click', setTextEffect);
-      this._els.textAlignButton.removeEventListener('click', setTextAlign);
-      this._els.textRange.off();
-      this._els.textColorpicker.off();
-
-      this.colorPickerInputBox.removeEventListener(_consts.eventNames.FOCUS, this._onStartEditingInputBox.bind(this));
-      this.colorPickerInputBox.removeEventListener(_consts.eventNames.BLUR, this._onStopEditingInputBox.bind(this));
-    }
-
-    /**
-     * Returns the menu to its default state.
-     */
-
-  }, {
-    key: 'changeStandbyMode',
-    value: function changeStandbyMode() {
-      this.actions.stopDrawingMode();
-    }
-
-    /**
-     * Executed when the menu starts.
-     */
-
-  }, {
-    key: 'changeStartMode',
-    value: function changeStartMode() {
-      this.actions.modeChange('text');
-    }
-  }, {
-    key: 'setTextStyleStateOnAction',
-    value: function setTextStyleStateOnAction() {
-      var textStyle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var fill = textStyle.fill,
-          fontSize = textStyle.fontSize,
-          fontStyle = textStyle.fontStyle,
-          fontWeight = textStyle.fontWeight,
-          textDecoration = textStyle.textDecoration,
-          textAlign = textStyle.textAlign;
-
-
-      this.textColor = fill;
-      this.fontSize = fontSize;
-      this.setEffectState('italic', fontStyle);
-      this.setEffectState('bold', fontWeight);
-      this.setEffectState('underline', textDecoration);
-      this.setAlignState(textAlign);
-    }
-  }, {
-    key: 'setEffectState',
-    value: function setEffectState(effectName, value) {
-      var effectValue = value === 'italic' || value === 'bold' || value === 'underline';
-      var button = this._els.textEffectButton.querySelector('.tui-image-editor-button.' + effectName);
-
-      this.effect[effectName] = effectValue;
-
-      button.classList[effectValue ? 'add' : 'remove']('active');
-    }
-  }, {
-    key: 'setAlignState',
-    value: function setAlignState(value) {
-      var button = this._els.textAlignButton;
-      button.classList.remove(this.align);
-      button.classList.add(value);
-      this.align = value;
-    }
-
-    /**
-     * text effect set handler
-     * @param {object} event - add button event object
-     * @private
-     */
-
-  }, {
-    key: '_setTextEffectHandler',
-    value: function _setTextEffectHandler(event) {
-      var button = event.target.closest('.tui-image-editor-button');
-      if (button) {
-        var _button$className$mat = button.className.match(/(bold|italic|underline)/),
-            styleType = _button$className$mat[0];
-
-        var styleObj = {
-          bold: { fontWeight: 'bold' },
-          italic: { fontStyle: 'italic' },
-          underline: { textDecoration: 'underline' }
-        }[styleType];
-
-        this.effect[styleType] = !this.effect[styleType];
-        button.classList.toggle('active');
-        this.actions.changeTextStyle(styleObj);
-      }
-    }
-
-    /**
-     * text effect set handler
-     * @param {object} event - add button event object
-     * @private
-     */
-
-  }, {
-    key: '_setTextAlignHandler',
-    value: function _setTextAlignHandler(event) {
-      var button = event.target.closest('.tui-image-editor-button');
-      if (button) {
-        var styleType = this.getButtonType(button, ['left', 'center', 'right']);
-
-        event.currentTarget.classList.remove(this.align);
-        if (this.align !== styleType) {
-          event.currentTarget.classList.add(styleType);
-        }
-        this.actions.changeTextStyle({ textAlign: styleType });
-
-        this.align = styleType;
-      }
-    }
-
-    /**
-     * text align set handler
-     * @param {number} value - range value
-     * @param {boolean} isLast - Is last change
-     * @private
-     */
-
-  }, {
-    key: '_changeTextRnageHandler',
-    value: function _changeTextRnageHandler(value, isLast) {
-      this.actions.changeTextStyle({
-        fontSize: value
-      }, !isLast);
-    }
-
-    /**
-     * change color handler
-     * @param {string} color - change color string
-     * @private
-     */
-
-  }, {
-    key: '_changeColorHandler',
-    value: function _changeColorHandler(color) {
-      color = color || 'transparent';
-      this.actions.changeTextStyle({
-        fill: color
-      });
-    }
-  }, {
-    key: 'textColor',
-    set: function set(color) {
-      this._els.textColorpicker.color = color;
-    }
-
-    /**
-     * Get text color
-     * @returns {string} - text color
-     */
-    ,
-    get: function get() {
-      return this._els.textColorpicker.color;
-    }
-
-    /**
-     * Get text size
-     * @returns {string} - text size
-     */
-
-  }, {
-    key: 'fontSize',
-    get: function get() {
-      return this._els.textRange.value;
-    }
-
-    /**
-     * Set text size
-     * @param {Number} value - text size
-     */
-    ,
-    set: function set(value) {
-      this._els.textRange.value = value;
-    }
-
-    /**
-     * get font style
-     * @returns {string} - font style
-     */
-
-  }, {
-    key: 'fontStyle',
-    get: function get() {
-      return this.effect.italic ? 'italic' : 'normal';
-    }
-
-    /**
-     * get font weight
-     * @returns {string} - font weight
-     */
-
-  }, {
-    key: 'fontWeight',
-    get: function get() {
-      return this.effect.bold ? 'bold' : 'normal';
-    }
-
-    /**
-     * get text underline text underline
-     * @returns {boolean} - true or false
-     */
-
-  }, {
-    key: 'underline',
-    get: function get() {
-      return this.effect.underline;
-    }
-  }]);
-
-  return Text;
-}(_submenuBase2.default);
-
-exports.default = Text;
-
-/***/ }),
-
-/***/ "./src/js/ui/theme/standard.js":
-/*!*************************************!*\
-  !*** ./src/js/ui/theme/standard.js ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- * @author NHN. FE Development Team <dl_javascript@nhn.com>
- * @fileoverview The standard theme
- */
-
-/**
- * Full configuration for theme.<br>
- * @typedef {object} themeConfig
- * @property {string} common.bi.image - Brand icon image
- * @property {string} common.bisize.width - Icon image width
- * @property {string} common.bisize.height - Icon Image Height
- * @property {string} common.backgroundImage - Background image
- * @property {string} common.backgroundColor - Background color
- * @property {string} common.border - Full area border style
- * @property {string} header.backgroundImage - header area background
- * @property {string} header.backgroundColor - header area background color
- * @property {string} header.border - header area border style
- * @property {string} loadButton.backgroundColor - load button background color
- * @property {string} loadButton.border - load button border style
- * @property {string} loadButton.color - load button foreground color
- * @property {string} loadButton.fontFamily - load button font type
- * @property {string} loadButton.fontSize - load button font size
- * @property {string} downloadButton.backgroundColor - download button background color
- * @property {string} downloadButton.border - download button border style
- * @property {string} downloadButton.color - download button foreground color
- * @property {string} downloadButton.fontFamily - download button font type
- * @property {string} downloadButton.fontSize - download button font size
- * @property {string} menu.normalIcon.color - Menu normal color for default icon
- * @property {string} menu.normalIcon.path - Menu normal icon svg bundle file path
- * @property {string} menu.normalIcon.name - Menu normal icon svg bundle name
- * @property {string} menu.activeIcon.color - Menu active color for default icon
- * @property {string} menu.activeIcon.path - Menu active icon svg bundle file path
- * @property {string} menu.activeIcon.name - Menu active icon svg bundle name
- * @property {string} menu.disabled.color - Menu disabled color for default icon
- * @property {string} menu.disabled.path - Menu disabled icon svg bundle file path
- * @property {string} menu.disabled.name - Menu disabled icon svg bundle name
- * @property {string} menu.hover.color - Menu default icon hover color
- * @property {string} menu.hover.path - Menu hover icon svg bundle file path
- * @property {string} menu.hover.name - Menu hover icon svg bundle name
- * @property {string} menu.iconSize.width - Menu icon Size Width
- * @property {string} menu.iconSize.height - Menu Icon Size Height
- * @property {string} submenu.backgroundColor - Sub-menu area background color
- * @property {string} submenu.partition.color - Submenu partition line color
- * @property {string} submenu.normalIcon.color - Submenu normal color for default icon
- * @property {string} submenu.normalIcon.path - Submenu default icon svg bundle file path
- * @property {string} submenu.normalIcon.name - Submenu default icon svg bundle name
- * @property {string} submenu.activeIcon.color - Submenu active color for default icon
- * @property {string} submenu.activeIcon.path - Submenu active icon svg bundle file path
- * @property {string} submenu.activeIcon.name - Submenu active icon svg bundle name
- * @property {string} submenu.iconSize.width - Submenu icon Size Width
- * @property {string} submenu.iconSize.height - Submenu Icon Size Height
- * @property {string} submenu.normalLabel.color - Submenu default label color
- * @property {string} submenu.normalLabel.fontWeight - Sub Menu Default Label Font Thickness
- * @property {string} submenu.activeLabel.color - Submenu active label color
- * @property {string} submenu.activeLabel.fontWeight - Submenu active label Font thickness
- * @property {string} checkbox.border - Checkbox border style
- * @property {string} checkbox.backgroundColor - Checkbox background color
- * @property {string} range.pointer.color - range control pointer color
- * @property {string} range.bar.color - range control bar color
- * @property {string} range.subbar.color - range control subbar color
- * @property {string} range.value.color - range number box font color
- * @property {string} range.value.fontWeight - range number box font thickness
- * @property {string} range.value.fontSize - range number box font size
- * @property {string} range.value.border - range number box border style
- * @property {string} range.value.backgroundColor - range number box background color
- * @property {string} range.title.color - range title font color
- * @property {string} range.title.fontWeight - range title font weight
- * @property {string} colorpicker.button.border - colorpicker button border style
- * @property {string} colorpicker.title.color - colorpicker button title font color
- * @example
- // default keys and styles
- var customTheme = {
-    'common.bi.image': 'https://uicdn.toast.com/toastui/img/tui-image-editor-bi.png',
-    'common.bisize.width': '251px',
-    'common.bisize.height': '21px',
-    'common.backgroundImage': 'none',
-    'common.backgroundColor': '#1e1e1e',
-    'common.border': '0px',
-
-    // header
-    'header.backgroundImage': 'none',
-    'header.backgroundColor': 'transparent',
-    'header.border': '0px',
-
-    // load button
-    'loadButton.backgroundColor': '#fff',
-    'loadButton.border': '1px solid #ddd',
-    'loadButton.color': '#222',
-    'loadButton.fontFamily': 'NotoSans, sans-serif',
-    'loadButton.fontSize': '12px',
-
-    // download button
-    'downloadButton.backgroundColor': '#fdba3b',
-    'downloadButton.border': '1px solid #fdba3b',
-    'downloadButton.color': '#fff',
-    'downloadButton.fontFamily': 'NotoSans, sans-serif',
-    'downloadButton.fontSize': '12px',
-
-    // icons default
-    'menu.normalIcon.color': '#8a8a8a',
-    'menu.activeIcon.color': '#555555',
-    'menu.disabledIcon.color': '#434343',
-    'menu.hoverIcon.color': '#e9e9e9',
-    'submenu.normalIcon.color': '#8a8a8a',
-    'submenu.activeIcon.color': '#e9e9e9',
-
-    'menu.iconSize.width': '24px',
-    'menu.iconSize.height': '24px',
-    'submenu.iconSize.width': '32px',
-    'submenu.iconSize.height': '32px',
-
-    // submenu primary color
-    'submenu.backgroundColor': '#1e1e1e',
-    'submenu.partition.color': '#858585',
-
-    // submenu labels
-    'submenu.normalLabel.color': '#858585',
-    'submenu.normalLabel.fontWeight': 'lighter',
-    'submenu.activeLabel.color': '#fff',
-    'submenu.activeLabel.fontWeight': 'lighter',
-
-    // checkbox style
-    'checkbox.border': '1px solid #ccc',
-    'checkbox.backgroundColor': '#fff',
-
-    // rango style
-    'range.pointer.color': '#fff',
-    'range.bar.color': '#666',
-    'range.subbar.color': '#d1d1d1',
-
-    'range.disabledPointer.color': '#414141',
-    'range.disabledBar.color': '#282828',
-    'range.disabledSubbar.color': '#414141',
-
-    'range.value.color': '#fff',
-    'range.value.fontWeight': 'lighter',
-    'range.value.fontSize': '11px',
-    'range.value.border': '1px solid #353535',
-    'range.value.backgroundColor': '#151515',
-    'range.title.color': '#fff',
-    'range.title.fontWeight': 'lighter',
-
-    // colorpicker style
-    'colorpicker.button.border': '1px solid #1e1e1e',
-    'colorpicker.title.color': '#fff'
-};
- */
-exports.default = {
-  'common.bi.image': 'https://uicdn.toast.com/toastui/img/tui-image-editor-bi.png',
-  'common.bisize.width': '251px',
-  'common.bisize.height': '21px',
-  'common.backgroundImage': 'none',
-  'common.backgroundColor': '#1e1e1e',
-  'common.border': '0px',
-
-  // header
-  'header.backgroundImage': 'none',
-  'header.backgroundColor': 'transparent',
-  'header.border': '0px',
-
-  // load button
-  'loadButton.backgroundColor': '#fff',
-  'loadButton.border': '1px solid #ddd',
-  'loadButton.color': '#222',
-  'loadButton.fontFamily': "'Noto Sans', sans-serif",
-  'loadButton.fontSize': '12px',
-
-  // download button
-  'downloadButton.backgroundColor': '#fdba3b',
-  'downloadButton.border': '1px solid #fdba3b',
-  'downloadButton.color': '#fff',
-  'downloadButton.fontFamily': "'Noto Sans', sans-serif",
-  'downloadButton.fontSize': '12px',
-
-  // main icons
-  'menu.normalIcon.color': '#8a8a8a',
-  'menu.activeIcon.color': '#555555',
-  'menu.disabledIcon.color': '#434343',
-  'menu.hoverIcon.color': '#e9e9e9',
-
-  // submenu icons
-  'submenu.normalIcon.color': '#8a8a8a',
-  'submenu.activeIcon.color': '#e9e9e9',
-
-  'menu.iconSize.width': '24px',
-  'menu.iconSize.height': '24px',
-
-  'submenu.iconSize.width': '32px',
-  'submenu.iconSize.height': '32px',
-
-  // submenu primary color
-  'submenu.backgroundColor': '#1e1e1e',
-  'submenu.partition.color': '#3c3c3c',
-
-  // submenu labels
-  'submenu.normalLabel.color': '#8a8a8a',
-  'submenu.normalLabel.fontWeight': 'lighter',
-  'submenu.activeLabel.color': '#fff',
-  'submenu.activeLabel.fontWeight': 'lighter',
-
-  // checkbox style
-  'checkbox.border': '0px',
-  'checkbox.backgroundColor': '#fff',
-
-  // range style
-  'range.pointer.color': '#fff',
-  'range.bar.color': '#666',
-  'range.subbar.color': '#d1d1d1',
-
-  'range.disabledPointer.color': '#414141',
-  'range.disabledBar.color': '#282828',
-  'range.disabledSubbar.color': '#414141',
-
-  'range.value.color': '#fff',
-  'range.value.fontWeight': 'lighter',
-  'range.value.fontSize': '11px',
-  'range.value.border': '1px solid #353535',
-  'range.value.backgroundColor': '#151515',
-  'range.title.color': '#fff',
-  'range.title.fontWeight': 'lighter',
-
-  // colorpicker style
-  'colorpicker.button.border': '1px solid #1e1e1e',
-  'colorpicker.title.color': '#fff'
-};
-
-/***/ }),
-
-/***/ "./src/js/ui/theme/theme.js":
-/*!**********************************!*\
-  !*** ./src/js/ui/theme/theme.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _style = __webpack_require__(/*! @/ui/template/style */ "./src/js/ui/template/style.js");
-
-var _style2 = _interopRequireDefault(_style);
-
-var _standard = __webpack_require__(/*! @/ui/theme/standard */ "./src/js/ui/theme/standard.js");
-
-var _standard2 = _interopRequireDefault(_standard);
-
-var _default = __webpack_require__(/*! @svg/default.svg */ "./src/svg/default.svg");
-
-var _default2 = _interopRequireDefault(_default);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Theme manager
- * @class
- * @param {Object} customTheme - custom theme
- * @ignore
- */
-var Theme = function () {
-  function Theme(customTheme) {
-    _classCallCheck(this, Theme);
-
-    this.styles = this._changeToObject((0, _tuiCodeSnippet.extend)({}, _standard2.default, customTheme));
-    (0, _util.styleLoad)(this._styleMaker());
-
-    this._loadDefaultSvgIcon();
-  }
-
-  /**
-   * Get a Style cssText or StyleObject
-   * @param {string} type - style type
-   * @returns {string|object} - cssText or StyleObject
-   */
-  // eslint-disable-next-line complexity
-
-
-  _createClass(Theme, [{
-    key: 'getStyle',
-    value: function getStyle(type) {
-      var result = null;
-      var firstProperty = type.replace(/\..+$/, '');
-      var option = this.styles[type];
-      switch (type) {
-        case 'common.bi':
-          result = this.styles[type].image;
-          break;
-        case 'menu.icon':
-          result = {
-            active: this.styles[firstProperty + '.activeIcon'],
-            normal: this.styles[firstProperty + '.normalIcon'],
-            hover: this.styles[firstProperty + '.hoverIcon'],
-            disabled: this.styles[firstProperty + '.disabledIcon']
-          };
-          break;
-        case 'submenu.icon':
-          result = {
-            active: this.styles[firstProperty + '.activeIcon'],
-            normal: this.styles[firstProperty + '.normalIcon']
-          };
-          break;
-        case 'submenu.label':
-          result = {
-            active: this._makeCssText(this.styles[firstProperty + '.activeLabel']),
-            normal: this._makeCssText(this.styles[firstProperty + '.normalLabel'])
-          };
-          break;
-        case 'submenu.partition':
-          result = {
-            vertical: this._makeCssText((0, _tuiCodeSnippet.extend)({}, option, { borderLeft: '1px solid ' + option.color })),
-            horizontal: this._makeCssText((0, _tuiCodeSnippet.extend)({}, option, { borderBottom: '1px solid ' + option.color }))
-          };
-          break;
-
-        case 'range.disabledPointer':
-        case 'range.disabledBar':
-        case 'range.disabledSubbar':
-        case 'range.pointer':
-        case 'range.bar':
-        case 'range.subbar':
-          option.backgroundColor = option.color;
-          result = this._makeCssText(option);
-          break;
-        default:
-          result = this._makeCssText(option);
-          break;
-      }
-
-      return result;
-    }
-
-    /**
-     * Make css resource
-     * @returns {string} - serialized css text
-     * @private
-     */
-
-  }, {
-    key: '_styleMaker',
-    value: function _styleMaker() {
-      var submenuLabelStyle = this.getStyle('submenu.label');
-      var submenuPartitionStyle = this.getStyle('submenu.partition');
-
-      return (0, _style2.default)({
-        subMenuLabelActive: submenuLabelStyle.active,
-        subMenuLabelNormal: submenuLabelStyle.normal,
-        submenuPartitionVertical: submenuPartitionStyle.vertical,
-        submenuPartitionHorizontal: submenuPartitionStyle.horizontal,
-        biSize: this.getStyle('common.bisize'),
-        subMenuRangeTitle: this.getStyle('range.title'),
-        submenuRangePointer: this.getStyle('range.pointer'),
-        submenuRangeBar: this.getStyle('range.bar'),
-        submenuRangeSubbar: this.getStyle('range.subbar'),
-
-        submenuDisabledRangePointer: this.getStyle('range.disabledPointer'),
-        submenuDisabledRangeBar: this.getStyle('range.disabledBar'),
-        submenuDisabledRangeSubbar: this.getStyle('range.disabledSubbar'),
-
-        submenuRangeValue: this.getStyle('range.value'),
-        submenuColorpickerTitle: this.getStyle('colorpicker.title'),
-        submenuColorpickerButton: this.getStyle('colorpicker.button'),
-        submenuCheckbox: this.getStyle('checkbox'),
-        menuIconSize: this.getStyle('menu.iconSize'),
-        submenuIconSize: this.getStyle('submenu.iconSize'),
-        menuIconStyle: this.getStyle('menu.icon'),
-        submenuIconStyle: this.getStyle('submenu.icon')
-      });
-    }
-
-    /**
-     * Change to low dimensional object.
-     * @param {object} styleOptions - style object of user interface
-     * @returns {object} low level object for style apply
-     * @private
-     */
-
-  }, {
-    key: '_changeToObject',
-    value: function _changeToObject(styleOptions) {
-      var styleObject = {};
-      (0, _tuiCodeSnippet.forEach)(styleOptions, function (value, key) {
-        var keyExplode = key.match(/^(.+)\.([a-z]+)$/i);
-        var property = keyExplode[1],
-            subProperty = keyExplode[2];
-
-
-        if (!styleObject[property]) {
-          styleObject[property] = {};
-        }
-        styleObject[property][subProperty] = value;
-      });
-
-      return styleObject;
-    }
-
-    /**
-     * Style object to Csstext serialize
-     * @param {object} styleObject - style object
-     * @returns {string} - css text string
-     * @private
-     */
-
-  }, {
-    key: '_makeCssText',
-    value: function _makeCssText(styleObject) {
-      var _this = this;
-
-      var converterStack = [];
-
-      (0, _tuiCodeSnippet.forEach)(styleObject, function (value, key) {
-        if (['backgroundImage'].indexOf(key) > -1 && value !== 'none') {
-          value = 'url(' + value + ')';
-        }
-
-        converterStack.push(_this._toUnderScore(key) + ': ' + value);
-      });
-
-      return converterStack.join(';');
-    }
-
-    /**
-     * Camel key string to Underscore string
-     * @param {string} targetString - change target
-     * @returns {string}
-     * @private
-     */
-
-  }, {
-    key: '_toUnderScore',
-    value: function _toUnderScore(targetString) {
-      return targetString.replace(/([A-Z])/g, function ($0, $1) {
-        return '-' + $1.toLowerCase();
-      });
-    }
-
-    /**
-     * Load default svg icon
-     * @private
-     */
-
-  }, {
-    key: '_loadDefaultSvgIcon',
-    value: function _loadDefaultSvgIcon() {
-      if (!document.getElementById('tui-image-editor-svg-default-icons')) {
-        var parser = new DOMParser();
-        var dom = parser.parseFromString(_default2.default, 'text/xml');
-
-        document.body.appendChild(dom.documentElement);
-      }
-    }
-
-    /**
-     * Make className for svg icon
-     * @param {string} iconType - normal' or 'active' or 'hover' or 'disabled
-     * @param {boolean} isSubmenu - submenu icon or not.
-     * @returns {string}
-     * @private
-     */
-
-  }, {
-    key: '_makeIconClassName',
-    value: function _makeIconClassName(iconType, isSubmenu) {
-      var iconStyleInfo = isSubmenu ? this.getStyle('submenu.icon') : this.getStyle('menu.icon');
-      var _iconStyleInfo$iconTy = iconStyleInfo[iconType],
-          path = _iconStyleInfo$iconTy.path,
-          name = _iconStyleInfo$iconTy.name;
-
-
-      return path && name ? iconType : iconType + ' use-default';
-    }
-
-    /**
-     * Make svg use link path name
-     * @param {string} iconType - normal' or 'active' or 'hover' or 'disabled
-     * @param {boolean} isSubmenu - submenu icon or not.
-     * @returns {string}
-     * @private
-     */
-
-  }, {
-    key: '_makeSvgIconPrefix',
-    value: function _makeSvgIconPrefix(iconType, isSubmenu) {
-      var iconStyleInfo = isSubmenu ? this.getStyle('submenu.icon') : this.getStyle('menu.icon');
-      var _iconStyleInfo$iconTy2 = iconStyleInfo[iconType],
-          path = _iconStyleInfo$iconTy2.path,
-          name = _iconStyleInfo$iconTy2.name;
-
-
-      return path && name ? path + '#' + name + '-' : '#';
-    }
-
-    /**
-     * Make svg use link path name
-     * @param {Array.<string>} useIconTypes - normal' or 'active' or 'hover' or 'disabled
-     * @param {string} menuName - menu name
-     * @param {boolean} isSubmenu - submenu icon or not.
-     * @returns {string}
-     * @private
-     */
-
-  }, {
-    key: '_makeSvgItem',
-    value: function _makeSvgItem(useIconTypes, menuName, isSubmenu) {
-      var _this2 = this;
-
-      return (0, _tuiCodeSnippet.map)(useIconTypes, function (iconType) {
-        var svgIconPrefix = _this2._makeSvgIconPrefix(iconType, isSubmenu);
-        var iconName = _this2._toUnderScore(menuName);
-        var svgIconClassName = _this2._makeIconClassName(iconType, isSubmenu);
-
-        return '<use xlink:href="' + svgIconPrefix + 'ic-' + iconName + '" class="' + svgIconClassName + '"/>';
-      }).join('');
-    }
-
-    /**
-     * Make svg icon set
-     * @param {Array.<string>} useIconTypes - normal' or 'active' or 'hover' or 'disabled
-     * @param {string} menuName - menu name
-     * @param {boolean} isSubmenu - submenu icon or not.
-     * @returns {string}
-     */
-
-  }, {
-    key: 'makeMenSvgIconSet',
-    value: function makeMenSvgIconSet(useIconTypes, menuName) {
-      var isSubmenu = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      return '<svg class="svg_ic-' + (isSubmenu ? 'submenu' : 'menu') + '">' + this._makeSvgItem(useIconTypes, menuName, isSubmenu) + '</svg>';
-    }
-  }]);
-
-  return Theme;
-}();
-
-exports.default = Theme;
-
-/***/ }),
-
-/***/ "./src/js/ui/tools/colorpicker.js":
-/*!****************************************!*\
-  !*** ./src/js/ui/tools/colorpicker.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
-
-var _tuiColorPicker = __webpack_require__(/*! tui-color-picker */ "tui-color-picker");
-
-var _tuiColorPicker2 = _interopRequireDefault(_tuiColorPicker);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var PICKER_COLOR = ['#000000', '#2a2a2a', '#545454', '#7e7e7e', '#a8a8a8', '#d2d2d2', '#ffffff', '', '#ff4040', '#ff6518', '#ffbb3b', '#03bd9e', '#00a9ff', '#515ce6', '#9e5fff', '#ff5583'];
-
-/**
- * Colorpicker control class
- * @class
- * @ignore
- */
-
-var Colorpicker = function () {
-  function Colorpicker(colorpickerElement) {
-    var defaultColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#7e7e7e';
-    var toggleDirection = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
-    var usageStatistics = arguments[3];
-
-    _classCallCheck(this, Colorpicker);
-
-    this.colorpickerElement = colorpickerElement;
-    this.usageStatistics = usageStatistics;
-
-    this._show = false;
-
-    this._colorpickerElement = colorpickerElement;
-    this._toggleDirection = toggleDirection;
-    this._makePickerButtonElement(defaultColor);
-    this._makePickerLayerElement(colorpickerElement, colorpickerElement.getAttribute('title'));
-    this._color = defaultColor;
-    this.picker = _tuiColorPicker2.default.create({
-      container: this.pickerElement,
-      preset: PICKER_COLOR,
-      color: defaultColor,
-      usageStatistics: this.usageStatistics
-    });
-
-    this._addEvent();
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Colorpicker, [{
-    key: 'destroy',
-    value: function destroy() {
-      var _this = this;
-
-      this._removeEvent();
-      this.picker.destroy();
-      this.colorpickerElement.innerHTML = '';
-      _tuiCodeSnippet2.default.forEach(this, function (value, key) {
-        _this[key] = null;
-      });
-    }
-
-    /**
-     * Get color
-     * @returns {Number} color value
-     */
-
-  }, {
-    key: '_changeColorElement',
-
-
-    /**
-     * Change color element
-     * @param {string} color color value
-     * #private
-     */
-    value: function _changeColorElement(color) {
-      if (color) {
-        this.colorElement.classList.remove('transparent');
-        this.colorElement.style.backgroundColor = color;
-      } else {
-        this.colorElement.style.backgroundColor = '#fff';
-        this.colorElement.classList.add('transparent');
-      }
-    }
-
-    /**
-     * Make picker button element
-     * @param {string} defaultColor color value
-     * @private
-     */
-
-  }, {
-    key: '_makePickerButtonElement',
-    value: function _makePickerButtonElement(defaultColor) {
-      this.colorpickerElement.classList.add('tui-image-editor-button');
-
-      this.colorElement = document.createElement('div');
-      this.colorElement.className = 'color-picker-value';
-      if (defaultColor) {
-        this.colorElement.style.backgroundColor = defaultColor;
-      } else {
-        this.colorElement.classList.add('transparent');
-      }
-    }
-
-    /**
-     * Make picker layer element
-     * @param {HTMLElement} colorpickerElement color picker element
-     * @param {string} title picker title
-     * @private
-     */
-
-  }, {
-    key: '_makePickerLayerElement',
-    value: function _makePickerLayerElement(colorpickerElement, title) {
-      var label = document.createElement('label');
-      var triangle = document.createElement('div');
-
-      this.pickerControl = document.createElement('div');
-      this.pickerControl.className = 'color-picker-control';
-
-      this.pickerElement = document.createElement('div');
-      this.pickerElement.className = 'color-picker';
-
-      label.innerHTML = title;
-      triangle.className = 'triangle';
-
-      this.pickerControl.appendChild(this.pickerElement);
-      this.pickerControl.appendChild(triangle);
-
-      colorpickerElement.appendChild(this.pickerControl);
-      colorpickerElement.appendChild(this.colorElement);
-      colorpickerElement.appendChild(label);
-    }
-
-    /**
-     * Add event
-     * @private
-     */
-
-  }, {
-    key: '_addEvent',
-    value: function _addEvent() {
-      var _this2 = this;
-
-      this.picker.on('selectColor', function (value) {
-        _this2._changeColorElement(value.color);
-        _this2._color = value.color;
-        _this2.fire('change', value.color);
-      });
-
-      this.eventHandler = {
-        pickerToggle: this._pickerToggleEventHandler.bind(this),
-        pickerHide: function pickerHide() {
-          return _this2.hide();
-        }
-      };
-
-      this.colorpickerElement.addEventListener('click', this.eventHandler.pickerToggle);
-      document.body.addEventListener('click', this.eventHandler.pickerHide);
-    }
-
-    /**
-     * Remove event
-     * @private
-     */
-
-  }, {
-    key: '_removeEvent',
-    value: function _removeEvent() {
-      this.colorpickerElement.removeEventListener('click', this.eventHandler.pickerToggle);
-      document.body.removeEventListener('click', this.eventHandler.pickerHide);
-      this.picker.off();
-    }
-
-    /**
-     * Picker toggle event handler
-     * @param {object} event - change event
-     * @private
-     */
-
-  }, {
-    key: '_pickerToggleEventHandler',
-    value: function _pickerToggleEventHandler(event) {
-      var target = event.target;
-
-      var isInPickerControl = target && this._isElementInColorPickerControl(target);
-
-      if (!isInPickerControl || isInPickerControl && this._isPaletteButton(target)) {
-        this._show = !this._show;
-        this.pickerControl.style.display = this._show ? 'block' : 'none';
-        this._setPickerControlPosition();
-        this.fire('changeShow', this);
-      }
-      event.stopPropagation();
-    }
-
-    /**
-     * Check hex input or not
-     * @param {Element} target - Event target element
-     * @returns {boolean}
-     * @private
-     */
-
-  }, {
-    key: '_isPaletteButton',
-    value: function _isPaletteButton(target) {
-      return target.className === 'tui-colorpicker-palette-button';
-    }
-
-    /**
-     * Check given element is in pickerControl element
-     * @param {Element} element - element to check
-     * @returns {boolean}
-     * @private
-     */
-
-  }, {
-    key: '_isElementInColorPickerControl',
-    value: function _isElementInColorPickerControl(element) {
-      var parentNode = element;
-
-      while (parentNode !== document.body) {
-        if (!parentNode) {
-          break;
-        }
-
-        if (parentNode === this.pickerControl) {
-          return true;
-        }
-
-        parentNode = parentNode.parentNode;
-      }
-
-      return false;
-    }
-  }, {
-    key: 'hide',
-    value: function hide() {
-      this._show = false;
-      this.pickerControl.style.display = 'none';
-    }
-
-    /**
-     * Set picker control position
-     * @private
-     */
-
-  }, {
-    key: '_setPickerControlPosition',
-    value: function _setPickerControlPosition() {
-      var controlStyle = this.pickerControl.style;
-      var halfPickerWidth = this._colorpickerElement.clientWidth / 2 + 2;
-      var left = this.pickerControl.offsetWidth / 2 - halfPickerWidth;
-      var top = (this.pickerControl.offsetHeight + 10) * -1;
-
-      if (this._toggleDirection === 'down') {
-        top = 30;
-      }
-
-      controlStyle.top = top + 'px';
-      controlStyle.left = '-' + left + 'px';
-    }
-  }, {
-    key: 'color',
-    get: function get() {
-      return this._color;
-    }
-
-    /**
-     * Set color
-     * @param {string} color color value
-     */
-    ,
-    set: function set(color) {
-      this._color = color;
-      this._changeColorElement(color);
-    }
-  }]);
-
-  return Colorpicker;
-}();
-
-_tuiCodeSnippet2.default.CustomEvents.mixin(Colorpicker);
-exports.default = Colorpicker;
-
-/***/ }),
-
-/***/ "./src/js/ui/tools/range.js":
-/*!**********************************!*\
-  !*** ./src/js/ui/tools/range.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
-
-var _tuiCodeSnippet2 = _interopRequireDefault(_tuiCodeSnippet);
-
-var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
-
-var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var INPUT_FILTER_REGEXP = /(-?)([0-9]*)[^0-9]*([0-9]*)/g;
-
-/**
- * Range control class
- * @class
- * @ignore
- */
-
-var Range = function () {
-  /**
-   * @constructor
-   * @extends {View}
-   * @param {Object} rangeElements - Html resources for creating sliders
-   *  @param {HTMLElement} rangeElements.slider - b
-   *  @param {HTMLElement} [rangeElements.input] - c
-   * @param {Object} options - Slider make options
-   *  @param {number} options.min - min value
-   *  @param {number} options.max - max value
-   *  @param {number} options.value - default value
-   *  @param {number} [options.useDecimal] - Decimal point processing.
-   *  @param {boolean} [options.realTimeEvent] - Reflect live events.
-   */
-  function Range(rangeElements) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    _classCallCheck(this, Range);
-
-    this._value = options.value || 0;
-
-    this.rangeElement = rangeElements.slider;
-    this.rangeInputElement = rangeElements.input;
-
-    this._drawRangeElement();
-
-    this.rangeWidth = this._getRangeWidth();
-    this._min = options.min || 0;
-    this._max = options.max || 100;
-    this._useDecimal = options.useDecimal;
-    this._absMax = this._min * -1 + this._max;
-    this.realTimeEvent = options.realTimeEvent || false;
-
-    this.eventHandler = {
-      startChangingSlide: this._startChangingSlide.bind(this),
-      stopChangingSlide: this._stopChangingSlide.bind(this),
-      changeSlide: this._changeSlide.bind(this),
-      changeSlideFinally: this._changeSlideFinally.bind(this),
-      changeInput: this._changeValueWithInput.bind(this, false),
-      changeInputFinally: this._changeValueWithInput.bind(this, true),
-      changeInputWithArrow: this._changeValueWithInputKeyEvent.bind(this)
-    };
-
-    this._addClickEvent();
-    this._addDragEvent();
-    this._addInputEvent();
-    this.value = options.value;
-    this.trigger('change');
-  }
-
-  /**
-   * Destroys the instance.
-   */
-
-
-  _createClass(Range, [{
-    key: 'destroy',
-    value: function destroy() {
-      var _this = this;
-
-      this._removeClickEvent();
-      this._removeDragEvent();
-      this._removeInputEvent();
-      this.rangeElement.innerHTML = '';
-      _tuiCodeSnippet2.default.forEach(this, function (value, key) {
-        _this[key] = null;
-      });
-    }
-
-    /**
-     * Set range max value and re position cursor
-     * @param {number} maxValue - max value
-     */
-
-  }, {
-    key: 'trigger',
-
-
-    /**
-     * event trigger
-     * @param {string} type - type
-     */
-    value: function trigger(type) {
-      this.fire(type, this._value);
-    }
-
-    /**
-     * Calculate slider width
-     * @returns {number} - slider width
-     */
-
-  }, {
-    key: '_getRangeWidth',
-    value: function _getRangeWidth() {
-      var getElementWidth = function getElementWidth(element) {
-        return (0, _util.toInteger)(window.getComputedStyle(element, null).width);
-      };
-
-      return getElementWidth(this.rangeElement) - getElementWidth(this.pointer);
-    }
-
-    /**
-     * Make range element
-     * @private
-     */
-
-  }, {
-    key: '_drawRangeElement',
-    value: function _drawRangeElement() {
-      this.rangeElement.classList.add('tui-image-editor-range');
-
-      this.bar = document.createElement('div');
-      this.bar.className = 'tui-image-editor-virtual-range-bar';
-
-      this.subbar = document.createElement('div');
-      this.subbar.className = 'tui-image-editor-virtual-range-subbar';
-
-      this.pointer = document.createElement('div');
-      this.pointer.className = 'tui-image-editor-virtual-range-pointer';
-
-      this.bar.appendChild(this.subbar);
-      this.bar.appendChild(this.pointer);
-      this.rangeElement.appendChild(this.bar);
-    }
-
-    /**
-     * Add range input editing event
-     * @private
-     */
-
-  }, {
-    key: '_addInputEvent',
-    value: function _addInputEvent() {
-      if (this.rangeInputElement) {
-        this.rangeInputElement.addEventListener('keydown', this.eventHandler.changeInputWithArrow);
-        this.rangeInputElement.addEventListener('keyup', this.eventHandler.changeInput);
-        this.rangeInputElement.addEventListener('blur', this.eventHandler.changeInputFinally);
-      }
-    }
-
-    /**
-     * Remove range input editing event
-     * @private
-     */
-
-  }, {
-    key: '_removeInputEvent',
-    value: function _removeInputEvent() {
-      if (this.rangeInputElement) {
-        this.rangeInputElement.removeEventListener('keydown', this.eventHandler.changeInputWithArrow);
-        this.rangeInputElement.removeEventListener('keyup', this.eventHandler.changeInput);
-        this.rangeInputElement.removeEventListener('blur', this.eventHandler.changeInputFinally);
-      }
-    }
-
-    /**
-     * change angle event
-     * @param {object} event - key event
-     * @private
-     */
-
-  }, {
-    key: '_changeValueWithInputKeyEvent',
-    value: function _changeValueWithInputKeyEvent(event) {
-      var keyCode = event.keyCode,
-          target = event.target;
-
-
-      if ([_consts.keyCodes.ARROW_UP, _consts.keyCodes.ARROW_DOWN].indexOf(keyCode) < 0) {
-        return;
-      }
-
-      var value = Number(target.value);
-
-      value = this._valueUpDownForKeyEvent(value, keyCode);
-
-      var unChanged = value < this._min || value > this._max;
-
-      if (!unChanged) {
-        var clampValue = (0, _util.clamp)(value, this._min, this.max);
-        this.value = clampValue;
-        this.fire('change', clampValue, false);
-      }
-    }
-
-    /**
-     * value up down for input
-     * @param {number} value - original value number
-     * @param {number} keyCode - input event key code
-     * @returns {number} value - changed value
-     * @private
-     */
-
-  }, {
-    key: '_valueUpDownForKeyEvent',
-    value: function _valueUpDownForKeyEvent(value, keyCode) {
-      var step = this._useDecimal ? 0.1 : 1;
-
-      if (keyCode === _consts.keyCodes.ARROW_UP) {
-        value += step;
-      } else if (keyCode === _consts.keyCodes.ARROW_DOWN) {
-        value -= step;
-      }
-
-      return value;
-    }
-
-    /**
-     * change angle event
-     * @param {boolean} isLast - Is last change
-     * @param {object} event - key event
-     * @private
-     */
-
-  }, {
-    key: '_changeValueWithInput',
-    value: function _changeValueWithInput(isLast, event) {
-      var keyCode = event.keyCode,
-          target = event.target;
-
-
-      if ([_consts.keyCodes.ARROW_UP, _consts.keyCodes.ARROW_DOWN].indexOf(keyCode) >= 0) {
-        return;
-      }
-
-      var stringValue = this._filterForInputText(target.value);
-      var waitForChange = !stringValue || isNaN(stringValue);
-      target.value = stringValue;
-
-      if (!waitForChange) {
-        var value = this._useDecimal ? Number(stringValue) : (0, _util.toInteger)(stringValue);
-        value = (0, _util.clamp)(value, this._min, this.max);
-
-        this.value = value;
-        this.fire('change', value, isLast);
-      }
-    }
-
-    /**
-     * Add Range click event
-     * @private
-     */
-
-  }, {
-    key: '_addClickEvent',
-    value: function _addClickEvent() {
-      this.rangeElement.addEventListener('click', this.eventHandler.changeSlideFinally);
-    }
-
-    /**
-     * Remove Range click event
-     * @private
-     */
-
-  }, {
-    key: '_removeClickEvent',
-    value: function _removeClickEvent() {
-      this.rangeElement.removeEventListener('click', this.eventHandler.changeSlideFinally);
-    }
-
-    /**
-     * Add Range drag event
-     * @private
-     */
-
-  }, {
-    key: '_addDragEvent',
-    value: function _addDragEvent() {
-      this.pointer.addEventListener('mousedown', this.eventHandler.startChangingSlide);
-    }
-
-    /**
-     * Remove Range drag event
-     * @private
-     */
-
-  }, {
-    key: '_removeDragEvent',
-    value: function _removeDragEvent() {
-      this.pointer.removeEventListener('mousedown', this.eventHandler.startChangingSlide);
-    }
-
-    /**
-     * change angle event
-     * @param {object} event - change event
-     * @private
-     */
-
-  }, {
-    key: '_changeSlide',
-    value: function _changeSlide(event) {
-      var changePosition = event.screenX;
-      var diffPosition = changePosition - this.firstPosition;
-      var touchPx = this.firstLeft + diffPosition;
-      touchPx = touchPx > this.rangeWidth ? this.rangeWidth : touchPx;
-      touchPx = touchPx < 0 ? 0 : touchPx;
-
-      this.pointer.style.left = touchPx + 'px';
-      this.subbar.style.right = this.rangeWidth - touchPx + 'px';
-
-      var ratio = touchPx / this.rangeWidth;
-      var resultValue = this._absMax * ratio + this._min;
-      var value = this._useDecimal ? resultValue : (0, _util.toInteger)(resultValue);
-      var isValueChanged = this.value !== value;
-
-      if (isValueChanged) {
-        this.value = value;
-        if (this.realTimeEvent) {
-          this.fire('change', this._value, false);
-        }
-      }
-    }
-  }, {
-    key: '_changeSlideFinally',
-    value: function _changeSlideFinally(event) {
-      event.stopPropagation();
-      if (event.target.className !== 'tui-image-editor-range') {
-        return;
-      }
-      var touchPx = event.offsetX;
-      var ratio = touchPx / this.rangeWidth;
-      var value = this._absMax * ratio + this._min;
-      this.pointer.style.left = ratio * this.rangeWidth + 'px';
-      this.subbar.style.right = (1 - ratio) * this.rangeWidth + 'px';
-      this.value = value;
-
-      this.fire('change', value, true);
-    }
-  }, {
-    key: '_startChangingSlide',
-    value: function _startChangingSlide(event) {
-      this.firstPosition = event.screenX;
-      this.firstLeft = (0, _util.toInteger)(this.pointer.style.left) || 0;
-
-      document.addEventListener('mousemove', this.eventHandler.changeSlide);
-      document.addEventListener('mouseup', this.eventHandler.stopChangingSlide);
-    }
-
-    /**
-     * stop change angle event
-     * @private
-     */
-
-  }, {
-    key: '_stopChangingSlide',
-    value: function _stopChangingSlide() {
-      this.fire('change', this._value, true);
-
-      document.removeEventListener('mousemove', this.eventHandler.changeSlide);
-      document.removeEventListener('mouseup', this.eventHandler.stopChangingSlide);
-    }
-
-    /**
-     * Unnecessary string filtering.
-     * @param {string} inputValue - origin string of input
-     * @returns {string} filtered string
-     * @private
-     */
-
-  }, {
-    key: '_filterForInputText',
-    value: function _filterForInputText(inputValue) {
-      return inputValue.replace(INPUT_FILTER_REGEXP, '$1$2$3');
-    }
-  }, {
-    key: 'max',
-    set: function set(maxValue) {
-      this._max = maxValue;
-      this._absMax = this._min * -1 + this._max;
-      this.value = this._value;
-    },
-    get: function get() {
-      return this._max;
-    }
-
-    /**
-     * Get range value
-     * @returns {Number} range value
-     */
-
-  }, {
-    key: 'value',
-    get: function get() {
-      return this._value;
-    }
-
-    /**
-     * Set range value
-     * @param {Number} value range value
-     */
-    ,
-    set: function set(value) {
-      value = this._useDecimal ? value : (0, _util.toInteger)(value);
-
-      var absValue = value - this._min;
-      var leftPosition = absValue * this.rangeWidth / this._absMax;
-
-      if (this.rangeWidth < leftPosition) {
-        leftPosition = this.rangeWidth;
-      }
-
-      this.pointer.style.left = leftPosition + 'px';
-      this.subbar.style.right = this.rangeWidth - leftPosition + 'px';
-
-      this._value = value;
-      if (this.rangeInputElement) {
-        this.rangeInputElement.value = value;
-      }
-    }
-  }]);
-
-  return Range;
-}();
-
-_tuiCodeSnippet2.default.CustomEvents.mixin(Range);
-
-exports.default = Range;
+}());*/
 
 /***/ }),
 
@@ -25997,7 +21464,7 @@ exports.getHistoryTitle = getHistoryTitle;
 exports.getHelpMenuBarPosition = getHelpMenuBarPosition;
 exports.isEmptyCropzone = isEmptyCropzone;
 
-var _tuiCodeSnippet = __webpack_require__(/*! tui-code-snippet */ "tui-code-snippet");
+var _codeSnippet = __webpack_require__(/*! ./codeSnippet */ "./src/js/codeSnippet.js");
 
 var _promise = __webpack_require__(/*! core-js-pure/features/promise */ "./node_modules/core-js-pure/features/promise/index.js");
 
@@ -26016,12 +21483,11 @@ var CSS_PREFIX = 'tui-image-editor-';
 var min = Math.min,
     max = Math.max;
 
-var hostnameSent = false;
-
 /**
  * Export Promise Class (for simplified module path)
  * @returns {Promise} promise class
  */
+
 exports.Promise = _promise2.default;
 
 /**
@@ -26053,7 +21519,7 @@ function keyMirror() {
     args[_key] = arguments[_key];
   }
 
-  (0, _tuiCodeSnippet.forEach)(args, function (key) {
+  (0, _codeSnippet.forEach)(args, function (key) {
     obj[key] = key;
   });
 
@@ -26068,7 +21534,7 @@ function keyMirror() {
 function makeStyleText(styleObj) {
   var styleStr = '';
 
-  (0, _tuiCodeSnippet.forEach)(styleObj, function (value, prop) {
+  (0, _codeSnippet.forEach)(styleObj, function (value, prop) {
     styleStr += prop + ': ' + value + ';';
   });
 
@@ -26147,14 +21613,7 @@ function getRgb(color, alpha) {
 /**
  * send hostname
  */
-function sendHostName() {
-  if (hostnameSent) {
-    return;
-  }
-  hostnameSent = true;
-
-  (0, _tuiCodeSnippet.sendHostname)('image-editor', 'UA-129999381-1');
-}
+function sendHostName() {}
 
 /**
  * Apply css resource
@@ -26231,7 +21690,7 @@ function fixFloatingPoint(value) {
  * @param {Object} targetObject - object to be removed.
  */
 function assignmentForDestroy(targetObject) {
-  (0, _tuiCodeSnippet.forEach)(targetObject, function (value, key) {
+  (0, _codeSnippet.forEach)(targetObject, function (value, key) {
     targetObject[key] = null;
   });
 }
@@ -26300,7 +21759,7 @@ function flipObject(targetObject) {
  */
 function setCustomProperty(targetObject, props) {
   targetObject.customProps = targetObject.customProps || {};
-  (0, _tuiCodeSnippet.extend)(targetObject.customProps, props);
+  (0, _codeSnippet.extend)(targetObject.customProps, props);
 }
 
 /**
@@ -26311,10 +21770,10 @@ function setCustomProperty(targetObject, props) {
  */
 function getCustomProperty(fObject, propNames) {
   var resultObject = {};
-  if ((0, _tuiCodeSnippet.isString)(propNames)) {
+  if ((0, _codeSnippet.isString)(propNames)) {
     propNames = [propNames];
   }
-  (0, _tuiCodeSnippet.forEach)(propNames, function (propName) {
+  (0, _codeSnippet.forEach)(propNames, function (propName) {
     resultObject[propName] = fObject.customProps[propName];
   });
 
@@ -26348,7 +21807,7 @@ function includes(targetArray, compareValue) {
 function getFillTypeFromOption() {
   var fillOption = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  return (0, _tuiCodeSnippet.pick)(fillOption, 'type') || _consts.SHAPE_FILL_TYPE.COLOR;
+  return (0, _codeSnippet.pick)(fillOption, 'type') || _consts.SHAPE_FILL_TYPE.COLOR;
 }
 
 /**
@@ -26373,7 +21832,7 @@ function getFillTypeFromObject(shapeObj) {
  * @returns {boolean}
  */
 function isShape(obj) {
-  return (0, _tuiCodeSnippet.inArray)(obj.get('type'), _consts.SHAPE_TYPE) >= 0;
+  return (0, _codeSnippet.inArray)(obj.get('type'), _consts.SHAPE_TYPE) >= 0;
 }
 
 /**
@@ -26578,17 +22037,6 @@ function isEmptyCropzone(cropRect) {
 
 /***/ }),
 
-/***/ "./src/svg/default.svg":
-/*!*****************************!*\
-  !*** ./src/svg/default.svg ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<svg display=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><defs id=\"tui-image-editor-svg-default-icons\"><symbol id=\"ic-apply\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" stroke=\"none\" fill=\"none\"></path><path fill=\"none\" stroke=\"inherit\" d=\"M4 12.011l5 5L20.011 6\"></path></symbol><symbol id=\"ic-cancel\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\" stroke=\"none\"></path><path fill=\"none\" stroke=\"inherit\" d=\"M6 6l12 12M18 6L6 18\"></path></symbol><symbol id=\"ic-crop\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" stroke=\"none\" fill=\"none\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M4 0h1v20a1 1 0 0 1-1-1V0zM20 17h-1V5h1v12zm0 2v5h-1v-5h1z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M5 19h19v1H5zM4.762 4v1H0V4h4.762zM7 4h12a1 1 0 0 1 1 1H7V4z\"></path></symbol><symbol id=\"ic-delete-all\" viewBox=\"0 0 24 24\"><path stroke=\"none\" fill=\"inherit\" d=\"M5 23H3a1 1 0 0 1-1-1V6h1v16h2v1zm16-10h-1V6h1v7zM9 13H8v-3h1v3zm3 0h-1v-3h1v3zm3 0h-1v-3h1v3zM14.794 3.794L13 2h-3L8.206 3.794A.963.963 0 0 1 8 2.5l.703-1.055A1 1 0 0 1 9.535 1h3.93a1 1 0 0 1 .832.445L15 2.5a.965.965 0 0 1-.206 1.294zM14.197 4H8.803h5.394z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M0 3h23v1H0zM11.286 21H8.714L8 23H7l1-2.8V20h.071L9.5 16h1l1.429 4H12v.2l1 2.8h-1l-.714-2zm-.357-1L10 17.4 9.071 20h1.858zM20 22h3v1h-4v-7h1v6zm-5 0h3v1h-4v-7h1v6z\"></path></symbol><symbol id=\"ic-delete\" viewBox=\"0 0 24 24\"><path stroke=\"none\" fill=\"inherit\" d=\"M3 6v16h17V6h1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6h1zM14.794 3.794L13 2h-3L8.206 3.794A.963.963 0 0 1 8 2.5l.703-1.055A1 1 0 0 1 9.535 1h3.93a1 1 0 0 1 .832.445L15 2.5a.965.965 0 0 1-.206 1.294zM14.197 4H8.803h5.394z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M0 3h23v1H0zM8 10h1v6H8v-6zm3 0h1v6h-1v-6zm3 0h1v6h-1v-6z\"></path></symbol><symbol id=\"ic-draw-free\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" d=\"M2.5 20.929C2.594 10.976 4.323 6 7.686 6c5.872 0 2.524 19 7.697 19s1.89-14.929 6.414-14.929 1.357 10.858 5.13 10.858c1.802 0 2.657-2.262 2.566-6.786\"></path></symbol><symbol id=\"ic-draw-line\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" d=\"M2 15.5h28\"></path></symbol><symbol id=\"ic-draw\" viewBox=\"0 0 24 24\"><path fill=\"none\" stroke=\"inherit\" d=\"M2.5 21.5H5c.245 0 .48-.058.691-.168l.124-.065.14.01c.429.028.85-.127 1.16-.437L22.55 5.405a.5.5 0 0 0 0-.707l-3.246-3.245a.5.5 0 0 0-.707 0L3.162 16.888a1.495 1.495 0 0 0-.437 1.155l.01.14-.065.123c-.111.212-.17.448-.17.694v2.5z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M16.414 3.707l3.89 3.89-.708.706-3.889-3.889z\"></path></symbol><symbol id=\"ic-filter\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\" stroke=\"none\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M12 7v1H2V7h10zm6 0h4v1h-4V7zM12 16v1h10v-1H12zm-6 0H2v1h4v-1z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M8.5 20a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7zm0-1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM15.5 11a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7zm0-1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z\"></path></symbol><symbol id=\"ic-flip-reset\" viewBox=\"0 0 31 32\"><path fill=\"none\" stroke=\"none\" d=\"M31 0H0v32h31z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M28 16a8 8 0 0 1-8 8H3v-1h1v-7H3a8 8 0 0 1 8-8h17v1h-1v7h1zM11 9a7 7 0 0 0-7 7v7h16a7 7 0 0 0 7-7V9H11z\"></path><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"square\" d=\"M24 5l3.5 3.5L24 12M7 20l-3.5 3.5L7 27\"></path></symbol><symbol id=\"ic-flip-x\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"none\" d=\"M32 32H0V0h32z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M17 32h-1V0h1zM27.167 11l.5 3h-1.03l-.546-3h1.076zm-.5-3h-1.122L25 5h-5V4h5.153a1 1 0 0 1 .986.836L26.667 8zm1.5 9l.5 3h-.94l-.545-3h.985zm1 6l.639 3.836A1 1 0 0 1 28.819 28H26v-1h3l-.726-4h.894zM23 28h-3v-1h3v1zM13 4v1H7L3 27h10v1H3.18a1 1 0 0 1-.986-1.164l3.666-22A1 1 0 0 1 6.847 4H13z\"></path></symbol><symbol id=\"ic-flip-y\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"none\" d=\"M0 0v32h32V0z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M0 16v1h32v-1zM11 27.167l3 .5v-1.03l-3-.546v1.076zm-3-.5v-1.122L5 25v-5H4v5.153a1 1 0 0 0 .836.986L8 26.667zm9 1.5l3 .5v-.94l-3-.545v.985zm6 1l3.836.639A1 1 0 0 0 28 28.82V26h-1v3l-4-.727v.894zM28 23v-3h-1v3h1zM4 13h1V7l22-4v10h1V3.18a1 1 0 0 0-1.164-.986l-22 3.667A1 1 0 0 0 4 6.847V13z\"></path></symbol><symbol id=\"ic-flip\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\" stroke=\"none\"></path><path fill=\"inherit\" stroke=\"none\" d=\"M11 0h1v24h-1zM19 21v-1h2v-2h1v2a1 1 0 0 1-1 1h-2zm-2 0h-3v-1h3v1zm5-5h-1v-3h1v3zm0-5h-1V8h1v3zm0-5h-1V4h-2V3h2a1 1 0 0 1 1 1v2zm-5-3v1h-3V3h3zM9 3v1H2v16h7v1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7z\"></path></symbol><symbol id=\"ic-history\" viewBox=\"0 0 24 24\"><path fill=\"none\" stroke=\"none\" d=\"M0 0H24V24H0z\" transform=\"translate(-740 -16) translate(547 8) translate(193 8)\"></path><path fill=\"inherit\" stroke=\"none\" d=\"M12.5 1C18.299 1 23 5.701 23 11.5S18.299 22 12.5 22c-5.29 0-9.665-3.911-10.394-8.999h1.012C3.838 17.534 7.764 21 12.5 21c5.247 0 9.5-4.253 9.5-9.5S17.747 2 12.5 2C8.49 2 5.06 4.485 3.666 8H3h4v1H2V4h1v3.022C4.68 3.462 8.303 1 12.5 1zm.5 5l-.001 5.291 2.537 2.537-.708.708L12.292 12H12V6h1z\" transform=\"translate(-740 -16) translate(547 8) translate(193 8)\"></path></symbol><symbol id=\"ic-history-check\" viewBox=\"0 0 24 24\"><g fill=\"none\" fill-rule=\"evenodd\"><path stroke=\"#555555\" d=\"M4.5 -1L1.5 2 6.5 7\" transform=\"translate(-60 -804) translate(60 804) translate(2 3) rotate(-90 4 3)\"></path></g></symbol><symbol id=\"ic-history-crop\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><path d=\"M0 0H12V12H0z\" transform=\"translate(-84 -804) translate(84 804)\"></path><path fill=\"#434343\" d=\"M2 0h1v10c-.552 0-1-.448-1-1V0zM10 9v3H9V9h1zM9 2h1v6H9V2z\" transform=\"translate(-84 -804) translate(84 804)\"></path><path fill=\"#434343\" d=\"M2 9H12V10H2zM9 2c.513 0 .936.386.993.883L10 3H3V2h6zM2 3H0V2h2v1z\" transform=\"translate(-84 -804) translate(84 804)\"></path></g></symbol><symbol id=\"ic-history-draw\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><path d=\"M0 1H12V13H0z\" transform=\"translate(-156 -804) translate(156 803)\"></path><path stroke=\"#434343\" d=\"M9.622 1.584l1.835 1.658-8.31 8.407L.5 12.5V11l9.122-9.416z\" transform=\"translate(-156 -804) translate(156 803)\"></path><path fill=\"#434343\" d=\"M7.628 3.753L10.378 3.753 10.378 4.253 7.628 4.253z\" transform=\"translate(-156 -804) translate(156 803) rotate(45 9.003 4.003)\"></path></g></symbol><symbol id=\"ic-history-filter\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><path d=\"M0 0H12V12H0z\" transform=\"translate(-276 -804) translate(276 804)\"></path><path fill=\"#434343\" d=\"M12 3v1H9V3h3zM7 4H0V3h7v1z\" transform=\"translate(-276 -804) translate(276 804)\"></path><path fill=\"#434343\" d=\"M12 8v1H9V8h3zM7 9H0V8h7v1z\" transform=\"translate(-276 -804) translate(276 804) matrix(-1 0 0 1 12 0)\"></path><path fill=\"#434343\" d=\"M8 1c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0 1c-.552 0-1 .448-1 1s.448 1 1 1 1-.448 1-1-.448-1-1-1zM4 7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0 1c-.552 0-1 .448-1 1s.448 1 1 1 1-.448 1-1-.448-1-1-1z\" transform=\"translate(-276 -804) translate(276 804)\"></path></g></symbol><symbol id=\"ic-history-flip\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><path d=\"M0 0H12V12H0z\" transform=\"translate(-108 -804) translate(108 804)\"></path><path fill=\"#434343\" d=\"M6 0L7 0 7 12 6 12zM11 10V9h1v1.5c0 .276-.224.5-.5.5H10v-1h1zM5 1v1H1v8h4v1H.5c-.276 0-.5-.224-.5-.5v-9c0-.276.224-.5.5-.5H5zm7 5v2h-1V6h1zm0-3v2h-1V3h1zM9 1v1H7V1h2zm2.5 0c.276 0 .5.224.5.5V2h-2V1h1.5zM9 11H7v-1h2v1z\" transform=\"translate(-108 -804) translate(108 804)\"></path></g></symbol><symbol id=\"ic-history-icon\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><path d=\"M0 0H12V12H0z\" transform=\"translate(-204 -804) translate(204 804)\"></path><path stroke=\"#434343\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.1\" d=\"M6 9.568L2.601 11 2.975 7.467 0.5 4.82 4.13 4.068 6 1 7.87 4.068 11.5 4.82 9.025 7.467 9.399 11z\" transform=\"translate(-204 -804) translate(204 804)\"></path></g></symbol><symbol id=\"ic-history-mask\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><g transform=\"translate(-252 -804) translate(252 804)\"><path d=\"M0 0H12V12H0z\"></path><circle cx=\"6\" cy=\"6\" r=\"2.5\" stroke=\"#444\"></circle><path fill=\"#434343\" d=\"M11.5 0c.276 0 .5.224.5.5v11c0 .276-.224.5-.5.5H.5c-.276 0-.5-.224-.5-.5V.5C0 .224.224 0 .5 0h11zM11 1H1v10h10V1z\"></path></g></g></symbol><symbol id=\"ic-history-rotate\" viewBox=\"0 0 24 24\"><defs><path id=\"rfn4rylffa\" d=\"M7 12c-.335 0-.663-.025-.983-.074C3.171 11.492 1 9.205 1 6.444c0-1.363.534-2.613 1.415-3.58\"></path><mask id=\"6f9gn2dysb\" width=\"6\" height=\"9.136\" x=\"0\" y=\"0\" maskUnits=\"objectBoundingBox\"><use xlink:href=\"#rfn4rylffa\" stroke=\"434343\"></use></mask></defs><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><g transform=\"translate(-132 -804) translate(132 804)\"><path d=\"M0 0.5H12V12.5H0z\"></path><path fill=\"#434343\" d=\"M6.5 1C9.538 1 12 3.462 12 6.5c0 2.37-1.5 4.39-3.6 5.163l-.407-.916C9.744 10.13 11 8.462 11 6.5 11 4.015 8.985 2 6.5 2c-.777 0-1.509.197-2.147.544L4 1.75l-.205-.04C4.594 1.258 5.517 1 6.5 1z\"></path><use stroke=\"#434343\" stroke-dasharray=\"2 1.25\" stroke-width=\"1\" mask=\"url(#6f9gn2dysb)\" xlink:href=\"#rfn4rylffa\"></use><path fill=\"#434343\" d=\"M4.279 0L6 1.75 4.25 3.571 3.543 2.864 4.586 1.75 3.572 0.707z\" transform=\"matrix(-1 0 0 1 9.543 0)\"></path></g></g></symbol><symbol id=\"ic-history-shape\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><path d=\"M0 0H12V12H0z\" transform=\"translate(-180 -804) translate(180 804)\"></path><path fill=\"#434343\" d=\"M11.5 4c.276 0 .5.224.5.5v7c0 .276-.224.5-.5.5h-7c-.276 0-.5-.224-.5-.5V8.8h1V11h6V5H8.341l-.568-1H11.5z\" transform=\"translate(-180 -804) translate(180 804)\"></path><path stroke=\"#434343\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M4.5 0.5L8.5 7.611 0.5 7.611z\" transform=\"translate(-180 -804) translate(180 804)\"></path></g></symbol><symbol id=\"ic-history-text\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><path d=\"M0 0H12V12H0z\" transform=\"translate(-228 -804) translate(228 804)\"></path><path fill=\"#434343\" d=\"M2 1h8c.552 0 1 .448 1 1H1c0-.552.448-1 1-1z\" transform=\"translate(-228 -804) translate(228 804)\"></path><path fill=\"#434343\" d=\"M1 1H2V3H1zM10 1H11V3H10zM5.5 1L6.5 1 6.5 11 5.5 11z\" transform=\"translate(-228 -804) translate(228 804)\"></path><path fill=\"#434343\" d=\"M4 10H8V11H4z\" transform=\"translate(-228 -804) translate(228 804)\"></path></g></symbol><symbol id=\"ic-history-load\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><path d=\"M0 0H12V12H0z\" transform=\"translate(-324 -805) translate(324 805)\"></path><path fill=\"#434343\" d=\"M5 0c.552 0 1 .448 1 1v1h5.5c.276 0 .5.224.5.5v8c0 .276-.224.5-.5.5H.5c-.276 0-.5-.224-.5-.5V1c0-.552.448-1 1-1h4zm0 1H1v9h10V3H5V1z\" transform=\"translate(-324 -805) translate(324 805)\"></path><path fill=\"#434343\" d=\"M1 2L5 2 5 3 1 3z\" transform=\"translate(-324 -805) translate(324 805)\"></path></g></symbol><symbol id=\"ic-history-delete\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><g fill=\"#434343\"><path d=\"M2 9h8V1h1v8.5c0 .276-.224.5-.5.5h-9c-.276 0-.5-.224-.5-.5V1h1v8zM0 0H12V1H0z\" transform=\"translate(-300 -804) translate(300 804) translate(0 2)\"></path><path d=\"M4 3H5V7H4zM7 3H8V7H7z\" transform=\"translate(-300 -804) translate(300 804) translate(0 2)\"></path><path d=\"M4 1h4V0h1v1.5c0 .276-.224.5-.5.5h-5c-.276 0-.5-.224-.5-.5V0h1v1z\" transform=\"translate(-300 -804) translate(300 804) matrix(1 0 0 -1 0 2)\"></path></g></g></symbol><symbol id=\"ic-history-group\" viewBox=\"0 0 24 24\"><g fill=\"none\" stroke=\"none\" fill-rule=\"evenodd\"><g transform=\"translate(-348 -804) translate(348 804)\"><path d=\"M0 0H12V12H0z\"></path><path fill=\"#434343\" d=\"M1 9v2h1v1H.5c-.276 0-.5-.224-.5-.5V9h1zm11 1v1.5c0 .276-.224.5-.5.5H9v-1h2v-1h1zm-4 1v1H6v-1h2zm-3 0v1H3v-1h2zm7-4v2h-1V7h1zM1 6v2H0V6h1zm11-2v2h-1V4h1zM1 3v2H0V3h1zm10.5-3c.276 0 .5.224.5.5V3h-1V1h-1V0h1.5zM6 0v1H4V0h2zm3 0v1H7V0h2zM0 .5C0 .224.224 0 .5 0H3v1H1v1H0V.5zM9.5 4c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5h-5c-.276 0-.5-.224-.5-.5V8.355c.317.094.652.145 1 .145V9h4V5h-.5c0-.348-.05-.683-.145-1H9.5z\"></path><circle cx=\"5\" cy=\"5\" r=\"2.5\" stroke=\"#434343\"></circle></g></g></symbol><symbol id=\"ic-icon-arrow-2\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M21.793 18.5H2.5v-5h18.935l-7.6-8h5.872l10.5 10.5-10.5 10.5h-5.914l8-8z\"></path></symbol><symbol id=\"ic-icon-arrow-3\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M25.288 16.42L14.208 27.5H6.792l11.291-11.291L6.826 4.5h7.381l11.661 11.661-.58.258z\"></path></symbol><symbol id=\"ic-icon-arrow\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" d=\"M2.5 11.5v9h18v5.293L30.293 16 20.5 6.207V11.5h-18z\"></path></symbol><symbol id=\"ic-icon-bubble\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M22.207 24.5L16.5 30.207V24.5H8A6.5 6.5 0 0 1 1.5 18V9A6.5 6.5 0 0 1 8 2.5h16A6.5 6.5 0 0 1 30.5 9v9a6.5 6.5 0 0 1-6.5 6.5h-1.793z\"></path></symbol><symbol id=\"ic-icon-heart\" viewBox=\"0 0 32 32\"><path fill-rule=\"nonzero\" fill=\"none\" stroke=\"inherit\" d=\"M15.996 30.675l1.981-1.79c7.898-7.177 10.365-9.718 12.135-13.012.922-1.716 1.377-3.37 1.377-5.076 0-4.65-3.647-8.297-8.297-8.297-2.33 0-4.86 1.527-6.817 3.824l-.38.447-.381-.447C13.658 4.027 11.126 2.5 8.797 2.5 4.147 2.5.5 6.147.5 10.797c0 1.714.46 3.375 1.389 5.098 1.775 3.288 4.26 5.843 12.123 12.974l1.984 1.806z\"></path></symbol><symbol id=\"ic-icon-load\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17.314 18.867l1.951-2.53 4 5.184h-17l6.5-8.84 4.549 6.186z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M18.01 4a11.798 11.798 0 0 0 0 1H3v24h24V14.986a8.738 8.738 0 0 0 1 0V29a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h15.01z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M25 3h1v9h-1z\"></path><path fill=\"none\" stroke=\"inherit\" d=\"M22 6l3.5-3.5L29 6\"></path></symbol><symbol id=\"ic-icon-location\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" d=\"M16 31.28C23.675 23.302 27.5 17.181 27.5 13c0-6.351-5.149-11.5-11.5-11.5S4.5 6.649 4.5 13c0 4.181 3.825 10.302 11.5 18.28z\"></path><circle fill=\"none\" stroke=\"inherit\" cx=\"16\" cy=\"13\" r=\"4.5\"></circle></symbol><symbol id=\"ic-icon-polygon\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" d=\"M.576 16L8.29 29.5h15.42L31.424 16 23.71 2.5H8.29L.576 16z\"></path></symbol><symbol id=\"ic-icon-star-2\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" d=\"M19.446 31.592l2.265-3.272 3.946.25.636-3.94 3.665-1.505-1.12-3.832 2.655-2.962-2.656-2.962 1.12-3.832-3.664-1.505-.636-3.941-3.946.25-2.265-3.271L16 3.024 12.554 1.07 10.289 4.34l-3.946-.25-.636 3.941-3.665 1.505 1.12 3.832L.508 16.33l2.656 2.962-1.12 3.832 3.664 1.504.636 3.942 3.946-.25 2.265 3.27L16 29.638l3.446 1.955z\"></path></symbol><symbol id=\"ic-icon-star\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"inherit\" d=\"M25.292 29.878l-1.775-10.346 7.517-7.327-10.388-1.51L16 1.282l-4.646 9.413-10.388 1.51 7.517 7.327-1.775 10.346L16 24.993l9.292 4.885z\"></path></symbol><symbol id=\"ic-icon\" viewBox=\"0 0 24 24\"><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M11.923 19.136L5.424 22l.715-7.065-4.731-5.296 6.94-1.503L11.923 2l3.574 6.136 6.94 1.503-4.731 5.296L18.42 22z\"></path></symbol><symbol id=\"ic-mask-load\" viewBox=\"0 0 32 32\"><path stroke=\"none\" fill=\"none\" d=\"M0 0h32v32H0z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M18.01 4a11.798 11.798 0 0 0 0 1H3v24h24V14.986a8.738 8.738 0 0 0 1 0V29a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h15.01zM15 23a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-1a5 5 0 1 0 0-10 5 5 0 0 0 0 10z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M25 3h1v9h-1z\"></path><path fill=\"none\" stroke=\"inherit\" d=\"M22 6l3.5-3.5L29 6\"></path></symbol><symbol id=\"ic-mask\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"4.5\" stroke=\"inherit\" fill=\"none\"></circle><path stroke=\"none\" fill=\"inherit\" d=\"M2 1h20a1 1 0 0 1 1 1v20a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm0 1v20h20V2H2z\"></path></symbol><symbol id=\"ic-redo\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" opacity=\".5\" fill=\"none\" stroke=\"none\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M21 6H9a6 6 0 1 0 0 12h12v1H9A7 7 0 0 1 9 5h12v1z\"></path><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"square\" d=\"M19 3l2.5 2.5L19 8\"></path></symbol><symbol id=\"ic-reset\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" opacity=\".5\" stroke=\"none\" fill=\"none\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M2 13v-1a7 7 0 0 1 7-7h13v1h-1v5h1v1a7 7 0 0 1-7 7H2v-1h1v-5H2zm7-7a6 6 0 0 0-6 6v6h12a6 6 0 0 0 6-6V6H9z\"></path><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"square\" d=\"M19 3l2.5 2.5L19 8M5 16l-2.5 2.5L5 21\"></path></symbol><symbol id=\"ic-rotate-clockwise\" viewBox=\"0 0 32 32\"><path stroke=\"none\" fill=\"inherit\" d=\"M29 17h-.924c0 6.627-5.373 12-12 12-6.628 0-12-5.373-12-12C4.076 10.398 9.407 5.041 16 5V4C8.82 4 3 9.82 3 17s5.82 13 13 13 13-5.82 13-13z\"></path><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"square\" d=\"M16 1.5l4 3-4 3\"></path><path stroke=\"none\" fill=\"inherit\" fill-rule=\"nonzero\" d=\"M16 4h4v1h-4z\"></path></symbol><symbol id=\"ic-rotate-counterclockwise\" viewBox=\"0 0 32 32\"><path stroke=\"none\" d=\"M3 17h.924c0 6.627 5.373 12 12 12 6.628 0 12-5.373 12-12 0-6.602-5.331-11.96-11.924-12V4c7.18 0 13 5.82 13 13s-5.82 13-13 13S3 24.18 3 17z\"></path><path stroke=\"none\" fill=\"inherit\" fill-rule=\"nonzero\" d=\"M12 4h4v1h-4z\"></path><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"square\" d=\"M16 1.5l-4 3 4 3\"></path></symbol><symbol id=\"ic-rotate\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\" stroke=\"none\"></path><path fill=\"inherit\" stroke=\"none\" d=\"M8.349 22.254a10.002 10.002 0 0 1-2.778-1.719l.65-.76a9.002 9.002 0 0 0 2.495 1.548l-.367.931zm2.873.704l.078-.997a9 9 0 1 0-.557-17.852l-.14-.99A10.076 10.076 0 0 1 12.145 3c5.523 0 10 4.477 10 10s-4.477 10-10 10c-.312 0-.62-.014-.924-.042zm-7.556-4.655a9.942 9.942 0 0 1-1.253-2.996l.973-.234a8.948 8.948 0 0 0 1.124 2.693l-.844.537zm-1.502-5.91A9.949 9.949 0 0 1 2.88 9.23l.925.382a8.954 8.954 0 0 0-.644 2.844l-.998-.062zm2.21-5.686c.687-.848 1.51-1.58 2.436-2.166l.523.852a9.048 9.048 0 0 0-2.188 1.95l-.771-.636z\"></path><path stroke=\"inherit\" fill=\"none\" stroke-linecap=\"square\" d=\"M13 1l-2.5 2.5L13 6\"></path></symbol><symbol id=\"ic-shape-circle\" viewBox=\"0 0 32 32\"><circle cx=\"16\" cy=\"16\" r=\"14.5\" fill=\"none\" stroke=\"inherit\"></circle></symbol><symbol id=\"ic-shape-rectangle\" viewBox=\"0 0 32 32\"><rect width=\"27\" height=\"27\" x=\"2.5\" y=\"2.5\" fill=\"none\" stroke=\"inherit\" rx=\"1\"></rect></symbol><symbol id=\"ic-shape-triangle\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M16 2.5l15.5 27H.5z\"></path></symbol><symbol id=\"ic-shape\" viewBox=\"0 0 24 24\"><path stroke=\"none\" fill=\"inherit\" d=\"M14.706 8H21a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4h1v4h12V9h-5.706l-.588-1z\"></path><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.5 1.5l7.5 13H1z\"></path></symbol><symbol id=\"ic-text-align-center\" viewBox=\"0 0 32 32\"><path stroke=\"none\" fill=\"none\" d=\"M0 0h32v32H0z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M2 5h28v1H2zM8 12h16v1H8zM2 19h28v1H2zM8 26h16v1H8z\"></path></symbol><symbol id=\"ic-text-align-left\" viewBox=\"0 0 32 32\"><path stroke=\"none\" fill=\"none\" d=\"M0 0h32v32H0z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M2 5h28v1H2zM2 12h16v1H2zM2 19h28v1H2zM2 26h16v1H2z\"></path></symbol><symbol id=\"ic-text-align-right\" viewBox=\"0 0 32 32\"><path stroke=\"none\" fill=\"none\" d=\"M0 0h32v32H0z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M2 5h28v1H2zM14 12h16v1H14zM2 19h28v1H2zM14 26h16v1H14z\"></path></symbol><symbol id=\"ic-text-bold\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"none\" d=\"M0 0h32v32H0z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M7 2h2v2H7zM7 28h2v2H7z\"></path><path fill=\"none\" stroke=\"inherit\" stroke-width=\"2\" d=\"M9 3v12h9a6 6 0 1 0 0-12H9zM9 15v14h10a7 7 0 0 0 0-14H9z\"></path></symbol><symbol id=\"ic-text-italic\" viewBox=\"0 0 32 32\"><path fill=\"none\" stroke=\"none\" d=\"M0 0h32v32H0z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M15 2h5v1h-5zM11 29h5v1h-5zM17 3h1l-4 26h-1z\"></path></symbol><symbol id=\"ic-text-underline\" viewBox=\"0 0 32 32\"><path stroke=\"none\" fill=\"none\" d=\"M0 0h32v32H0z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M8 2v14a8 8 0 1 0 16 0V2h1v14a9 9 0 0 1-18 0V2h1zM3 29h26v1H3z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M5 2h5v1H5zM22 2h5v1h-5z\"></path></symbol><symbol id=\"ic-text\" viewBox=\"0 0 24 24\"><path stroke=\"none\" fill=\"inherit\" d=\"M4 3h15a1 1 0 0 1 1 1H3a1 1 0 0 1 1-1zM3 4h1v1H3zM19 4h1v1h-1z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M11 3h1v18h-1z\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M10 20h3v1h-3z\"></path></symbol><symbol id=\"ic-undo\" viewBox=\"0 0 24 24\"><path d=\"M24 0H0v24h24z\" opacity=\".5\" fill=\"none\" stroke=\"none\"></path><path stroke=\"none\" fill=\"inherit\" d=\"M3 6h12a6 6 0 1 1 0 12H3v1h12a7 7 0 0 0 0-14H3v1z\"></path><path fill=\"none\" stroke=\"inherit\" stroke-linecap=\"square\" d=\"M5 3L2.5 5.5 5 8\"></path></symbol><symbol id=\"ic-zoom-in\" viewBox=\"0 0 24 24\"><g transform=\"translate(-229 -290) translate(229 290)\"><circle cx=\"10.5\" cy=\"10.5\" r=\"9\" stroke=\"inherit\" fill=\"none\"></circle><path fill=\"inherit\" d=\"M18.828 15.828H19.828V22.828H18.828z\" transform=\"rotate(-45 19.328 19.328)\"></path><path fill=\"inherit\" d=\"M7 10H14V11H7z\"></path><path fill=\"inherit\" d=\"M10 7H11V14H10z\"></path></g></symbol><symbol id=\"ic-zoom-out\" viewBox=\"0 0 24 24\"><g transform=\"translate(-263 -290) translate(263 290)\"><circle cx=\"10.5\" cy=\"10.5\" r=\"9\" stroke=\"inherit\" fill=\"none\"></circle><path fill=\"inherit\" d=\"M18.828 15.828H19.828V22.828H18.828z\" transform=\"rotate(-45 19.328 19.328)\"></path><path fill=\"inherit\" d=\"M7 10H14V11H7z\"></path></g></symbol><symbol id=\"ic-hand\" viewBox=\"0 0 24 24\"><g fill=\"none\" fill-rule=\"evenodd\" stroke-linejoin=\"round\"><path fill=\"inherit\" fill-rule=\"nonzero\" d=\"M8.672 3.36c1.328 0 2.114.78 2.29 1.869l.014.101.023.006v1.042l-.638-.185c-.187-.055-.323-.211-.354-.399L10 5.713c0-.825-.42-1.353-1.328-1.353C7.695 4.36 7 5.041 7 5.713v7.941c0 .439-.524.665-.843.364l-1.868-1.761c-.595-.528-1.316-.617-1.918-.216-.522.348-.562 1.203-.18 1.8L7.738 22h11.013l.285-.518c1.247-2.326 1.897-4.259 1.96-5.785l.004-.239V8.035c0-.656-.5-1.17-1-1.17-.503 0-1 .456-1 1.17 0 .333-.32.573-.64.48L18 8.41V7.368l.086.026.042-.136c.279-.805.978-1.332 1.738-1.388L20 5.865c1.057 0 2 .967 2 2.17v7.423c0 1.929-.845 4.352-2.521 7.29-.09.156-.255.252-.435.252H7.474c-.166 0-.321-.082-.414-.219l-5.704-8.39c-.653-1.019-.584-2.486.46-3.182 1-.666 2.216-.516 3.148.31L6 12.495V5.713c0-1.18 1.058-2.263 2.49-2.348z\" transform=\"translate(-297 -290) translate(297 290)\"></path><path fill=\"inherit\" fill-rule=\"nonzero\" d=\"M12.5 1.5c1.325 0 2.41 1.032 2.495 2.336L15 4v7.22h-1V4c0-.828-.672-1.5-1.5-1.5-.78 0-1.42.595-1.493 1.356L11 4v7.22h-1V4c0-1.38 1.12-2.5 2.5-2.5z\" transform=\"translate(-297 -290) translate(297 290)\"></path><path fill=\"inherit\" fill-rule=\"nonzero\" d=\"M16.5 3.5c1.325 0 2.41 1.032 2.495 2.336L19 6v6.3h-1V6c0-.828-.672-1.5-1.5-1.5-.78 0-1.42.595-1.493 1.356L15 6v2.44h-1V6c0-1.38 1.12-2.5 2.5-2.5z\" transform=\"translate(-297 -290) translate(297 290)\"></path></g></symbol></defs></svg>"
-
-/***/ }),
-
 /***/ "fabric":
 /*!****************************************************************************************************************!*\
   !*** external {"commonjs":["fabric","fabric"],"commonjs2":["fabric","fabric"],"amd":"fabric","root":"fabric"} ***!
@@ -26597,28 +22045,6 @@ module.exports = "<svg display=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xml
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_fabric__;
-
-/***/ }),
-
-/***/ "tui-code-snippet":
-/*!******************************************************************************************************************************!*\
-  !*** external {"commonjs":"tui-code-snippet","commonjs2":"tui-code-snippet","amd":"tui-code-snippet","root":["tui","util"]} ***!
-  \******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_tui_code_snippet__;
-
-/***/ }),
-
-/***/ "tui-color-picker":
-/*!*************************************************************************************************************************************!*\
-  !*** external {"commonjs":"tui-color-picker","commonjs2":"tui-color-picker","amd":"tui-color-picker","root":["tui","colorPicker"]} ***!
-  \*************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_tui_color_picker__;
 
 /***/ })
 
