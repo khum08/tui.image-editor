@@ -1460,12 +1460,14 @@ class ImageEditor {
    * @private
    */
   _selectionCreated(eventTarget) {
-    eventTarget.set({
-      lockRotation: true,
-      lockScalingX: true,
-      lockScalingY: true,
-      hasControls: false,
-    });
+    if (eventTarget.type === 'activeSelection') {
+      eventTarget.set({
+        lockRotation: true,
+        lockScalingX: true,
+        lockScalingY: true,
+        hasControls: false,
+      });
+    }
     this.fire(SELECTION_CREATED, eventTarget);
   }
 
