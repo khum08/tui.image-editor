@@ -75,6 +75,9 @@ const Cropzone = fabric.util.createClass(
 
       this.canvas = canvas;
       this.options = options;
+
+      // Hide rotate control since the cropzone can't be rotated
+      this.setControlVisible('mtr', false);
     },
     canvasEventDelegation(eventName) {
       let delegationState = 'unregistered';
