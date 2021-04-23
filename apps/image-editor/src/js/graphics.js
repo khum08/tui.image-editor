@@ -580,16 +580,7 @@ class Graphics {
   adjustCanvasDimension() {
     const canvasImage = this.canvasImage.scale(1);
     const { width, height } = canvasImage.getBoundingRect();
-    const tempMaxDimension = this._calcMaxDimension(width, height);
-
-    const zoomLevel = this.getCanvasZoom();
-    const maxDimension =
-      zoomLevel <= 1
-        ? tempMaxDimension
-        : {
-            width: tempMaxDimension.width * zoomLevel,
-            height: tempMaxDimension.height * zoomLevel,
-          };
+    const maxDimension = this._calcMaxDimension(width, height);
 
     this.setCanvasCssDimension({
       width: '100%',
@@ -626,7 +617,7 @@ class Graphics {
       width,
       height,
     });
-    this._canvas.centerObject(canvasImage);
+    this.canvasImage.viewportCenter();
   }
 
   /**
