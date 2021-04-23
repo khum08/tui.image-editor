@@ -351,11 +351,13 @@ const Cropzone = fabric.util.createClass(
     _onScaling(fEvent) {
       const selectedCorner = fEvent.transform.corner;
       const pointer = this.canvas.getPointer(fEvent.e);
-      const settings = this._calcScalingSizeFromPointer(pointer, selectedCorner);
 
-      // On scaling cropzone,
-      // change real width and height and fix scaleFactor to 1
-      this.scale(1).set(settings);
+      // Due to how the crop zone works, we don't want fabric to do the scaling.
+      // We need to reset the scale before calculating our new position to avoid resize jankiness
+      this.scale(1);
+
+      const settings = this._calcScalingSizeFromPointer(pointer, selectedCorner);
+      this.set(settings);
 
       this.canvasEventTrigger[events.OBJECT_SCALED](this);
     },
