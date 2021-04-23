@@ -264,8 +264,9 @@ const Cropzone = fabric.util.createClass(
       const { canvas, width, height, left, top } = this;
       const halfWidth = width / 2;
       const halfHeight = height / 2;
-      const canvasHeight = canvas.getHeight(); // fabric object
-      const canvasWidth = canvas.getWidth(); // fabric object
+      const zoomLevel = canvas.getZoom();
+      const canvasWidth = canvas.getWidth() / zoomLevel; // Convert from HTML dimensions to fabric object dimensions
+      const canvasHeight = canvas.getHeight() / zoomLevel; // Convert from HTML dimensions to fabric object dimensions
 
       return {
         x: snippet.map(
@@ -332,8 +333,9 @@ const Cropzone = fabric.util.createClass(
      */
     _onMoving() {
       const { height, width, left, top } = this;
-      const maxLeft = this.canvas.getWidth() - width;
-      const maxTop = this.canvas.getHeight() - height;
+      const zoomLevel = this.canvas.getZoom();
+      const maxLeft = this.canvas.getWidth() / zoomLevel - width;
+      const maxTop = this.canvas.getHeight() / zoomLevel - height;
 
       this.left = clamp(left, 0, maxLeft);
       this.top = clamp(top, 0, maxTop);
@@ -428,13 +430,15 @@ const Cropzone = fabric.util.createClass(
      * @private
      */
     _getCropzoneRectInfo() {
-      const { width: canvasWidth, height: canvasHeight } = this.canvas;
+      const zoomLevel = this.canvas.getZoom();
+      const canvasWidth = this.canvas.getWidth() / zoomLevel; // Convert from HTML dimensions to fabric object dimensions
+      const canvasHeight = this.canvas.getHeight() / zoomLevel; // Convert from HTML dimensions to fabric object dimensions
       const {
         top: rectTop,
         left: rectLeft,
         width: rectWidth,
         height: rectHeight,
-      } = this.getBoundingRect(false, true);
+      } = this.getBoundingRect(true, true); // Use absolute dimensions to work with zooming
 
       return {
         rectTop,
