@@ -245,6 +245,7 @@ class Cropper extends Component {
     const canvas = this.getCanvas();
 
     canvas.setActiveObject(cropzone);
+    canvas.requestRenderAll();
     canvas.off({
       'mouse:move': listeners.mousemove,
       'mouse:up': listeners.mouseup,

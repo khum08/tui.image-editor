@@ -185,6 +185,7 @@ class Line extends Component {
     });
 
     canvas.setActiveObject(this._line);
+    canvas.requestRenderAll();
 
     this._line = null;
 
