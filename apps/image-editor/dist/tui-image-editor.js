@@ -1,6 +1,6 @@
 /*!
  * tui-image-editor.js
- * @version 3.14.3
+ * @version 3.14.3-alm.1
  * @author NHN. FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
@@ -6500,6 +6500,7 @@ var Cropper = function (_Component) {
       var canvas = this.getCanvas();
 
       canvas.setActiveObject(cropzone);
+      canvas.requestRenderAll();
       canvas.off({
         'mouse:move': listeners.mousemove,
         'mouse:up': listeners.mouseup
@@ -8114,6 +8115,7 @@ var Line = function (_Component) {
       });
 
       canvas.setActiveObject(this._line);
+      canvas.requestRenderAll();
 
       this._line = null;
 
@@ -12676,6 +12678,9 @@ var Cropzone = _fabric2.default.util.createClass(_fabric2.default.Rect,
 
     this.canvas = canvas;
     this.options = options;
+
+    // Hide rotate control since the cropzone can't be rotated
+    this.setControlVisible('mtr', false);
   },
   canvasEventDelegation: function canvasEventDelegation(eventName) {
     var delegationState = 'unregistered';
@@ -12876,8 +12881,9 @@ var Cropzone = _fabric2.default.util.createClass(_fabric2.default.Rect,
 
     var halfWidth = width / 2;
     var halfHeight = height / 2;
-    var canvasHeight = canvas.getHeight(); // fabric object
-    var canvasWidth = canvas.getWidth(); // fabric object
+    var zoomLevel = canvas.getZoom();
+    var canvasWidth = canvas.getWidth() / zoomLevel; // Convert from HTML dimensions to fabric object dimensions
+    var canvasHeight = canvas.getHeight() / zoomLevel; // Convert from HTML dimensions to fabric object dimensions
 
     return {
       x: _codeSnippet2.default.map([-(halfWidth + left), // x0
@@ -12944,8 +12950,9 @@ var Cropzone = _fabric2.default.util.createClass(_fabric2.default.Rect,
         left = this.left,
         top = this.top;
 
-    var maxLeft = this.canvas.getWidth() - width;
-    var maxTop = this.canvas.getHeight() - height;
+    var zoomLevel = this.canvas.getZoom();
+    var maxLeft = this.canvas.getWidth() / zoomLevel - width;
+    var maxTop = this.canvas.getHeight() / zoomLevel - height;
 
     this.left = (0, _util.clamp)(left, 0, maxLeft);
     this.top = (0, _util.clamp)(top, 0, maxTop);
@@ -12962,11 +12969,13 @@ var Cropzone = _fabric2.default.util.createClass(_fabric2.default.Rect,
   _onScaling: function _onScaling(fEvent) {
     var selectedCorner = fEvent.transform.corner;
     var pointer = this.canvas.getPointer(fEvent.e);
-    var settings = this._calcScalingSizeFromPointer(pointer, selectedCorner);
 
-    // On scaling cropzone,
-    // change real width and height and fix scaleFactor to 1
-    this.scale(1).set(settings);
+    // Due to how the crop zone works, we don't want fabric to do the scaling.
+    // We need to reset the scale before calculating our new position to avoid resize jankiness
+    this.scale(1);
+
+    var settings = this._calcScalingSizeFromPointer(pointer, selectedCorner);
+    this.set(settings);
 
     this.canvasEventTrigger[_consts.eventNames.OBJECT_SCALED](this);
   },
@@ -13057,15 +13066,15 @@ var Cropzone = _fabric2.default.util.createClass(_fabric2.default.Rect,
    * @private
    */
   _getCropzoneRectInfo: function _getCropzoneRectInfo() {
-    var _canvas = this.canvas,
-        canvasWidth = _canvas.width,
-        canvasHeight = _canvas.height;
+    var zoomLevel = this.canvas.getZoom();
+    var canvasWidth = this.canvas.getWidth() / zoomLevel; // Convert from HTML dimensions to fabric object dimensions
+    var canvasHeight = this.canvas.getHeight() / zoomLevel; // Convert from HTML dimensions to fabric object dimensions
 
-    var _getBoundingRect = this.getBoundingRect(false, true),
+    var _getBoundingRect = this.getBoundingRect(true, true),
         rectTop = _getBoundingRect.top,
         rectLeft = _getBoundingRect.left,
         rectWidth = _getBoundingRect.width,
-        rectHeight = _getBoundingRect.height;
+        rectHeight = _getBoundingRect.height; // Use absolute dimensions to work with zooming
 
     return {
       rectTop: rectTop,
@@ -14392,13 +14401,7 @@ var Graphics = function () {
           width = _canvasImage$getBound.width,
           height = _canvasImage$getBound.height;
 
-      var tempMaxDimension = this._calcMaxDimension(width, height);
-
-      var zoomLevel = this.getCanvasZoom();
-      var maxDimension = zoomLevel <= 1 ? tempMaxDimension : {
-        width: tempMaxDimension.width * zoomLevel,
-        height: tempMaxDimension.height * zoomLevel
-      };
+      var maxDimension = this._calcMaxDimension(width, height);
 
       this.setCanvasCssDimension({
         width: '100%',
@@ -14442,7 +14445,7 @@ var Graphics = function () {
         width: width,
         height: height
       });
-      this._canvas.centerObject(canvasImage);
+      this.canvasImage.viewportCenter();
     }
 
     /**
