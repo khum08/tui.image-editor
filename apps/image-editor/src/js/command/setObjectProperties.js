@@ -31,12 +31,10 @@ const command = {
       return Promise.reject(rejectMessages.noObject);
     }
 
-    if (this.undoData && !this.undoData.props && targetObj.originalState) {
-      this.undoData.props = {};
-      snippet.forEachOwnProperties(props, (value, key) => {
-        this.undoData.props[key] = targetObj.originalState[key];
-      });
-    }
+    this.undoData.props = {};
+    snippet.forEachOwnProperties(props, (value, key) => {
+      this.undoData.props[key] = targetObj[key];
+    });
 
     graphics.setObjectProperties(id, props);
 
