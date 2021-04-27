@@ -34,6 +34,7 @@ import {
 
 const SHAPE_INIT_OPTIONS = extend(
   {
+    angle: 0,
     strokeWidth: 1,
     stroke: '#000000',
     fill: '#ffffff',

@@ -136,6 +136,7 @@ class Line extends Component {
       evented: false,
       perPixelTargetFind: true,
       targetFindTolerance: defaultPixelTargetTolerance,
+      angle: 0,
     });
 
     this._line.set(fObjectOptions.SELECTION_STYLE);

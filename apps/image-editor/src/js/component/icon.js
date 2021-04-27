@@ -125,6 +125,7 @@ class Icon extends Component {
           {
             type: 'icon',
             fill: this._oColor,
+            angle: 0,
           },
           selectionStyle,
           options,

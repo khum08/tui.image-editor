@@ -1310,6 +1310,7 @@ class Graphics {
         {
           left,
           top,
+          angle: 0,
         },
         fObjectOptions.SELECTION_STYLE
       )

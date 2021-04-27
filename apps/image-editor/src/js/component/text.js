@@ -12,6 +12,7 @@ const defaultStyles = {
   fill: '#000000',
   left: 0,
   top: 0,
+  angle: 0,
 };
 const resetStyles = {
   fill: '#000000',
