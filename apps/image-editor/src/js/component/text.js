@@ -197,6 +197,10 @@ class Text extends Component {
 
       if (options.styles) {
         styles = snippet.extend(styles, options.styles);
+
+        if ('textDecoration' in styles) {
+          snippet.extend(styles, this._getTextDecorationAdaptObject(styles.textDecoration));
+        }
       }
 
       if (!snippet.isExisty(options.autofocus)) {
