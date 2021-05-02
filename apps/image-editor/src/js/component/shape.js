@@ -412,10 +412,8 @@ export default class Shape extends Component {
         canvas.uniformScaling = false;
       },
       modified() {
-        const currentObj = self._shapeObj;
-
-        resizeHelper.adjustOriginToCenter(currentObj);
-        resizeHelper.setOrigins(currentObj);
+        resizeHelper.adjustOriginToCenter(this);
+        resizeHelper.setOrigins(this);
       },
       modifiedInGroup(activeSelection) {
         self._fillFilterRePositionInGroupSelection(shapeObj, activeSelection);
@@ -428,11 +426,10 @@ export default class Shape extends Component {
       },
       scaling(fEvent) {
         const pointer = canvas.getPointer(fEvent.e);
-        const currentObj = self._shapeObj;
-        resizeHelper.setOrigins(currentObj);
+        resizeHelper.setOrigins(this);
 
         canvas.setCursor('crosshair');
-        resizeHelper.resize(currentObj, pointer, true);
+        resizeHelper.resize(this, pointer, true);
 
         self._resetPositionFillFilter(this);
       },
