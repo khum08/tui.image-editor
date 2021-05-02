@@ -7,6 +7,11 @@ import fabric from 'fabric';
 import Component from '@/interface/component';
 import { Promise } from '@/util';
 import { componentNames, eventNames as events, fObjectOptions } from '@/consts';
+import {
+  setCachedUndoDataForDimension,
+  makeSelectionUndoData,
+  makeSelectionUndoDatum,
+} from '@/helper/selectionModifyHelper';
 
 const defaultStyles = {
   fill: '#000000',
@@ -258,7 +263,36 @@ class Text extends Component {
         snippet.extend(styleObj, this._getTextDecorationAdaptObject(styleObj.textDecoration));
       }
 
+      const wasEditing = activeObj.isEditing;
+      let selectionStart = 0;
+      let selectionEnd = 0;
+      if (activeObj.isEditing) {
+        selectionStart = activeObj.selectionStart;
+        selectionEnd = activeObj.selectionEnd;
+
+        // End the edit before setting styles, this will generate an undo entry if needed
+        activeObj.exitEditing();
+      }
+
       activeObj.set(styleObj);
+
+      if (wasEditing) {
+        // Resume the edit
+        activeObj.enterEditing();
+        activeObj.setSelectionStart(selectionStart);
+        activeObj.setSelectionEnd(selectionEnd);
+
+        // Emit that we're editing again as exitEditing can emit an event that indicates the edit is over
+        this.fire(events.TEXT_EDITING);
+
+        // Update the cached undo data for when the edit ends next time in case the text has changed since the original edit
+        const id = this.graphics.getObjectId(activeObj);
+        if (id !== null) {
+          setCachedUndoDataForDimension(
+            makeSelectionUndoData(activeObj, () => makeSelectionUndoDatum(id, activeObj, false))
+          );
+        }
+      }
 
       this.getCanvas().renderAll();
       resolve();
