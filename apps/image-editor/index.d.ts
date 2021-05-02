@@ -206,7 +206,7 @@ declare namespace tuiImageEditor {
 
   interface ITextObjectProps extends IObjectProps {
     fontFamily: string;
-    fontSize: string;
+    fontSize: number;
     fontStyle: string;
     fontWeight: string;
     text: string;
