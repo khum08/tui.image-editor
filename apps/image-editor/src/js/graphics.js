@@ -147,7 +147,7 @@ class Graphics {
       onObjectScaled: this._onObjectScaled.bind(this),
       onObjectModified: this._onObjectModified.bind(this),
       onObjectRotated: this._onObjectRotated.bind(this),
-      onObjectSelected: this._onObjectSelected.bind(this),
+      onSelectionChanged: this._onSelectionChanged.bind(this),
       onPathCreated: this._onPathCreated.bind(this),
       onSelectionCleared: this._onSelectionCleared.bind(this),
       onSelectionCreated: this._onSelectionCreated.bind(this),
@@ -1132,7 +1132,7 @@ class Graphics {
       'path:created': handler.onPathCreated,
       'selection:cleared': handler.onSelectionCleared,
       'selection:created': handler.onSelectionCreated,
-      'selection:updated': handler.onObjectSelected,
+      'selection:updated': handler.onSelectionChanged,
     });
   }
 
@@ -1282,16 +1282,23 @@ class Graphics {
   }
 
   /**
-   * "object:selected" canvas event handler
-   * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event
+   * "selection:updated" canvas event handler
+   * @param {{target: fabric.Object, selected: fabric.Object[]}} fEvent - Fabric event
    * @private
    */
-  _onObjectSelected(fEvent) {
+  _onSelectionChanged(fEvent) {
     const { target } = fEvent;
-    const params = this.createObjectProperties(target);
     this._canvas.bringToFront(target);
 
-    this.fire(events.OBJECT_ACTIVATED, params);
+    if (target.type !== 'activeSelection') {
+      const params = this.createObjectProperties(target);
+      this.fire(events.OBJECT_ACTIVATED, params);
+    } else if (fEvent.selected.length > 0 && target.size() === 2) {
+      // If the selection was changed so that a second item is now selected this means the user went
+      // from 1 item selected to 2 items selected via Shift + click. We now have an activeSelection
+      // in play so emit the proper event.
+      this.fire(events.SELECTION_CREATED, fEvent.target);
+    }
   }
 
   /**
