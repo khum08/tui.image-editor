@@ -75,16 +75,27 @@ export function makeSelectionUndoData(obj, undoDatumMaker) {
  * @private
  */
 export function makeSelectionUndoDatum(id, obj, isSelection) {
-  return isSelection
-    ? {
-        id,
-        width: obj.width,
-        height: obj.height,
-        top: obj.top,
-        left: obj.left,
-        angle: obj.angle,
-        scaleX: obj.scaleX,
-        scaleY: obj.scaleY,
-      }
-    : extend({ id }, obj);
+  let datum;
+
+  if (isSelection) {
+    datum = {
+      id,
+      width: obj.width,
+      height: obj.height,
+      top: obj.top,
+      left: obj.left,
+      angle: obj.angle,
+      scaleX: obj.scaleX,
+      scaleY: obj.scaleY,
+    };
+  } else {
+    datum = extend({ id }, obj);
+
+    // Don't undo into edit mode as it causes minor UI issues that look weird
+    if (obj.type === 'i-text') {
+      datum.isEditing = false;
+    }
+  }
+
+  return datum;
 }
