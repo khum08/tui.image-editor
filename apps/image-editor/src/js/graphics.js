@@ -1295,6 +1295,8 @@ class Graphics {
       // If the selection was changed so that a second item is now selected this means the user went
       // from 1 item selected to 2 items selected via Shift + click. We now have an activeSelection
       // in play so emit the proper event.
+      const params = this.createObjectProperties(target);
+      this.fire(events.OBJECT_ACTIVATED, params);
       this.fire(events.SELECTION_CREATED, fEvent.target);
     }
   }
