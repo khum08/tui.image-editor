@@ -190,9 +190,7 @@ declare namespace tuiImageEditor {
     rotatingPointOffset?: number;
   }
 
-  interface IObjectProps {
-    // icon, shape
-    fill: string;
+  interface IBaseObjectProps {
     height: number;
     id: number;
     left: number;
@@ -200,11 +198,16 @@ declare namespace tuiImageEditor {
     stroke: string | null;
     strokeWidth: number | null;
     top: number;
-    type: string;
     width: number;
   }
 
-  interface ITextObjectProps extends IObjectProps {
+  interface IObjectProps extends IBaseObjectProps {
+    type: 'icon' | 'line' | 'path' | 'cropzone';
+    fill: string;
+  }
+
+  interface ITextObjectProps extends IBaseObjectProps {
+    type: 'i-text' | 'text'
     fontFamily: string;
     fontSize: number;
     fontStyle: string;
@@ -212,7 +215,15 @@ declare namespace tuiImageEditor {
     text: string;
     textAlign: string;
     textDecoration: string;
+    fill: string;
   }
+
+  interface IShapeObjectProps extends IBaseObjectProps {
+    type: 'rect' | 'triangle' | 'circle';
+    fill: { type: 'filter', filter: object } | { type: 'color', color: string }
+  }
+
+  type AnyObjectProperties = IObjectProps | ITextObjectProps | IShapeObjectProps;
 
   interface IFilterResolveObject {
     type: string;
