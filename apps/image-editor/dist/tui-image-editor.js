@@ -1,6 +1,6 @@
 /*!
  * tui-image-editor.js
- * @version 3.14.3-alm.1
+ * @version 3.14.3-alm.3
  * @author NHN. FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
@@ -6159,12 +6159,10 @@ var command = {
       return _util.Promise.reject(_consts.rejectMessages.noObject);
     }
 
-    if (this.undoData && !this.undoData.props && targetObj.originalState) {
-      this.undoData.props = {};
-      _codeSnippet2.default.forEachOwnProperties(props, function (value, key) {
-        _this.undoData.props[key] = targetObj.originalState[key];
-      });
-    }
+    this.undoData.props = {};
+    _codeSnippet2.default.forEachOwnProperties(props, function (value, key) {
+      _this.undoData.props[key] = targetObj[key];
+    });
 
     graphics.setObjectProperties(id, props);
 
@@ -7573,7 +7571,8 @@ var Icon = function (_Component) {
 
         icon.set(_codeSnippet2.default.extend({
           type: 'icon',
-          fill: _this2._oColor
+          fill: _this2._oColor,
+          angle: 0
         }, selectionStyle, options, _this2.graphics.controlStyle));
 
         canvas.add(icon).setActiveObject(icon);
@@ -8058,7 +8057,8 @@ var Line = function (_Component) {
         arrowType: this._arrowType,
         evented: false,
         perPixelTargetFind: true,
-        targetFindTolerance: _consts.defaultPixelTargetTolerance
+        targetFindTolerance: _consts.defaultPixelTargetTolerance,
+        angle: 0
       });
 
       this._line.set(_consts.fObjectOptions.SELECTION_STYLE);
@@ -8361,6 +8361,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var SHAPE_INIT_OPTIONS = (0, _codeSnippet.extend)({
+  angle: 0,
   strokeWidth: 1,
   stroke: '#000000',
   fill: '#ffffff',
@@ -8774,10 +8775,8 @@ var Shape = function (_Component) {
           canvas.uniformScaling = false;
         },
         modified: function modified() {
-          var currentObj = self._shapeObj;
-
-          _shapeResizeHelper2.default.adjustOriginToCenter(currentObj);
-          _shapeResizeHelper2.default.setOrigins(currentObj);
+          _shapeResizeHelper2.default.adjustOriginToCenter(this);
+          _shapeResizeHelper2.default.setOrigins(this);
         },
         modifiedInGroup: function modifiedInGroup(activeSelection) {
           self._fillFilterRePositionInGroupSelection(shapeObj, activeSelection);
@@ -8790,11 +8789,10 @@ var Shape = function (_Component) {
         },
         scaling: function scaling(fEvent) {
           var pointer = canvas.getPointer(fEvent.e);
-          var currentObj = self._shapeObj;
-          _shapeResizeHelper2.default.setOrigins(currentObj);
+          _shapeResizeHelper2.default.setOrigins(this);
 
           canvas.setCursor('crosshair');
-          _shapeResizeHelper2.default.resize(currentObj, pointer, true);
+          _shapeResizeHelper2.default.resize(this, pointer, true);
 
           self._resetPositionFillFilter(this);
         }
@@ -9072,6 +9070,8 @@ var _util = __webpack_require__(/*! @/util */ "./src/js/util.js");
 
 var _consts = __webpack_require__(/*! @/consts */ "./src/js/consts.js");
 
+var _selectionModifyHelper = __webpack_require__(/*! @/helper/selectionModifyHelper */ "./src/js/helper/selectionModifyHelper.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9087,14 +9087,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var defaultStyles = {
   fill: '#000000',
   left: 0,
-  top: 0
-};
-var resetStyles = {
-  fill: '#000000',
-  fontStyle: 'normal',
-  fontWeight: 'normal',
-  textAlign: 'left',
-  underline: false
+  top: 0,
+  angle: 0
 };
 var DBCLICK_TIME = 500;
 
@@ -9299,6 +9293,10 @@ var Text = function (_Component) {
 
         if (options.styles) {
           styles = _codeSnippet2.default.extend(styles, options.styles);
+
+          if ('textDecoration' in styles) {
+            _codeSnippet2.default.extend(styles, _this2._getTextDecorationAdaptObject(styles.textDecoration));
+          }
         }
 
         if (!_codeSnippet2.default.isExisty(options.autofocus)) {
@@ -9369,17 +9367,40 @@ var Text = function (_Component) {
       var _this4 = this;
 
       return new _util.Promise(function (resolve) {
-        _codeSnippet2.default.forEach(styleObj, function (val, key) {
-          if (activeObj[key] === val && key !== 'fontSize') {
-            styleObj[key] = resetStyles[key] || '';
-          }
-        }, _this4);
-
         if ('textDecoration' in styleObj) {
           _codeSnippet2.default.extend(styleObj, _this4._getTextDecorationAdaptObject(styleObj.textDecoration));
         }
 
+        var wasEditing = activeObj.isEditing;
+        var selectionStart = 0;
+        var selectionEnd = 0;
+        if (activeObj.isEditing) {
+          selectionStart = activeObj.selectionStart;
+          selectionEnd = activeObj.selectionEnd;
+
+          // End the edit before setting styles, this will generate an undo entry if needed
+          activeObj.exitEditing();
+        }
+
         activeObj.set(styleObj);
+
+        if (wasEditing) {
+          // Resume the edit
+          activeObj.enterEditing();
+          activeObj.setSelectionStart(selectionStart);
+          activeObj.setSelectionEnd(selectionEnd);
+
+          // Emit that we're editing again as exitEditing can emit an event that indicates the edit is over
+          _this4.fire(_consts.eventNames.TEXT_EDITING);
+
+          // Update the cached undo data for when the edit ends next time in case the text has changed since the original edit
+          var id = _this4.graphics.getObjectId(activeObj);
+          if (id !== null) {
+            (0, _selectionModifyHelper.setCachedUndoDataForDimension)((0, _selectionModifyHelper.makeSelectionUndoData)(activeObj, function () {
+              return (0, _selectionModifyHelper.makeSelectionUndoDatum)(id, activeObj, false);
+            }));
+          }
+        }
 
         _this4.getCanvas().renderAll();
         resolve();
@@ -13846,7 +13867,7 @@ var Graphics = function () {
       onObjectScaled: this._onObjectScaled.bind(this),
       onObjectModified: this._onObjectModified.bind(this),
       onObjectRotated: this._onObjectRotated.bind(this),
-      onObjectSelected: this._onObjectSelected.bind(this),
+      onSelectionChanged: this._onSelectionChanged.bind(this),
       onPathCreated: this._onPathCreated.bind(this),
       onSelectionCleared: this._onSelectionCleared.bind(this),
       onSelectionCreated: this._onSelectionCreated.bind(this)
@@ -13868,13 +13889,8 @@ var Graphics = function () {
   _createClass(Graphics, [{
     key: 'destroy',
     value: function destroy() {
-      var wrapperEl = this._canvas.wrapperEl;
-
-
       this._canvas.clear();
-
-      wrapperEl.parentNode.removeChild(wrapperEl);
-
+      this._canvas.dispose();
       this._detachZoomEvents();
     }
 
@@ -14934,8 +14950,7 @@ var Graphics = function () {
       this._canvas = new _fabric2.default.Canvas(canvasElement, {
         containerClass: 'tui-image-editor-canvas-container',
         enableRetinaScaling: false,
-        targetFindTolerance: _consts.defaultPixelTargetTolerance,
-        rotationCursor: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAD3ElEQVRIS5WWbUyVZRjH//+ewxhsraNrAQVZk7b0NI5tUrAgHGy2rIQDBL6cc8CWQxYyEIXVigQzJnYqczN5EcHsg+gH7UVdBLodjjleRKCXrQ/MHBsbK2E12ALPrnY/yCPneM7hdH97dv+v63dd133d1/0QYSwRKQQQTfJkGHIfCcMxEJFiAMp5C4DdJP8Nx05p/hdgeHgYVqt1AEA+yT/CgYQL2Amg+dnEZ1Dz3rso3rHjDsktJLuWgywLEJE1AH5VjhKfelr3l5mViUaXS8xmcy2AgyQlGCgoQETWARjyer3o7+vDiZZWXOnpMfzExcVhu9OBXaWl3wFwkpwKBAkIEJFyAEfaWlvx5bFjmLoT0BaaSUNlVZWCjAGwkRzxhzwAEJF9ABq3FhSgv68/ZIljYmPhuf6T0vwOIJfkLyEBIpIF4Mfc7GyMDPsGYzabMT09bdi/nJGBto529X0OwFsk/wlZIhExAfjtUENDYktTs6Fda7HgwMcHVXvqh6xpGir36mVRmkqSn4dK0yiRiLw5MTHRmZWxAXNzc7pN8gvJaOvomI+KiroIIPullFQcOXoU65PXq+00kp6w21REzrY0NecfamjQbSIjI9F99Spi42IdAB4F8Nk9Z1cAqDswuZxzn5ssIreLHY6EXnevbmfLy8Vhl+s6yVQRqbgHUPQPSHoXnYvIIyqeYMClJZKNmVkYG1MdB73uW7dtqyV5QEScAKZIfusftYiUAfjCb+zcIqnfSh/AhrR0jI+P6z4Ou1wqixqSjaFKISLfNx9v2lRSusuQiUhAwFS+Ldd8c2hIF6ou2VtT3UlSjeqAS0QeBvD3qxtfweWuHxYyr6vD+7W1F0jm+GfQ/VF9fWZ728LIj09IQFdPtzciImIdyZ8DEURk/+jI6Ie2zZuN7favTiEtPb2EpN7rS0tUeWNw8NOCvHxDXFa+GxV79qix/AbJ0aUQESkBcFw5Hx1Z2HosJgbua555TdMeJ/mnP2AlgL+c2+245rnf3uUVFXinrMyrmbRvAPSplw3A6wCeL7Lb4em9r91fXwe70/k1SftiMD6zSESqAHxitTyHmZkZI+AnV61Cjs2G1YmrcXf+LgYHBnDh/HkfzYspKTh1+vSsZtLWkLwdDPAQABXpa0kWC2ZnZkM1kLGXZE3CiZPtWLFyRSHJzqVGgaapKsFZAJvysnOgnslgiyQcRU7sq672RkVH7wz0UxDsPVCZqHI19rrduHzpEm7eGMLk5CRMJhOeiI9HSmoqCrcUqm5TJ/w2SXU+D6yQT6aIqBlUtHioANRYUOsWADeAMwAuhnoy/wO8rHIopxJHwwAAAABJRU5ErkJggg==) 6 6, alias'
+        targetFindTolerance: _consts.defaultPixelTargetTolerance
       });
     }
 
@@ -15077,7 +15092,7 @@ var Graphics = function () {
         'path:created': handler.onPathCreated,
         'selection:cleared': handler.onSelectionCleared,
         'selection:created': handler.onSelectionCreated,
-        'selection:updated': handler.onObjectSelected
+        'selection:updated': handler.onSelectionChanged
       });
     }
 
@@ -15267,20 +15282,29 @@ var Graphics = function () {
     }
 
     /**
-     * "object:selected" canvas event handler
-     * @param {{target: fabric.Object, e: MouseEvent}} fEvent - Fabric event
+     * "selection:updated" canvas event handler
+     * @param {{target: fabric.Object, selected: fabric.Object[]}} fEvent - Fabric event
      * @private
      */
 
   }, {
-    key: '_onObjectSelected',
-    value: function _onObjectSelected(fEvent) {
+    key: '_onSelectionChanged',
+    value: function _onSelectionChanged(fEvent) {
       var target = fEvent.target;
 
-      var params = this.createObjectProperties(target);
       this._canvas.bringToFront(target);
 
-      this.fire(_consts.eventNames.OBJECT_ACTIVATED, params);
+      if (target.type !== 'activeSelection') {
+        var params = this.createObjectProperties(target);
+        this.fire(_consts.eventNames.OBJECT_ACTIVATED, params);
+      } else if (fEvent.selected.length > 0 && target.size() === 2) {
+        // If the selection was changed so that a second item is now selected this means the user went
+        // from 1 item selected to 2 items selected via Shift + click. We now have an activeSelection
+        // in play so emit the proper event.
+        var _params = this.createObjectProperties(target);
+        this.fire(_consts.eventNames.OBJECT_ACTIVATED, _params);
+        this.fire(_consts.eventNames.SELECTION_CREATED, fEvent.target);
+      }
     }
 
     /**
@@ -15298,7 +15322,8 @@ var Graphics = function () {
 
       obj.path.set(extend({
         left: left,
-        top: top
+        top: top,
+        angle: 0
       }, _consts.fObjectOptions.SELECTION_STYLE));
 
       var params = this.createObjectProperties(obj.path);
@@ -16871,16 +16896,29 @@ function makeSelectionUndoData(obj, undoDatumMaker) {
  * @private
  */
 function makeSelectionUndoDatum(id, obj, isSelection) {
-  return isSelection ? {
-    id: id,
-    width: obj.width,
-    height: obj.height,
-    top: obj.top,
-    left: obj.left,
-    angle: obj.angle,
-    scaleX: obj.scaleX,
-    scaleY: obj.scaleY
-  } : (0, _codeSnippet.extend)({ id: id }, obj);
+  var datum = void 0;
+
+  if (isSelection) {
+    datum = {
+      id: id,
+      width: obj.width,
+      height: obj.height,
+      top: obj.top,
+      left: obj.left,
+      angle: obj.angle,
+      scaleX: obj.scaleX,
+      scaleY: obj.scaleY
+    };
+  } else {
+    datum = (0, _codeSnippet.extend)({ id: id }, obj);
+
+    // Don't undo into edit mode as it causes minor UI issues that look weird
+    if (obj.type === 'i-text') {
+      datum.isEditing = false;
+    }
+  }
+
+  return datum;
 }
 
 /***/ }),
