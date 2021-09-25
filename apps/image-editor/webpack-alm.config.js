@@ -33,6 +33,7 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src/js/'),
       '@svg': path.resolve(__dirname, 'src/svg/'),
+      fabric: 'fabric-pure-browser',
     },
   },
   externals: [
