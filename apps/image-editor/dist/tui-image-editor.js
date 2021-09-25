@@ -1,6 +1,6 @@
 /*!
  * tui-image-editor.js
- * @version 3.14.3-alm.3
+ * @version 3.14.3-alm.4
  * @author NHN. FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
